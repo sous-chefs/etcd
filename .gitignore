@@ -1,0 +1,17 @@
+.vagrant
+*~
+*#
+.#*
+\#*#
+.*.sw[a-z]
+*.un~
+/cookbooks
+# Bundler
+bin/*
+.bundle/*
+vendor/*
+.kitchen/
+.kitchen.local.yml
+.colander
+berks.json
+.vagabond

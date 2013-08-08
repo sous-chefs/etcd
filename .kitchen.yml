@@ -1,0 +1,24 @@
+---
+driver_plugin: vagrant
+
+platforms:
+- name: centos-6.4_chef-11.4.4
+  driver_config: 
+    box: opscode-centos-6.4_chef-11.4.4
+    box_url:  https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.4_chef-11.4.4.box
+- name: ubuntu-12.04_chef-11.4.4
+  driver_config:
+    run_list:
+      - recipe[ubuntu]
+    box: opscode-ubuntu-12.04_chef-11.4.4
+    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_chef-11.4.4.box
+
+suites:
+- name: default
+  run_list:
+    - recipe[etcd]
+  attributes: {}
+
+clusters:
+  default:
+    - default

@@ -1,0 +1,6 @@
+description "etcd service registry"
+
+start on started
+stop on shutdown
+ 
+exec  <%= node[:etcd][:bin] %> <%= @args %>

@@ -1,0 +1,6 @@
+driver_plugin: lxc
+
+platforms:
+- name: centos_64
+  driver_config:
+    base_container: centos_64

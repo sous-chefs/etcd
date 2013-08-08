@@ -1,0 +1,18 @@
+{
+  "sources": {
+    "etcd": {
+      "path": "."
+    },
+    "chef-solo-search": {
+      "locked_version": "0.4.0",
+      "git": "git://github.com/edelight/chef-solo-search.git",
+      "ref": "1f79c1d86e85aa3a2b01e15f90755cf60eb66a4f"
+    },
+    "ubuntu": {
+      "locked_version": "1.1.2"
+    },
+    "apt": {
+      "locked_version": "2.0.0"
+    }
+  }
+}
