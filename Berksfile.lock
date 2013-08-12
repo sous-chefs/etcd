@@ -6,10 +6,13 @@
     "chef-solo-search": {
       "locked_version": "0.4.0",
       "git": "git://github.com/edelight/chef-solo-search.git",
-      "ref": "1f79c1d86e85aa3a2b01e15f90755cf60eb66a4f"
+      "ref": "a28e7f25ab4afb53f9a55dd49d8b1277d0374c29"
     },
     "ubuntu": {
       "locked_version": "1.1.2"
+    },
+    "ark": {
+      "locked_version": "0.2.4"
     },
     "apt": {
       "locked_version": "2.0.0"
