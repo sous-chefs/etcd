@@ -8,15 +8,15 @@
 #
 version = node[:etcd][:version]
 package = "etcd-v#{version}-#{node[:os].capitalize}.tar.gz"
-package_url = "https://github.com/coreos/etcd/releases/download/v#{version}/#{package}"
+url = "https://github.com/coreos/etcd/releases/download/v#{version}/#{package}"
 if node[:etcd][:url]
-  package_url = node[:etcd][:url]
+  url = node[:etcd][:url]
 end
 
 ark "etcd" do
-  has_binaries [ "etcd", "etcdctl" ]
+  has_binaries ["etcd", "etcdctl"]
   version node[:etcd][:version]
-  url package_url
+  url url
   checksum node[:etcd][:sha256]
   action :install
 end
