@@ -1,8 +1,7 @@
 #
+# Recipe:: _service
 #
 #
-
-package "curl"
 
 directory File.dirname node[:etcd][:state_dir]
 
