@@ -1,9 +1,13 @@
 # vim: ft=sh:
 # only run on rhel
 @test "we should be able to store a value" {
-  curl -L http://127.0.0.1:4001/v1/keys/message -d value="Hello world"
+  /usr/local/bin/etcdctl set /keys/message "Hello world"
 }
 
 @test "we should be able to get a value" {
-  curl -L http://127.0.0.1:4001/v1/keys/message
+  /usr/local/bin/etcdctl get /keys/message
+}
+
+@test "we should be able to delete a key" {
+  /usr/local/bin/etcdctl delete /keys/message
 }
