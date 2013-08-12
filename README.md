@@ -19,8 +19,8 @@ Centos/rhat 6+ & ubuntu with upstart
 |`default[:etcd][:version]` | 0.1.0 | The release versions to install. binary install will assemble a github url to grab this version |
 |`default[:etcd][:sha256]` | 00891.. | The Sha256 hash of the tarball specified by the version or URL attribute| 
 |`default[:etcd][:url]` | nil |overide the internal genrated url to specify your own binary tarball |
-|`default[:etcd][:port]`| 4001 | The port to start etcd rest interface on |
-|`default[:etcd][:raft_port]` | 7001 | Raft cluster communication port |
+|`default[:etcd][:port]`| 0.0.0.0:4001 | The port to start etcd rest interface on |
+|`default[:etcd][:raft_port]` | 0.0.0.0:7001 | Raft cluster communication port |
 |`default[:etcd][:state_dir]` | /var/cache/etcd/state | Where etcd will store its state | 
 
 

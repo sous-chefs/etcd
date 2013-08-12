@@ -14,6 +14,6 @@ default[:etcd][:sha256] = "0089111a4c36e8d481efb91e847dbf498c4db2e33c43a1103fa8f
 # Use this to supply your own url to a tarball
 default[:etcd][:url] = nil
 
-default[:etcd][:port] = 4001
-default[:etcd][:raft_port] = 7001
+default[:etcd][:port] = "0.0.0.0:4001"
+default[:etcd][:raft_port] = "0.0.0.0:7001"
 default[:etcd][:state_dir] = "/var/cache/etcd/state"

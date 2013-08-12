@@ -7,7 +7,9 @@ directory File.dirname node[:etcd][:state_dir]
 
 args = node[:etcd][:bin]
 args << " -c #{node[:etcd][:port]}"
-args << " -s#{node[:etcd][:raft_port]} #{node[:etcd][:extra_args]}"
+args << " -s #{node[:raft][:port]}"
+args << " -n #{node.fqdn}"
+args << " #{node[:etcd][:extra_args]}"
 if node[:etcd][:seed_node]
   args << " -C #{node[:etcd][:seed_node]}"
 end
