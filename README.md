@@ -10,6 +10,8 @@ Centos/rhat 6+ & ubuntu with upstart
 
 * *binary_install:* Installs the binary of etcd from a build of etcd from master branch on github
 
+* *tar_install:* Installs the binary of etcd from a release tar.gz.
+
 ## Usage 
 For now just use default. In the future that might change.
 
