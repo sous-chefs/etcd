@@ -5,8 +5,7 @@
 
 directory File.dirname node[:etcd][:state_dir]
 
-args = node[:etcd][:bin]
-args << " -c #{node[:etcd][:port]}"
+args =  " -c #{node[:etcd][:port]}"
 args << " -s #{node[:raft][:port]}"
 args << " -n #{node.fqdn}"
 args << " #{node[:etcd][:extra_args]}"
