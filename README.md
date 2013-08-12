@@ -8,9 +8,22 @@ Centos/rhat 6+ & ubuntu with upstart
 
 * *_service:* Recipe used by default for seting up the service
 
-* *binary_install:* Installs the binary of etcd from a build of etcd from master branch on github
+* *binary_install:* Installs the binary of etcd from github release tarballs
 
-* *tar_install:* Installs the binary of etcd from a release tar.gz.
+## Attributes
+
+| attribute | default setting | description | 
+|:---------------------------------|:---------------|:-----------------------------------------|
+|`default[:etcd][:seed_node]`| nil |If you have multiple nodes set this to the seed node that others should contact when they start to register with the cluster |
+|`default[:etcd][:install_method]`| binary | Right now only binary is supported. In the future this will probably go away as there are actual distro packages |
+|`default[:etcd][:version]` | 0.1.0 | The release versions to install. binary install will assemble a github url to grab this version |
+|`default[:etcd][:sha256]` | 00891.. | The Sha256 hash of the tarball specified by the version or URL attribute| 
+|`default[:etcd][:url]` | nil |overide the internal genrated url to specify your own binary tarball |
+|`default[:etcd][:port]`| 4001 | The port to start etcd rest interface on |
+|`default[:etcd][:raft_port]` | 7001 | Raft cluster communication port |
+|`default[:etcd][:state_dir]` | /var/cache/etcd/state | Where etcd will store its state | 
+
+
 
 ## Usage 
 For now just use default. In the future that might change.
