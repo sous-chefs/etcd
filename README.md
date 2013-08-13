@@ -1,4 +1,4 @@
-#Etcd Cookbook
+etcd cookbook - installs coreos/etcd on centos/ubuntu boxen
 
 ## Supported Platforms
 Centos/rhat 6+ & ubuntu with upstart
@@ -14,13 +14,12 @@ Centos/rhat 6+ & ubuntu with upstart
 
 | attribute | default setting | description | 
 |:---------------------------------|:---------------|:-----------------------------------------|
-|`default[:etcd][:seed_node]`| nil |If you have multiple nodes set this to the seed node that others should contact when they start to register with the cluster |
 |`default[:etcd][:install_method]`| binary | Right now only binary is supported. In the future this will probably go away as there are actual distro packages |
+|`default[:etcd][:args]`|  -c 0.0.0.0:4001 -s 0.0.0.0:70001 | Arguments to pass to etcd when starting the service. |
+|`default[:etcd][:name_switch]`| -n | this is the switch used for spcifyin the node or hostname to etcd. if you build from source this switch has changed since the 0.1.0 release. I will remove this when the arguments to etcd stabalize|
 |`default[:etcd][:version]` | 0.1.0 | The release versions to install. binary install will assemble a github url to grab this version |
 |`default[:etcd][:sha256]` | 00891.. | The Sha256 hash of the tarball specified by the version or URL attribute| 
-|`default[:etcd][:url]` | nil |overide the internal genrated url to specify your own binary tarball |
-|`default[:etcd][:port]`| 0.0.0.0:4001 | The port to start etcd rest interface on |
-|`default[:etcd][:raft_port]` | 0.0.0.0:7001 | Raft cluster communication port |
+|`default[:etcd][:url]` | nil |overide the internal genrated url to specify your own binary tarball. see the .kitchen.yml for example override |
 |`default[:etcd][:state_dir]` | /var/cache/etcd/state | Where etcd will store its state | 
 
 
@@ -37,6 +36,7 @@ run_list[etcd]
 |                      |                                          |
 |:---------------------|:-----------------------------------------|
 | **Original Author**  | Jesse Nelson <spheromak@gmail.com>       |
+| **Contributor**      | James Gregory <james@jagregory.com>      |
 | **Copyright**        | Copyright (c) 2013 Jesse Nelson          |
 
 Licensed under the Apache License, Version 2.0 (the "License");
