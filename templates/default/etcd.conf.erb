@@ -4,4 +4,4 @@ start on started
 stop on shutdown
  
 
-exec /usr/local/bin/etcd <%= @args %>
+exec /usr/local/bin/etcd <%= node[:etcd][:args] %>
