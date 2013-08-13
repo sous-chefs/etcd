@@ -1,3 +1,8 @@
+### 1.1.2 
+* fix the startup args so it is easier to specify custom args
+* supports release version and current master on git
+* add in tests for both release and git versions of etcd 
+
 ### 1.1.1
 * Make everything work with release 0.1.0 of etcd
 * fixup some syntax issues
