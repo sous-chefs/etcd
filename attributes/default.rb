@@ -2,7 +2,7 @@
 default[:etcd][:install_method] = "binary"
 
 # service start args to pass
-default[:etcd][:args] = " -c 0.0.0.0:4001 -s 0.0.0.0:70001"
+default[:etcd][:args] = " -c 0.0.0.0:4001 -s 0.0.0.0:7001"
 # github version and release version have different option for setting this
 default[:etcd][:name_switch] = "-n"
 
