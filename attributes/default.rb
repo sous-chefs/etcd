@@ -2,7 +2,7 @@
 default[:etcd][:install_method] = "binary"
 
 # service start args to pass
-default[:etcd][:args] = ""
+default[:etcd][:args] = " -c 0.0.0.0:4001 -s 0.0.0.0:70001 -n #{fqdn} "
 
 # Release to install
 default[:etcd][:version] = "0.1.0"
