@@ -6,7 +6,7 @@ Centos/rhat 6+ & ubuntu with upstart
 ## Recipes
 * *default:* Install and setup the service
 
-* *_service:* Recipe used by default for seting up the service
+* *_service:* Recipe used by default for setting up the service
 
 * *binary_install:* Installs the binary of etcd from github release tarballs
 
@@ -16,10 +16,10 @@ Centos/rhat 6+ & ubuntu with upstart
 |:---------------------------------|:---------------|:-----------------------------------------|
 |`default[:etcd][:install_method]`| binary | Right now only binary is supported. In the future this will probably go away as there are actual distro packages |
 |`default[:etcd][:args]`|  -c 0.0.0.0:4001 -s 0.0.0.0:70001 | Arguments to pass to etcd when starting the service. |
-|`default[:etcd][:name_switch]`| -n | this is the switch used for spcifyin the node or hostname to etcd. if you build from source this switch has changed since the 0.1.0 release. I will remove this when the arguments to etcd stabalize|
+|`default[:etcd][:name_switch]`| -n | The switch used to specify the node or hostname to etcd. if you build from source this switch has changed since the 0.1.0 release. I will remove this when the arguments to etcd stabilize|
 |`default[:etcd][:version]` | 0.1.0 | The release versions to install. binary install will assemble a github url to grab this version |
 |`default[:etcd][:sha256]` | 00891.. | The Sha256 hash of the tarball specified by the version or URL attribute| 
-|`default[:etcd][:url]` | nil |overide the internal genrated url to specify your own binary tarball. see the .kitchen.yml for example override |
+|`default[:etcd][:url]` | nil |override the internal generated url to specify your own binary tarball. see the .kitchen.yml for example override |
 |`default[:etcd][:state_dir]` | /var/cache/etcd/state | Where etcd will store its state | 
 
 
