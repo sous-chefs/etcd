@@ -14,11 +14,20 @@ platforms:
     box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_chef-11.4.4.box
 
 suites:
-- name: default
+- name: release
   run_list:
     - recipe[etcd]
   attributes: {}
 
-clusters:
-  default:
-    - default
+- name: edge
+  run_list:
+    - recipe[etcd]
+  attributes: {
+    etcd: {
+      url: "https://dl.dropboxusercontent.com/u/848501/etcd-130812.tar.gz",
+      sha256: "ea65aeae3d68ee5012d86ece40aae11d1a4fa10ebb7a19425413e8a01b4ce6fe",
+      args: "-c 4001 -s 7001 -i",
+      version: "130812"
+    }
+  }
+
