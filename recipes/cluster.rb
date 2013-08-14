@@ -26,7 +26,7 @@ query << " AND chef_environment:#{node.chef_environment}" if node[:etcd][:env_sc
 # return a string of comma sepparated  fqdn that doens't include this host
 cluster = partial_search(:node, query,
    :keys => { 'node' => [ 'fqdn' ] }
-   ).map { |n| n['node'] == node[:hostname] ? nil : "#{n['node']}:7001" }.compact.join ","
+   ).map { |n| n['node'] == node[:fqdn] ? nil : "#{n['node']}:7001" }.compact.join ","
 
 # write out members
 file "/etc/etcd_members" do

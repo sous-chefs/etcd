@@ -1,3 +1,7 @@
+### 1.2.3
+* hotfix to add missing  `node[:etcd][:env_scope]` attribute
+* bugfix: use `node[:fqdn]` instead of hostname when matching local machine name
+
 ### 1.2.2
 * add cluster recipe for setting up clusters of etcd nodes
 * re-add seed-node attribute 

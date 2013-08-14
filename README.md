@@ -22,7 +22,7 @@ Centos/rhat 6+ & ubuntu with upstart
 |`default[:etcd][:state_dir]` | /var/cache/etcd/state | Where etcd will store its state | 
 |`default[:etcd][:search_cook]`| etcd | The cookbook that should be searched for on the nodes recipes to detect if it is also running etcd |
 |`default[:etcd][:seed_node]` | nil | The seed node for initial cluster setup. This node will start as the master, but restarts will rejoin the raft cluster. This needs to be set when using cluster recipe otherwise the cluster will not initialize.|
-
+|`default[:etcd][:env_scope]` | true | Set the search in cluster recipe to restrict to nodes in the same environment.
 
 ## Usage 
 

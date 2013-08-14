@@ -7,6 +7,9 @@ default[:etcd][:seed_node] = nil
 # if you wrap this cookbook you should use your wrappers cook name here
 default[:etcd][:search_cook] = "etcd"
 
+# set to false if you don't want environment scoped searching
+default[:etcd][:env_scope] = true
+
 # service start args to pass
 default[:etcd][:args] = " -c 0.0.0.0:4001 -s 0.0.0.0:7001"
 
