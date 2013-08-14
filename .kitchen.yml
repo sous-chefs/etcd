@@ -1,5 +1,7 @@
 ---
 driver_plugin: vagrant
+driver_config: 
+  provisioner: chef_zero
 
 platforms:
 - name: centos-6.4_chef-11.4.4
@@ -24,10 +26,20 @@ suites:
     - recipe[etcd]
   attributes: {
     etcd: {
-      url: "https://dl.dropboxusercontent.com/u/848501/etcd-130812.tar.gz",
-      sha256: "ea65aeae3d68ee5012d86ece40aae11d1a4fa10ebb7a19425413e8a01b4ce6fe",
+      url: "https://dl.dropboxusercontent.com/u/848501/etcd-130813.tar.gz",
+      sha256: "7d7e6e71d27aad41345ba41a8b35dc57e01f70524a77cb7968b3c4fdc9f3ade3",
       args: "-f",
       version: "130812"
     }
   }
+
+- name: cluster
+  run_list:
+    - recipe[etcd]
+  attributes: {
+    etcd: {
+      seed_node: "#{node.name}"
+    }
+  }
+  
 

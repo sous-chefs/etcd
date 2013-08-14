@@ -3,4 +3,4 @@ description "etcd service registry"
 start on started
 stop on shutdown
 
-exec /usr/local/bin/etcd <%= node[:etcd][:args] %> -d <%= node[:etcd][:state_dir] %> <%= node[:etcd][:name_switch] %>  <%= node[:fqdn] %>
+exec /usr/local/bin/etcd <%= @args %> -d <%= node[:etcd][:state_dir] %> -n <%= node[:fqdn] %>

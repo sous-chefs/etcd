@@ -5,10 +5,9 @@ Centos/rhat 6+ & ubuntu with upstart
 
 ## Recipes
 * *default:* Install and setup the service
-
 * *_service:* Recipe used by default for setting up the service
-
 * *binary_install:* Installs the binary of etcd from github release tarballs
+* *cluster:* Recipe to aide in the building of multi-node etcd clusters
 
 ## Attributes
 
@@ -21,15 +20,26 @@ Centos/rhat 6+ & ubuntu with upstart
 |`default[:etcd][:sha256]` | 00891.. | The Sha256 hash of the tarball specified by the version or URL attribute| 
 |`default[:etcd][:url]` | nil |override the internal generated url to specify your own binary tarball. see the .kitchen.yml for example override |
 |`default[:etcd][:state_dir]` | /var/cache/etcd/state | Where etcd will store its state | 
-
+|`default[:etcd][:search_cook]`| etcd | The cookbook that should be searched for on the nodes recipes to detect if it is also running etcd |
+|`default[:etcd][:seed_node]` | nil | The seed node for initial cluster setup. This node will start as the master, but restarts will rejoin the raft cluster. This needs to be set when using cluster recipe otherwise the cluster will not initialize.|
 
 
 ## Usage 
-For now just use default. In the future that might change.
 
+#### Default single instance single node:
 ````
 run_list[etcd]
 ````
+
+#### Setup a cluster
+In a role or wrapper cookbook setup the seed_node attribute and add the cluster recipe to each node in the cluster.
+
+If you use a wrapper cookbook set `node[:etcd][:search_cook]` to the wrapper cookboks name
+````
+run_list[etcd::cluster]
+````
+
+example wrapper can be seen here [http://github.com/cloudware-cookbooks/ktc-etcd]
 
 ## License and Author
 
