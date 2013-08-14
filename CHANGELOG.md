@@ -1,3 +1,7 @@
+### 1.2.2
+* add cluster recipe for setting up clusters of etcd nodes
+* re-add seed-node attribute 
+
 ### 1.2.1 
 * fix the startup args so it is easier to specify custom args
 * supports release version and current master on git
