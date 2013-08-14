@@ -12,7 +12,7 @@ end
 
 template "/etc/init/etcd.conf" do
   mode 0644
-  variables( args: args)
+  variables(args: args)
 end
 
 service "etcd" do
