@@ -14,9 +14,9 @@ default[:etcd][:env_scope] = true
 default[:etcd][:args] = " -c 0.0.0.0:4001 -s 0.0.0.0:7001"
 
 # Release to install
-default[:etcd][:version] = "0.1.0"
+default[:etcd][:version] = "0.1.1"
 # Sha for github tarball
-default[:etcd][:sha256] = "0089111a4c36e8d481efb91e847dbf498c4db2e33c43a1103fa8fb77f904dcb0"
+default[:etcd][:sha256] = "5c25b863bd3d87a5352cf0a2ae3e1c453cc3c9fc3d880694c20da4e802b1d752"
 # Use this to supply your own url to a tarball
 default[:etcd][:url] = nil
 
