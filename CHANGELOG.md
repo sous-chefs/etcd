@@ -1,3 +1,6 @@
+### 1.2.4
+* update to etcd 0.1.1 release 
+
 ### 1.2.3
 * hotfix to add missing  `node[:etcd][:env_scope]` attribute
 * bugfix: use `node[:fqdn]` instead of hostname when matching local machine name
