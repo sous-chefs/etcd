@@ -1,5 +1,6 @@
 ### 1.2.4
 * update to etcd 0.1.1 release 
+* add compile_time recipe that does the whole bit in chef compile time
 
 ### 1.2.3
 * hotfix to add missing  `node[:etcd][:env_scope]` attribute
