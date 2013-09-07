@@ -1,21 +1,19 @@
 {
+  "sha": "f8d879989da5322b54aa31a9817ad7689759b575",
   "sources": {
     "etcd": {
+      "locked_version": "1.2.4",
+      "constraint": "= 1.2.4",
       "path": "."
-    },
-    "chef-solo-search": {
-      "locked_version": "0.4.0",
-      "git": "git://github.com/edelight/chef-solo-search.git",
-      "ref": "a28e7f25ab4afb53f9a55dd49d8b1277d0374c29"
     },
     "ubuntu": {
       "locked_version": "1.1.2"
     },
     "ark": {
-      "locked_version": "0.2.4"
+      "locked_version": "0.3.0"
     },
     "apt": {
-      "locked_version": "2.0.0"
+      "locked_version": "2.1.0"
     }
   }
 }

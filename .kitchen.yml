@@ -23,11 +23,11 @@ suites:
 
 - name: edge
   run_list:
-    - recipe[etcd]
+    - recipe[etcd::compile_time]
   attributes: {
     etcd: {
-      url: "https://dl.dropboxusercontent.com/u/848501/etcd-130813.tar.gz",
-      sha256: "7d7e6e71d27aad41345ba41a8b35dc57e01f70524a77cb7968b3c4fdc9f3ade3",
+      url: "https://dl.dropboxusercontent.com/u/848501/etcd-130907.tar.gz",
+      sha256: "6867fc7b6a53d60d93f2c53c3a06d4f5d8143ad06ca26a76b8d5b4d830248c2d",
       args: "-f",
       version: "130812"
     }

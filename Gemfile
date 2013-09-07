@@ -18,7 +18,4 @@ group "develop" do
   gem 'guard-kitchen'
   gem 'knife-cookbook-doc'
   gem 'chefspec'
-  gem 'vagabond',
-    :git => "git://github.com/chrisroberts/vagabond.git",
-    :branch => "develop"
 end
