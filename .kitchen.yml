@@ -18,26 +18,32 @@ platforms:
 suites:
 - name: release
   run_list:
+    - recipe[curl]
     - recipe[etcd]
-  attributes: {}
+  attributes:
+    etcd:
+      args: "-s 127.0.0.1:4001 -c 127.0.0.1:7001"
 
 - name: edge
   run_list:
+    - recipe[curl]
     - recipe[etcd::compile_time]
   attributes: {
     etcd: {
       url: "https://dl.dropboxusercontent.com/u/848501/etcd-130907.tar.gz",
       sha256: "6867fc7b6a53d60d93f2c53c3a06d4f5d8143ad06ca26a76b8d5b4d830248c2d",
-      args: "-f",
+      args: "-f -s 127.0.0.1:4001 -c 127.0.0.1:7001",
       version: "130812"
     }
   }
 
 - name: cluster
   run_list:
+    - recipe[curl]
     - recipe[etcd]
   attributes: {
     etcd: {
+      args: "-s 127.0.0.1:4001 -c 127.0.0.1:7001",
       seed_node: "#{node.name}"
     }
   }

@@ -5,7 +5,7 @@ site :opscode
 
 metadata
 
-# solo-search for intgration tests
 group :integration do
+  cookbook 'curl'
   cookbook 'ubuntu'
 end
