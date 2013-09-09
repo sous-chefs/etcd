@@ -11,7 +11,7 @@ default[:etcd][:search_cook] = "etcd"
 default[:etcd][:env_scope] = true
 
 # service start args to pass
-default[:etcd][:args] = " -c 0.0.0.0:4001 -s 0.0.0.0:7001"
+default[:etcd][:args] = " -c #{ipaddress}:4001 -s #{ipaddress}:7001"
 
 # Release to install
 default[:etcd][:version] = "0.1.1"
