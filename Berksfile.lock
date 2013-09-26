@@ -12,6 +12,9 @@
     "ark": {
       "locked_version": "0.3.0"
     },
+    "partial_search": {
+      "locked_version": "1.0.2"
+    },
     "apt": {
       "locked_version": "2.1.0"
     }
