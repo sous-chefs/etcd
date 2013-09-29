@@ -21,3 +21,11 @@ default[:etcd][:sha256] = "5c25b863bd3d87a5352cf0a2ae3e1c453cc3c9fc3d880694c20da
 default[:etcd][:url] = nil
 
 default[:etcd][:state_dir] = "/var/cache/etcd/state"
+
+# Used for source_install method
+default[:etcd][:source][:repo] = "https://github.com/coreos/etcd"
+default[:etcd][:source][:revision] = "HEAD"
+default[:etcd][:source][:go_ver] = "1.1.2"
+default[:etcd][:source][:go_url] = nil
+default[:etcdctl][:source][:repo] = "https://github.com/coreos/etcdctl"
+default[:etcdctl][:source][:revision] = "HEAD"
