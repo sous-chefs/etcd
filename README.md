@@ -7,13 +7,14 @@ Centos/rhat 6+ & ubuntu with upstart
 * *default:* Install and setup the service
 * *_service:* Recipe used by default for setting up the service
 * *binary_install:* Installs the binary of etcd from github release tarballs
+* *source_install:* Compiles the binary of etcd from a specificed github repo/revision
 * *cluster:* Recipe to aide in the building of multi-node etcd clusters
 
 ## Attributes
 
 | attribute | default setting | description | 
 |:---------------------------------|:---------------|:-----------------------------------------|
-|`default[:etcd][:install_method]`| binary | Right now only binary is supported. In the future this will probably go away as there are actual distro packages |
+|`default[:etcd][:install_method]`| binary | Right now only binary and source are supported. In the future this will probably go away as there are actual distro packages |
 |`default[:etcd][:args]`|  -c 0.0.0.0:4001 -s 0.0.0.0:70001 | Arguments to pass to etcd when starting the service. |
 |`default[:etcd][:name_switch]`| -n | The switch used to specify the node or hostname to etcd. if you build from source this switch has changed since the 0.1.0 release. I will remove this when the arguments to etcd stabilize|
 |`default[:etcd][:version]` | 0.1.0 | The release versions to install. binary install will assemble a github url to grab this version |

@@ -5,9 +5,11 @@
 case node[:etcd][:install_method]
 when "binary"
   include_recipe "etcd::binary_install"
+when "source"
+  include_recipe "etcd::source_install"
 else
   log "Install Method not supported: #{node[:etcd][:install_method]}" do
-    level :warn
+    level :fatal
   end
 end
 
