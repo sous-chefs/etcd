@@ -1,6 +1,6 @@
 description "etcd service registry"
 
-start on started
+start on started networking
 stop on shutdown
 
 exec /usr/local/bin/etcd <%= @args %> -d <%= node[:etcd][:state_dir] %> -n <%= node[:fqdn] %>
