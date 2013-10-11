@@ -25,7 +25,6 @@ default[:etcd][:state_dir] = "/var/cache/etcd/state"
 # Used for source_install method
 default[:etcd][:source][:repo] = "https://github.com/coreos/etcd"
 default[:etcd][:source][:revision] = "HEAD"
-default[:etcd][:source][:go_ver] = "1.1.2"
-default[:etcd][:source][:go_url] = nil
 default[:etcdctl][:source][:repo] = "https://github.com/coreos/etcdctl"
 default[:etcdctl][:source][:revision] = "HEAD"
+set[:go][:version] = "1.1.2" # workaround for https://github.com/NOX73/chef-golang/pull/10
