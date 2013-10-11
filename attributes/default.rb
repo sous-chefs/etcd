@@ -16,7 +16,7 @@ default[:etcd][:args] = " -c #{ipaddress}:4001 -s #{ipaddress}:7001"
 # Release to install
 default[:etcd][:version] = "0.1.2"
 # Sha for github tarball
-default[:etcd][:sha256] = "5c25b863bd3d87a5352cf0a2ae3e1c453cc3c9fc3d880694c20da4e802b1d752"
+default[:etcd][:sha256] = "2bc03993559333649455aadcd0f0b1f16aa4dddf30188171741fcaf0d4fd8a55"
 # Use this to supply your own url to a tarball
 default[:etcd][:url] = nil
 
