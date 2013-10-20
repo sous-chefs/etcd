@@ -4,7 +4,7 @@
 
 
 version = node[:etcd][:version]
-package = "etcd-v#{version}-#{node[:os].capitalize}.tar.gz"
+package = "etcd-v#{version}-#{node[:os].capitalize}-x86_64.tar.gz"
 url = "https://github.com/coreos/etcd/releases/download/v#{version}/#{package}"
 if node[:etcd][:url]
   url = node[:etcd][:url]
