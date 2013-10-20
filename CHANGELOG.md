@@ -1,3 +1,10 @@
+### 1.3.3 
+* Bump to etcd 1.2
+* Added source install recipe
+
+### 1.3.1
+* default binding to node[:ipaddress]
+
 ### 1.2.4
 * update to etcd 0.1.1 release 
 * add compile_time recipe that does the whole bit in chef compile time
