@@ -24,7 +24,7 @@ suites:
     etcd:
       args: "-s 127.0.0.1:4001 -c 127.0.0.1:7001"
 
-- name: edge
+- name: custom
   run_list:
     - recipe[curl]
     - recipe[etcd::compile_time]
@@ -34,6 +34,16 @@ suites:
       sha256: "6867fc7b6a53d60d93f2c53c3a06d4f5d8143ad06ca26a76b8d5b4d830248c2d",
       args: "-f -s 127.0.0.1:4001 -c 127.0.0.1:7001",
       version: "130812"
+    }
+  }
+
+- name: release_compiletime
+  run_list:
+    - recipe[curl]
+    - recipe[etcd::compile_time]
+  attributes: {
+    etcd: {
+      args: "-s 127.0.0.1:4001 -c 127.0.0.1:7001",
     }
   }
 
