@@ -37,7 +37,7 @@ suites:
     }
   }
 
-- name: release_compiletime
+- name: compiletime
   run_list:
     - recipe[curl]
     - recipe[etcd::compile_time]
