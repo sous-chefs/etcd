@@ -1,3 +1,6 @@
+### 1.3.4
+* fix compile_time to use the rigth tarball path
+
 ### 1.3.3 
 * Bump to etcd 1.2
 * Added source install recipe
