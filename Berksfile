@@ -8,4 +8,5 @@ metadata
 group :integration do
   cookbook 'curl'
   cookbook 'ubuntu'
+  cookbook 'yum'
 end
