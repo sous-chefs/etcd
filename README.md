@@ -4,11 +4,13 @@ etcd cookbook - installs coreos/etcd on centos/ubuntu boxen
 Centos/rhat 6+ & ubuntu with upstart
 
 ## Recipes
-* *default:* Install and setup the service
-* *_service:* Recipe used by default for setting up the service
-* *binary_install:* Installs the binary of etcd from github release tarballs
-* *source_install:* Compiles the binary of etcd from a specificed github repo/revision
-* *cluster:* Recipe to aide in the building of multi-node etcd clusters
+| Name | Description |
+|:-----|:------------|
+| `default` | Install and setup the service
+| `_service` | Recipe used by default for setting up the service
+| `binary_install` | Installs the binary of etcd from github release tarballs
+| `source_install` | Compiles the binary of etcd from a specificed github repo/revision
+| `cluster` | Recipe to aide in the building of multi-node etcd clusters
 
 ## Attributes
 
@@ -46,8 +48,9 @@ example wrapper can be seen here [http://github.com/cloudware-cookbooks/ktc-etcd
 
 |                      |                                          |
 |:---------------------|:-----------------------------------------|
-| **Original Author**  | Jesse Nelson <spheromak@gmail.com>       |
-| **Contributor**      | James Gregory <james@jagregory.com>      |
+| **Original Author**  | [Jesse Nelson]( https://github.com/spheromak)  |
+| **contributor**      | [Robert Coleman](https://github.com/rjocoleman)|
+| **Contributor**      | [James Gregory](https://github.com/jagregory)|
 | **Copyright**        | Copyright (c) 2013 Jesse Nelson          |
 
 Licensed under the Apache License, Version 2.0 (the "License");
