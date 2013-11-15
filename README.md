@@ -46,12 +46,13 @@ example wrapper can be seen here [http://github.com/cloudware-cookbooks/ktc-etcd
 
 ## License and Author
 
-|                      |                                          |
-|:---------------------|:-----------------------------------------|
+|                      |                                                |
+|:---------------------|:-----------------------------------------------|
 | **Original Author**  | [Jesse Nelson]( https://github.com/spheromak)  |
-| **contributor**      | [Robert Coleman](https://github.com/rjocoleman)|
-| **Contributor**      | [James Gregory](https://github.com/jagregory)|
-| **Copyright**        | Copyright (c) 2013 Jesse Nelson          |
+| **Contributor**      | [Anthony Scalisi](https://github.com/scalp42)  |
+| **Contributor**      | [Robert Coleman](https://github.com/rjocoleman)|
+| **Contributor**      | [James Gregory](https://github.com/jagregory)  |
+| **Copyright**        | Copyright (c) 2013, Jesse Nelson               |
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
