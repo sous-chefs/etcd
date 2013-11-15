@@ -17,7 +17,7 @@ Centos/rhat 6+ & ubuntu with upstart
 | attribute | default setting | description | 
 |:---------------------------------|:---------------|:-----------------------------------------|
 |`default[:etcd][:install_method]`| binary | Right now only binary and source are supported. In the future this will probably go away as there are actual distro packages |
-|`default[:etcd][:args]`|  -c 0.0.0.0:4001 -s 0.0.0.0:70001 | Arguments to pass to etcd when starting the service. |
+|`default[:etcd][:args]`|  -c $PRIVATE_IP:4001 -s $PRIVATE_IP:70001 | Arguments to pass to etcd when starting the service. |
 |`default[:etcd][:name_switch]`| -n | The switch used to specify the node or hostname to etcd. if you build from source this switch has changed since the 0.1.0 release. I will remove this when the arguments to etcd stabilize|
 |`default[:etcd][:version]` | 0.1.0 | The release versions to install. binary install will assemble a github url to grab this version |
 |`default[:etcd][:sha256]` | 00891.. | The Sha256 hash of the tarball specified by the version or URL attribute| 
