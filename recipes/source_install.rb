@@ -2,6 +2,8 @@
 # Installs etcd from source
 #
 
+include_recipe "git"
+
 # install go
 version = node[:etcd][:source][:go_ver]
 package = "go#{version}.linux-#{node['kernel']['machine'] =~ /x86_64/ ? "amd64" : "i386"}.tar.gz"
