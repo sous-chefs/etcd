@@ -13,6 +13,9 @@ default[:etcd][:env_scope] = true
 # service start args to pass
 default[:etcd][:args] = " -c #{ipaddress}:4001 -s #{ipaddress}:7001"
 
+# restart etcd when the config file is updated
+default[:etcd][:trigger_restart] = true
+
 # Release to install
 default[:etcd][:version] = "0.1.2"
 # Sha for github tarball
