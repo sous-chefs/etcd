@@ -6,7 +6,7 @@ include_recipe "git"
 
 # install go
 version = node[:etcd][:source][:go_ver]
-package = "go#{version}.linux-#{node['kernel']['machine'] =~ /x86_64/ ? "amd64" : "i386"}.tar.gz"
+package = "go#{version}.linux-#{node[:kernel][:machine] =~ /x86_64/ ? "amd64" : "i386"}.tar.gz"
 url = "https://go.googlecode.com/files/#{package}"
 if node[:etcd][:source][:go_url]
   url = node[:etcd][:source][:go_url]

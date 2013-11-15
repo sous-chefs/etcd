@@ -13,6 +13,7 @@ end
 template "/etc/init/etcd.conf" do
   mode 0644
   variables(args: args)
+  notifies :restart, "service[etcd]" if node[:etcd][:trigger_restart]
 end
 
 service "etcd" do
