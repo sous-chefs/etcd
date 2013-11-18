@@ -1,5 +1,13 @@
+### 1.3.5
+* silence foodcritic by accessing attributes in a consistent manner, 
+* trigger a restart when etcd conf is updated
+* include git if source install
+* metadata depends on git recipe
+* Update Documentation
+* Update contributors
+
 ### 1.3.4
-* fix compile_time to use the rigth tarball path
+* fix compile_time to use the right tarball path
 
 ### 1.3.3 
 * Bump to etcd 1.2
