@@ -17,7 +17,7 @@ end
 self_hostnames = [node[:fqdn], node[:hostname], node[:name]].compact
 
 # if we aren't the seed then include initial cluster bootstrap
-if self_hostnames.include? node[:etcd][:seed_node]
+if not self_hostnames.include? node[:etcd][:seed_node]
   node.run_state[:etcd_slave] = true
 end
 
