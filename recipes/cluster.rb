@@ -16,9 +16,16 @@ end
 # Hostnames and/or ip addresses of current node
 self_hostnames = [node[:fqdn], node[:hostname], node[:name]].compact
 
+log "Seed node is : #{node[:etcd][:seed_node]}"
+log "Setting up etcd::cluster. Hosts are : #{self_hostnames.join ', '}"
+
+
 # if we aren't the seed then include initial cluster bootstrap
 if not self_hostnames.include? node[:etcd][:seed_node]
-  node.run_state[:etcd_slave] = true
+    log "This node is a slave node"
+    node.run_state[:etcd_slave] = true
+else
+    log "This node will be the seed node"
 end
 
 if Chef::Config[:solo]
