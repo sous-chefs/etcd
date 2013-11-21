@@ -16,6 +16,9 @@ default[:etcd][:args] = " -c #{ipaddress}:4001 -s #{ipaddress}:7001"
 # nodes in cluster
 default[:etcd][:nodes] = []
 
+# Allow locally
+default[:etcd][:local] = true
+
 # restart etcd when the config file is updated
 default[:etcd][:trigger_restart] = true
 
