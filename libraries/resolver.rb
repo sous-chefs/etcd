@@ -1,4 +1,4 @@
-require 'Resolv'
+require 'resolv'
 
 class Chef::Recipe::Resolver
     # We can call this with ISP.vhosts
