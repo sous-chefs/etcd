@@ -22,47 +22,47 @@ log "Setting up etcd::cluster. Hosts are : #{self_hostnames.join ', '}"
 
 # if we aren't the seed then include initial cluster bootstrap
 if not self_hostnames.include? node[:etcd][:seed_node]
-    log "This node is a slave node"
-    node.run_state[:etcd_slave] = true
+  log "This node is a slave node"
+  node.run_state[:etcd_slave] = true
 else
-    log "This node will be the seed node"
+  log "This node will be the seed node"
 end
 
 if Chef::Config[:solo]
-    Chef::Log.warn 'etcd requires node[:etcd][:nodes] to be set when using Chef Solo !'
+  Chef::Log.warn 'etcd requires node[:etcd][:nodes] to be set when using Chef Solo !'
 
-    # Else simply use specified nodes in :nodes array
-    cluster = node[:etcd][:nodes].dup
+  # Else simply use specified nodes in :nodes array
+  cluster = node[:etcd][:nodes].dup
 else
-    # find nodes in this env and populate the cluster nodes file with it
-    query = "recipes:#{node[:etcd][:search_cook]}"
+  # find nodes in this env and populate the cluster nodes file with it
+  query = "recipes:#{node[:etcd][:search_cook]}"
 
-    if node[:etcd][:env_scope]
-      query << " AND chef_environment:#{node.chef_environment}"
-    end
+  if node[:etcd][:env_scope]
+    query << " AND chef_environment:#{node.chef_environment}"
+  end
 
-    # Get a list of hosts
-    cluster = partial_search(:node, query,
-      :keys => {
-        'node' => ['fqdn']
-      }
-    ).map do |n|
-        # Return hostname/fqdn
-        n['node']
-    end
+  # Get a list of hosts
+  cluster = partial_search(:node, query,
+    :keys => {
+      'node' => ['fqdn']
+    }
+  ).map do |n|
+    # Return hostname/fqdn
+    n['node']
+  end
 end
 
 
 # Build /etc/etcd_members file
 cluster_str = cluster.select { |n|
-    # Filter out current host
-    not self_hostnames.include? n
+  # Filter out current host
+  not self_hostnames.include? n
 }.map { |hostname|
-    # Get IP address
-    Resolver.ip hostname
+  # Get IP address
+  Resolver.ip hostname
 }.map { |ip|
-    # Append port
-    "#{ip}:7001"
+  # Append port
+  "#{ip}:7001"
 }
 .join ","  # Join in one string
 
