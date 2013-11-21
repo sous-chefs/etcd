@@ -22,7 +22,7 @@ if Chef::Config[:solo]
     Chef::Log.warn 'etcd requires node[:etcd][:nodes] to be set when using Chef Solo !'
 
     # Else simply use specified nodes in :nodes array
-    cluster = node[:etcd][:nodes]
+    cluster = node[:etcd][:nodes].dup
 else
     # find nodes in this env and populate the cluster nodes file with it
     query = "recipes:#{node[:etcd][:search_cook]}"
