@@ -42,11 +42,23 @@ else
     end
 end
 
-# Cleanup nodes
-# had this in one statement, but might be simpler to break it out even more
-cluster.map! { |n| [node[:fqdn], node[:hostname]].include?(n) ? nil : "#{n}:7001" }
-cluster.compact!
-cluster = cluster.join ","
+# Nodes to exclude
+exclude_nodes = [node[:fqdn], node[:hostname]]
+
+# Build /etc/etcd_members file
+cluster_str = cluster.select { |n|
+    # Filter out current host
+    not exclude_nodes.include? n
+}.map { |hostname|
+    # Get IP address
+    Resolver.ip hostname
+}.map { |ip|
+    # Append port
+    "#{ip}:7001"
+}
+.join ","  # Join in one string
+
+p cluster_str
 
 # write out members
 file "/etc/etcd_members" do
