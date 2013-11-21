@@ -58,11 +58,9 @@ cluster_str = cluster.select { |n|
 }
 .join ","  # Join in one string
 
-p cluster_str
-
 # write out members
 file "/etc/etcd_members" do
-  content cluster
+  content cluster_str
 end
 
 include_recipe "etcd"
