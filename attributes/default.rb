@@ -13,6 +13,9 @@ default[:etcd][:env_scope] = true
 # service start args to pass
 default[:etcd][:args] = " -c #{ipaddress}:4001 -s #{ipaddress}:7001"
 
+# nodes in cluster
+default[:etcd][:nodes] = []
+
 # restart etcd when the config file is updated
 default[:etcd][:trigger_restart] = true
 
