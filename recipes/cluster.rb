@@ -14,7 +14,7 @@ log msg do
 end
 
 # Hostnames and/or ip addresses of current node
-self_hostnames = [node[:fqdn], node[:hostname], node[:name]].compact
+self_hostnames = [node[:fqdn], node[:hostname], node[:name], Resolver.ip(node[:fqdn]) ]
 
 log "Seed node is : #{node[:etcd][:seed_node]}"
 log "Setting up etcd::cluster. Hosts are : #{self_hostnames.join ', '}"
