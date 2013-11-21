@@ -18,10 +18,12 @@ if node.name != node[:etcd][:seed_node]
   node.run_state[:etcd_slave] = true
 end
 
-# Search if no nodes specified
-if node[:etcd][:nodes].empty?
+if Chef::Config[:solo]
+    Chef::Log.warn 'etcd requires node[:etcd][:nodes] to be set when using Chef Solo !'
 
-    #
+    # Else simply use specified nodes in :nodes array
+    cluster = node[:etcd][:nodes]
+else
     # find nodes in this env and populate the cluster nodes file with it
     query = "recipes:#{node[:etcd][:search_cook]}"
 
@@ -38,9 +40,6 @@ if node[:etcd][:nodes].empty?
         # Return hostname/fqdn
         n['node']
     end
-else
-    # Else simply use specified nodes in :nodes array
-    cluster = node[:etcd][:nodes]
 end
 
 # Cleanup nodes
