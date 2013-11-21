@@ -13,8 +13,11 @@ log msg do
   not_if { node[:etcd][:seed_node] }
 end
 
+# Hostnames and/or ip addresses of current node
+self_hostnames = [node[:fqdn], node[:hostname], node[:name]].compact
+
 # if we aren't the seed then include initial cluster bootstrap
-if node.name != node[:etcd][:seed_node]
+if self_hostnames.include? node[:etcd][:seed_node]
   node.run_state[:etcd_slave] = true
 end
 
@@ -42,13 +45,11 @@ else
     end
 end
 
-# Nodes to exclude
-exclude_nodes = [node[:fqdn], node[:hostname]]
 
 # Build /etc/etcd_members file
 cluster_str = cluster.select { |n|
     # Filter out current host
-    not exclude_nodes.include? n
+    not self_hostnames.include? n
 }.map { |hostname|
     # Get IP address
     Resolver.ip hostname
