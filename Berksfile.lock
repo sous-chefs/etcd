@@ -10,34 +10,40 @@
       "locked_version": "1.1.2"
     },
     "yum": {
-      "locked_version": "2.3.4"
+      "locked_version": "3.0.4"
     },
     "ark": {
-      "locked_version": "0.4.0"
+      "locked_version": "0.4.2"
     },
     "partial_search": {
       "locked_version": "1.0.6"
     },
     "git": {
-      "locked_version": "2.7.0"
+      "locked_version": "2.9.0"
     },
     "dmg": {
-      "locked_version": "2.0.4"
+      "locked_version": "2.1.2"
     },
     "build-essential": {
       "locked_version": "1.4.2"
     },
     "windows": {
-      "locked_version": "1.11.0"
+      "locked_version": "1.12.4"
     },
     "chef_handler": {
       "locked_version": "1.1.4"
     },
+    "powershell": {
+      "locked_version": "1.1.2"
+    },
     "runit": {
-      "locked_version": "1.4.0"
+      "locked_version": "1.5.8"
+    },
+    "yum-epel": {
+      "locked_version": "0.2.0"
     },
     "apt": {
-      "locked_version": "2.3.0"
+      "locked_version": "2.3.4"
     }
   }
 }
