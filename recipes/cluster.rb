@@ -3,7 +3,7 @@
 #  Reecipe:: cluster
 #
 #
-# Use search to find nodes that are in the eetcd cluster and build a -CF clusteer file for etcd
+# Use search to find nodes that are in the eetcd cluster and build a -peers-file clusteer file for etcd
 #
 
 # make sure we validate

@@ -14,7 +14,7 @@ default[:etcd][:env_scope] = true
 default[:etcd][:name_switch] = node[:hostname]
 
 # service start args to pass
-default[:etcd][:args] = " -c #{ipaddress}:4001 -s #{ipaddress}:7001"
+default[:etcd][:args] = " -addr #{ipaddress}:4001 -peer-addr #{ipaddress}:7001"
 
 # nodes in cluster
 default[:etcd][:nodes] = []
