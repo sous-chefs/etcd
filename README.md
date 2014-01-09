@@ -27,6 +27,7 @@ Centos/rhat 6+ & ubuntu with upstart
 it is also running etcd |
 |`default[:etcd][:nodes]`| [] | Array of hostnames in cluster. This provides an alternative ,ethod to using Chef's
 `partial_search` for specifying nodes in cluster (useful if using `chef-solo`)  |
+|`default[:etcd][:snapshot]`| false | This is really important to get good memory usage. If you're running this in product, you probably want this set to `true` |
 |`default[:etcd][:local]`| true | Expose local access to Etcd |
 |`default[:etcd][:seed_node]` | nil | The seed node for initial cluster setup. This node will start as the master, but restarts will rejoin the raft cluster. This needs to be set when using cluster recipe otherwise the cluster will not initialize.|
 |`default[:etcd][:env_scope]` | true | Set the search in cluster recipe to restrict to nodes in the same environment.

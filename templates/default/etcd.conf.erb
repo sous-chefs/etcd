@@ -3,4 +3,4 @@ description "etcd service registry"
 start on started networking
 stop on shutdown
 
-exec /usr/local/bin/etcd <%= @args %> -data-dir <%= node[:etcd][:state_dir] %> -name <%= node[:etcd][:name_switch] %>
+exec /usr/local/bin/etcd <%= @args %> -data-dir <%= node[:etcd][:state_dir] %> -name <%= node[:etcd][:name_switch] %> <<% if node[:etcd][:snapshot] %>-snapshot<% end %>
