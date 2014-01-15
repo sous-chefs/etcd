@@ -20,7 +20,7 @@ default[:etcd][:args] = " -addr #{ipaddress}:4001 -peer-addr #{ipaddress}:7001"
 default[:etcd][:nodes] = []
 
 # Activate snapshoting
-default[:etcd][:snapshot] = false
+default[:etcd][:snapshot] = true
 
 # Allow locally
 default[:etcd][:local] = true
