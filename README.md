@@ -54,6 +54,7 @@ example wrapper can be seen here [http://github.com/cloudware-cookbooks/ktc-etcd
 |                      |                                                |
 |:---------------------|:-----------------------------------------------|
 | **Original Author**  | [Jesse Nelson]( https://github.com/spheromak)  |
+| **Contributor**      | [Aaron O'Mullan](https://github.com/AaronO)    |
 | **Contributor**      | [Anthony Scalisi](https://github.com/scalp42)  |
 | **Contributor**      | [Robert Coleman](https://github.com/rjocoleman)|
 | **Contributor**      | [James Gregory](https://github.com/jagregory)  |
