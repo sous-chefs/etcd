@@ -29,9 +29,9 @@ default[:etcd][:local] = true
 default[:etcd][:trigger_restart] = true
 
 # Release to install
-default[:etcd][:version] = "0.1.2"
-# Sha for github tarball
-default[:etcd][:sha256] = "2bc03993559333649455aadcd0f0b1f16aa4dddf30188171741fcaf0d4fd8a55"
+default[:etcd][:version] = "0.2.0"
+# Sha for github tarball Linux by default
+default[:etcd][:sha256] = "726bd35e67e643436e21b3a8f3433ecf4419dabbca337c481c81117095c166ab"
 # Use this to supply your own url to a tarball
 default[:etcd][:url] = nil
 
