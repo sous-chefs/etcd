@@ -3,7 +3,7 @@
 #  Reecipe:: cluster
 #
 #
-# Use search to find nodes that are in the eetcd cluster and build a -CF clusteer file for etcd
+# Use search to find nodes that are in the eetcd cluster and build a -peers-file clusteer file for etcd
 #
 
 # make sure we validate
@@ -13,34 +13,62 @@ log msg do
   not_if { node[:etcd][:seed_node] }
 end
 
+# Hostnames and/or ip addresses of current node
+self_hostnames = [node[:fqdn], node[:hostname], node[:name], Resolver.ip(node[:fqdn]), node[:etcd][:name_switch] ]
+
+log "Seed node is : #{node[:etcd][:seed_node]}"
+log "Setting up etcd::cluster. Hosts are : #{self_hostnames.join ', '}"
+
+
 # if we aren't the seed then include initial cluster bootstrap
-if node.name != node[:etcd][:seed_node]
+if not self_hostnames.include? node[:etcd][:seed_node]
+  log "This node is a slave node"
   node.run_state[:etcd_slave] = true
+else
+  log "This node will be the seed node"
 end
 
-#
-# find nodes in this env and populate the cluster nodes file with it
-query = "recipes:#{node[:etcd][:search_cook]}"
+if Chef::Config[:solo]
+  Chef::Log.warn 'etcd requires node[:etcd][:nodes] to be set when using Chef Solo !'
 
+  # Else simply use specified nodes in :nodes array
+  cluster = node[:etcd][:nodes].dup
+else
+  # find nodes in this env and populate the cluster nodes file with it
+  query = "recipes:#{node[:etcd][:search_cook]}"
 
-if node[:etcd][:env_scope]
-  query << " AND chef_environment:#{node.chef_environment}"
+  if node[:etcd][:env_scope]
+    query << " AND chef_environment:#{node.chef_environment}"
+  end
+
+  # Get a list of hosts
+  cluster = partial_search(:node, query,
+    :keys => {
+      'node' => ['fqdn']
+    }
+  ).map do |n|
+    # Return hostname/fqdn
+    n['node']
+  end
 end
 
-# return a string of comma sepparated  fqdn that doens't include this host
-cluster = partial_search(:node, query,
-  :keys => {
-    'node' => ['fqdn']
-  }
-)
-# had this in one statement, but might be simpler to break it out even more
-cluster.map! { |n| n['node'] == node[:fqdn] ? nil : "#{n['node']}:7001" }
-cluster.compact!
-cluster = cluster.join ","
+
+# Build /etc/etcd_members file
+cluster_str = cluster.select { |n|
+  # Filter out current host
+  not self_hostnames.include? n
+}.map { |hostname|
+  # Get IP address
+  Resolver.ip hostname
+}.map { |ip|
+  # Append port
+  "#{ip}:7001"
+}
+.join ","  # Join in one string
 
 # write out members
 file "/etc/etcd_members" do
-  content cluster
+  content cluster_str
 end
 
 include_recipe "etcd"

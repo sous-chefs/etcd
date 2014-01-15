@@ -14,20 +14,25 @@ Centos/rhat 6+ & ubuntu with upstart
 
 ## Attributes
 
-| attribute | default setting | description | 
+| attribute | default setting | description |
 |:---------------------------------|:---------------|:-----------------------------------------|
 |`default[:etcd][:install_method]`| binary | Right now only binary and source are supported. In the future this will probably go away as there are actual distro packages |
 |`default[:etcd][:args]`|  -c `node['ipaddress']`:4001 -s `node['ipaddress']`:70001 | Arguments to pass to etcd when starting the service. |
 |`default[:etcd][:name_switch]`| -n | The switch used to specify the node or hostname to etcd. if you build from source this switch has changed since the 0.1.0 release. I will remove this when the arguments to etcd stabilize|
 |`default[:etcd][:version]` | 0.1.0 | The release versions to install. binary install will assemble a github url to grab this version |
-|`default[:etcd][:sha256]` | 00891.. | The Sha256 hash of the tarball specified by the version or URL attribute| 
+|`default[:etcd][:sha256]` | 00891.. | The Sha256 hash of the tarball specified by the version or URL attribute|
 |`default[:etcd][:url]` | nil |override the internal generated url to specify your own binary tarball. see the .kitchen.yml for example override |
-|`default[:etcd][:state_dir]` | /var/cache/etcd/state | Where etcd will store its state | 
-|`default[:etcd][:search_cook]`| etcd | The cookbook that should be searched for on the nodes recipes to detect if it is also running etcd |
+|`default[:etcd][:state_dir]` | /var/cache/etcd/state | Where etcd will store its state |
+|`default[:etcd][:search_cook]`| etcd | The cookbook that should be searched for on the nodes recipes to detect if
+it is also running etcd |
+|`default[:etcd][:nodes]`| [] | Array of hostnames in cluster. This provides an alternative ,ethod to using Chef's
+`partial_search` for specifying nodes in cluster (useful if using `chef-solo`)  |
+|`default[:etcd][:snapshot]`| false | This is really important to get good memory usage. If you're running this in product, you probably want this set to `true` |
+|`default[:etcd][:local]`| true | Expose local access to Etcd |
 |`default[:etcd][:seed_node]` | nil | The seed node for initial cluster setup. This node will start as the master, but restarts will rejoin the raft cluster. This needs to be set when using cluster recipe otherwise the cluster will not initialize.|
 |`default[:etcd][:env_scope]` | true | Set the search in cluster recipe to restrict to nodes in the same environment.
 |`default[:etcd][:trigger_restart]` | true | Make etcd restart if the init config is updated
-## Usage 
+## Usage
 
 #### Default single instance single node:
 ````
