@@ -10,26 +10,18 @@ provisioner:
 
 platforms:
 - name: centos-6.4
-  run_list:
-    - recipe[yum-epel]
-
 - name: ubuntu-12.04
-  run_list:
-    - recipe[ubuntu]
 
 suites:
 - name: release
   run_list:
-    - recipe[curl]
     - recipe[etcd]
-  attributes:
-    etcd:
-      args: "-s 127.0.0.1:4001 -c 127.0.0.1:7001"
+    - recipe[etcd_testing_setup]
 
 - name: custom
   run_list:
-    - recipe[curl]
     - recipe[etcd::compile_time]
+    - recipe[etcd_testing_setup]
   attributes: {
     etcd: {
       url: "https://dl.dropboxusercontent.com/u/848501/etcd-130907.tar.gz",
@@ -43,11 +35,6 @@ suites:
   run_list:
     - recipe[curl]
     - recipe[etcd::compile_time]
-  attributes: {
-    etcd: {
-      args: "-s 127.0.0.1:4001 -c 127.0.0.1:7001",
-    }
-  }
 
 - name: cluster
   run_list:
@@ -55,9 +42,7 @@ suites:
     - recipe[etcd]
   attributes: {
     etcd: {
-      args: "-s 127.0.0.1:4001 -c 127.0.0.1:7001",
       seed_node: "#{node.name}"
     }
   }
-  
 

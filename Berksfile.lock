@@ -12,6 +12,9 @@
     "yum": {
       "locked_version": "3.0.4"
     },
+    "etcd_testing_setup": {
+      "path": "./test/cookbooks/etcd_testing_setup"
+    },
     "ark": {
       "locked_version": "0.4.2"
     },
@@ -28,13 +31,10 @@
       "locked_version": "1.4.2"
     },
     "windows": {
-      "locked_version": "1.12.4"
+      "locked_version": "1.12.6"
     },
     "chef_handler": {
       "locked_version": "1.1.4"
-    },
-    "powershell": {
-      "locked_version": "1.1.2"
     },
     "runit": {
       "locked_version": "1.5.8"
