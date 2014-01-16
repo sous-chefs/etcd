@@ -10,9 +10,6 @@ default[:etcd][:search_cook] = "etcd"
 # set to false if you don't want environment scoped searching
 default[:etcd][:env_scope] = true
 
-# Readable name to give to etcd node
-default[:etcd][:name_switch] = node[:hostname]
-
 # service start args to pass
 default[:etcd][:args] = " -addr #{ipaddress}:4001 -peer-addr #{ipaddress}:7001"
 
