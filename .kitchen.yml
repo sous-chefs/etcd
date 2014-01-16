@@ -33,13 +33,13 @@ suites:
 
 - name: compiletime
   run_list:
-    - recipe[curl]
     - recipe[etcd::compile_time]
+    - recipe[etcd_testing_setup]
 
 - name: cluster
   run_list:
-    - recipe[curl]
-    - recipe[etcd]
+    - recipe[etcd::cluster]
+    - recipe[etcd_testing_setup]
   attributes: {
     etcd: {
       seed_node: "#{node.name}"
