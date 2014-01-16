@@ -1,5 +1,5 @@
 #
-# Install, congigure, and start etcd in one go @ compile time
+# Install, configure, and start etcd in one go @ compile time
 #
 
 
