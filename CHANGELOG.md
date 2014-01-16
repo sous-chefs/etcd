@@ -1,3 +1,11 @@
+### 2.0.0
+* update to etcd 0.2.0
+* remove `name_switch` attribute. It was marked for deprication in 1.3
+* enable snapshotting by default
+* add optional local listener
+* support chef-solo
+* Add support of explicitely specifying a cluster's nodes
+
 ### 1.3.5
 * silence foodcritic by accessing attributes in a consistent manner, 
 * trigger a restart when etcd conf is updated
