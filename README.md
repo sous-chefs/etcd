@@ -32,6 +32,8 @@ it is also running etcd |
 |`default[:etcd][:seed_node]` | nil | The seed node for initial cluster setup. This node will start as the master, but restarts will rejoin the raft cluster. This needs to be set when using cluster recipe otherwise the cluster will not initialize.|
 |`default[:etcd][:env_scope]` | true | Set the search in cluster recipe to restrict to nodes in the same environment.
 |`default[:etcd][:trigger_restart]` | true | Make etcd restart if the init config is updated
+|`default[:etcd][:upstart][:start_on]` | started networking | When to start the etcd service using upstart
+|`default[:etcd][:upstart][:stop_on]` | shutdown | When to stop the etcd service using upstart
 
 ## Usage
 
