@@ -25,6 +25,11 @@ default[:etcd][:local] = true
 # restart etcd when the config file is updated
 default[:etcd][:trigger_restart] = true
 
+# Upstart parameters for starting/stopping etcd service
+default[:etcd][:upstart][:start_on] = "started networking"
+default[:etcd][:upstart][:stop_on] = "shutdown"
+
+
 # Release to install
 default[:etcd][:version] = "0.2.0"
 
