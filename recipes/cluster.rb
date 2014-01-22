@@ -63,8 +63,7 @@ cluster_str = cluster.select { |n|
 }.map { |ip|
   # Append port
   "#{ip}:7001"
-}
-.join ","  # Join in one string
+}.join ","  # Join in one string
 
 # write out members
 file "/etc/etcd_members" do
