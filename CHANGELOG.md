@@ -1,3 +1,7 @@
+### 2.0.1
+* ruby 1.8.7 compatable (tho this may go away inthe future)
+* configurable upstart start and stop commands
+
 ### 2.0.0
 * update to etcd 0.2.0
 * remove `name_switch` attribute. It was marked for deprication in 1.3
