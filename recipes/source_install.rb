@@ -6,7 +6,8 @@ include_recipe "git"
 
 # install go
 version = node[:etcd][:source][:go_ver]
-package = "go#{version}.linux-#{node[:kernel][:machine] =~ /x86_64/ ? "amd64" : "i386"}.tar.gz"
+arch = node[:kernel][:machine] =~ /x86_64/ ? "amd64" : "i386"
+package = "go#{version}.linux-#{arch}.tar.gz"
 url = "https://go.googlecode.com/files/#{package}"
 if node[:etcd][:source][:go_url]
   url = node[:etcd][:source][:go_url]
@@ -17,7 +18,7 @@ ark "go" do
   url url
   append_env_path true
   action :nothing
-end.run_action(:install) 
+end.run_action(:install)
 
 # checkout from git
 git "#{Chef::Config[:file_cache_path]}/etcd" do
