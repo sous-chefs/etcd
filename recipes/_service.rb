@@ -12,9 +12,7 @@ if node[:etcd][:local]
     args << " -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0"
 end
 
-if node.run_state.has_key? :etcd_slave  and node.run_state[:etcd_slave] == true
-  args << " -peers-file=/etc/etcd_members"
-end
+args << etcd_peers_arg
 
 template "/etc/init/etcd.conf" do
   mode 0644
