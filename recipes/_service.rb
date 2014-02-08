@@ -9,7 +9,7 @@ args = node[:etcd][:args]
 
 # Allow local access over port 4001
 if node[:etcd][:local]
-    args << " -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0"
+  args << " -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0"
 end
 
 args << etcd_peers_arg
