@@ -13,8 +13,8 @@ if node[:etcd][:url]
   url = node[:etcd][:url]
 end
 
-ark "etcd" do
-  has_binaries ["etcd", "etcdctl"]
+ark 'etcd' do
+  has_binaries ['etcd', 'etcdctl']
   version node[:etcd][:version]
   url url
   checksum node[:etcd][:sha256]

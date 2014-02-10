@@ -11,8 +11,8 @@ if node[:etcd][:url]
 end
 
 # hack to get compile time installation
-a = ark "etcd" do
-  has_binaries ["etcd", "etcdctl"]
+a = ark 'etcd' do
+  has_binaries ['etcd', 'etcdctl']
   version node[:etcd][:version]
   url url
   checksum node[:etcd][:sha256]
@@ -23,15 +23,15 @@ a.run_action :install
 
 directory File.dirname node[:etcd][:state_dir]
 
-t = template "/etc/init/etcd.conf" do
+t = template '/etc/init/etcd.conf' do
   mode 0644
   variables(args: Etcd.args)
-  notifies :restart, "service[etcd]", :immediately
+  notifies :restart, 'service[etcd]', :immediately
 end
 
-s = service "etcd" do
+s = service 'etcd' do
   provider Chef::Provider::Service::Upstart
-  supports :status => true, :restart => true, :reload => true
+  supports status: true, restart: true, reload: true
   action [:enable, :start]
 end
 

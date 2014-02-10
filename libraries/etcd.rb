@@ -14,17 +14,16 @@ class Chef::Recipe::Etcd
       discovery =  node[:etcd][:discovery]
 
       if node[:etcd][:local] == true
-        args << " -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0"
+        args << ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0'
       end
 
       if discovery.length > 0
         args << " -discovery='#{discovery}'"
       elsif slave  == true
-        args << " -peers-file=/etc/etcd_members"
+        args << ' -peers-file=/etc/etcd_members'
       end
       args
     end
-
 
     #
     # lookup github url
@@ -33,7 +32,7 @@ class Chef::Recipe::Etcd
       version = node[:etcd][:version]
 
       case version
-      when "0.3.0"
+      when '0.3.0'
         package = "etcd-v#{version}-#{node[:os]}-amd64.tar.gz"
       else
         package = "etcd-v#{version}-#{node[:os].capitalize}-x86_64.tar.gz"
@@ -41,6 +40,5 @@ class Chef::Recipe::Etcd
 
        "https://github.com/coreos/etcd/releases/download/v#{version}/#{package}"
      end
-
   end
 end

@@ -13,7 +13,7 @@ Etcd.node = node
 if node[:etcd][:discovery].length > 0 then
   log 'Use discovery URL to gather the peers'
 else
-  msg="`node[:etcd][:seed_node]` is required to bootstrap a cluster"
+  msg = '`node[:etcd][:seed_node]` is required to bootstrap a cluster'
   log msg do
     level :error
     not_if { node[:etcd][:seed_node] }
@@ -30,13 +30,12 @@ else
   log "Seed node is : #{node[:etcd][:seed_node]}"
   log "Setting up etcd::cluster. Hosts are : #{self_hostnames.join ', '}"
 
-
   # if we aren't the seed then include initial cluster bootstrap
   if not self_hostnames.include? node[:etcd][:seed_node]
-    log "This node is a slave node"
+    log 'This node is a slave node'
     Etcd.slave = true
   else
-    log "This node will be the seed node"
+    log 'This node will be the seed node'
   end
 
   if Chef::Config[:solo]
@@ -54,32 +53,31 @@ else
 
     # Get a list of hosts
     cluster = partial_search(:node, query,
-      :keys => {
-        'node' => ['fqdn']
-      }
+                             keys: {
+                               'node' => ['fqdn']
+                             }
     ).map do |n|
       # Return hostname/fqdn
       n['node']
     end
   end
 
-
   # Build /etc/etcd_members file
-  cluster_str = cluster.select { |n|
+  cluster_str = cluster.select do |n|
     # Filter out current host
     not self_hostnames.include? n
-  }.map { |hostname|
+  end.map do |hostname|
     # Get IP address
     Resolver.ip hostname
-  }.map { |ip|
+  end.map do |ip|
     # Append port
     "#{ip}:7001"
-  }.join ","  # Join in one string
+  end.join ','  # Join in one string
 
   # write out members
-  file "/etc/etcd_members" do
+  file '/etc/etcd_members' do
     content cluster_str
   end
 end
 
-include_recipe "etcd"
+include_recipe 'etcd'

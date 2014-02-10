@@ -2,18 +2,18 @@
 # Installs etcd from source
 #
 
-include_recipe "git"
+include_recipe 'git'
 
 # install go
 version = node[:etcd][:source][:go_ver]
-arch = node[:kernel][:machine] =~ /x86_64/ ? "amd64" : "i386"
+arch = node[:kernel][:machine] =~ /x86_64/ ? 'amd64' : 'i386'
 package = "go#{version}.linux-#{arch}.tar.gz"
 url = "https://go.googlecode.com/files/#{package}"
 if node[:etcd][:source][:go_url]
   url = node[:etcd][:source][:go_url]
 end
 
-ark "go" do
+ark 'go' do
   version node[:etcd][:source][:go_ver]
   url url
   append_env_path true
@@ -25,19 +25,19 @@ git "#{Chef::Config[:file_cache_path]}/etcd" do
   repository node[:etcd][:source][:repo]
   reference node[:etcd][:source][:revision]
   action :sync
-  notifies :run, "bash[compile_etcd]"
+  notifies :run, 'bash[compile_etcd]'
 end
 
 git "#{Chef::Config[:file_cache_path]}/etcdctl" do
   repository node[:etcdctl][:source][:repo]
   reference node[:etcdctl][:source][:revision]
   action :sync
-  notifies :run, "bash[compile_etcdctl]"
+  notifies :run, 'bash[compile_etcdctl]'
 end
 
 # build and 'install'
-bash "compile_etcd" do
-  user "root"
+bash 'compile_etcd' do
+  user 'root'
   cwd "#{Chef::Config[:file_cache_path]}/etcd"
   code <<-EOH
   ./build
@@ -45,8 +45,8 @@ bash "compile_etcd" do
   EOH
 end
 
-bash "compile_etcdctl" do
-  user "root"
+bash 'compile_etcdctl' do
+  user 'root'
   cwd "#{Chef::Config[:file_cache_path]}/etcdctl"
   code <<-EOH
   ./build
