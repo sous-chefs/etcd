@@ -2,8 +2,10 @@
 # Install, configure, and start etcd in one go @ compile time
 #
 
+# Etcd singleton gets our node
+Etcd.node = node
 
-url = gh_bin_url
+url = Etcd.gh_bin_url
 if node[:etcd][:url]
   url = node[:etcd][:url]
 end
@@ -21,12 +23,9 @@ a.run_action :install
 
 directory File.dirname node[:etcd][:state_dir]
 
-args = node[:etcd][:args]
-args << etcd_peers_arg
-
 t = template "/etc/init/etcd.conf" do
   mode 0644
-  variables(args: args)
+  variables(args: Etcd.args)
   notifies :restart, "service[etcd]", :immediately
 end
 

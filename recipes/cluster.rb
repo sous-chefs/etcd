@@ -6,6 +6,9 @@
 # Use search to find nodes that are in the eetcd cluster and build a -peers-file clusteer file for etcd
 #
 
+# pass node over to Etcd singleton
+Etcd.node = node
+
 # make sure we validate
 if node[:etcd][:discovery].length > 0 then
   log 'Use discovery URL to gather the peers'
@@ -31,7 +34,7 @@ else
   # if we aren't the seed then include initial cluster bootstrap
   if not self_hostnames.include? node[:etcd][:seed_node]
     log "This node is a slave node"
-    node.run_state[:etcd_slave] = true
+    Etcd.slave = true
   else
     log "This node will be the seed node"
   end
