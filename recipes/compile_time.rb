@@ -3,9 +3,7 @@
 #
 
 
-version = node[:etcd][:version]
-package = "etcd-v#{version}-#{node[:os].capitalize}-x86_64.tar.gz"
-url = "https://github.com/coreos/etcd/releases/download/v#{version}/#{package}"
+url = gh_bin_url
 if node[:etcd][:url]
   url = node[:etcd][:url]
 end
@@ -24,9 +22,7 @@ a.run_action :install
 directory File.dirname node[:etcd][:state_dir]
 
 args = node[:etcd][:args]
-if node.run_state.has_key? :etcd_slave  and node.run_state[:etcd_slave] == true
-  args << " -peers-file=/etc/etcd_members"
-end
+args << etcd_peers_arg
 
 t = template "/etc/init/etcd.conf" do
   mode 0644

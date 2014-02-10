@@ -6,9 +6,8 @@
 # assemble default url or use supplied url in attributes
 # we can assemble the url from the version
 #
-version = node[:etcd][:version]
-package = "etcd-v#{version}-#{node[:os].capitalize}-x86_64.tar.gz"
-url = "https://github.com/coreos/etcd/releases/download/v#{version}/#{package}"
+
+url = gh_bin_url
 if node[:etcd][:url]
   url = node[:etcd][:url]
 end

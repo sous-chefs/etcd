@@ -13,6 +13,9 @@ default[:etcd][:env_scope] = true
 # service start args to pass
 default[:etcd][:args] = " -addr #{ipaddress}:4001 -peer-addr #{ipaddress}:7001"
 
+# v0.3.0 API cluster discovery
+default[:etcd][:discovery] = ""
+
 # nodes in cluster
 default[:etcd][:nodes] = []
 
@@ -31,10 +34,10 @@ default[:etcd][:upstart][:stop_on] = "shutdown"
 
 
 # Release to install
-default[:etcd][:version] = "0.2.0"
+default[:etcd][:version] = "0.3.0"
 
 # Sha for github tarball Linux by default
-default[:etcd][:sha256] = "726bd35e67e643436e21b3a8f3433ecf4419dabbca337c481c81117095c166ab"
+default[:etcd][:sha256] = "18be476ba59db42c573ee23fbe00f4a205830ac54f752c0d46280707603c9192"
 
 # Use this to supply your own url to a tarball
 default[:etcd][:url] = nil
