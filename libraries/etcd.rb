@@ -12,6 +12,11 @@ class Chef::Recipe::Etcd
     def args
       args  = node[:etcd][:args]
       discovery =  node[:etcd][:discovery]
+
+      if node[:etcd][:local] == true
+        args << " -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0"
+      end
+
       if discovery.length > 0
         args << " -discovery='#{discovery}'"
       elsif slave  == true
