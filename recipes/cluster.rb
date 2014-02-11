@@ -1,10 +1,11 @@
-#
+# Encoding: UTF-8
 # Cookbook:: etcd
 #  Reecipe:: cluster
 #
-#
-# Use search to find nodes that are in the eetcd cluster and build a -peers-file clusteer file for etcd
-#
+# This sets up a set of servers via search or attributes or discover
+#-------------------------------------------------------------------------------
+
+require 'resolv'
 
 # pass node over to Etcd singleton
 Etcd.node = node
@@ -20,18 +21,19 @@ else
   end
 
   # Hostnames and/or ip addresses of current node
+  my_ip = Resolv.getaddr(node[:fqdn]) || Resolv.getaddr(node[:hostname]) || Resolv.getaddr(node[:name])
   self_hostnames = [
     node[:fqdn],
     node[:hostname],
     node[:name],
-    Resolver.ip(node[:fqdn])
+    my_ip
   ]
 
   log "Seed node is : #{node[:etcd][:seed_node]}"
   log "Setting up etcd::cluster. Hosts are : #{self_hostnames.join ', '}"
 
   # if we aren't the seed then include initial cluster bootstrap
-  if not self_hostnames.include? node[:etcd][:seed_node]
+  unless self_hostnames.include? node[:etcd][:seed_node]
     log 'This node is a slave node'
     Etcd.slave = true
   else
@@ -68,7 +70,7 @@ else
     not self_hostnames.include? n
   end.map do |hostname|
     # Get IP address
-    Resolver.ip hostname
+    Resolve.getaddress hostname
   end.map do |ip|
     # Append port
     "#{ip}:7001"
