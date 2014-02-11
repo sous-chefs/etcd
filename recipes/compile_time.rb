@@ -1,3 +1,4 @@
+# Encoding: UTF-8
 #
 # Install, configure, and start etcd in one go @ compile time
 #
@@ -5,16 +6,11 @@
 # Etcd singleton gets our node
 Etcd.node = node
 
-url = Etcd.gh_bin_url
-if node[:etcd][:url]
-  url = node[:etcd][:url]
-end
-
 # hack to get compile time installation
 a = ark 'etcd' do
   has_binaries ['etcd', 'etcdctl']
   version node[:etcd][:version]
-  url url
+  url Etcd.bin_url
   checksum node[:etcd][:sha256]
   action :install
 end

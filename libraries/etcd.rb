@@ -1,14 +1,17 @@
+# Encoding: UTF-8
 #
 # Etcd Helper Libraries
 #
 #
 class Chef::Recipe::Etcd
+  # intent of this class is recipe helpers
+  # for usage with etcd cook
   class << self
     attr_accessor :slave, :node
 
     #
     # Compute weather we are peer or discovery
-    #
+    # rubocop:disable MethodLength
     def args
       args  = node[:etcd][:args]
       discovery =  node[:etcd][:discovery]
@@ -24,21 +27,31 @@ class Chef::Recipe::Etcd
       end
       args
     end
+    # rubocop:endable MethodLength
 
-    #
-    # lookup github url
-    #
-    def gh_bin_url
+    # compute the package name based on etcd version
+    def package_name
       version = node[:etcd][:version]
 
-      case version
+      package = case version
       when '0.3.0'
-        package = "etcd-v#{version}-#{node[:os]}-amd64.tar.gz"
+        "etcd-v#{version}-#{node[:os]}-amd64.tar.gz"
       else
-        package = "etcd-v#{version}-#{node[:os].capitalize}-x86_64.tar.gz"
+        "etcd-v#{version}-#{node[:os].capitalize}-x86_64.tar.gz"
       end
+      package
+    end
 
-       "https://github.com/coreos/etcd/releases/download/v#{version}/#{package}"
-     end
+    #
+    # Return URL for package via what user has supplied of what we compute
+    #
+    def bin_url
+      version = node[:etcd][:version]
+      if  node[:etcd][:url]
+        url = node[:etcd][:url]
+      else
+        url = "https://github.com/coreos/etcd/releases/download/v#{version}/#{package_name}"
+      end
+    end
   end
 end
