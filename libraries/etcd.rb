@@ -9,6 +9,11 @@ class Chef::Recipe::Etcd
   class << self
     attr_accessor :slave, :node
 
+    # return local cmdline args if localmode
+    def local_cmd
+      ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0' if node[:etcd][:local] == true
+    end
+
     #
     # Compute weather we are peer or discovery
     # rubocop:disable MethodLength
@@ -16,10 +21,7 @@ class Chef::Recipe::Etcd
       args  = node[:etcd][:args]
       discovery =  node[:etcd][:discovery]
 
-      if node[:etcd][:local] == true
-        args << ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0'
-      end
-
+      args << local_cmd
       if discovery.length > 0
         args << " -discovery='#{discovery}'"
       elsif slave  == true
