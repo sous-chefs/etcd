@@ -29,17 +29,17 @@ class Chef::Recipe::Etcd
     end
     # rubocop:endable MethodLength
 
+    #
     # compute the package name based on etcd version
+    #
     def package_name
       version = node[:etcd][:version]
 
-      package = case version
-      when '0.3.0'
+      if Gem::Requirement.new('>= 0.3.0').satisfied_by?(Gem::Version.new(version))
         "etcd-v#{version}-#{node[:os]}-amd64.tar.gz"
       else
         "etcd-v#{version}-#{node[:os].capitalize}-x86_64.tar.gz"
       end
-      package
     end
 
     #
@@ -48,9 +48,9 @@ class Chef::Recipe::Etcd
     def bin_url
       version = node[:etcd][:version]
       if  node[:etcd][:url]
-        url = node[:etcd][:url]
+        node[:etcd][:url]
       else
-        url = "https://github.com/coreos/etcd/releases/download/v#{version}/#{package_name}"
+        "https://github.com/coreos/etcd/releases/download/v#{version}/#{package_name}"
       end
     end
   end
