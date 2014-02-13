@@ -21,7 +21,7 @@ else
   end
 
   # Hostnames and/or ip addresses of current node
-  my_ip = Resolv.getaddr(node[:fqdn]) || Resolv.getaddr(node[:hostname]) || Resolv.getaddr(node[:name])
+  my_ip = Resolv.getaddress(node[:fqdn]) || Resolv.getaddress(node[:hostname]) || Resolv.getaddress(node[:name])
   self_hostnames = [
     node[:fqdn],
     node[:hostname],
