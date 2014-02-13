@@ -11,9 +11,7 @@ version = node[:etcd][:source][:go_ver]
 arch = node[:kernel][:machine] =~ /x86_64/ ? 'amd64' : 'i386'
 package = "go#{version}.linux-#{arch}.tar.gz"
 url = "https://go.googlecode.com/files/#{package}"
-if node[:etcd][:source][:go_url]
-  url = node[:etcd][:source][:go_url]
-end
+url = node[:etcd][:source][:go_url] if node[:etcd][:source][:go_url]
 
 ark 'go' do
   version node[:etcd][:source][:go_ver]
