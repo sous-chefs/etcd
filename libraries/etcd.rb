@@ -14,20 +14,26 @@ class Chef::Recipe::Etcd
       ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0' if node[:etcd][:local] == true
     end
 
+    # return cmd args for discovery/cluster members
+    def discovery_cmd
+      discovery =  node[:etcd][:discovery]
+      cmd = ''
+      if discovery.length > 0
+        cmd << " -discovery='#{discovery}'"
+      elsif slave  == true
+        cmd << ' -peers-file=/etc/etcd_members'
+      end
+      cmd
+    end
+
     #
     # Compute weather we are peer or discovery
     # rubocop:disable MethodLength
     def args
-      args  = node[:etcd][:args]
-      discovery =  node[:etcd][:discovery]
-
-      args << local_cmd
-      if discovery.length > 0
-        args << " -discovery='#{discovery}'"
-      elsif slave  == true
-        args << ' -peers-file=/etc/etcd_members'
-      end
-      args
+      cmd = node[:etcd][:args].dup
+      cmd << local_cmd
+      cmd << discovery_cmd
+      cmd
     end
     # rubocop:endable MethodLength
 
