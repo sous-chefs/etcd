@@ -23,8 +23,8 @@ log msg do
 end
 
 # Hostnames and/or ip addresses of current node
-my_ip = Resolv.getaddress(node[:fqdn]) || Resolv.getaddress(node[:hostname]) || Resolv.getaddress(node[:name])
-self_hostnames = [
+my_ip = Resolv.getaddress(node.fqdn) || Resolv.getaddress(node.hostname) || Resolv.getaddress(node.name)
+my_hostnames = [
   node[:fqdn],
   node[:hostname],
   node[:name],
@@ -32,10 +32,10 @@ self_hostnames = [
 ]
 
 log "Seed node is : #{node[:etcd][:seed_node]}"
-log "Setting up etcd::cluster. Hosts are : #{self_hostnames.join ', '}"
+log "Setting up etcd::cluster. Hosts are : #{my_hostnames.join ', '}"
 
 # if we aren't the seed then include initial cluster bootstrap
-unless self_hostnames.include? node[:etcd][:seed_node]
+unless my_hostnames.include? node[:etcd][:seed_node]
   log 'This node is a slave node'
   Etcd.slave = true
 end
@@ -68,7 +68,7 @@ end
 # rubocop:disable MultilineBlockChain
 cluster_str = cluster.select do |n|
   # Filter out current host
-  !self_hostnames.include? n
+  !my_hostnames.include? n
 end.map do |hostname|
   # Get IP address
   Resolve.getaddress hostname
