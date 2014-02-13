@@ -1,4 +1,4 @@
-#
+# Encoding: UTF-8
 # Recipe:: _service
 #
 #

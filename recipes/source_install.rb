@@ -1,3 +1,5 @@
+# Encoding: UTF-8
+#
 #
 # Installs etcd from source
 #

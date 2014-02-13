@@ -1,3 +1,5 @@
+# Encoding: UTF-8
+#
 # recipe:: Default
 #
 # Setup etcd
