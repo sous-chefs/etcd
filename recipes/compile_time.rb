@@ -6,7 +6,7 @@
 # Etcd singleton gets our node
 Etcd.node = node
 
-# hack to get compile time installation
+# HACK: to get compile time installation
 a = ark 'etcd' do
   has_binaries ['etcd', 'etcdctl']
   version node[:etcd][:version]
