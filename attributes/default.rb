@@ -1,4 +1,4 @@
-#
+# Encoding: UTF-8
 default[:etcd][:install_method] = 'binary'
 
 # cluster options
@@ -11,7 +11,7 @@ default[:etcd][:search_cook] = 'etcd'
 default[:etcd][:env_scope] = true
 
 # service start args to pass
-default[:etcd][:args] = " -addr #{ipaddress}:4001 -peer-addr #{ipaddress}:7001"
+default[:etcd][:args] = ''
 
 # v0.3.0 API cluster discovery
 default[:etcd][:discovery] = ''
