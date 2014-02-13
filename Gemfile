@@ -5,7 +5,6 @@ gem 'berkshelf'
 
 group 'develop' do
   gem 'test-kitchen'
-  gem 'kitchen-vagrant'
   gem 'kitchen-docker', git: 'https://github.com/spheromak/kitchen-docker.git', branch: 'locale'
   gem 'rake'
   gem 'foodcritic', git: 'https://github.com/mlafeldt/foodcritic.git', branch: 'improve-rake-task'
