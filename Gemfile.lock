@@ -123,6 +123,8 @@ GEM
     i18n (0.6.9)
     ipaddress (0.8.0)
     json (1.8.1)
+    kitchen-vagrant (0.14.0)
+      test-kitchen (~> 1.0)
     knife-cookbook-doc (0.8.0)
       chef
       erubis
@@ -262,6 +264,7 @@ DEPENDENCIES
   chefspec (>= 3.2.0)
   foodcritic!
   kitchen-docker!
+  kitchen-vagrant
   knife-cookbook-doc
   rake
   rubocop

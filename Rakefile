@@ -16,13 +16,13 @@ namespace :test do
   begin
     require 'kitchen/rake_tasks'
     Kitchen::RakeTasks.new
-  rescue LoadError
+  rescue
     puts '>>>>> Kitchen gem not loaded, omitting tasks' unless ENV['CI']
   end
 
   begin
+    require 'foodcritic/rake_task'
     require 'foodcritic'
-
     task :default => [:foodcritic]
     FoodCritic::Rake::LintTask.new do |t|
       t.options = {:fail_tags => %w/correctness services libraries deprecated/ }
@@ -43,9 +43,9 @@ namespace :test do
 
   desc 'Run all of the quick tests.'
   task :quick do
-    Rake::Task['test:spec'].invoke
-    Rake::Task['test:foodcritic'].invoke
     Rake::Task['test:rubocop'].invoke
+    Rake::Task['test:foodcritic'].invoke
+    Rake::Task['test:spec'].invoke
   end
 
   desc 'Run _all_ the tests. Go get a coffee.'
@@ -67,3 +67,4 @@ namespace :release do
   task :tag_release do
   end
 end
+
