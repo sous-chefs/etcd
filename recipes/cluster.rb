@@ -1,31 +1,43 @@
-#
+# Encoding: UTF-8
 # Cookbook:: etcd
 #  Reecipe:: cluster
 #
-#
-# Use search to find nodes that are in the eetcd cluster and build a -peers-file clusteer file for etcd
-#
+# This sets up a set of servers via search or attributes or discover
+#-------------------------------------------------------------------------------
+
+require 'resolv'
+
+# pass node over to Etcd singleton
+Etcd.node = node
 
 # make sure we validate
-msg="`node[:etcd][:seed_node]` is required to bootstrap a cluster"
+if node[:etcd][:discovery].length > 0
+  include_recipe 'etcd'
+  return
+end
+
+msg = '`node[:etcd][:seed_node]` is required to bootstrap a cluster'
 log msg do
   level :error
   not_if { node[:etcd][:seed_node] }
 end
 
 # Hostnames and/or ip addresses of current node
-self_hostnames = [node[:fqdn], node[:hostname], node[:name], Resolver.ip(node[:fqdn]) ]
+my_ip = Resolv.getaddress(node.fqdn) || Resolv.getaddress(node.hostname) || Resolv.getaddress(node.name)
+my_hostnames = [
+  node[:fqdn],
+  node[:hostname],
+  node[:name],
+  my_ip
+]
 
 log "Seed node is : #{node[:etcd][:seed_node]}"
-log "Setting up etcd::cluster. Hosts are : #{self_hostnames.join ', '}"
-
+log "Setting up etcd::cluster. Hosts are : #{my_hostnames.join ', '}"
 
 # if we aren't the seed then include initial cluster bootstrap
-if not self_hostnames.include? node[:etcd][:seed_node]
-  log "This node is a slave node"
-  node.run_state[:etcd_slave] = true
-else
-  log "This node will be the seed node"
+unless my_hostnames.include? node[:etcd][:seed_node]
+  log 'This node is a slave node'
+  Etcd.slave = true
 end
 
 if Chef::Config[:solo]
@@ -43,31 +55,32 @@ else
 
   # Get a list of hosts
   cluster = partial_search(:node, query,
-    :keys => {
-      'node' => ['fqdn']
-    }
+                           keys: {
+                             'node' => ['fqdn']
+                           }
   ).map do |n|
     # Return hostname/fqdn
     n['node']
   end
 end
 
-
 # Build /etc/etcd_members file
-cluster_str = cluster.select { |n|
+# rubocop:disable MultilineBlockChain
+cluster_str = cluster.select do |n|
   # Filter out current host
-  not self_hostnames.include? n
-}.map { |hostname|
+  !my_hostnames.include? n
+end.map do |hostname|
   # Get IP address
-  Resolver.ip hostname
-}.map { |ip|
+  Resolve.getaddress hostname
+end.map do |ip|
   # Append port
   "#{ip}:7001"
-}.join ","  # Join in one string
+end.join ','  # Join in one string
+# rubocop:enable MultilineBlockChain
 
 # write out members
-file "/etc/etcd_members" do
+file '/etc/etcd_members' do
   content cluster_str
 end
 
-include_recipe "etcd"
+include_recipe 'etcd'
