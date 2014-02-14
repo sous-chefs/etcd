@@ -1,3 +1,11 @@
+### 2.1.1
+* update to etcd 0.3.0
+* Add support for new discovery mode
+* refactor common functions into library methods
+* Add specs
+* Use rubocop to replace tailor/cane
+* Fixup testing (add travis integration) 
+
 ### 2.0.0
 * update to etcd 0.2.0
 * remove `name_switch` attribute. It was marked for deprication in 1.3
