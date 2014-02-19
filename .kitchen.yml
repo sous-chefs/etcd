@@ -41,9 +41,4 @@ suites:
   run_list:
     - recipe[etcd::cluster]
     - recipe[etcd_testing_setup]
-  attributes: {
-    etcd: {
-      seed_node: "#{node.name}"
-    }
-  }
 

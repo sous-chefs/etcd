@@ -23,7 +23,7 @@ log msg do
 end
 
 # Hostnames and/or ip addresses of current node
-my_ip = Resolv.getaddress(node.fqdn) || Resolv.getaddress(node.hostname) || Resolv.getaddress(node.name)
+my_ip = ::Resolv.getaddress(node.fqdn) || ::Resolv.getaddress(node.hostname) || ::Resolv.getaddress(node.name)
 my_hostnames = [
   node[:fqdn],
   node[:hostname],
@@ -71,7 +71,7 @@ cluster_str = cluster.select do |n|
   !my_hostnames.include? n
 end.map do |hostname|
   # Get IP address
-  Resolve.getaddress hostname
+  ::Resolv.getaddress hostname
 end.map do |ip|
   # Append port
   "#{ip}:7001"
