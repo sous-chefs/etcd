@@ -25,7 +25,7 @@ Centos/rhat 6+ & ubuntu with upstart
 |`default[:etcd][:sha256]` | 726bd3.. | The Sha256 hash of the tarball specified by the version or URL attribute|
 |`default[:etcd][:url]` | nil |override the internal generated url to specify your own binary tarball. see the .kitchen.yml for example override |
 |`default[:etcd][:state_dir]` | /var/cache/etcd/state | Where etcd will store its state |
-|`default[:etcd][:search_cook]`| etcd | The cookbook that should be searched for on the nodes recipes to detect if it is also running etcd |
+|`default[:etcd][:search_cook]`| etcd\:\:cluster | The cookbook that should be searched for on the nodes recipes to detect if it is also running etcd |
 |`default[:etcd][:nodes]`| [] | Array of hostnames in cluster. This provides an alternative method to using Chef's `partial_search` for specifying nodes in cluster (useful if using `chef-solo`)  |
 |`default[:etcd][:snapshot]`| true | This is really important to get good memory usage. If you're running this in product, you probably want this set to `true` |
 |`default[:etcd][:local]`| true | Etcd will bind to all interfaces (this will be renamed in a future release) |

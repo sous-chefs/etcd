@@ -41,20 +41,14 @@ unless my_hostnames.include? node[:etcd][:seed_node]
   Etcd.slave = true
 end
 
-if Chef::Config[:solo]
-  Chef::Log.warn 'etcd requires node[:etcd][:nodes] to be set when using Chef Solo !'
-
-  # Else simply use specified nodes in :nodes array
-  cluster = node[:etcd][:nodes].dup
-else
+cluster = node[:etcd][:nodes].dup
+if node[:etcd][:nodes].empty? && Chef::Config[:solo] != true
   # find nodes in this env and populate the cluster nodes file with it
   query = "recipes:#{node[:etcd][:search_cook]}"
 
   if node[:etcd][:env_scope]
     query << " AND chef_environment:#{node.chef_environment}"
   end
-
-  puts "looking for etcd nodes with query: '#{query}'"
 
   # Get a list of hosts
   cluster = partial_search(:node, query,
@@ -67,12 +61,9 @@ else
   end
 end
 
-puts 'Etcd got cluster: ' << cluster.inspect
 log 'Etcd got cluster: ' << cluster.inspect do
   level :debug
 end
-
-puts pp(search(:node, '*.*'))
 
 # Build /etc/etcd_members file
 # rubocop:disable MultilineBlockChain
