@@ -3,8 +3,9 @@
 #  Reecipe:: cluster
 #
 # This sets up a set of servers via search or attributes or discover
+# TODO: Much of this recipe should be moved to lib/helper methods.
+#
 #-------------------------------------------------------------------------------
-
 require 'resolv'
 
 # pass node over to Etcd singleton
@@ -23,11 +24,11 @@ log msg do
 end
 
 # Hostnames and/or ip addresses of current node
-my_ip = ::Resolv.getaddress(node.fqdn) || ::Resolv.getaddress(node.hostname) || ::Resolv.getaddress(node.name)
+my_ip = ::Resolv.getaddress(node[:fqdn]) || ::Resolv.getaddress(node[:hostname]) || ::Resolv.getaddress(node.name)
 my_hostnames = [
   node[:fqdn],
   node[:hostname],
-  node[:name],
+  node.name,
   my_ip
 ]
 
@@ -53,6 +54,8 @@ else
     query << " AND chef_environment:#{node.chef_environment}"
   end
 
+  puts "looking for etcd nodes with query: '#{query}'"
+
   # Get a list of hosts
   cluster = partial_search(:node, query,
                            keys: {
@@ -64,6 +67,13 @@ else
   end
 end
 
+puts 'Etcd got cluster: ' << cluster.inspect
+log 'Etcd got cluster: ' << cluster.inspect do
+  level :debug
+end
+
+puts pp(search(:node, '*.*'))
+
 # Build /etc/etcd_members file
 # rubocop:disable MultilineBlockChain
 cluster_str = cluster.select do |n|
@@ -71,6 +81,7 @@ cluster_str = cluster.select do |n|
   !my_hostnames.include? n
 end.map do |hostname|
   # Get IP address
+  # TODO: break this thing up, this could break if unresolvable
   ::Resolv.getaddress hostname
 end.map do |ip|
   # Append port
@@ -78,6 +89,7 @@ end.map do |ip|
 end.join ','  # Join in one string
 # rubocop:enable MultilineBlockChain
 
+log "Setting up etcd members: #{cluster_str}"
 # write out members
 file '/etc/etcd_members' do
   content cluster_str

@@ -1,3 +1,4 @@
+.cooks
 .vagrant
 .berkshelf/cookbooks
 .berkshelf/tmp

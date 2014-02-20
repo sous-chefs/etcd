@@ -1,4 +1,5 @@
-$: << File.expand_path(File.dirname(__FILE__) + "../../")
+cfg_dir = File.expand_path(File.dirname(__FILE__) + "../../")
+$: << cfg_dir
 
 if ENV["COVERAGE"]
   require "simplecov"
@@ -9,10 +10,11 @@ if ENV["COVERAGE"]
 end
 
 require "chefspec"
-require 'chefspec/berkshelf'
+require 'chefspec/server'
 
 RSpec.configure do |config|
   config.platform = 'centos'
   config.version = '6.4'
   config.color = true
+  config.cookbook_path = "#{cfg_dir}/../.cooks"
 end

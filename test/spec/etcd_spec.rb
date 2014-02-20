@@ -2,14 +2,10 @@ require_relative 'spec_helper'
 require_relative '../../libraries/etcd'
 
 describe 'etcd::default' do
-  let(:chef_run) do
-    ChefSpec::Runner.new do |node|
-    end.converge(described_recipe)
-  end
-
   before(:each) do
-    @node = chef_run.run_context.node
-    Chef::Recipe::Etcd.node = @node
+    @chef_run = ChefSpec::Runner.new
+    @node = @chef_run.node
+    Chef::Recipe::Etcd.node = @chef_run.node
   end
 
   context 'package_name' do
@@ -28,6 +24,7 @@ describe 'etcd::default' do
 
   context 'local_cmd' do
     it 'binds all ints when local is set' do
+      @node.set[:etcd][:local] = true
       Chef::Recipe::Etcd.local_cmd.should eql ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0'
     end
 
@@ -39,6 +36,7 @@ describe 'etcd::default' do
 
   context 'discovery_cmd' do
     it 'should default to empty string' do
+      @node.set[:etcd][:discovery] = ''
       Chef::Recipe::Etcd.discovery_cmd.should eql ''
     end
 
