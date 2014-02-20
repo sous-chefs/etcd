@@ -4,6 +4,7 @@ require 'rspec/core/rake_task'
 
 cfg_dir = File.expand_path File.dirname(__FILE__)
 ENV['BERKSHELF_PATH'] = cfg_dir + '/.berkshelf'
+cook_dir = cfg_dir + '/.cooks'
 
 task :default => 'test:quick'
 namespace :test do
@@ -11,6 +12,8 @@ namespace :test do
   RSpec::Core::RakeTask.new(:spec) do |t|
     t.pattern = Dir.glob('test/spec/**/*_spec.rb')
     t.rspec_opts = "--color -f d"
+    system "rm -rf  #{cook_dir}"
+    system "berks install --path #{cook_dir}"
   end
 
   begin

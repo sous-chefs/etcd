@@ -3,8 +3,9 @@
 #  Reecipe:: cluster
 #
 # This sets up a set of servers via search or attributes or discover
+# TODO: Much of this recipe should be moved to lib/helper methods.
+#
 #-------------------------------------------------------------------------------
-
 require 'resolv'
 
 # pass node over to Etcd singleton
@@ -23,11 +24,11 @@ log msg do
 end
 
 # Hostnames and/or ip addresses of current node
-my_ip = ::Resolv.getaddress(node.fqdn) || ::Resolv.getaddress(node.hostname) || ::Resolv.getaddress(node.name)
+my_ip = ::Resolv.getaddress(node[:fqdn]) || ::Resolv.getaddress(node[:hostname]) || ::Resolv.getaddress(node.name)
 my_hostnames = [
   node[:fqdn],
   node[:hostname],
-  node[:name],
+  node.name,
   my_ip
 ]
 
@@ -40,12 +41,8 @@ unless my_hostnames.include? node[:etcd][:seed_node]
   Etcd.slave = true
 end
 
-if Chef::Config[:solo]
-  Chef::Log.warn 'etcd requires node[:etcd][:nodes] to be set when using Chef Solo !'
-
-  # Else simply use specified nodes in :nodes array
-  cluster = node[:etcd][:nodes].dup
-else
+cluster = node[:etcd][:nodes].dup
+if node[:etcd][:nodes].empty? && Chef::Config[:solo] != true
   # find nodes in this env and populate the cluster nodes file with it
   query = "recipes:#{node[:etcd][:search_cook]}"
 
@@ -64,6 +61,10 @@ else
   end
 end
 
+log 'Etcd got cluster: ' << cluster.inspect do
+  level :debug
+end
+
 # Build /etc/etcd_members file
 # rubocop:disable MultilineBlockChain
 cluster_str = cluster.select do |n|
@@ -71,6 +72,7 @@ cluster_str = cluster.select do |n|
   !my_hostnames.include? n
 end.map do |hostname|
   # Get IP address
+  # TODO: break this thing up, this could break if unresolvable
   ::Resolv.getaddress hostname
 end.map do |ip|
   # Append port
@@ -78,6 +80,7 @@ end.map do |ip|
 end.join ','  # Join in one string
 # rubocop:enable MultilineBlockChain
 
+log "Setting up etcd members: #{cluster_str}"
 # write out members
 file '/etc/etcd_members' do
   content cluster_str

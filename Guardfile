@@ -17,9 +17,9 @@ guard 'rake', :task => 'test:quick' do
 end
 
 guard 'kitchen' do
-  watch(%r{test/[^spec].+})
+#  watch(%r{test/[^spec].+})
   watch(%r{^lib/(.+)\.rb$})
-  watch('spec/spec_helper.rb')  { "test/spec" }
+#  watch('spec/spec_helper.rb')  { "test/spec" }
   watch(%r{^recipes/(.+)\.rb$}) { |m| "test/spec/unit/recipes/#{m[1]}_spec.rb" }
   watch(%r{^attributes/(.+)\.rb$})
   watch(%r{^files/(.+)})

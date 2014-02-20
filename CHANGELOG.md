@@ -1,3 +1,10 @@
+### 2.1.2
+* fix bug in cluster recipe where Resolv was spelled wrong
+* fix kitchen test on cluster to pickup this issue.
+* add basic chefspec as well to ensure this sort of issue doesn't occur
+* fix bug with name attribute methods
+* fix searching for wrong recipe when using cluster recipe
+
 ### 2.1.1
 * update to etcd 0.3.0
 * Add support for new discovery mode

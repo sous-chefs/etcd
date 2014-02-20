@@ -1,13 +1,13 @@
-require_relative 'spec_helper'
+require_relative 'spec_server_helper'
 require_relative '../../libraries/etcd'
 
-describe 'Etcd' do
-  let(:chef_run) { ChefSpec::Runner.new }
-  let(:node) { chef_run.node }
+describe 'etcd::default' do
+    let(:chef_run) { ChefSpec::Runner.new }
+    let(:node) { chef_run.node }
 
-  before(:each) do
-    Chef::Recipe::Etcd.node = chef_run.node
-  end
+    before(:each) do
+      Chef::Recipe::Etcd.node = chef_run.node
+    end
 
   context 'package_name' do
     it 'handles version variance' do
@@ -21,6 +21,7 @@ describe 'Etcd' do
       expect(Chef::Recipe::Etcd.package_name).to eql 'etcd-v0.0.1-Linux-x86_64.tar.gz'
     end
   end
+
 
   context 'local_cmd' do
     it 'binds all ints when local is set' do
@@ -37,8 +38,6 @@ describe 'Etcd' do
   context 'discovery_cmd' do
     it 'should default to empty string' do
       node.set[:etcd][:discovery] = ''
-      node.set[:etcd][:nodes] = []
-      Chef::Recipe::Etcd.slave = false
       Chef::Recipe::Etcd.discovery_cmd.should eql ''
     end
 
@@ -51,7 +50,6 @@ describe 'Etcd' do
       node.set[:etcd][:discovery] = ''
       Chef::Recipe::Etcd.slave = true
       Chef::Recipe::Etcd.discovery_cmd.should eql ' -peers-file=/etc/etcd_members'
-      Chef::Recipe::Etcd.slave = false
     end
 
   end
@@ -61,9 +59,6 @@ describe 'Etcd' do
       node.set[:etcd][:local] = true
       node.set[:etcd][:discovery] = ''
       node.set[:etcd][:args] = ''
-      Chef::Recipe::Etcd.slave = false
-      Chef::Recipe::Etcd.args.should eql ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0'
-      Chef::Recipe::Etcd.slave = true
       Chef::Recipe::Etcd.args.should eql ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0 -peers-file=/etc/etcd_members'
     end
 
