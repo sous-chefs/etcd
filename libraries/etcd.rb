@@ -11,7 +11,11 @@ class Chef::Recipe::Etcd
 
     # return local cmdline args if localmode
     def local_cmd
-      ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0' if node[:etcd][:local] == true
+      if node[:etcd][:local] == true
+        ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0'
+      else
+        ''
+      end
     end
 
     # return cmd args for discovery/cluster members
