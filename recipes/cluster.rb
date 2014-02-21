@@ -67,7 +67,7 @@ end
 
 # Build /etc/etcd_members file
 # rubocop:disable MultilineBlockChain
-cluster_str = cluster.select do |n|
+cluster_str = cluster.sort.select do |n|
   # Filter out current host
   !my_hostnames.include? n
 end.map do |hostname|

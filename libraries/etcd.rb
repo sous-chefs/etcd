@@ -26,13 +26,37 @@ class Chef::Recipe::Etcd
       cmd
     end
 
+    def peer_addr
+      cmd = ''
+      if node[:etcd][:peer_addr].match(/.*:(\d)/)
+        cmd << " --peer-addr=#{node[:etcd][:peer_addr]}"
+      elsif node[:etcd][:peer_addr].length > 0
+        cmd << " --peer-addr=#{node[:etcd][:peer_addr]}:7001"
+      end
+    end
+
+    def snapshot
+      " -snapshot=#{node[:etcd][:snapshot]}"
+    end
+
+    # determine node name
+    def node_name
+      a = " -name #{node.name}"
+      a = " -name #{node[:fqdn]}" unless node[:fqdn].nil?
+      a = " -name #{node[:etcd][:name]}" unless node[:etcd][:name].nil?
+      a
+    end
+
     #
     # Compute weather we are peer or discovery
     # rubocop:disable MethodLength
     def args
       cmd = node[:etcd][:args].dup
       cmd << local_cmd
+      cmd << node_name
       cmd << discovery_cmd
+      cmd << peer_addr
+      cmd << snapshot
       cmd
     end
     # rubocop:endable MethodLength

@@ -1,6 +1,12 @@
 # Encoding: UTF-8
 default[:etcd][:install_method] = 'binary'
 
+# address to announce to peers specified as ip:port or ip (will default to :7001)
+default[:etcd][:peer_addr] = ''
+
+# set if you want to override the node name. It uses fqdn by default
+default[:etcd][:name] = nil
+
 # cluster options
 default[:etcd][:seed_node] = nil
 
