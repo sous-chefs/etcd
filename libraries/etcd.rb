@@ -26,12 +26,12 @@ class Chef::Recipe::Etcd
       cmd
     end
 
-    def peer_addr
+    def lookup_addr(option, key, port)
       cmd = ''
-      if node[:etcd][:peer_addr].match(/.*:(\d)/)
-        cmd << " --peer-addr=#{node[:etcd][:peer_addr]}"
-      elsif node[:etcd][:peer_addr].length > 0
-        cmd << " --peer-addr=#{node[:etcd][:peer_addr]}:7001"
+      if key.match(/.*:(\d)/)
+        cmd << " #{option}=#{key}"
+      elsif key.length > 0
+        cmd << " #{option}=#{key}:#{port}"
       end
     end
 
@@ -47,15 +47,16 @@ class Chef::Recipe::Etcd
       a
     end
 
+    # when you specify args in config we don't compute. so you have to specify all of them
     #
-    # Compute weather we are peer or discovery
-    # rubocop:disable MethodLength
     def args
+      # return node[:etcd][:args] if node[:etcd][:args].length > 0
       cmd = node[:etcd][:args].dup
       cmd << local_cmd
       cmd << node_name
       cmd << discovery_cmd
-      cmd << peer_addr
+      cmd << lookup_addr('-peer-addr', node[:etcd][:peer_addr], 7001)
+      cmd << lookup_addr('-addr', node[:etcd][:peer_addr], 4001)
       cmd << snapshot
       cmd
     end
