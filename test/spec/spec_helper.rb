@@ -8,4 +8,3 @@ RSpec.configure do |config|
   config.color = true
   config.cookbook_path = cook_dir
 end
-

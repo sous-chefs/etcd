@@ -20,8 +20,8 @@ class Chef::Recipe::Etcd
 
     # return cmd args for discovery/cluster members
     def discovery_cmd
-      discovery =  node[:etcd][:discovery]
       cmd = ''
+      discovery =  node[:etcd][:discovery]
       if discovery.length > 0
         cmd << " -discovery='#{discovery}'"
       elsif slave  == true
@@ -30,12 +30,13 @@ class Chef::Recipe::Etcd
       cmd
     end
 
-    def lookup_addr(option, key = '', port)
+    def lookup_addr(option, key, port)
       cmd = ''
-      if key.match(/.*:(\d)/)
-        cmd << " #{option}=#{key}"
-      elsif key.length > 0
-        cmd << " #{option}=#{key}:#{port}"
+      val = node[:etcd][key.to_sym]
+      if val.match(/.*:(\d)/)
+        cmd << " #{option}=#{val}"
+      elsif val.length > 0
+        cmd << " #{option}=#{val}:#{port}"
       end
       cmd
     end
@@ -55,13 +56,12 @@ class Chef::Recipe::Etcd
     # when you specify args in config we don't compute. so you have to specify all of them
     #
     def args
-      # return node[:etcd][:args] if node[:etcd][:args].length > 0
       cmd = node[:etcd][:args].dup
       cmd << local_cmd
       cmd << node_name
       cmd << discovery_cmd
-      cmd << lookup_addr('-peer-addr', node[:etcd][:peer_addr], 7001)
-      cmd << lookup_addr('-addr', node[:etcd][:peer_addr], 4001)
+      cmd << lookup_addr('-peer-addr', :peer_addr, 7001)
+      cmd << lookup_addr('-addr', :peer_addr, 4001)
       cmd << snapshot
       cmd
     end
@@ -72,7 +72,7 @@ class Chef::Recipe::Etcd
     #
     def package_name
       version = node[:etcd][:version]
-
+      fail ArgumentError, 'need to specify a version for etcd' unless version
       if Gem::Requirement.new('>= 0.3.0').satisfied_by?(Gem::Version.new(version))
         "etcd-v#{version}-#{node[:os]}-amd64.tar.gz"
       else

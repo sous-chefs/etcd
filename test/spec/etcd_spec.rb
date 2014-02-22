@@ -4,13 +4,16 @@ require_relative '../../libraries/etcd'
 describe 'Etcd' do
   let(:chef_run) { ChefSpec::Runner.new }
   let(:node) { chef_run.node }
-
   before(:each) do
     Chef::Recipe::Etcd.node = chef_run.node
   end
 
   context 'package_name' do
+
     it 'handles version variance' do
+      chef_run = ChefSpec::Runner.new
+      node = chef_run.node
+      Chef::Recipe::Etcd.node = chef_run.node
       node.set[:etcd][:version] = '1.3.0'
       expect(Chef::Recipe::Etcd.package_name).to eql 'etcd-v1.3.0-linux-amd64.tar.gz'
       node.set[:etcd][:version] = '0.3.0'
@@ -19,6 +22,11 @@ describe 'Etcd' do
       expect(Chef::Recipe::Etcd.package_name).to eql 'etcd-v0.2.0-Linux-x86_64.tar.gz'
       node.set[:etcd][:version] = '0.0.1'
       expect(Chef::Recipe::Etcd.package_name).to eql 'etcd-v0.0.1-Linux-x86_64.tar.gz'
+    end
+    
+    it ' raises when version is nil or invalid' do
+      node.set[:etcd][:version] = nil
+      expect {Chef::Recipe::Etcd.package_name}.to raise_error
     end
   end
 
@@ -57,21 +65,25 @@ describe 'Etcd' do
   end
 
   context 'args' do
+    before do
+      chef_run = ChefSpec::Runner.new
+      chef_run.converge('etcd')
+      Chef::Recipe::Etcd.node = chef_run.node
+    end
+
     it 'recognizes local mode' do
-      node.set[:etcd][:local] = true
-      node.set[:etcd][:discovery] = ''
-      node.set[:etcd][:args] = ''
       Chef::Recipe::Etcd.slave = false
-      Chef::Recipe::Etcd.args.should eql ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0'
+      Chef::Recipe::Etcd.args.should eql ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0 -name fauxhai.local -snapshot=true'
+
       Chef::Recipe::Etcd.slave = true
-      Chef::Recipe::Etcd.args.should eql ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0 -peers-file=/etc/etcd_members'
+      Chef::Recipe::Etcd.args.should eql ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0 -name fauxhai.local -peers-file=/etc/etcd_members -snapshot=true'
     end
 
     it 'toggles discovery' do
-      node.set[:etcd][:local] = true
-      node.set[:etcd][:discovery] = '1.1.1.1'
-      node.set[:etcd][:args] = ''
-      Chef::Recipe::Etcd.args.should eql %Q{ -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0 -discovery='1.1.1.1'}
+      chef_run = ChefSpec::Runner.new
+      chef_run.node.set[:etcd][:discovery] = '1.1.1.1'
+      chef_run.converge('etcd')
+      Chef::Recipe::Etcd.args.should eql %Q{ -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0 -name fauxhai.local -discovery='1.1.1.1' -snapshot=true}
     end
   end
 end
