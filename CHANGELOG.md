@@ -1,3 +1,10 @@
+### 2.13
+* add peer and peer_addr support / attributes
+* add name attribute and computation
+* fixup cmdline argument computation
+* ensure cluster members are always sorted
+* fix spec tests
+
 ### 2.1.2
 * fix bug in cluster recipe where Resolv was spelled wrong
 * fix kitchen test on cluster to pickup this issue.
