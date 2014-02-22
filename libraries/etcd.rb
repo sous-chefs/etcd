@@ -30,7 +30,7 @@ class Chef::Recipe::Etcd
       cmd
     end
 
-    def lookup_addr(option, key, port)
+    def lookup_addr(option, key = '', port)
       cmd = ''
       if key.match(/.*:(\d)/)
         cmd << " #{option}=#{key}"

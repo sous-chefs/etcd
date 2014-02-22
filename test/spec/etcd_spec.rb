@@ -28,9 +28,9 @@ describe 'Etcd' do
       Chef::Recipe::Etcd.local_cmd.should eql ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0'
     end
 
-    it 'returns nil when not set' do
+    it 'empty when not set' do
       node.set[:etcd][:local] = false
-      Chef::Recipe::Etcd.local_cmd.should eql nil
+      Chef::Recipe::Etcd.local_cmd.should eql ''
     end
   end
 
