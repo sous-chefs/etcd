@@ -11,13 +11,17 @@ class Chef::Recipe::Etcd
 
     # return local cmdline args if localmode
     def local_cmd
-      ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0' if node[:etcd][:local] == true
+      if node[:etcd][:local] == true
+        ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0'
+      else
+        ''
+      end
     end
 
     # return cmd args for discovery/cluster members
     def discovery_cmd
-      discovery =  node[:etcd][:discovery]
       cmd = ''
+      discovery =  node[:etcd][:discovery]
       if discovery.length > 0
         cmd << " -discovery='#{discovery}'"
       elsif slave  == true
@@ -26,13 +30,39 @@ class Chef::Recipe::Etcd
       cmd
     end
 
+    def lookup_addr(option, key, port)
+      cmd = ''
+      val = node[:etcd][key.to_sym]
+      if val.match(/.*:(\d)/)
+        cmd << " #{option}=#{val}"
+      elsif val.length > 0
+        cmd << " #{option}=#{val}:#{port}"
+      end
+      cmd
+    end
+
+    def snapshot
+      " -snapshot=#{node[:etcd][:snapshot]}"
+    end
+
+    # determine node name
+    def node_name
+      a = " -name #{node.name}"
+      a = " -name #{node[:fqdn]}" unless node[:fqdn].nil?
+      a = " -name #{node[:etcd][:name]}" unless node[:etcd][:name].nil?
+      a
+    end
+
+    # when you specify args in config we don't compute. so you have to specify all of them
     #
-    # Compute weather we are peer or discovery
-    # rubocop:disable MethodLength
     def args
       cmd = node[:etcd][:args].dup
       cmd << local_cmd
+      cmd << node_name
       cmd << discovery_cmd
+      cmd << lookup_addr('-peer-addr', :peer_addr, 7001)
+      cmd << lookup_addr('-addr', :peer_addr, 4001)
+      cmd << snapshot
       cmd
     end
     # rubocop:endable MethodLength
@@ -42,7 +72,7 @@ class Chef::Recipe::Etcd
     #
     def package_name
       version = node[:etcd][:version]
-
+      fail ArgumentError, 'need to specify a version for etcd' unless version
       if Gem::Requirement.new('>= 0.3.0').satisfied_by?(Gem::Version.new(version))
         "etcd-v#{version}-#{node[:os]}-amd64.tar.gz"
       else

@@ -19,40 +19,56 @@ Centos/rhat 6+ & ubuntu with upstart
 
 | attribute | default setting | description |
 |:---------------------------------|:---------------|:-----------------------------------------|
-|`default[:etcd][:install_method]`| binary | Right now only binary and source are supported. In the future this will probably go away as there are actual distro packages |
-|`default[:etcd][:args]`| | Extra arguments to pass to etcd when starting the service. |
-|`default[:etcd][:version]` | 0.3.0 | The release versions to install. binary install will assemble a github url to grab this version |
-|`default[:etcd][:sha256]` | 726bd3.. | The Sha256 hash of the tarball specified by the version or URL attribute|
-|`default[:etcd][:url]` | nil |override the internal generated url to specify your own binary tarball. see the .kitchen.yml for example override |
-|`default[:etcd][:state_dir]` | /var/cache/etcd/state | Where etcd will store its state |
-|`default[:etcd][:search_cook]`| etcd\:\:cluster | The cookbook that should be searched for on the nodes recipes to detect if it is also running etcd |
-|`default[:etcd][:nodes]`| [] | Array of hostnames in cluster. This provides an alternative method to using Chef's `partial_search` for specifying nodes in cluster (useful if using `chef-solo`)  |
-|`default[:etcd][:snapshot]`| true | This is really important to get good memory usage. If you're running this in product, you probably want this set to `true` |
-|`default[:etcd][:local]`| true | Etcd will bind to all interfaces (this will be renamed in a future release) |
-|`default[:etcd][:seed_node]` | nil | The seed node for initial cluster setup. This node will start as the master, but restarts will rejoin the raft cluster. This needs to be set when using cluster recipe otherwise the cluster will not initialize.|
-|`default[:etcd][:discovery]` | '' | Discovery address/token see: https://coreos.com/docs/cluster-management/setup/etcd-cluster-discovery/ for more info
-|`default[:etcd][:env_scope]` | true | Set the search in cluster recipe to restrict to nodes in the same environment
-|`default[:etcd][:trigger_restart]` | true | Make etcd restart if the init config is updated
-|`default[:etcd][:upstart][:start_on]` | started networking | When to start the etcd service using upstart
-|`default[:etcd][:upstart][:stop_on]` | shutdown | When to stop the etcd service using upstart
+|`default[:etcd][:install_method]`| `binary` | Right now only binary and source are supported. In the future this will probably go away as there are actual distro packages |
+|`default[:etcd][:version]` | `0.3.0` | The release versions to install. binary install will assemble a github url to grab this version |
+|`default[:etcd][:sha256]` | `726bd3..` | The Sha256 hash of the tarball specified by the version or URL attribute|
+|`default[:etcd][:url]` | `nil` |override the internal generated url to specify your own binary tarball. see the .kitchen.yml for example override |
+|`default[:etcd][:state_dir]` | `/var/cache/etcd/state` | Where etcd will store its state |
+|`default[:etcd][:search_cook]`| `'etcd\:\:cluster'` | The cookbook that should be searched for on the nodes recipes to detect if it is also running etcd |
+|`default[:etcd][:trigger_restart]` | `true` | Make etcd restart if the init config is updated
+|`default[:etcd][:upstart][:start_on]` | `started networking` | When to start the etcd service using upstart
+|`default[:etcd][:upstart][:stop_on]` | `shutdown` | When to stop the etcd service using upstart
+
+These attributes control the startup/cmdline args for etcd:
+
+| attribute | default setting | description |
+|:---------------------------------|:---------------|:-----------------------------------------|
+|`default[:etcd][:name]`| `nil` | The name etcd uses inthe cluster. By default we use the first available value from `node[:fqdn]`, `node[:hostname]`, or `node[:name]`. Set this to something else to override. |
+|`default[:etcd][:snapshot]`| `true` | This is really important to get good memory usage. If you're running this in product, you probably want this set to `true` |
+|`default[:etcd][:local]`| `true` | Etcd will bind to all interfaces not mutually exclusive with `:addr` and `:peer_addr`
+|`default[:etcd][:seed_node]` | `nil` | The seed node for initial cluster setup. This node will start as the master, but restarts will rejoin the raft cluster. This needs to be set when using cluster recipe otherwise the cluster will not initialize.|
+|`default[:etcd][:nodes]`| `[]` | Array of hostnames in cluster. This provides an alternative method to using Chef's `partial_search` for specifying nodes in cluster (useful if using `chef-solo`)  |
+|`default[:etcd][:addr]` | `node.ipaddress:4001` | address the adress that etcd uses publically. defaults to  node.ipaddress:4001
+|`default[:etcd][:peer_addr]` | `node.ipaddress:7001` | address to announce to peers specified as ip:port or ip when empty string it will set to node.ipaddress:7001
+|`default[:etcd][:discovery]` | `''` | Discovery address/token see: https://coreos.com/docs/cluster-management/setup/etcd-cluster-discovery/ for more info
+|`default[:etcd][:env_scope]` | `true` | Set the search in cluster recipe to restrict to nodes in the same environment
+|`default[:etcd][:args]`| `''` | Extra arguments to pass to etcd when starting the service. if you specify something that is computed they will be passed twice. This is here to handle where you want to setup other things. |
 
 ## Usage
-
-
 #### Default single instance single node:
+Siply add etcd to your runlist
 ````
 run_list[etcd]
 ````
 
 #### Setup a cluster
-In a role or wrapper cookbook setup the seed_node attribute and add the cluster recipe to each node in the cluster.
+__NOTE:__ setting `node[:etcd][:addr]` and `[:etcd][:peer_addr]` is important when using a cluster where nodes might have many adresses. Make sure they advertise an adress that is reachable by other members.
 
+##### Using Seed node
+In a role or wrapper cookbook setup the seed_node attribute and add the cluster recipe to each node in the cluster.
 If you use a wrapper cookbook set `node[:etcd][:search_cook]` to the wrapper cookboks name
+
 ````
 run_list[etcd::cluster]
 ````
 
-example wrapper can be seen here [http://github.com/cloudware-cookbooks/ktc-etcd]
+example wrapper can be seen [here](http://github.com/cloudware-cookbooks/ktc-etcd)
+
+##### Using Discovery
+To use discovery simply goto [https://discovery.etcd.io/new](https://discovery.etcd.io/new) and get a url then set `node[:etd][:discovery]` to that url. This can also be your own etcd instance and a key.
+
+Then use `etcd::cluster` recipe to build out the cluster.
+
 
 ## License and Author
 

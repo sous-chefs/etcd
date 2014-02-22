@@ -6,6 +6,7 @@ gem 'berkshelf'
 group 'develop' do
   gem 'test-kitchen'
   gem 'kitchen-vagrant'
+  gem 'kitchen-docker'
   gem 'rake'
   gem 'foodcritic',
       git: 'https://github.com/mlafeldt/foodcritic.git',
@@ -14,4 +15,7 @@ group 'develop' do
   gem 'knife-cookbook-doc'
   gem 'chefspec', '>= 3.2.0'
   gem 'git'
+  gem 'guard'
+  gem 'guard-rake'
+  gem 'guard-kitchen'
 end
