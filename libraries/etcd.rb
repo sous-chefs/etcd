@@ -37,6 +37,7 @@ class Chef::Recipe::Etcd
       elsif key.length > 0
         cmd << " #{option}=#{key}:#{port}"
       end
+      cmd
     end
 
     def snapshot
