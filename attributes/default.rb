@@ -44,6 +44,9 @@ default[:etcd][:upstart][:stop_on] = 'shutdown'
 # Release to install
 default[:etcd][:version] = '0.3.0'
 
+# Auto respawn
+default[:etcd][:respawn] = false
+
 # Sha for github tarball Linux by default
 default[:etcd][:sha256] = '18be476ba59db42c573ee23fbe00f4a205830ac54f752c0d46280707603c9192'
 
