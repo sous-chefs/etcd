@@ -1,5 +1,9 @@
 description "etcd service registry"
 
+<%- if node[:etcd][:respawn] %>
+respawn
+<%- end %>
+
 start on <%= node[:etcd][:upstart][:start_on] %>
 stop on <%= node[:etcd][:upstart][:stop_on] %>
 
