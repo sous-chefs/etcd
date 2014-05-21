@@ -42,7 +42,7 @@ default[:etcd][:upstart][:start_on] = 'started networking'
 default[:etcd][:upstart][:stop_on] = 'shutdown'
 
 # Release to install
-default[:etcd][:version] = '0.3.0'
+default[:etcd][:version] = '0.4.1'
 
 # Auto respawn
 default[:etcd][:respawn] = false
