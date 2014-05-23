@@ -52,7 +52,7 @@ if node[:etcd][:nodes].empty? && Chef::Config[:solo] != true
 
   # Get a list of hosts
   cluster = partial_search(:node, query,
-                           :keys => {
+                           keys: {
                              'node' => ['fqdn']
                            }
   ).map do |n|

@@ -2,7 +2,6 @@
 # vim: set ft=ruby:
 #
 site :opscode
-
 metadata
 
 group :integration do

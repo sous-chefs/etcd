@@ -8,6 +8,7 @@ AllCops:
     - providers/**
     - resources/**
   Excludes:
+    - bin/**
     - test/**
     - vendor/**
 

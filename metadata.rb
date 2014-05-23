@@ -1,4 +1,4 @@
-name    'etcd'
+name 'etcd'
 version '2.1.3'
 
 depends 'ark'

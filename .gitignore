@@ -1,4 +1,5 @@
 .cooks
+bin
 .vagrant
 .berkshelf/cookbooks
 .berkshelf/tmp
