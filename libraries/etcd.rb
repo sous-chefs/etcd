@@ -11,7 +11,7 @@ class Chef::Recipe::Etcd
 
     # return local cmdline args if localmode
     def local_cmd
-      if node[:etcd][:local] == true
+      if node[:etcd][:local]
         ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0'
       else
         ''
@@ -24,7 +24,7 @@ class Chef::Recipe::Etcd
       discovery =  node[:etcd][:discovery]
       if discovery.length > 0
         cmd << " -discovery='#{discovery}'"
-      elsif slave  == true
+      elsif slave
         cmd << ' -peers-file=/etc/etcd_members'
       end
       cmd
@@ -37,6 +37,8 @@ class Chef::Recipe::Etcd
         cmd << " #{option}=#{val}"
       elsif val.length > 0
         cmd << " #{option}=#{val}:#{port}"
+      else
+        cmd << " #{option}=#{node[:ipaddress]}:#{port}"
       end
       cmd
     end
