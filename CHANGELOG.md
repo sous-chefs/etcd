@@ -1,4 +1,9 @@
-### 2.13
+### 2.2.0
+* update to etcd 0.4.2
+* add auto-respawn instruction in upstart config file
+* Fix Gem deps in the ci build
+
+### 2.1.3
 * add peer and peer_addr support / attributes
 * add name attribute and computation
 * fixup cmdline argument computation
