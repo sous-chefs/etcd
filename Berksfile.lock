@@ -16,34 +16,34 @@
       "path": "./test/cookbooks/etcd_testing_setup"
     },
     "ark": {
-      "locked_version": "0.4.2"
+      "locked_version": "0.8.2"
     },
     "partial_search": {
-      "locked_version": "1.0.6"
+      "locked_version": "1.0.8"
     },
     "git": {
-      "locked_version": "2.9.0"
+      "locked_version": "4.0.2"
     },
     "dmg": {
-      "locked_version": "2.1.4"
+      "locked_version": "2.2.0"
     },
     "build-essential": {
-      "locked_version": "1.4.2"
+      "locked_version": "2.0.2"
     },
     "windows": {
-      "locked_version": "1.30.0"
+      "locked_version": "1.31.0"
     },
     "chef_handler": {
-      "locked_version": "1.1.4"
+      "locked_version": "1.1.6"
     },
     "runit": {
-      "locked_version": "1.5.8"
+      "locked_version": "1.5.10"
     },
     "yum-epel": {
-      "locked_version": "0.3.4"
+      "locked_version": "0.3.6"
     },
     "apt": {
-      "locked_version": "2.3.8"
+      "locked_version": "2.4.0"
     }
   }
 }

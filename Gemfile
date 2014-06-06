@@ -1,4 +1,4 @@
-source  'https://rubygems.org'
+source 'https://rubygems.org'
 
 # get this from git for the chefignore issues
 gem 'berkshelf'

@@ -30,18 +30,6 @@ describe 'Etcd' do
     end
   end
 
-  context 'local_cmd' do
-    it 'binds all ints when local is set' do
-      node.set[:etcd][:local] = true
-      Chef::Recipe::Etcd.local_cmd.should eql ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0'
-    end
-
-    it 'empty when not set' do
-      node.set[:etcd][:local] = false
-      Chef::Recipe::Etcd.local_cmd.should eql ''
-    end
-  end
-
   context 'discovery_cmd' do
     it 'should default to empty string' do
       node.set[:etcd][:discovery] = ''
@@ -71,19 +59,11 @@ describe 'Etcd' do
       Chef::Recipe::Etcd.node = chef_run.node
     end
 
-    it 'recognizes local mode' do
-      Chef::Recipe::Etcd.slave = false
-      Chef::Recipe::Etcd.args.should eql ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0 -name fauxhai.local -snapshot=true'
-
-      Chef::Recipe::Etcd.slave = true
-      Chef::Recipe::Etcd.args.should eql ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0 -name fauxhai.local -peers-file=/etc/etcd_members -snapshot=true'
-    end
-
     it 'toggles discovery' do
       chef_run = ChefSpec::Runner.new
       chef_run.node.set[:etcd][:discovery] = '1.1.1.1'
       chef_run.converge('etcd')
-      Chef::Recipe::Etcd.args.should eql %Q{ -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0 -name fauxhai.local -discovery='1.1.1.1' -snapshot=true}
+      Chef::Recipe::Etcd.args.should eql %Q{ -name fauxhai.local -discovery='1.1.1.1' -peer-addr=10.0.0.2:7001 -addr=10.0.0.2:4001 -snapshot=true}
     end
   end
 end

@@ -10,15 +10,6 @@ class Chef
       class << self
         attr_accessor :slave, :node
 
-        # return local cmdline args if localmode
-        def local_cmd
-          if node[:etcd][:local] == true
-            ' -bind-addr 0.0.0.0 -peer-bind-addr 0.0.0.0'
-          else
-            ''
-          end
-        end
-
         # return cmd args for discovery/cluster members
         def discovery_cmd
           cmd = ''
@@ -60,7 +51,6 @@ class Chef
         #
         def args
           cmd = node[:etcd][:args].dup
-          cmd << local_cmd
           cmd << node_name
           cmd << discovery_cmd
           cmd << lookup_addr('-peer-addr', :peer_addr, 7001)

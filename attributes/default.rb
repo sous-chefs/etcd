@@ -31,9 +31,6 @@ default[:etcd][:nodes] = []
 # Activate snapshoting
 default[:etcd][:snapshot] = true
 
-# Allow locally
-default[:etcd][:local] = true
-
 # restart etcd when the config file is updated
 default[:etcd][:trigger_restart] = true
 
@@ -53,7 +50,7 @@ default[:etcd][:sha256] = '18be476ba59db42c573ee23fbe00f4a205830ac54f752c0d46280
 # Use this to supply your own url to a tarball
 default[:etcd][:url] = nil
 
-# Etcd's backend storage 
+# Etcd's backend storage
 default[:etcd][:state_dir] = '/var/cache/etcd/state'
 
 # Used for source_install method
