@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/spheromak/etcd-cookbook.png)](https://travis-ci.org/spheromak/etcd-cookbook)
-
 etcd cookbook - installs coreos/etcd on centos/ubuntu boxen
 
 ## Supported Platforms
@@ -35,7 +34,6 @@ These attributes control the startup/cmdline args for etcd:
 |:---------------------------------|:---------------|:-----------------------------------------|
 |`default[:etcd][:name]`| `nil` | The name etcd uses inthe cluster. By default we use the first available value from `node[:fqdn]`, `node[:hostname]`, or `node[:name]`. Set this to something else to override. |
 |`default[:etcd][:snapshot]`| `true` | This is really important to get good memory usage. If you're running this in product, you probably want this set to `true` |
-|`default[:etcd][:local]`| `true` | Etcd will bind to all interfaces not mutually exclusive with `:addr` and `:peer_addr`
 |`default[:etcd][:seed_node]` | `nil` | The seed node for initial cluster setup. This node will start as the master, but restarts will rejoin the raft cluster. This needs to be set when using cluster recipe otherwise the cluster will not initialize.|
 |`default[:etcd][:nodes]`| `[]` | Array of hostnames in cluster. This provides an alternative method to using Chef's `partial_search` for specifying nodes in cluster (useful if using `chef-solo`)  |
 |`default[:etcd][:addr]` | `node.ipaddress:4001` | address the adress that etcd uses publically. defaults to  node.ipaddress:4001
@@ -46,7 +44,7 @@ These attributes control the startup/cmdline args for etcd:
 
 ## Usage
 #### Default single instance single node:
-Siply add etcd to your runlist
+Simply add etcd to your runlist
 ````
 run_list[etcd]
 ````

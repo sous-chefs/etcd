@@ -1,6 +1,7 @@
 ### 2.2.0
-* Removed node[:etcd][:local] No longer needed in new etcd. Etcd will bind all, the default is now to use node[:ipaddress] as the -bind/peer address
 * update to etcd 0.4.2
+* Removed node[:etcd][:local] No longer needed in new etcd. Etcd will default bind :4001 and :7001. 
+  The cookbook default is now to use node[:ipaddress] as the  addr and peer_addr.
 * add auto-respawn instruction in upstart config file
 * Fix Gem deps in the ci build
 
