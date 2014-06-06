@@ -1,4 +1,5 @@
 ### 2.2.0
+* Removed node[:etcd][:local] No longer needed in new etcd. Etcd will bind all, the default is now to use node[:ipaddress] as the -bind/peer address
 * update to etcd 0.4.2
 * add auto-respawn instruction in upstart config file
 * Fix Gem deps in the ci build
