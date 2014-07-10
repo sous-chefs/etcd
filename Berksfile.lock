@@ -1,49 +1,50 @@
-{
-  "sources": {
-    "etcd": {
-      "path": "."
-    },
-    "curl": {
-      "locked_version": "1.1.0"
-    },
-    "ubuntu": {
-      "locked_version": "1.1.2"
-    },
-    "yum": {
-      "locked_version": "3.0.4"
-    },
-    "etcd_testing_setup": {
-      "path": "./test/cookbooks/etcd_testing_setup"
-    },
-    "ark": {
-      "locked_version": "0.8.2"
-    },
-    "partial_search": {
-      "locked_version": "1.0.8"
-    },
-    "git": {
-      "locked_version": "4.0.2"
-    },
-    "dmg": {
-      "locked_version": "2.2.0"
-    },
-    "build-essential": {
-      "locked_version": "2.0.2"
-    },
-    "windows": {
-      "locked_version": "1.31.0"
-    },
-    "chef_handler": {
-      "locked_version": "1.1.6"
-    },
-    "runit": {
-      "locked_version": "1.5.10"
-    },
-    "yum-epel": {
-      "locked_version": "0.3.6"
-    },
-    "apt": {
-      "locked_version": "2.4.0"
-    }
-  }
-}
+DEPENDENCIES
+  curl
+  etcd
+    path: .
+    metadata: true
+  etcd_testing_setup
+    path: test/cookbooks/etcd_testing_setup
+  ubuntu
+  yum
+
+GRAPH
+  7-zip (1.0.2)
+    windows (>= 1.2.2)
+  apt (2.4.0)
+  ark (0.9.0)
+    7-zip (>= 0.0.0)
+    windows (>= 0.0.0)
+  build-essential (2.0.4)
+  chef-sugar (2.0.0)
+  chef_handler (1.1.6)
+  curl (2.0.0)
+  dmg (2.2.0)
+  etcd (2.2.0)
+    ark (>= 0.0.0)
+    chef-sugar (>= 0.0.0)
+    git (>= 0.0.0)
+    partial_search (~> 1.0.6)
+  etcd_testing_setup (0.0.1)
+    curl (>= 0.0.0)
+    ubuntu (>= 0.0.0)
+    yum-epel (>= 0.0.0)
+  git (4.0.2)
+    build-essential (>= 0.0.0)
+    dmg (>= 0.0.0)
+    runit (>= 1.0.0)
+    windows (>= 0.0.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
+  partial_search (1.0.8)
+  runit (1.5.10)
+    build-essential (>= 0.0.0)
+    yum (~> 3.0)
+    yum-epel (>= 0.0.0)
+  ubuntu (1.1.6)
+    apt (>= 0.0.0)
+  windows (1.31.0)
+    chef_handler (>= 0.0.0)
+  yum (3.2.2)
+  yum-epel (0.3.6)
+    yum (~> 3.0)
