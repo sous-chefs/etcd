@@ -7,7 +7,7 @@
 rhel7 = false
 init_provider = Chef::Provider::Service::Upstart
 
-if node.platform_family == 'rhel' && node.platform_version.to_i >= 7
+if node[:platform_family] == 'rhel' && node[:platform_version].to_i >= 7
   rhel7 = true
   init_provider = Chef::Provider::Service::Systemd
 end

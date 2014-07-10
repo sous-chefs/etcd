@@ -13,7 +13,7 @@ namespace :test do
     t.pattern = Dir.glob('test/spec/**/*_spec.rb')
     t.rspec_opts = "--color -f d --fail-fast"
     system "rm -rf  #{cook_dir}"
-    system "berks install --path #{cook_dir}"
+    system "berks vendor #{cook_dir}"
   end
 
   begin

@@ -1,3 +1,10 @@
+### 2.2.1
+* update to etcd 0.4.5
+* Add centos 7 support
+* Support centos cloud images without tar
+* Dry out compile time recipe
+* Move to berks3
+
 ### 2.2.0
 * update to etcd 0.4.2
 * Removed node[:etcd][:local] No longer needed in new etcd. Etcd will default bind :4001 and :7001. 

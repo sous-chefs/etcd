@@ -24,15 +24,15 @@ log msg do
 end
 
 # Hostnames and/or ip addresses of current node
-if node.key?(:fqdn) and !node[:fqdn].nil?
-  my_ip = ::Resolv.getaddress(node[:fqdn])  
-elsif node.key?(:hostname) and !node[:hostname].nil?
-  my_ip = ::Resolv.getaddress(node[:hostname]) 
+if node.key?(:fqdn) && !node[:fqdn].nil?
+  my_ip = ::Resolv.getaddress(node[:fqdn])
+elsif node.key?(:hostname) && !node[:hostname].nil?
+  my_ip = ::Resolv.getaddress(node[:hostname])
 else
   begin
     my_ip = ::Resolv.getaddress(node.name)
   rescue
-    my_ip = "127.0.0.1"
+    my_ip = '127.0.0.1'
   end
 end
 

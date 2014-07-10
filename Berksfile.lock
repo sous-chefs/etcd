@@ -20,7 +20,7 @@ GRAPH
   chef_handler (1.1.6)
   curl (2.0.0)
   dmg (2.2.0)
-  etcd (2.2.0)
+  etcd (2.2.1)
     ark (>= 0.0.0)
     chef-sugar (>= 0.0.0)
     git (>= 0.0.0)

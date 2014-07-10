@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # get this from git for the chefignore issues
-gem 'berkshelf'
+gem 'berkshelf', '>= 3.0.0'
 
 group 'develop' do
   gem 'test-kitchen'
