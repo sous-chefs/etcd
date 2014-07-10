@@ -3,14 +3,15 @@ settings:
   parallel: true
 
 driver:
-  name: vagrant
+  name: docker
 
 provisioner:
   name: chef_zero
   require_chef_omnibus: true
 
 platforms:
-- name: centos-6.4
+- name: centos-6
+- name: centos-7
 - name: ubuntu-12.04
 
 suites:

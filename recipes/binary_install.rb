@@ -6,10 +6,7 @@
 Etcd.node = node
 
 # ark needs tar, but doesn't ensure it's there (not there on cent cloud img)
-# we should add it in at compile time
-package 'tar' do
-  action :nothing
-end.run_action(:install)
+package 'tar'
 
 ark 'etcd' do
   has_binaries ['etcd', 'etcdctl']

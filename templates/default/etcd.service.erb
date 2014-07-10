@@ -1,0 +1,12 @@
+[Unit]
+Description=etcd
+
+[Service]
+User=nobody
+PermissionsStartOnly=true
+ExecStart=/usr/local/bin/etcd <%= @args %> -data-dir <%= node[:etcd][:state_dir] %>
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=default.target
