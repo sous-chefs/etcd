@@ -27,10 +27,11 @@ template "/etc/init.d/etcd" do
   only_if { init }
 end
 
+init_args=Etcd.args.delete("'")
 template "/etc/default/etcd" do
   mode 0644
   source "etcd-default.erb" 
-  variables(args: Etcd.args)
+  variables(args: init_args)
   notifies :restart, 'service[etcd]' if node[:etcd][:trigger_restart]
   only_if { init }
 end
