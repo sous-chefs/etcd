@@ -14,23 +14,23 @@ if node[:platform_family] == 'rhel' && node[:platform_version].to_i >= 7
   upstart = false
   init_provider = Chef::Provider::Service::Systemd
 end
-if node[:platform] == "debian"
+if node[:platform] == 'debian'
   init_provider = Chef::Provider::Service::Init::Debian
-  init=true
-  upstart=false
+  init = true
+  upstart = false
 end
 
 directory File.dirname node[:etcd][:state_dir]
 
-template "/etc/init.d/etcd" do
+template '/etc/init.d/etcd' do
   mode 0755
   only_if { init }
 end
 
-init_args=Etcd.args.delete("'")
-template "/etc/default/etcd" do
+init_args = Etcd.args.delete("'")
+template '/etc/default/etcd' do
   mode 0644
-  source "etcd-default.erb" 
+  source 'etcd-default.erb'
   variables(args: init_args)
   notifies :restart, 'service[etcd]' if node[:etcd][:trigger_restart]
   only_if { init }
