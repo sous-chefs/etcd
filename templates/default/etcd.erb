@@ -1,0 +1,103 @@
+#!/bin/bash
+#
+# etcd      This shell script takes care of starting and stopping
+#             etcd 
+#
+# chkconfig: 345 80 30
+# description:  etcd service registry
+
+# processname: etcd
+# pidfile: /var/run/etcd/etcd.pid
+
+# Source function library.
+. /lib/lsb/init-functions
+
+# Source etcd configuration
+if [ -f /etc/default/etcd ] ; then
+ . /etc/default/etcd
+fi
+
+RETVAL=0
+prog="etcd"
+
+start() {
+ # Start daemons.
+ echo -n $"Starting $prog: "
+ PID=`pidof etcd`
+ if [ ! -z $PID ]; then
+   return 2
+ fi
+ /usr/local/bin/etcd $ETCD_OPTS > /var/log/etcd 2> /var/log/etcd.err &
+ RETVAL=$?
+ echo
+ [ $RETVAL -eq 0 ] && touch /var/lock/etcd
+ return $RETVAL
+}
+
+stop() {
+ # Stop daemons.
+ echo -n $"Shutting down $prog: "
+ PID=`pidof etcd`
+ if [ ! -z $PID ]; then
+   kill -9 $PID
+ fi
+ RETVAL=$?
+ echo
+ [ $RETVAL -eq 0 ] && rm -f /var/lock/etcd
+ return $RETVAL
+}
+
+status() {
+ PID=`pidof etcd`
+ if [ ! -z $PID ]; then
+   echo "etcd is running running with pid $PID"
+   return 0
+ else
+   echo "etcd is not running"
+   return 1
+ fi
+}
+
+reload() {
+ # Reload daemons.
+ echo -n $"Reloading $prog: "
+ kill -1 `pidof etcd`
+ RETVAL=$?
+ echo
+ return $RETVAL
+}
+
+# See how we were called.
+case "$1" in
+  start)
+ start
+ ;;
+  stop)
+ stop
+ ;;
+  restart)
+ stop
+ start
+ RETVAL=$?
+ ;;
+  condrestart)
+ if [ -f /var/lock/etcd ]; then
+     stop
+     start
+     RETVAL=$?
+ fi
+ ;;
+  status)
+ status
+ RETVAL=$?
+ ;;
+  reload)
+ reload
+ RETVAL=$?
+ ;;
+  *)
+ echo $"Usage: $0 {start|stop|restart|reload|condrestart|status}"
+ exit 1
+esac
+
+exit $RETVAL
