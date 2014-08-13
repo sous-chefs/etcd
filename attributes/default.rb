@@ -39,13 +39,13 @@ default[:etcd][:upstart][:start_on] = 'started networking'
 default[:etcd][:upstart][:stop_on] = 'shutdown'
 
 # Release to install
-default[:etcd][:version] = '0.4.5'
+default[:etcd][:version] = '0.4.6'
 
 # Auto respawn
 default[:etcd][:respawn] = false
 
 # Sha for github tarball Linux by default
-default[:etcd][:sha256] = '18be476ba59db42c573ee23fbe00f4a205830ac54f752c0d46280707603c9192'
+default[:etcd][:sha256] = 'adcd0a9a24ec427b6158f48d994f667d436d2ffdde35a2e1e3886fd5787e4efe'
 
 # Use this to supply your own url to a tarball
 default[:etcd][:url] = nil
