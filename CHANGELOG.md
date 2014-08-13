@@ -1,3 +1,7 @@
+### 2.2.2
+* update to etcd 0.4.6
+* adds debian support
+
 ### 2.2.1
 * update to etcd 0.4.5
 * Add centos 7 support
