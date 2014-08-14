@@ -34,6 +34,9 @@ default[:etcd][:snapshot] = true
 # restart etcd when the config file is updated
 default[:etcd][:trigger_restart] = true
 
+# start etcd when etcd is first installed
+default[:etcd][:trigger_start] = true
+
 # Upstart parameters for starting/stopping etcd service
 default[:etcd][:upstart][:start_on] = 'started networking'
 default[:etcd][:upstart][:stop_on] = 'shutdown'
