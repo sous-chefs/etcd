@@ -54,7 +54,7 @@ class Chef
           cmd << node_name
           cmd << discovery_cmd
           cmd << lookup_addr('-peer-addr', :peer_addr, 7001)
-          cmd << lookup_addr('-addr', :peer_addr, 4001)
+          cmd << lookup_addr('-addr', :addr, 4001)
           cmd << snapshot
           cmd
         end
