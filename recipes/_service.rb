@@ -69,5 +69,5 @@ end
 service 'etcd' do
   provider init_provider
   supports status: true, restart: true, reload: true
-  action [:enable, :start]
+  action [:enable, :start] if node[:etcd][:trigger_start]
 end

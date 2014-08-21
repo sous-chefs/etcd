@@ -25,6 +25,7 @@ Centos/rhat 6+ & ubuntu with upstart
 |`default[:etcd][:state_dir]` | `/var/cache/etcd/state` | Where etcd will store its state |
 |`default[:etcd][:search_cook]`| `'etcd\:\:cluster'` | The cookbook that should be searched for on the nodes recipes to detect if it is also running etcd |
 |`default[:etcd][:trigger_restart]` | `true` | Make etcd restart if the init config is updated
+|`default[:etcd][:trigger_start]` | `true` | Make etcd start during this run
 |`default[:etcd][:upstart][:start_on]` | `started networking` | When to start the etcd service using upstart
 |`default[:etcd][:upstart][:stop_on]` | `shutdown` | When to stop the etcd service using upstart
 
