@@ -63,3 +63,7 @@ default[:etcd][:source][:go_ver] = '1.1.2'
 default[:etcd][:source][:go_url] = nil
 default[:etcdctl][:source][:repo] = 'https://github.com/coreos/etcdctl'
 default[:etcdctl][:source][:revision] = 'HEAD'
+
+# Create user and group for etcd
+default[:etcd][:user] = 'etcd'
+default[:etcd][:group] = 'etcd'
