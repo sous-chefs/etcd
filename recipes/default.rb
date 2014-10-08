@@ -7,7 +7,7 @@
 user node[:etcd][:user]
 
 group node[:etcd][:user] do
-  members node[:etcd][:user]  
+  members node[:etcd][:user]
 end
 
 case node[:etcd][:install_method]
