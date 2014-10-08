@@ -20,7 +20,11 @@ if node[:platform] == 'debian'
   upstart = false
 end
 
-directory File.dirname node[:etcd][:state_dir]
+directory File.dirname node[:etcd][:state_dir] do
+  user node[:etcd][:user]
+  group node[:etcd][:group]
+  mode 0755
+end
 
 template '/etc/init.d/etcd' do
   mode 0755
