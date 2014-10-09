@@ -2,7 +2,7 @@
 Description=etcd
 
 [Service]
-User=nobody
+User=<%= node[:etcd][:user] %>
 PermissionsStartOnly=true
 ExecStart=/usr/local/bin/etcd <%= @args %> -data-dir <%= node[:etcd][:state_dir] %>
 Restart=always
