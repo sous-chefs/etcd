@@ -11,9 +11,9 @@ group node[:etcd][:user] do
 end
 
 directory node[:etcd][:log_dir] do
-	owner node[:etcd][:user]
-	group node[:etcd][:group]
-	mode "0755"
+  owner node[:etcd][:user]
+  group node[:etcd][:group]
+  mode "0755"
 end
 
 case node[:etcd][:install_method]
