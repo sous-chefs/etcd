@@ -10,6 +10,12 @@ group node[:etcd][:user] do
   members node[:etcd][:user]
 end
 
+directory node[:etcd][:log_dir] do
+	owner node[:etcd][:user]
+	group node[:etcd][:group]
+	mode "0755"
+end
+
 case node[:etcd][:install_method]
 when 'binary'
   include_recipe 'etcd::binary_install'
