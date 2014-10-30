@@ -40,15 +40,6 @@ template '/etc/default/etcd' do
   only_if { init }
 end
 
-# TODO: use this on other sytemd platforms
-template '/etc/systemd/system/etcd.service' do
-  mode 0644
-  variables(args: Etcd.args)
-  notifies :run, 'execute[systemd_reload_units]', :immediate
-  notifies :restart, 'service[etcd]' if node[:etcd][:trigger_restart]
-  only_if { systemd }
-end
-
 template '/etc/init/etcd.conf' do
   mode 0644
   variables(args: Etcd.args)
