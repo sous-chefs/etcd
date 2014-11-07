@@ -51,7 +51,7 @@ run_list[etcd]
 ````
 
 #### Setup a cluster
-__NOTE:__ setting `node[:etcd][:addr]` and `[:etcd][:peer_addr]` is important when using a cluster where nodes might have many adresses. Make sure they advertise an adress that is reachable by other members.
+__NOTE:__ setting `node[:etcd][:addr]` and `[:etcd][:peer_addr]` is important when using a cluster where nodes might have many addresses. Make sure they advertise an address that is reachable by other members.
 
 ##### Using Seed node
 In a role or wrapper cookbook setup the seed_node attribute and add the cluster recipe to each node in the cluster.
