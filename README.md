@@ -37,7 +37,7 @@ These attributes control the startup/cmdline args for etcd:
 |`default[:etcd][:snapshot]`| `true` | This is really important to get good memory usage. If you're running this in product, you probably want this set to `true` |
 |`default[:etcd][:seed_node]` | `nil` | The seed node for initial cluster setup. This node will start as the master, but restarts will rejoin the raft cluster. This needs to be set when using cluster recipe otherwise the cluster will not initialize.|
 |`default[:etcd][:nodes]`| `[]` | Array of hostnames in cluster. This provides an alternative method to using Chef's `partial_search` for specifying nodes in cluster (useful if using `chef-solo`)  |
-|`default[:etcd][:addr]` | `node.ipaddress:4001` | address the adress that etcd uses publically. defaults to  node.ipaddress:4001
+|`default[:etcd][:addr]` | `node.ipaddress:4001` | The address that etcd uses publicly. defaults to  node.ipaddress:4001
 |`default[:etcd][:peer_addr]` | `node.ipaddress:7001` | address to announce to peers specified as ip:port or ip when empty string it will set to node.ipaddress:7001
 |`default[:etcd][:discovery]` | `''` | Discovery address/token see: https://coreos.com/docs/cluster-management/setup/etcd-cluster-discovery/ for more info
 |`default[:etcd][:env_scope]` | `true` | Set the search in cluster recipe to restrict to nodes in the same environment
@@ -51,7 +51,7 @@ run_list[etcd]
 ````
 
 #### Setup a cluster
-__NOTE:__ setting `node[:etcd][:addr]` and `[:etcd][:peer_addr]` is important when using a cluster where nodes might have many adresses. Make sure they advertise an adress that is reachable by other members.
+__NOTE:__ setting `node[:etcd][:addr]` and `[:etcd][:peer_addr]` is important when using a cluster where nodes might have many addresses. Make sure they advertise an address that is reachable by other members.
 
 ##### Using Seed node
 In a role or wrapper cookbook setup the seed_node attribute and add the cluster recipe to each node in the cluster.
