@@ -64,7 +64,7 @@ run_list[etcd::cluster]
 example wrapper can be seen [here](http://github.com/cloudware-cookbooks/ktc-etcd)
 
 ##### Using Discovery
-To use discovery simply goto [https://discovery.etcd.io/new](https://discovery.etcd.io/new) and get a url then set `node[:etd][:discovery]` to that url. This can also be your own etcd instance and a key.
+To use discovery simply goto [https://discovery.etcd.io/new](https://discovery.etcd.io/new) and get a url then set `node[:etcd][:discovery]` to that url. This can also be your own etcd instance and a key.
 
 Then use `etcd::cluster` recipe to build out the cluster.
 
