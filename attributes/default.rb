@@ -48,7 +48,7 @@ default[:etcd][:version] = '0.4.6'
 default[:etcd][:respawn] = false
 
 # Sha for github tarball Linux by default
-default[:etcd][:sha256] = 'adcd0a9a24ec427b6158f48d994f667d436d2ffdde35a2e1e3886fd5787e4efe'
+default[:etcd][:sha256] = 'b351d05f68d2a8f3fce2d4038f3ecf3408901ac2ec37240ff0043b4c989484f5'
 
 # Use this to supply your own url to a tarball
 default[:etcd][:url] = nil
