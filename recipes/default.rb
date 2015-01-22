@@ -14,6 +14,7 @@ directory node[:etcd][:log_dir] do
   owner node[:etcd][:user]
   group node[:etcd][:group]
   mode '0755'
+  only_if { node[:etcd][:log_to_file] }
 end
 
 case node[:etcd][:install_method]
