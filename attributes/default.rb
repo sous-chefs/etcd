@@ -69,5 +69,6 @@ default[:etcd][:user] = 'etcd'
 default[:etcd][:group] = 'etcd'
 
 # Set etcd log dir & file
+default[:etcd][:log_to_file] = false
 default[:etcd][:log_dir] = '/var/log/etcd'
 default[:etcd][:log_file] = 'etcd.log'
