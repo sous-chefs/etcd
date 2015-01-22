@@ -10,4 +10,8 @@ setgid <%= node[:etcd][:group] %>
 start on <%= node[:etcd][:upstart][:start_on] %>
 stop on <%= node[:etcd][:upstart][:stop_on] %>
 
-exec /usr/local/bin/etcd <%= @args %> -data-dir <%= node[:etcd][:state_dir] %> <%= ">> #{ node[:etcd][:log_dir] }/ #{ node[:etcd][:log_file]} 2>&1" if node[:etcd][:log_to_file] %>
+<% if node[:etcd][:log_to_file] %>
+exec /usr/local/bin/etcd <%= @args %> -data-dir <%= node[:etcd][:state_dir] %> >> <%= node[:etcd][:log_dir] %>/<%= node[:etcd][:log_file] %> 2>&1
+<% else %>
+exec /usr/local/bin/etcd <%= @args %> -data-dir <%= node[:etcd][:state_dir] %>
+<% end %>
