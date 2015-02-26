@@ -20,15 +20,15 @@ class Chef
           cmd
         end
 
-        def lookup_addr(option, key, port, prefix=nil)
+        def lookup_addr(option, key, port)
           cmd = ''
           val = node[:etcd][key.to_sym]
           if val.match(/.*:(\d)/)
             cmd << " #{option}=#{val}"
           elsif val.length > 0
-            cmd << " #{option}=#{prefix}#{val}:#{port[0]},#{val}:#{port[1]}"
+            cmd << " #{option}=#{val}:#{port[0]},#{val}:#{port[1]}"
           else
-            cmd << " #{option}=#{prefix}#{node[:etcd][:http_protocol]}#{node[:ipaddress]}:#{port[0]},#{prefix}#{node[:etcd][:http_protocol]}#{node[:ipaddress]}:#{port[1]}"
+            cmd << " #{option}=#{node[:etcd][:http_protocol]}#{node[:ipaddress]}:#{port[0]},#{node[:etcd][:http_protocol]}#{node[:ipaddress]}:#{port[1]}"
           end
           cmd
         end
@@ -51,8 +51,6 @@ class Chef
           cmd << lookup_addr('--advertise-client-urls', :advertise_client_urls, [2379, 4001])
           cmd << lookup_addr('--listen-peer-urls', :listen_peer_urls, [2380, 7001])
           cmd << lookup_addr('--listen-client-urls', :listen_client_urls, [2379, 4001])
-          cmd << lookup_addr('--initial-advertise-peer-urls', :initial_advertise_peer_urls, [2380, 7001])
-          cmd << lookup_addr('--initial-cluster', :initial_cluster, [2380, 7001], prefix="#{node_name}=")
           cmd
         end
         # rubocop:endable MethodLength
