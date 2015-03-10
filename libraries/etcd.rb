@@ -16,8 +16,6 @@ class Chef
           discovery =  node[:etcd][:discovery]
           if discovery.length > 0
             cmd << " -discovery='#{discovery}'"
-          elsif slave == true
-            cmd << ' -peers-file=/etc/etcd_members'
           end
           cmd
         end
@@ -28,22 +26,19 @@ class Chef
           if val.match(/.*:(\d)/)
             cmd << " #{option}=#{val}"
           elsif val.length > 0
-            cmd << " #{option}=#{val}:#{port}"
+            cmd << " #{option}=#{val}:#{port[0]},#{val}:#{port[1]}"
           else
-            cmd << " #{option}=#{node[:ipaddress]}:#{port}"
+            cmd << " #{option}=#{node[:etcd][:http_protocol]}#{node[:ipaddress]}:#{port[0]},#{node[:etcd][:http_protocol]}#{node[:ipaddress]}:#{port[1]}"
           end
           cmd
         end
 
-        def snapshot
-          " -snapshot=#{node[:etcd][:snapshot]}"
-        end
 
         # determine node name
         def node_name
-          a = " -name #{node.name}"
-          a = " -name #{node[:fqdn]}" unless node[:fqdn].nil?
-          a = " -name #{node[:etcd][:name]}" unless node[:etcd][:name].nil?
+          a = node.name
+          a = node[:fqdn] unless node[:fqdn].nil?
+          a = node[:etcd][:name] unless node[:etcd][:name].nil?
           a
         end
 
@@ -51,11 +46,12 @@ class Chef
         #
         def args
           cmd = node[:etcd][:args].dup
-          cmd << node_name
+          cmd << " -name #{node_name}"
           cmd << discovery_cmd
-          cmd << lookup_addr('-peer-addr', :peer_addr, 7001)
-          cmd << lookup_addr('-addr', :addr, 4001)
-          cmd << snapshot
+          cmd << lookup_addr('--initial-advertise-peer-urls', :advertise_client_urls, [2380, 7001])
+          cmd << lookup_addr('--advertise-client-urls', :advertise_client_urls, [2379, 4001])
+          cmd << lookup_addr('--listen-peer-urls', :listen_peer_urls, [2380, 7001])
+          cmd << lookup_addr('--listen-client-urls', :listen_client_urls, [2379, 4001])
           cmd
         end
         # rubocop:endable MethodLength

@@ -1,17 +1,23 @@
 # Encoding: UTF-8
 default[:etcd][:install_method] = 'binary'
 
-# address to announce to peers specified as ip:port or ip (will default to :7001)
-default[:etcd][:peer_addr] = ''
+# the default http protocol to use 
+default[:etcd][:http_protocol] = 'http://'
 
-# the adress that etcd uses publically. if not set we compute it to node.ipaddress:4001
-default[:etcd][:addr] = ''
+# address to announce to peers specified as ip:port or ip (will default to :7001)
+default[:etcd][:listen_peer_urls] = ''
+
+# address to announce to clients specified as ip:port or ip (will default to :7001)
+default[:etcd][:listen_client_urls] = ''
+
+# List of URLs to listen on for peer traffic. if not set we compute it to http://localhost:2380,http://localhost:7001
+default[:etcd][:initial_advertise_peer_urls] = ''
+
+# List of URLs to listen on for client traffic. if not set we compute it to http://localhost:2379,http://localhost:4001
+default[:etcd][:advertise_client_urls] = ''
 
 # set if you want to override the node name. It uses fqdn by default
-default[:etcd][:name] = nil
-
-# cluster options
-default[:etcd][:seed_node] = nil
+default[:etcd][:name] = ''
 
 # if you wrap this cookbook you should use your wrappers cook name here
 default[:etcd][:search_cook] = 'etcd\:\:cluster'
@@ -25,11 +31,14 @@ default[:etcd][:args] = ''
 # v0.3.0 API cluster discovery
 default[:etcd][:discovery] = ''
 
-# nodes in cluster
-default[:etcd][:nodes] = []
+# v0.3.0 API cluster discovery dns srv records
+default[:etcd][:discovery_srv] = ''
 
-# Activate snapshoting
-default[:etcd][:snapshot] = true
+# Initial cluster configuration for bootstrapping
+default[:etcd][:initial_cluster] = ''
+
+# Initial cluster state ("new" or "existing").
+default[:etcd][:initial_cluster_state] = 'new'
 
 # restart etcd when the config file is updated
 default[:etcd][:trigger_restart] = true
@@ -42,13 +51,13 @@ default[:etcd][:upstart][:start_on] = 'started networking'
 default[:etcd][:upstart][:stop_on] = 'shutdown'
 
 # Release to install
-default[:etcd][:version] = '0.4.6'
+default[:etcd][:version] = '2.0.3'
 
 # Auto respawn
 default[:etcd][:respawn] = false
 
 # Sha for github tarball Linux by default
-default[:etcd][:sha256] = 'b351d05f68d2a8f3fce2d4038f3ecf3408901ac2ec37240ff0043b4c989484f5'
+default[:etcd][:sha256] = '0d4dd3ec5c3961433f514544ae7106676f313fe2fa7aa85cde0f2454f1a65b2f'
 
 # Use this to supply your own url to a tarball
 default[:etcd][:url] = nil
@@ -67,3 +76,8 @@ default[:etcdctl][:source][:revision] = 'HEAD'
 # Create user and group for etcd
 default[:etcd][:user] = 'etcd'
 default[:etcd][:group] = 'etcd'
+
+# Set etcd log dir & file
+default[:etcd][:log_to_file] = false
+default[:etcd][:log_dir] = '/var/log/etcd'
+default[:etcd][:log_file] = 'etcd.log'
