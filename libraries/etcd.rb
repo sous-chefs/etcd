@@ -48,6 +48,7 @@ class Chef
           cmd = node[:etcd][:args].dup
           cmd << " -name #{node_name}"
           cmd << discovery_cmd
+          cmd << lookup_addr('--initial-advertise-peer-urls', :advertise_client_urls, [2380, 7001])
           cmd << lookup_addr('--advertise-client-urls', :advertise_client_urls, [2379, 4001])
           cmd << lookup_addr('--listen-peer-urls', :listen_peer_urls, [2380, 7001])
           cmd << lookup_addr('--listen-client-urls', :listen_client_urls, [2379, 4001])
