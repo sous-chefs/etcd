@@ -7,6 +7,8 @@ respawn
 setuid <%= node[:etcd][:user] %>
 setgid <%= node[:etcd][:group] %>
 
+limit nofile <%= node[:etcd][:upstart][:nofile] %> <%= node[:etcd][:upstart][:nofile] %>
+
 start on <%= node[:etcd][:upstart][:start_on] %>
 stop on <%= node[:etcd][:upstart][:stop_on] %>
 
