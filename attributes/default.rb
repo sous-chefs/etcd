@@ -40,6 +40,7 @@ default[:etcd][:trigger_start] = true
 # Upstart parameters for starting/stopping etcd service
 default[:etcd][:upstart][:start_on] = 'started networking'
 default[:etcd][:upstart][:stop_on] = 'shutdown'
+default[:etcd][:upstart][:nofile] = 4096
 
 # Release to install
 default[:etcd][:version] = '0.4.6'
