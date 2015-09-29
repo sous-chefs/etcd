@@ -10,7 +10,12 @@ upstart = true
 init_provider = Chef::Provider::Service::Upstart
 
 if node[:init_package] == 'init'
-  init_provider = Chef::Provider::Service::Init
+  case node[:platform_family]
+  when "rhel"
+    init_provider = Chef::Provider::Service::Init::Redhat
+  when "debian"
+    init_provider = Chef::Provider::Service::Init::Debian
+  end
   init = true
   upstart = false
 end
