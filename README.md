@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/spheromak/etcd-cookbook.png)](https://travis-ci.org/spheromak/etcd-cookbook)
+[![Build Status](https://travis-ci.org/chef-brigade/etcd-cookbook.png)](https://travis-ci.org/chef-brigade/etcd-cookbook)
 etcd cookbook - installs coreos/etcd on centos/ubuntu boxen
 
 ## Supported Platforms
