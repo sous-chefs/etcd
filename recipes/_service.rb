@@ -3,20 +3,25 @@
 #
 #
 
-## handle rhel7/debian
+## Handle Upstart/Init/Systemd properly
 systemd = false
 init = false
 upstart = true
 init_provider = Chef::Provider::Service::Upstart
 
-if node[:platform_family] == 'rhel' && node[:platform_version].to_i >= 7
-  systemd = true
-  upstart = false
-  init_provider = Chef::Provider::Service::Systemd
-end
-if node[:platform] == 'debian'
-  init_provider = Chef::Provider::Service::Init::Debian
+if node[:init_package] == 'init'
+  case node[:platform_family]
+  when "rhel"
+    init_provider = Chef::Provider::Service::Init::Redhat
+  when "debian"
+    init_provider = Chef::Provider::Service::Init::Debian
+  end
   init = true
+  upstart = false
+end
+if node[:init_package] == 'systemd'
+  init_provider = Chef::Provider::Service::Systemd
+  systemd = true
   upstart = false
 end
 
