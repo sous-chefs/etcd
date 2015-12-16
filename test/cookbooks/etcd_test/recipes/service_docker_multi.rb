@@ -14,8 +14,6 @@ etcd_installation_docker 'default'
 # https://coreos.com/etcd/docs/2.2.2/docker_guide.html
 # Static Clustering
 
-docker0_ip = `ifconfig docker0 | grep "inet " | awk '{ print $2 }'`
-
 etcd_service_manager_docker 'etcd0' do
   advertise_client_urls "http://#{node[:ipaddress]}:2379,http://0.0.0.0:4001"
   listen_client_urls 'http://0.0.0.0:2379,http://0.0.0.0:4001'
