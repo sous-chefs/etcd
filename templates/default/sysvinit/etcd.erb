@@ -1,0 +1,270 @@
+#!/bin/sh
+#
+### BEGIN INIT INFO
+# Provides:          etcd
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Should-Start:      $network $time
+# Should-Stop:       $network $time
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start and stop the mysql database server daemon
+# Description:       Etcd Application Container Engine
+### END INIT INFO
+
+# set -e
+# set -u
+
+### Exit code reference
+# http://fedoraproject.org/wiki/Packaging:SysVInitScript
+# http://refspecs.linuxbase.org/LSB_3.1.0/LSB-Core-generic/LSB-Core-generic/iniscrptact.html
+
+####
+# Variables
+####
+
+STARTTIMEOUT=10
+STOPTIMEOUT=10
+PID_DELAY=60
+
+<% if @pidfile -%>
+pidfile="<%= @config.pidfile %>"
+<% else -%>
+pidfile="/var/run/<%= @etcd_name %>.pid"
+<% end -%>
+<% if @config.logfile -%>
+logfile="<%= @config.logfile %>"
+<% else -%>
+logfile="/var/log/<%= @etcd_name %>"
+<% end -%>
+
+####
+# Helper functions
+###
+
+pid_exists() {
+    PID_EXISTS=1
+    if [ -f $pidfile ]; then
+        ETCD_PID=`cat $pidfile 2>/dev/null`
+        if [ -n "$ETCD_PID" ] && [ -d "/proc/$ETCD_PID" ] ; then
+            PID_EXISTS=0
+        fi
+    fi
+    return $PID_EXISTS
+}
+
+running() {
+    RUNNING=1
+    RESPONSE=`<%= @etcdctl_cmd %> cluster-health 2>&1`
+    local mret=$?
+    if pid_exists \
+        && [ $mret -eq 0 ] \
+        || [ `echo $RESPONSE | grep -q "unavailable or misconfigured"` ]; then
+        RUNNING=0
+    fi
+    return $RUNNING
+    return 
+}
+
+print_start_success() {
+    echo "Starting <%= @etcd_name %>"
+    return 0;
+}
+
+print_start_failure() {
+    echo "Could not start <%= @etcd_name %>"
+    return 0;
+}
+
+print_reload_success() {
+    echo "Reload success for <%= @etcd_name %>"
+    return 0;
+}
+
+print_reload_failure() {
+    echo "Reload failed for <%= @etcd_name %>"
+    return 0;
+}
+
+print_stop_success() {
+    echo "Stopping <%= @etcd_name %>"
+    return 0;
+}
+
+print_stop_failure() {
+    echo "Could not stop <%= @etcd_name %>"
+    return 0;
+}
+
+prestart() {
+    <% if @config.http_proxy %>
+    export HTTP_PROXY=<%= @config.http_proxy %>
+    <% end %>
+    <% if @config.https_proxy %>
+    export HTTPS_PROXY=<%= @config.https_proxy %>
+    <% end %>
+    <% if @config.no_proxy %>
+    export NO_PROXY=<%= @config.no_proxy %>
+    <% end %>
+    return 0
+}
+
+start_command() {
+    [ -x <%= @etcd_bin %> ] || exit 5
+
+    check_for_cleanup
+
+    if ! [ -f $pidfile ]; then
+        prestart
+        start_loop
+        start_wait_ready
+        print_start_success
+    else
+        print_start_failure
+    fi
+}
+
+start_loop(){ 
+    echo "\n$(date)\n" >> $logfile
+    echo "<%= @etcd_cmd %> >> $logfile 2>&1 &"
+    <%= @etcd_cmd %> >> $logfile 2>&1 &
+    PID=$!    
+    sleep 0.1
+    kill -0 $PID
+    RET=$?
+    echo "${PID}" > ${pidfile}
+    exit $RET    
+}
+
+start_wait_ready(){
+    timeout=0
+    while [ $timeout -lt 20 ];  do
+        ((timeout++))
+        if running; then
+            sleep .1
+        fi
+    done
+    [[ $timeout -eq 20 ]] && exit 1
+    exit 0    
+}
+
+####
+# Init script actions
+###
+
+# Start Etcd
+start() {
+    # exit 0 if already running.
+    if running; then
+        print_start_success
+        return 0;
+    fi
+
+    # run program
+    start_command;
+    start_pid=$?
+
+    # Timeout loop
+    local TIMEOUT=$STARTTIMEOUT
+    while [ $TIMEOUT -gt 0 ]; do
+        if running; then
+            break
+        fi
+
+        CURRENT_DELAY=`expr ${STARTTIMEOUT} - ${TIMEOUT}`
+        if [ $CURRENT_DELAY -gt $PID_DELAY ] \
+          && ! pid_exists; then
+            break
+        fi
+
+        sleep 1
+        TIMEOUT=`expr ${TIMEOUT} - 1`
+    done
+
+    if running; then
+        # successbaby.gif
+        print_start_success
+        return 0
+    elif ! pid_exists; then
+        # Handle startup failure
+        print_start_failure
+        return 3
+    elif [ $TIMEOUT -eq 0 ]; then
+        # Handle timeout
+        print_start_failure
+        # clean up
+        kill $start_pid 2>/dev/null
+        return 1
+    fi
+}
+
+# Status of Etcd daemon
+status() {
+    if running; then
+        echo "<%= @etcd_name %> is running"
+        return 0
+    else
+        echo "<%= @etcd_name %> is not running"
+        return 1
+    fi
+}
+
+stop() {
+    if running; then
+        echo "Stopping <%= @etcd_name %>"
+        if [ -f $pidfile ]; then
+            /bin/kill `cat $pidfile 2>/dev/null`
+            kstat=$?
+        fi
+
+        # Timeout loop
+        local TIMEOUT=$STOPTIMEOUT
+        while [ $TIMEOUT -gt 0 ]; do
+            if running; then
+            sleep 1
+            fi
+            TIMEOUT=`expr ${TIMEOUT} - 1`
+        done
+
+        return $kstat
+    else
+        echo "<%= @etcd_name %> stopped."
+        return 0
+    fi
+
+}
+
+restart() {
+    stop
+    start
+}
+
+check_for_cleanup() {
+    if [ -f ${pidfile} ]; then
+        /bin/ps -fp $(cat ${pidfile}) > /dev/null || rm ${pidfile}
+    fi
+}
+
+# main()
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status
+        ;;
+    restart)
+        stop ; start
+        ;;
+    reload)
+        reload
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart|reload}"
+        exit 2
+esac
+
+exit $?

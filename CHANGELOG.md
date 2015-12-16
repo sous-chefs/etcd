@@ -1,3 +1,8 @@
+### 3.0.0
+* New major version, non-backwards compatible with 2.x.x
+* Rewritten as Custom Resources
+* Defaulting to etcd version 2.2.2
+
 ### 2.2.2
 * update to etcd 0.4.6
 * adds debian support

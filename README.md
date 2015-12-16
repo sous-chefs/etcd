@@ -1,94 +1,296 @@
-[![Build Status](https://travis-ci.org/chef-brigade/etcd-cookbook.png)](https://travis-ci.org/chef-brigade/etcd-cookbook)
-etcd cookbook - installs coreos/etcd on centos/ubuntu boxen
+Etcd Cookbook
+=============
+[![Build Status](https://travis-ci.org/someara/etcd-cookbook.png)](https://travis-ci.org/someara/etcd-cookbook)
+[![Cookbook Version](https://img.shields.io/cookbook/v/etcd.svg)](https://supermarket.chef.io/cookbooks/etcd)
 
-## Supported Platforms
-Centos/rhat 6+ & ubuntu with upstart
+The Docker Cookbook is a library cookbook that provides custom resources
+for use in recipes.
 
-## Recipes
-| Name | Description |
-|:-----|:------------|
-| `default` | Install and setup the service
-| `binary_install` | Installs the binary of etcd from github release tarballs
-| `cluster` | Recipe to aide in the building of multi-node etcd clusters
-| `compile_time` | Install and configure etcd during chef compile phase
-| `source_install` | Compiles the binary of etcd from a specificed github repo/revision
-| `_service` | Recipe used by default for setting up the service
+Scope
+-----
+This cookbook is concerned with the [Etcd](https://coreos.com/etcd/)
+distributed key/value store as distributed by CoreOS, Inc.
 
-## Attributes
+Requirements
+------------
+- Chef 12.0.0 or higher. Chef 11 is NOT SUPPORTED, please do not open issues about it.
+- Ruby 2.1 or higher (preferably, the Chef full-stack installer)
+- Network accessible web server hosting the etcd binary.
 
-| attribute | default setting | description |
-|:---------------------------------|:---------------|:-----------------------------------------|
-|`default[:etcd][:install_method]`| `binary` | Right now only binary and source are supported. In the future this will probably go away as there are actual distro packages |
-|`default[:etcd][:version]` | `0.3.0` | The release versions to install. binary install will assemble a github url to grab this version |
-|`default[:etcd][:sha256]` | `726bd3..` | The Sha256 hash of the tarball specified by the version or URL attribute|
-|`default[:etcd][:url]` | `nil` |override the internal generated url to specify your own binary tarball. see the .kitchen.yml for example override |
-|`default[:etcd][:state_dir]` | `/var/cache/etcd/state` | Where etcd will store its state |
-|`default[:etcd][:search_cook]`| `'etcd\:\:cluster'` | The cookbook that should be searched for on the nodes recipes to detect if it is also running etcd |
-|`default[:etcd][:trigger_restart]` | `true` | Make etcd restart if the init config is updated
-|`default[:etcd][:trigger_start]` | `true` | Make etcd start during this run
-|`default[:etcd][:upstart][:start_on]` | `started networking` | When to start the etcd service using upstart
-|`default[:etcd][:upstart][:stop_on]` | `shutdown` | When to stop the etcd service using upstart
+Platform Support
+----------------
+The following platforms have been tested with Test Kitchen. It will
+most likely work on other platforms as well
 
-These attributes control the startup/cmdline args for etcd:
+```
+|--------------+-------+
+|              | 2.2.2 |
+|--------------+-------+
+| debian-8     | X     |
+|--------------+-------+
+| centos-5     | X     |
+|--------------+-------+
+| centos-6     | X     |
+|--------------+-------+
+| centos-7     | X     |
+|--------------+-------+
+| fedora-21    | X     |
+|--------------+-------+
+| ubuntu-12.04 | X     |
+|--------------+-------+
+| ubuntu-14.04 | X     |
+|--------------+-------+
+| ubuntu-15.10 | X     |
+|--------------+-------+
+```
 
-| attribute | default setting | description |
-|:---------------------------------|:---------------|:-----------------------------------------|
-|`default[:etcd][:name]`| `nil` | The name etcd uses inthe cluster. By default we use the first available value from `node[:fqdn]`, `node[:hostname]`, or `node[:name]`. Set this to something else to override. |
-|`default[:etcd][:snapshot]`| `true` | This is really important to get good memory usage. If you're running this in product, you probably want this set to `true` |
-|`default[:etcd][:seed_node]` | `nil` | The seed node for initial cluster setup. This node will start as the master, but restarts will rejoin the raft cluster. This needs to be set when using cluster recipe otherwise the cluster will not initialize.|
-|`default[:etcd][:nodes]`| `[]` | Array of hostnames in cluster. This provides an alternative method to using Chef's `partial_search` for specifying nodes in cluster (useful if using `chef-solo`)  |
-|`default[:etcd][:addr]` | `node.ipaddress:4001` | The address that etcd uses publicly. defaults to  node.ipaddress:4001
-|`default[:etcd][:peer_addr]` | `node.ipaddress:7001` | address to announce to peers specified as ip:port or ip when empty string it will set to node.ipaddress:7001
-|`default[:etcd][:discovery]` | `''` | Discovery address/token see: https://coreos.com/docs/cluster-management/setup/etcd-cluster-discovery/ for more info
-|`default[:etcd][:env_scope]` | `true` | Set the search in cluster recipe to restrict to nodes in the same environment
-|`default[:etcd][:args]`| `''` | Extra arguments to pass to etcd when starting the service. if you specify something that is computed they will be passed twice. This is here to handle where you want to setup other things. |
+Cookbook Dependencies
+---------------------
+- [compat_resource](https://supermarket.chef.io/cookbooks/compat_resource)
 
-## Usage
-#### Default single instance single node:
-Simply add etcd to your runlist
-````
-run_list[etcd]
-````
+Usage
+-----
+- Add ```depends 'etcd', '~> 3.0'``` to your cookbook's metadata.rb
+- Use the resources shipped in cookbook in a recipe, the same way you'd
+  use core Chef resources (file, template, directory, package, etc).
 
-#### Setup a cluster
-__NOTE:__ setting `node[:etcd][:addr]` and `[:etcd][:peer_addr]` is important when using a cluster where nodes might have many addresses. Make sure they advertise an address that is reachable by other members.
+```ruby
+etcd_service 'etcd0' do
+  advertise_client_urls 'http://127.0.0.1:2379,http://127.0.0.1:4001'
+  listen_client_urls 'http://0.0.0.0:2379,http://0.0.0.0:4001'
+  initial_advertise_peer_urls 'http://127.0.0.1:2380'
+  listen_peer_urls 'http://0.0.0.0:2380'
+  initial_cluster_token 'etcd-cluster-1'
+  initial_cluster 'etcd0=http://127.0.0.1:2380,etcd1=http://127.0.0.1:3380,etcd2=http://127.0.0.1:4380'
+  initial_cluster_state 'new'
+  action :start
+end
 
-##### Using Seed node
-In a role or wrapper cookbook setup the seed_node attribute and add the cluster recipe to each node in the cluster.
-If you use a wrapper cookbook set `node[:etcd][:search_cook]` to the wrapper cookboks name
+etcd_service 'etcd1' do
+  advertise_client_urls 'http://127.0.0.1:3379,http://127.0.0.1:5001'
+  listen_client_urls 'http://0.0.0.0:3379,http://0.0.0.0:5001'
+  initial_advertise_peer_urls 'http://127.0.0.1:3380'
+  listen_peer_urls 'http://0.0.0.0:3380'
+  initial_cluster_token 'etcd-cluster-1'
+  initial_cluster 'etcd0=http://127.0.0.1:2380,etcd1=http://127.0.0.1:3380,etcd2=http://127.0.0.1:4380'
+  initial_cluster_state 'new'
+  action :start
+end
 
-````
-run_list[etcd::cluster]
-````
+etcd_service 'etcd2' do
+  advertise_client_urls 'http://127.0.0.1:4379,http://127.0.0.1:6001'
+  listen_client_urls 'http://0.0.0.0:4379,http://0.0.0.0:6001'
+  initial_advertise_peer_urls 'http://127.0.0.1:4380'
+  listen_peer_urls 'http://0.0.0.0:4380'
+  initial_cluster_token 'etcd-cluster-1'
+  initial_cluster 'etcd0=http://127.0.0.1:2380,etcd1=http://127.0.0.1:3380,etcd2=http://127.0.0.1:4380'
+  initial_cluster_state 'new'
+  action :start
+end
+```
 
-example wrapper can be seen [here](http://github.com/cloudware-cookbooks/ktc-etcd)
+Test Cookbooks as Examples
+--------------------------
+The cookbooks ran under test-kitchen make excellent usage examples.
 
-##### Using Discovery
-To use discovery simply goto [https://discovery.etcd.io/new](https://discovery.etcd.io/new) and get a url then set `node[:etcd][:discovery]` to that url. This can also be your own etcd instance and a key.
+The test recipes are found at:
+```ruby
+test/cookbooks/etcd_test/
+```
 
-Then use `etcd::cluster` recipe to build out the cluster.
+Resources Overview
+------------------
+* `etcd_service`: composite resource that uses etcd_installation and etcd_service_manager
+* `etcd_installation`: automatically selects an installation method
+* `etcd_service_manager`: automatically selects a service manager
+
+* `etcd_installation_binary`: copies a pre-compiled etcd binary onto disk
+* `etcd_service_manager_execute`: manage etcd daemon with Chef
+* `etcd_service_manager_sysvinit`: manage etcd daemon with a sysvinit script
+* `etcd_service_manager_upstart`: manage etcd daemon with upstart script
+* `etcd_service_manager_systemd`: manage etcd daemon with systemd unit files
+
+Resources Details
+------------------
+## etcd_installation
+The `etcd_installation` resource auto-selects one of the below
+resources with the provider resolution system. Currently only the
+binary installation is available. Packages will be supported in the
+future versions.
+
+#### Example
+```ruby
+etcd_installation 'default' do
+  action :create
+end
+```
+
+## etcd_installation_binary
+The `etcd_installation_binary` resource copies the precompiled Go binary onto
+the disk. It exists to help run older Etcd versions. It should not
+be used in production, especially with devicemapper.
+
+#### Example
+```ruby
+etcd_installation_binary 'default' do
+  version '2.2.2'
+  source 'https://my.computers.biz/dist/etcd'
+  checksum '90aff7364caa43932fd46974825af20e0ecb70fe7e01981e2d3a496106f147e7'
+  action :create
+end
+```
+
+#### Properties
+- `version` - The desired version of docker. Used to calculate source.
+- `source` - Path to network accessible Docker binary. Ignores version
+- `checksum` - SHA-256
+
+## etcd_service_manager
+The `etcd_service_manager` resource auto-selects one of the below
+resources with the provider resolution system. The
+`etcd_service` family all share a common set of properties, which
+are listed under the `etcd_service` composite resource.
+
+#### Example
+```ruby
+etcd_service_manager 'default' do
+  action :start
+end
+```
+
+## etcd_service_manager_execute
+#### Example
+```ruby
+etcd_service_manager_execute 'default' do
+  action :start
+end
+```
+
+## etcd_service_manager_sysvinit
+#### Example
+```ruby
+etcd_service_manager_sysvinit 'default' do
+  action :stop
+end
+```
+
+## etcd_service_manager_upstart
+#### Example
+```ruby
+etcd_service_manager_upstart 'default' do
+  action :start
+end
+```
+
+## etcd_service_manager_systemd
+#### Example
+```ruby
+etcd_service_manager_systemd 'default' do
+  action :start
+end
+```
+
+## etcd_service
+The `etcd_service`: resource is a composite resource that uses
+`etcd_installation` and `etcd_service_manager` resources.
+
+- The `:create` action uses am `etcd_installation`
+- The `:delete` action uses an`etcd_installation`
+- The `:start` action uses an `etcd_service_manager`
+- The `:stop` action uses an `etcd_service_manager`
+
+The service management strategy for the host platform is dynamically
+chosen based on platform, but can be overridden.
+
+# Properties
+The `etcd_service` resource property list corresponds to the options
+found in
+
+[Etcd Configuration Flags documentation](https://coreos.com/etcd/docs/2.2.2/configuration.html)
+
+- Member flags
+- `source`
+- `node_name`
+- `data_dir`
+- `wal_dir`
+- `snapshot_count`
+  snapshot to disk.
+- `heartbeat_interval`
+- `election_timeout`
+- `listen_peer_urls`
+- `listen_client_urls`
+- `max_snapshots`
+- `max_wals`
+- `cors`
+
+- Clustering Flags
+- `initial`
+- `initial_advertise_peer_urls`
+- `initial_cluster`
+- `initial_cluster_state`
+- `initial_cluster_token`
+- `advertise_client_urls`
+- `discovery`
+- `discovery_srv`
+- `discovery_fallback`
+- `discovery_proxy`
+
+- Proxy Flags
+- `proxy` -
+- `proxy_failure_wait`
+- `proxy_refresh_interval`
+- `proxy_dial_timeout`
+- `proxy_write_timeout`
+- `proxy_read_timeout`
+
+- Security Flags
+- `cert_file`
+- `key_file`
+- `client_cert_auth`
+- `trusted_ca_file`
+- `peer_cert_file`
+- `peer_key_file`
+- `peer_client_cert_auth`
+- `peer_trusted_ca_file`
+
+- Logging Flags
+- `debug`
+
+- Unsafe Flags
+- `force_new_cluster`
+
+- Experimental Flags
+- `experimental_v3demo`
+
+- Misc
+- `http_proxy`
+- `https_proxy`
+- `no_proxy`
+- `auto_restart`
 
 
-## License and Author
-
+License and Author
+------------------
 |                      |                                                |
-|:---------------------|:-----------------------------------------------|
+|----------------------|------------------------------------------------|
 | **Original Author**  | [Jesse Nelson]( https://github.com/spheromak)  |
-| **Contributor**      | [Soulou](https://github.com/Soulou)    |
+| **Contributor**      | [Soulou](https://github.com/Soulou)            |
 | **Contributor**      | [Aaron O'Mullan](https://github.com/AaronO)    |
 | **Contributor**      | [Anthony Scalisi](https://github.com/scalp42)  |
 | **Contributor**      | [Robert Coleman](https://github.com/rjocoleman)|
 | **Contributor**      | [James Gregory](https://github.com/jagregory)  |
+| **Contributor**      | [Sean OMeara](https://github.com/someara)      |
 | **Copyright**        | Copyright (c) 2013, Jesse Nelson               |
 
+## License
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
     http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

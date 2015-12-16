@@ -1,12 +1,8 @@
-#
-# vim: set ft=ruby:
-#
-site :opscode
+source 'https://supermarket.chef.io'
+
 metadata
 
 group :integration do
-  cookbook 'curl'
-  cookbook 'ubuntu'
-  cookbook 'yum'
-  cookbook 'etcd_testing_setup', path: 'test/cookbooks/etcd_testing_setup'
+  cookbook 'etcd_test', path: 'test/cookbooks/etcd_test'
+  cookbook 'yum-docker'
 end

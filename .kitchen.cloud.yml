@@ -1,0 +1,43 @@
+#<% require 'kitchen-sync' %>
+---
+driver_config:
+   digitalocean_access_token: <%= ENV['DIGITALOCEAN_API_TOKEN'] %>
+
+provisioner:
+  name: chef_zero
+  require_chef_omnibus: true
+
+platforms:
+- name: centos-7.0
+  driver_plugin: digitalocean
+  driver_config:
+    size: 2gb
+    image: centos-7-0-x64
+    region: <%= ENV['DIGITALOCEAN_REGION'] %>
+    ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEYS'] %>
+  transport:
+    ssh_key: <%= ENV['DIGITALOCEAN_SSH_KEY_PATH'] %>
+  run_list:
+  - recipe[yum-docker]
+
+suites:
+  - name: installation_docker-222
+    run_list:
+      - recipe[etcd_test::installation_docker]
+    attributes:
+      etcd:
+        version: '2.2.2'
+
+  - name: service-docker-222
+    run_list:
+      - recipe[etcd_test::service_docker]
+    attributes:
+      etcd:
+        version: '2.2.2'
+
+  - name: service-docker-multi-222
+    run_list:
+      - recipe[etcd_test::service_docker_multi]
+    attributes:
+      etcd:
+        version: '2.2.2'

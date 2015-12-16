@@ -1,5 +1,0 @@
-name "etcd_testing_setup"
-version "0.0.1"
-depends "yum-epel"
-depends "ubuntu"
-depends "curl"
