@@ -1,3 +1,6 @@
+### 3.1.0
+* Supporting run_user on service manager resources
+
 ### 3.0.0
 * New major version, non-backwards compatible with 2.x.x
 * Rewritten as Custom Resources
