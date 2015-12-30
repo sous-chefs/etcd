@@ -6,8 +6,8 @@ module EtcdCookbook
     # default_action :create
 
     # installation type and service_manager
-    property :install_method, %w(binary auto), default: 'auto', desired_state: false
-    property :service_manager, %w(execute sysvinit upstart systemd auto), default: 'auto', desired_state: false
+    property :install_method, %w(binary auto docker), default: 'auto', desired_state: false
+    property :service_manager, %w(execute sysvinit upstart systemd auto docker), default: 'auto', desired_state: false
 
     # etcd_installation_binary
     property :checksum, String, desired_state: false
