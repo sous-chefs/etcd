@@ -15,16 +15,16 @@ services: docker
 
 env:
   matrix:
-  - INSTANCE=service-execute-multi-debian-8
   - INSTANCE=service-execute-multi-centos-5
   - INSTANCE=service-execute-multi-centos-6
   - INSTANCE=service-execute-multi-centos-7
   - INSTANCE=service-execute-multi-fedora-21
+  - INSTANCE=service-execute-multi-debian-8
   - INSTANCE=service-execute-multi-ubuntu-1404
   - INSTANCE=service-execute-multi-ubuntu-1510
-  - INSTANCE=service-systemd-multi-debian-8
   - INSTANCE=service-systemd-multi-centos-7
   - INSTANCE=service-systemd-multi-fedora-21
+  - INSTANCE=service-systemd-multi-debian-8
   - INSTANCE=service-systemd-multi-ubuntu-1510
   - INSTANCE=service-upstart-multi-ubuntu-1404
   - INSTANCE=service-sysvinit-multi-centos-5
