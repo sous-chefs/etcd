@@ -1,3 +1,6 @@
+### 3.1.1
+* Adding docker to etcd_service
+
 ### 3.1.0
 * Supporting run_user on service manager resources
 
