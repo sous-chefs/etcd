@@ -3,7 +3,7 @@ Etcd Cookbook
 [![Build Status](https://travis-ci.org/someara/etcd-cookbook.png)](https://travis-ci.org/someara/etcd-cookbook)
 [![Cookbook Version](https://img.shields.io/cookbook/v/etcd.svg)](https://supermarket.chef.io/cookbooks/etcd)
 
-The Docker Cookbook is a library cookbook that provides custom resources
+The Etcd Cookbook is a library cookbook that provides custom resources
 for use in recipes.
 
 Scope
@@ -105,10 +105,12 @@ Resources Overview
 * `etcd_service_manager`: automatically selects a service manager
 
 * `etcd_installation_binary`: copies a pre-compiled etcd binary onto disk
+* `etcd_installation_docker`: pulls a docker image to the DOCKER_HOST
 * `etcd_service_manager_execute`: manage etcd daemon with Chef
 * `etcd_service_manager_sysvinit`: manage etcd daemon with a sysvinit script
 * `etcd_service_manager_upstart`: manage etcd daemon with upstart script
 * `etcd_service_manager_systemd`: manage etcd daemon with systemd unit files
+* `etcd_service_manager_docker`: starts a docker process on the DOCKER_HOST
 
 Resources Details
 ------------------
@@ -140,10 +142,15 @@ etcd_installation_binary 'default' do
 end
 ```
 
+## etcd_installation_docker
+The `etcd_installation_docker` resource uses the `docker_image` resource
+to pull an image to the DOCKER_HOST.
+
 #### Properties
-- `version` - The desired version of docker. Used to calculate source.
-- `source` - Path to network accessible Docker binary. Ignores version
-- `checksum` - SHA-256
+- `repo` - The image name to pull. Defaults to 'quay.io/coreos/etcd'
+- `tag` - The image tag to pull.
+- `version` - String used to calculate tag string when tag is ommited.
+  Defaults to '2.2.2'
 
 ## etcd_service_manager
 The `etcd_service_manager` resource auto-selects one of the below
@@ -189,6 +196,20 @@ etcd_service_manager_systemd 'default' do
   action :start
 end
 ```
+
+## etcd_service_manager_docker
+#### Example
+```ruby
+etcd_service_manager_docker 'default' do
+  action :start
+end
+```
+# properties
+- repo - defaults to 'quay.io/coreos/etcd'
+- tag - default calculated from version
+- version - defaults to '2.2.2',
+- container_name - defaults to resource name
+- port - defaults to  ['2379/tcp4:2379', '4001/tcp4:4001']
 
 ## etcd_service
 The `etcd_service`: resource is a composite resource that uses
@@ -267,7 +288,6 @@ found in
 - `https_proxy`
 - `no_proxy`
 - `auto_restart`
-
 
 License and Author
 ------------------
