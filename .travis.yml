@@ -26,7 +26,7 @@ env:
   - INSTANCE=service-systemd-multi-fedora-21
   - INSTANCE=service-systemd-multi-debian-8
   - INSTANCE=service-systemd-multi-ubuntu-1510
-  - INSTANCE=service-upstart-multi-ubuntu-1404
+#  - INSTANCE=service-upstart-multi-ubuntu-1404
   - INSTANCE=service-sysvinit-multi-centos-5
   - INSTANCE=service-sysvinit-multi-centos-6
   - INSTANCE=service-sysvinit-multi-ubuntu-1204
