@@ -5,9 +5,24 @@ module EtcdCookbook
 
     # Start the service
     action :start do
+      user 'etcd' do
+        action :create
+        only_if { run_user == 'etcd' }
+      end
+
+      file logfile do
+        owner run_user
+        action :create
+      end
+
+      directory data_dir do
+        owner run_user
+        action :create
+      end
+
       bash "start etcd #{name}" do
         code <<-EOF
-        #{etcd_cmd} >> #{logfile} 2>&1 &
+        su -c "#{etcd_cmd} >> #{logfile}" #{run_user} 2>&1 &
         PID=$!
         sleep 0.5
         kill -0 $PID
@@ -27,7 +42,7 @@ module EtcdCookbook
             timeout=0
             while [ $timeout -lt 20 ];  do
               ((timeout++))
-              #{etcdctl_cmd} cluster-health
+              su -c "#{etcdctl_cmd} cluster-health" #{run_user}
                 if [ $? -eq 0 ]; then
                   break
                 fi

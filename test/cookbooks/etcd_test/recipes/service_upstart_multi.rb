@@ -7,6 +7,25 @@ end
 # https://coreos.com/etcd/docs/2.2.2/clustering.html
 # Static Clustering
 
+user 'alice'
+user 'bob'
+user 'eve'
+
+directory '/etcd0.etcd' do
+  owner 'alice'
+  mode '0700'
+end
+
+directory '/etcd1.etcd' do
+  owner 'bob'
+  mode '0700'
+end
+
+directory '/etcd2.etcd' do
+  owner 'eve'
+  mode '0700'
+end
+
 etcd_service_manager_upstart 'etcd0' do
   advertise_client_urls 'http://127.0.0.1:2379,http://127.0.0.1:4001'
   listen_client_urls 'http://0.0.0.0:2379,http://0.0.0.0:4001'
@@ -15,6 +34,7 @@ etcd_service_manager_upstart 'etcd0' do
   initial_cluster_token 'etcd-cluster-1'
   initial_cluster 'etcd0=http://127.0.0.1:2380,etcd1=http://127.0.0.1:3380,etcd2=http://127.0.0.1:4380'
   initial_cluster_state 'new'
+  run_user 'alice'
   action :start
 end
 
@@ -26,6 +46,7 @@ etcd_service_manager_upstart 'etcd1' do
   initial_cluster_token 'etcd-cluster-1'
   initial_cluster 'etcd0=http://127.0.0.1:2380,etcd1=http://127.0.0.1:3380,etcd2=http://127.0.0.1:4380'
   initial_cluster_state 'new'
+  run_user 'bob'
   action :start
 end
 
@@ -37,5 +58,6 @@ etcd_service_manager_upstart 'etcd2' do
   initial_cluster_token 'etcd-cluster-1'
   initial_cluster 'etcd0=http://127.0.0.1:2380,etcd1=http://127.0.0.1:3380,etcd2=http://127.0.0.1:4380'
   initial_cluster_state 'new'
+  run_user 'eve'
   action :start
 end

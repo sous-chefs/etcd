@@ -15,6 +15,21 @@ module EtcdCookbook
     provides :etcd_service_manager, platform: 'debian'
 
     action :start do
+      user 'etcd' do
+        action :create
+        only_if { run_user == 'etcd' }
+      end
+
+      file logfile do
+        owner run_user
+        action :create
+      end
+
+      directory data_dir do
+        owner run_user
+        action :create
+      end
+
       create_init
       create_service
     end

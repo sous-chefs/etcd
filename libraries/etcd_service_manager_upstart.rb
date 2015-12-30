@@ -3,7 +3,23 @@ module EtcdCookbook
     resource_name :etcd_service_manager_upstart
     provides :etcd_service_manager, platform: 'ubuntu'
 
+    # Start the service
     action :start do
+      user 'etcd' do
+        action :create
+        only_if { run_user == 'etcd' }
+      end
+
+      file logfile do
+        owner run_user
+        action :create
+      end
+
+      directory data_dir do
+        owner run_user
+        action :create
+      end
+
       template "/etc/init/#{etcd_name}.conf" do
         source 'upstart/etcd.conf.erb'
         owner 'root'

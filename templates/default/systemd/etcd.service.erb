@@ -5,6 +5,9 @@ After=network.target
 
 [Service]
 Type=notify
+<% if @config.run_user %>
+User=<%= @config.run_user %>
+<% end %>
 <% if @config.http_proxy %>
 Environment="HTTP_PROXY=<%= @config.http_proxy %>"
 <% end %>

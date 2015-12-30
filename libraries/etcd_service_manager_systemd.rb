@@ -16,6 +16,21 @@ module EtcdCookbook
     end
 
     action :start do
+      user 'etcd' do
+        action :create
+        only_if { run_user == 'etcd' }
+      end
+
+      file logfile do
+        owner run_user
+        action :create
+      end
+
+      directory data_dir do
+        owner run_user
+        action :create
+      end
+
       # Needed for Debian / Ubuntu
       directory '/usr/libexec' do
         owner 'root'
