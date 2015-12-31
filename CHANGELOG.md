@@ -1,3 +1,6 @@
+### 3.1.2
+* Fixing wait-ready script to use etcdctl_cmd
+
 ### 3.1.1
 * Adding docker to etcd_service
 
