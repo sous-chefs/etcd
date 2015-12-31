@@ -2,7 +2,7 @@
 i=0
 while [ $i -lt 40 ]; do
   ((i++))
-  <%= @etcd_cmd %> cluster-health
+  <%= @etcdctl_cmd %> cluster-health
   [ $? -eq 0 ] && break
   sleep 0.5
 done

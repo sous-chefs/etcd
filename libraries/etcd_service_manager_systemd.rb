@@ -46,7 +46,7 @@ module EtcdCookbook
         owner 'root'
         group 'root'
         mode '0755'
-        variables(etcd_cmd: etcd_cmd)
+        variables(etcdctl_cmd: etcdctl_cmd)
         cookbook 'etcd'
         action :create
       end
