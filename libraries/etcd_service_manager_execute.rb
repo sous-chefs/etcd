@@ -1,7 +1,7 @@
 module EtcdCookbook
   class EtcdServiceManagerExecute < EtcdServiceBase
     resource_name :etcd_service_manager_execute
-    provides :docker_service_manager, os: 'linux'
+    provides :etcd_service_manager, os: 'linux'
 
     # Start the service
     action :start do
