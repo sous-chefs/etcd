@@ -1,3 +1,6 @@
+### 3.1.3
+* Fixing incorrectly named classes in service managers
+
 ### 3.1.2
 * Fixing wait-ready script to use etcdctl_cmd
 
