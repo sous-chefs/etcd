@@ -1,3 +1,6 @@
+### 3.1.4
+* Fixing up docker service manager tests
+
 ### 3.1.3
 * Fixing incorrectly named classes in service managers
 
