@@ -28,16 +28,10 @@ suites:
       etcd:
         version: '2.2.2'
 
-  - name: service-docker-222
+  - name: service-docker
     run_list:
       - recipe[etcd_test::service_docker]
-    attributes:
-      etcd:
-        version: '2.2.2'
 
-  - name: service-docker-multi-222
+  - name: service-docker-multi
     run_list:
       - recipe[etcd_test::service_docker_multi]
-    attributes:
-      etcd:
-        version: '2.2.2'
