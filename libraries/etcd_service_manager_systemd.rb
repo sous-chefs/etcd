@@ -15,6 +15,8 @@ module EtcdCookbook
       node['platform_version'].to_f >= 15.04
     end
 
+    property :service_timeout, Integer, default: 20
+
     action :start do
       user 'etcd' do
         action :create
@@ -46,7 +48,10 @@ module EtcdCookbook
         owner 'root'
         group 'root'
         mode '0755'
-        variables(etcdctl_cmd: etcdctl_cmd)
+        variables(
+          etcdctl_cmd: etcdctl_cmd,
+          service_timeout: service_timeout
+        )
         cookbook 'etcd'
         action :create
       end
