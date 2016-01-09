@@ -1,3 +1,6 @@
+### 3.1.5
+* Fix timeout pattern in systemd-wait-ready
+
 ### 3.1.4
 * Fixing up docker service manager tests
 
