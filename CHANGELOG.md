@@ -1,3 +1,6 @@
+### 3.1.6
+* Fix redirecting stderr to stdout in upstart manaager
+
 ### 3.1.5
 * Fix timeout pattern in systemd-wait-ready
 
