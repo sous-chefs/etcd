@@ -8,6 +8,7 @@ limit nproc 524288 1048576
 respawn
 respawn limit 2 10
 
-script
-  exec su -c "<%= @etcd_cmd %> >> <%= @config.logfile %>" <%= @config.run_user %>
-end script
+setuid <%= @config.run_user %>
+setgid <%= @config.run_user %>
+
+exec <%= @etcd_cmd %> >> <%= @config.logfile %> 2>&1
