@@ -1,0 +1,28 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+<<	lib/mixlib/log.rb	/^    def <<(msg)$/;"	f
+Formatter	lib/mixlib/log/formatter.rb	/^    class Formatter < Logger::Formatter$/;"	c	class:Mixlib.Log
+Log	lib/mixlib/log.rb	/^  module Log$/;"	m	class:Mixlib
+Log	lib/mixlib/log/formatter.rb	/^  module Log$/;"	m	class:Mixlib
+Log	lib/mixlib/log/version.rb	/^  module Log$/;"	m	class:Mixlib
+Mixlib	lib/mixlib/log.rb	/^module Mixlib$/;"	m
+Mixlib	lib/mixlib/log/formatter.rb	/^module Mixlib$/;"	m
+Mixlib	lib/mixlib/log/version.rb	/^module Mixlib$/;"	m
+add	lib/mixlib/log.rb	/^    def add(severity, message = nil, progname = nil, &block)$/;"	f
+call	lib/mixlib/log/formatter.rb	/^      def call(severity, time, progname, msg)$/;"	f	class:Mixlib.Log.Formatter
+init	lib/mixlib/log.rb	/^    def init(*opts)$/;"	f	class:Mixlib.Log
+level	lib/mixlib/log.rb	/^    def level(new_level=nil)$/;"	f	class:Mixlib.Log
+level=	lib/mixlib/log.rb	/^    def level=(new_level)$/;"	f	class:Mixlib.Log
+logger	lib/mixlib/log.rb	/^    def logger$/;"	f	class:Mixlib.Log
+logger=	lib/mixlib/log.rb	/^    def logger=(new_log_device)$/;"	f	class:Mixlib.Log
+logger_for	lib/mixlib/log.rb	/^    def logger_for(*opts)$/;"	f
+loggers	lib/mixlib/log.rb	/^    def loggers$/;"	f	class:Mixlib.Log
+method_missing	lib/mixlib/log.rb	/^    def method_missing(method_symbol, *args, &block)$/;"	f
+msg2str	lib/mixlib/log/formatter.rb	/^      def msg2str(msg)$/;"	f	class:Mixlib.Log.Formatter
+reset!	lib/mixlib/log.rb	/^    def reset!$/;"	f	class:Mixlib.Log
+show_time	lib/mixlib/log/formatter.rb	/^      def self.show_time=(show=false)$/;"	F	class:Mixlib.Log.Formatter
+use_log_devices	lib/mixlib/log.rb	/^    def use_log_devices(other)$/;"	f	class:Mixlib.Log

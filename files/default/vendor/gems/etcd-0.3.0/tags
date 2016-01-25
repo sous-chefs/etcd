@@ -1,0 +1,69 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+<=>	lib/etcd/node.rb	/^    def <=>(other)$/;"	f	class:Etcd.Node
+Client	lib/etcd/client.rb	/^  class Client$/;"	c	class:Etcd
+DirNotEmpty	lib/etcd/exceptions.rb	/^  class DirNotEmpty < Error; end$/;"	c	class:Etcd
+Error	lib/etcd/exceptions.rb	/^  class Error < StandardError$/;"	c	class:Etcd
+Etcd	lib/etcd.rb	/^module Etcd$/;"	m
+Etcd	lib/etcd/client.rb	/^module Etcd$/;"	m
+Etcd	lib/etcd/exceptions.rb	/^module Etcd$/;"	m
+Etcd	lib/etcd/keys.rb	/^module Etcd$/;"	m
+Etcd	lib/etcd/log.rb	/^module Etcd$/;"	m
+Etcd	lib/etcd/node.rb	/^module Etcd$/;"	m
+Etcd	lib/etcd/response.rb	/^module Etcd$/;"	m
+Etcd	lib/etcd/stats.rb	/^module Etcd$/;"	m
+Etcd	lib/etcd/version.rb	/^module Etcd$/;"	m
+EventIndexCleared	lib/etcd/exceptions.rb	/^  class EventIndexCleared < Error; end$/;"	c	class:Etcd
+IndexNaN	lib/etcd/exceptions.rb	/^  class IndexNaN < Error; end$/;"	c	class:Etcd
+KeyIsPreserved	lib/etcd/exceptions.rb	/^  class KeyIsPreserved < Error; end$/;"	c	class:Etcd
+KeyNotFound	lib/etcd/exceptions.rb	/^  class KeyNotFound < Error; end$/;"	c	class:Etcd
+Keys	lib/etcd/keys.rb	/^  module Keys$/;"	m	class:Etcd
+LeaderElect	lib/etcd/exceptions.rb	/^  class LeaderElect < Error; end$/;"	c	class:Etcd
+Log	lib/etcd/log.rb	/^  class Log$/;"	c	class:Etcd
+NoMorePeer	lib/etcd/exceptions.rb	/^  class NoMorePeer < Error; end$/;"	c	class:Etcd
+Node	lib/etcd/node.rb	/^  class Node$/;"	c	class:Etcd
+NodeExist	lib/etcd/exceptions.rb	/^  class NodeExist < Error; end$/;"	c	class:Etcd
+NotDir	lib/etcd/exceptions.rb	/^  class NotDir < Error; end$/;"	c	class:Etcd
+NotFile	lib/etcd/exceptions.rb	/^  class NotFile < Error; end$/;"	c	class:Etcd
+PrevValueRequired	lib/etcd/exceptions.rb	/^  class PrevValueRequired < Error; end$/;"	c	class:Etcd
+RaftInternal	lib/etcd/exceptions.rb	/^  class RaftInternal < Error; end$/;"	c	class:Etcd
+Response	lib/etcd/response.rb	/^  class Response$/;"	c	class:Etcd
+Stats	lib/etcd/stats.rb	/^  module Stats$/;"	m	class:Etcd
+TTLNaN	lib/etcd/exceptions.rb	/^  class TTLNaN < Error; end$/;"	c	class:Etcd
+TestFailed	lib/etcd/exceptions.rb	/^  class TestFailed < Error; end$/;"	c	class:Etcd
+ValueRequired	lib/etcd/exceptions.rb	/^  class ValueRequired < Error; end$/;"	c	class:Etcd
+WatcherCleared	lib/etcd/exceptions.rb	/^  class WatcherCleared < Error; end$/;"	c	class:Etcd
+api_execute	lib/etcd/client.rb	/^    def api_execute(path, method, options = {})$/;"	f	class:Etcd.Client
+build_http_request	lib/etcd/client.rb	/^    def build_http_request(klass, path, params = nil, body = nil)$/;"	f	class:Etcd.Client
+children	lib/etcd/node.rb	/^    def children$/;"	f	class:Etcd.Node
+client	lib/etcd.rb	/^  def self.client(opts = {})$/;"	F	class:Etcd
+compare_and_swap	lib/etcd/keys.rb	/^    def compare_and_swap(key, opts =  {})$/;"	f	class:Etcd.Keys
+create	lib/etcd/keys.rb	/^    def create(key, opts = {})$/;"	f	class:Etcd.Keys
+create_in_order	lib/etcd/keys.rb	/^    def create_in_order(dir, opts = {})$/;"	f	class:Etcd.Keys
+delete	lib/etcd/keys.rb	/^    def delete(key, opts = {})$/;"	f	class:Etcd.Keys
+directory?	lib/etcd/node.rb	/^    def directory?$/;"	f	class:Etcd.Node
+eternal_watch	lib/etcd/keys.rb	/^    def eternal_watch(key, index = nil)$/;"	f	class:Etcd.Keys
+exists?	lib/etcd/keys.rb	/^    def exists?(key)$/;"	f	class:Etcd.Keys
+from_http_response	lib/etcd/exceptions.rb	/^    def self.from_http_response(response)$/;"	F	class:Etcd.Error
+from_http_response	lib/etcd/response.rb	/^    def self.from_http_response(response)$/;"	F	class:Etcd.Response
+get	lib/etcd/keys.rb	/^    def get(key, opts = {})$/;"	f	class:Etcd.Keys
+initialize	lib/etcd/client.rb	/^    def initialize(opts = {})$/;"	f	class:Etcd.Client
+initialize	lib/etcd/exceptions.rb	/^    def initialize(opts = {})$/;"	f	class:Etcd.Error
+initialize	lib/etcd/node.rb	/^    def initialize(opts = {})$/;"	f	class:Etcd.Node
+initialize	lib/etcd/response.rb	/^    def initialize(opts, headers = {})$/;"	f	class:Etcd.Response
+inspect	lib/etcd/exceptions.rb	/^    def inspect$/;"	f	class:Etcd.Error
+key_endpoint	lib/etcd/keys.rb	/^    def key_endpoint$/;"	f	class:Etcd.Keys
+leader	lib/etcd/client.rb	/^    def leader$/;"	f	class:Etcd.Client
+process_http_request	lib/etcd/client.rb	/^    def process_http_request(res)$/;"	f	class:Etcd.Client
+set	lib/etcd/keys.rb	/^    def set(key, opts = nil)$/;"	f	class:Etcd.Keys
+setup_https	lib/etcd/client.rb	/^    def setup_https(http)$/;"	f	class:Etcd.Client
+stats	lib/etcd/stats.rb	/^    def stats(type)$/;"	f	class:Etcd.Stats
+stats_endpoint	lib/etcd/stats.rb	/^    def stats_endpoint$/;"	f	class:Etcd.Stats
+update	lib/etcd/keys.rb	/^    def update(key, opts = {})$/;"	f	class:Etcd.Keys
+version	lib/etcd/client.rb	/^    def version$/;"	f	class:Etcd.Client
+version_prefix	lib/etcd/client.rb	/^    def version_prefix$/;"	f	class:Etcd.Client
+watch	lib/etcd/keys.rb	/^    def watch(key, opts = {})$/;"	f	class:Etcd.Keys
