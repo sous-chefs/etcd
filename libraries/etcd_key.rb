@@ -10,7 +10,7 @@ module EtcdCookbook
     property :previous_value, String
     property :ttl, String
 
-    property :host, String, default: "127.0.0.1"
+    property :host, String, default: '127.0.0.1'
     property :port, Integer, default: 2379
 
     def etcd
@@ -25,14 +25,12 @@ module EtcdCookbook
     end
 
     load_current_value do
-      if key_exist?
-        value etcd.get(key).value
-      end
+      value etcd.get(key).value if key_exist?
     end
 
     action :set do
       if current_resource.value != value
-        opts = {value: value}
+        opts = { value: value }
         opts[:ttl] = ttl if ttl
         converge_by "will set value of key #{key}" do
           etcd.set(key, opts)
@@ -41,7 +39,7 @@ module EtcdCookbook
     end
 
     action :delete do
-      if key_exist? #~FC023
+      if key_exist? # ~FC023
         converge_by "delete key #{key}" do
           etcd.delete(key)
         end
