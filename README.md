@@ -103,6 +103,7 @@ Resources Overview
 * `etcd_service`: composite resource that uses etcd_installation and etcd_service_manager
 * `etcd_installation`: automatically selects an installation method
 * `etcd_service_manager`: automatically selects a service manager
+* `etcd_key`: manages keys in etcd
 
 * `etcd_installation_binary`: copies a pre-compiled etcd binary onto disk
 * `etcd_installation_docker`: pulls a docker image to the DOCKER_HOST
@@ -111,6 +112,7 @@ Resources Overview
 * `etcd_service_manager_upstart`: manage etcd daemon with upstart script
 * `etcd_service_manager_systemd`: manage etcd daemon with systemd unit files
 * `etcd_service_manager_docker`: starts a docker process on the DOCKER_HOST
+
 
 Resources Details
 ------------------
@@ -215,7 +217,7 @@ end
 The `etcd_service`: resource is a composite resource that uses
 `etcd_installation` and `etcd_service_manager` resources.
 
-- The `:create` action uses am `etcd_installation`
+- The `:create` action uses an `etcd_installation`
 - The `:delete` action uses an`etcd_installation`
 - The `:start` action uses an `etcd_service_manager`
 - The `:stop` action uses an `etcd_service_manager`
@@ -288,6 +290,31 @@ found in
 - `https_proxy`
 - `no_proxy`
 - `auto_restart`
+
+## etcd_key
+The `etcd_key` resource sets, watches and deletes keys in etcd.
+
+### Actions
+
+ - The `:set` action sets a key
+ - The `:delete` action deletes a key
+ - The `:watch` action waits for a key to update
+
+### Properties
+- `key` - The key name
+- `value` - The desired value
+- `ttl` - The ttl for the key (optional)
+- `host` - The hostname of the etcd server, defaults to `127.0.0.1`
+- `port` - The port that etcd is listening on, defaults to `2379`
+
+### Examples
+
+```
+etcd_key "/test" do
+  value "a_test_value"
+  action :set
+end
+```
 
 License and Author
 ------------------
