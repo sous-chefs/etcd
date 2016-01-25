@@ -1,3 +1,6 @@
+### 3.2.0
+* Adding etcd_key resource
+
 ### 3.1.6
 * Fix redirecting stderr to stdout in upstart manaager
 
