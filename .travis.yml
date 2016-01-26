@@ -15,6 +15,7 @@ services: docker
 
 env:
   matrix:
+  - INSTANCE=keys-centos-7
   - INSTANCE=service-execute-multi-centos-5
   - INSTANCE=service-execute-multi-centos-6
   - INSTANCE=service-execute-multi-centos-7
