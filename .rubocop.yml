@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    - files/default/vendor/**/*
     - vendor/**/*
     - Guardfile
 
