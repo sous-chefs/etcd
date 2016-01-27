@@ -1,15 +1,13 @@
-require 'etcd'
-
 module EtcdCookbook
   class EtcdKey < ChefCompat::Resource
+    require 'etcd'
+
     resource_name :etcd_key
 
     property :key, String, name_property: true, desired_state: false
     property :value, String
-
     property :previous_value, String
     property :ttl, String
-
     property :host, String, default: '127.0.0.1'
     property :port, Integer, default: 2379
 
@@ -18,8 +16,7 @@ module EtcdCookbook
     end
 
     def key_exist?
-      etcd.get(key)
-      true
+      true if etcd.get(key)
     rescue Etcd::KeyNotFound
       false
     end
