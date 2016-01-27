@@ -1,3 +1,8 @@
+### 3.2.1
+* Adding etcd_key resource
+* Removing unused property previous_state
+* Adding desired_state: false to various properties
+
 ### 3.2.0
 * Adding etcd_key resource
 
