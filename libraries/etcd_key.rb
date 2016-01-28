@@ -25,7 +25,7 @@ module EtcdCookbook
     end
 
     action :set do
-      if current_resource.value != value
+      converge_if_changed do
         opts = { value: value }
         opts[:ttl] = ttl if ttl
         converge_by "will set value of key #{key}" do
