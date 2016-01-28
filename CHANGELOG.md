@@ -1,3 +1,6 @@
+### 3.2.3
+* Retrying key operations
+
 ### 3.2.2
 * Using converge_if_changed in :set action
 
