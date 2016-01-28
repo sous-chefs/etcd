@@ -1,3 +1,6 @@
+### 3.2.2
+* Using converge_if_changed in :set action
+
 ### 3.2.1
 * Adding etcd_key resource
 * Removing unused property previous_state
@@ -45,7 +48,7 @@
 
 ### 2.2.0
 * update to etcd 0.4.2
-* Removed node[:etcd][:local] No longer needed in new etcd. Etcd will default bind :4001 and :7001. 
+* Removed node[:etcd][:local] No longer needed in new etcd. Etcd will default bind :4001 and :7001.
   The cookbook default is now to use node[:ipaddress] as the  addr and peer_addr.
 * add auto-respawn instruction in upstart config file
 * Fix Gem deps in the ci build
@@ -70,7 +73,7 @@
 * refactor common functions into library methods
 * Add specs
 * Use rubocop to replace tailor/cane
-* Fixup testing (add travis integration) 
+* Fixup testing (add travis integration)
 
 ### 2.0.0
 * update to etcd 0.2.0
@@ -81,7 +84,7 @@
 * Add support of explicitely specifying a cluster's nodes
 
 ### 1.3.5
-* silence foodcritic by accessing attributes in a consistent manner, 
+* silence foodcritic by accessing attributes in a consistent manner,
 * trigger a restart when etcd conf is updated
 * include git if source install
 * metadata depends on git recipe
@@ -91,7 +94,7 @@
 ### 1.3.4
 * fix compile_time to use the right tarball path
 
-### 1.3.3 
+### 1.3.3
 * Bump to etcd 1.2
 * Added source install recipe
 
@@ -99,7 +102,7 @@
 * default binding to node[:ipaddress]
 
 ### 1.2.4
-* update to etcd 0.1.1 release 
+* update to etcd 0.1.1 release
 * add compile_time recipe that does the whole bit in chef compile time
 
 ### 1.2.3
@@ -108,12 +111,12 @@
 
 ### 1.2.2
 * add cluster recipe for setting up clusters of etcd nodes
-* re-add seed-node attribute 
+* re-add seed-node attribute
 
-### 1.2.1 
+### 1.2.1
 * fix the startup args so it is easier to specify custom args
 * supports release version and current master on git
-* add in tests for both release and git versions of etcd 
+* add in tests for both release and git versions of etcd
 
 ### 1.1.1
 * Make everything work with release 0.1.0 of etcd
