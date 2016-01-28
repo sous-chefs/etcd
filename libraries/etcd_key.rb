@@ -30,7 +30,7 @@ module EtcdCookbook
     def key_exist?
       true if etcd.get(key)
     rescue Etcd::KeyNotFound,
-        Errno::ECONNREFUSED
+           Errno::ECONNREFUSED
       false
     end
 

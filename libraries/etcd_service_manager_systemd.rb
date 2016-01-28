@@ -1,6 +1,7 @@
 module EtcdCookbook
   class EtcdServiceManagerSystemd < EtcdServiceBase
     resource_name :etcd_service_manager_systemd
+
     provides :etcd_service_manager, platform: 'fedora'
 
     provides :etcd_service_manager, platform: %w(redhat centos scientific) do |node| # ~FC005
