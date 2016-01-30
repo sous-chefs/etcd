@@ -1,6 +1,6 @@
 Etcd Cookbook
 =============
-[![Build Status](https://travis-ci.org/someara/etcd-cookbook.png)](https://travis-ci.org/someara/etcd-cookbook)
+[![Build Status](https://travis-ci.org/chef-cookbooks/etcd.svg?branch=master)](https://travis-ci.org/chef-cookbooks/etcd)
 [![Cookbook Version](https://img.shields.io/cookbook/v/etcd.svg)](https://supermarket.chef.io/cookbooks/etcd)
 
 The Etcd Cookbook is a library cookbook that provides custom resources
