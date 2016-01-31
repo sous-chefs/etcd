@@ -1,6 +1,6 @@
 name 'etcd'
-source_url 'https://github.com/someara/etcd-cookbook'
-issues_url 'https://github.com/someara/etcd-cookbook/issues'
+source_url 'https://github.com/chef-cookbooks/etcd'
+issues_url 'https://github.com/chef-cookbooks/etcd/issues'
 maintainer 'Sean OMeara'
 maintainer_email 'sean@chef.io'
 version '3.2.4'
