@@ -4,7 +4,7 @@ issues_url 'https://github.com/chef-cookbooks/etcd/issues'
 maintainer 'Sean OMeara'
 maintainer_email 'sean@chef.io'
 license 'Apache 2.0'
-version '3.2.4'
+version '3.2.5'
 
 depends 'compat_resource', '>= 12.5.23'
 depends 'docker'

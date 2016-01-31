@@ -1,6 +1,13 @@
 # etcd Cookbook CHANGELOG
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 3.2.5
+- Added Redhat, Oracle Linux, and Scientific Linux to the metadata
+- Fixed issues_url and source_url in the metadata to point to the correct URL
+- Added license to the metadata
+- Updated Rakefile so testing tasks match other Chef cookbooks
+- Add maintainers files and Rake task to generate the markdown
+
 ## 3.2.4
 - Added support for Scientific / Oracle Linux 6.X
 - Fixed readme badges
