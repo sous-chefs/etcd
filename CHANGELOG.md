@@ -1,3 +1,13 @@
+# etcd Cookbook CHANGELOG
+This file is used to list changes made in each version of the etcd cookbook.
+
+### 3.2.4
+* Added support for Scientific / Oracle Linux 6.X
+* Fixed readme badges
+* Added a chefignore file
+* Add contributing and testing docs
+* Removed Ruby 2.2 via RVM install from the Travis CI runs
+
 ### 3.2.3
 * Retrying key operations
 
