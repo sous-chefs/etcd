@@ -3,11 +3,7 @@ module EtcdCookbook
     resource_name :etcd_service_manager_sysvinit
     provides :etcd_service_manager, platform: 'amazon'
 
-    provides :etcd_service_manager, platform: 'centos' do |node|
-      node['platform_version'].to_f <= 7.0
-    end
-
-    provides :etcd_service_manager, platform: 'redhat' do |node|
+    provides :etcd_service_manager, platform: %w(redhat centos scientific oracle) do |node| # ~FC005
       node['platform_version'].to_f <= 7.0
     end
 
