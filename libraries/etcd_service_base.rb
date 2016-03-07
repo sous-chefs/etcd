@@ -57,6 +57,8 @@ module EtcdCookbook
     property :peer_key_file, String, desired_state: false
     property :peer_client_cert_auth, Boolean, default: false, desired_state: false
     property :peer_trusted_ca_file, String, desired_state: false
+    property :etcdctl_client_cert_file, String, desired_state: false
+    property :etcdctl_client_key_file, String, desired_state: false
 
     # Logging Flags
     property :debug, Boolean, default: false, desired_state: false

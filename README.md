@@ -276,6 +276,8 @@ found in
 - `peer_key_file`
 - `peer_client_cert_auth`
 - `peer_trusted_ca_file`
+- `etcdctl_client_cert_file`
+- `etcdctl_client_key_file`
 
 - Logging Flags
 - `debug`
