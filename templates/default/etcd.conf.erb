@@ -1,0 +1,120 @@
+# [member]
+<% if @config.node_name -%>
+ETCD_NAME="<%= @config.node_name %>"
+<% end -%>
+<% if @config.data_dir -%>
+ETCD_DATA_DIR="<%= @config.data_dir %>"
+<% end -%>
+<% if @config.wal_dir -%>
+ETCD_WAL_DIR="<%= @config.wal_dir %>"
+<% end -%>
+<% if @config.snapshot_count -%>
+ETCD_SNAPSHOT_COUNT="<%= @config.snapshot_count %>"
+<% end -%>
+<% if @config.heartbeat_interval -%>
+ETCD_HEARTBEAT_INTERVAL="<%= @config.heartbeat_interval %>"
+<% end -%>
+<% if @config.election_timeout -%>
+ETCD_ELECTION_TIMEOUT="<%= @config.election_timeout %>"
+<% end -%>
+<% if @config.listen_peer_urls -%>
+ETCD_LISTEN_PEER_URLS="<%= @config.listen_peer_urls %>"
+<% end -%>
+<% if @config.listen_client_urls -%>
+ETCD_LISTEN_CLIENT_URLS="<%= @config.listen_client_urls %>"
+<% end -%>
+<% if @config.max_snapshots -%>
+ETCD_MAX_SNAPSHOTS="<%= @config.max_snapshots %>"
+<% end -%>
+<% if @config.max_wals -%>
+ETCD_MAX_WALS="<%= @config.max_wals %>"
+<% end -%>
+<% if @config.cors -%>
+ETCD_CORS="<%= @config.cors %>"
+<% end -%>
+
+#[cluster]
+<% if @config.initial_advertise_peer_urls -%>
+ETCD_INITIAL_ADVERTISE_PEER_URLS="<%= @config.initial_advertise_peer_urls %>"
+<% end -%>
+<% if @config.initial_cluster -%>
+ETCD_INITIAL_CLUSTER="<%= @config.initial_cluster %>"
+<% end -%>
+<% if @config.initial_cluster_state -%>
+ETCD_INITIAL_CLUSTER_STATE="<%= @config.initial_cluster_state %>"
+<% end -%>
+<% if @config.initial_cluster_token -%>
+ETCD_INITIAL_CLUSTER_TOKEN="<%= @config.initial_cluster_token %>"
+<% end -%>
+<% if @config.advertise_client_urls -%>
+ETCD_ADVERTISE_CLIENT_URLS="<%= @config.advertise_client_urls %>"
+<% end -%>
+<% if @config.discovery -%>
+ETCD_DISCOVERY="<%= @config.discovery %>"
+<% end -%>
+<% if @config.discovery_srv -%>
+ETCD_DISCOVERY_SRV="<%= @config.discovery_srv %>"
+<% end -%>
+<% if @config.discovery_fallback -%>
+ETCD_DISCOVERY_FALLBACK="<%= @config.discovery_fallback %>"
+<% end -%>
+<% if @config.discovery_proxy -%>
+ETCD_DISCOVERY_PROXY="<%= @config.discovery_proxy %>"
+<% end -%>
+<% if @config.strict_reconfig_check -%>
+ETCD_STRICT_RECONFIG_CHECK="<%= @config.strict_reconfig_check %>"
+<% end -%>
+
+#[proxy]
+<% if @config.proxy -%>
+ETCD_PROXY="<%= @config.proxy %>"
+<% end -%>
+<% if @config.proxy_failure_wait -%>
+ETCD_PROXY_FAILURE_WAIT="<%= @config.proxy_failure_wait %>"
+<% end -%>
+<% if @config.proxy_refresh_interval -%>
+ETCD_PROXY_REFRESH_INTERVAL="<%= @config.proxy_refresh_interval %>"
+<% end -%>
+<% if @config.proxy_dial_timeout -%>
+ETCD_PROXY_DIAL_TIMEOUT="<%= @config.proxy_dial_timeout %>"
+<% end -%>
+<% if @config.proxy_write_timeout -%>
+ETCD_PROXY_WRITE_TIMEOUT="<%= @config.proxy_write_timeout %>"
+<% end -%>
+<% if @config.proxy_read_timeout -%>
+ETCD_PROXY_READ_TIMEOUT="<%= @config.proxy_read_timeout %>"
+<% end -%>
+
+#[security]
+<% if @config.cert_file -%>
+ETCD_CERT_FILE="<%= @config.cert_file %>"
+<% end -%>
+<% if @config.key_file -%>
+ETCD_KEY_FILE="<%= @config.key_file %>"
+<% end -%>
+<% if @config.client_cert_auth -%>
+ETCD_CLIENT_CERT_AUTH="<%= @config.client_cert_auth %>"
+<% end -%>
+<% if @config.trusted_ca_file -%>
+ETCD_TRUSTED_CA_FILE="<%= @config.trusted_ca_file %>"
+<% end -%>
+<% if @config.peer_cert_file -%>
+ETCD_PEER_CERT_FILE="<%= @config.peer_cert_file %>"
+<% end -%>
+<% if @config.peer_key_file -%>
+ETCD_PEER_KEY_FILE="<%= @config.peer_key_file %>"
+<% end -%>
+<% if @config.peer_client_cert_auth -%>
+ETCD_PEER_CLIENT_CERT_AUTH="<%= @config.peer_client_cert_auth %>"
+<% end -%>
+<% if @config.peer_trusted_ca_file -%>
+ETCD_PEER_TRUSTED_CA_FILE="<%= @config.peer_trusted_ca_file %>"
+<% end -%>
+
+#[logging]
+<% if @config.debug -%>
+ETCD_DEBUG="<%= @config.debug %>"
+<% end -%>
+<% if @config.log_package_levels -%>
+ETCD_LOG_PACKAGE_LEVELS="<%= @config.log_package_levels %>"
+<% end -%>
