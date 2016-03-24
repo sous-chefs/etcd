@@ -6,8 +6,8 @@ module EtcdCookbook
       case node[:platform]
       when 'centos'
         package 'etcd'
-      else 
-        Chef::Exceptions::UnsupportedPlatform    
+      else
+        Chef::Exceptions::UnsupportedPlatform
       end
     end
 
@@ -17,8 +17,8 @@ module EtcdCookbook
         package 'etcd' do
           action :purge
         end
-      else 
-        Chef::Exceptions::UnsupportedPlatform        
+      else
+        Chef::Exceptions::UnsupportedPlatform
       end
     end
   end

@@ -51,7 +51,7 @@ module EtcdCookbook
         action [:start]
       end
     end
-    
+
     action :stop do
     end
 
@@ -59,6 +59,5 @@ module EtcdCookbook
       action_stop
       action_start
     end
-
   end
 end
