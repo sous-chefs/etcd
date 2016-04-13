@@ -6,7 +6,7 @@ module EtcdCookbook
 
     action :create do
       # Create service template
-      template "/lib/systemd/system/#{etcd_name}.service" do
+      template "/lib/systemd/system/etcd.service" do
         source 'systemd/etcd.service.conffile.erb'
         owner 'root'
         group 'root'
@@ -35,7 +35,7 @@ module EtcdCookbook
         owner 'root'
         group 'root'
         mode '0755'
-        notifies :restart, new_resource
+        notifies :restart, new_resource if auto_restart
         variables config: new_resource
       end
 
