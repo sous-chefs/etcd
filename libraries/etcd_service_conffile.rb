@@ -23,7 +23,7 @@ module EtcdCookbook
       end
 
       # Register this service within Chef
-      service etcd_name do
+      service 'etcd' do
         supports restart: true, status: true
         action [:enable]
       end

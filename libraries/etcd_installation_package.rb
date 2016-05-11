@@ -1,5 +1,5 @@
 module EtcdCookbook
-  class EtcdInstallationDocker < ChefCompat::Resource
+  class EtcdInstallationPackage < ChefCompat::Resource
     resource_name :etcd_installation_package
 
     action :create do
