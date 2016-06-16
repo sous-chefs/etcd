@@ -1,8 +1,3 @@
-require 'serverspec'
-
-set :backend, :exec
-puts "os: #{os}"
-
 describe command('ps -ef | grep -v grep | grep ^alice | grep etcd') do
   its(:exit_status) { should eq 0 }
 end

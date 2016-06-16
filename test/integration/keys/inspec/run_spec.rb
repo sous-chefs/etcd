@@ -1,7 +1,3 @@
-require 'serverspec'
-
-set :backend, :exec
-
 describe command('etcdctl get /test') do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should eql("a_test_value\n") }
