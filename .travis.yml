@@ -43,8 +43,8 @@ script:
   - /opt/chefdk/embedded/bin/chef --version
   - /opt/chefdk/embedded/bin/rubocop --version
   - /opt/chefdk/embedded/bin/rubocop
-  - echo KITCHEN_YAML=.kitchen.yml kitchen verify ${INSTANCE}
-  - KITCHEN_YAML=.kitchen.yml kitchen verify ${INSTANCE}
+  - echo KITCHEN_YAML=.kitchen.dokken.yml kitchen verify ${INSTANCE}
+  - KITCHEN_YAML=.kitchen.dokken.yml kitchen verify ${INSTANCE}
 
 after_script:
   - docker images

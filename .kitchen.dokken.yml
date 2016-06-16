@@ -1,0 +1,153 @@
+---
+driver:
+  name: dokken
+  chef_version: latest
+  privileged: true # because Docker and SystemD/Upstart
+
+transport:
+  name: dokken
+
+provisioner:
+  name: dokken
+
+verifier:
+  root_path: '/opt/verifier'
+  sudo: false
+
+platforms:
+- name: debian-8
+  driver:
+    image: debian:8
+    pid_one_command: /bin/systemd
+
+- name: centos-5
+  driver:
+    image: centos:5
+
+- name: centos-6
+  driver:
+    image: centos:6
+    intermediate_instructions:
+      - RUN yum -y install tar which initscripts
+
+- name: centos-7
+  driver:
+    image: centos:7
+    intermediate_instructions:
+      - RUN yum clean all
+      - RUN yum -y install net-tools lsof
+    pid_one_command: /usr/lib/systemd/systemd
+
+- name: fedora-21
+  driver:
+    image: fedora:21
+    intermediate_instructions:
+    - RUN yum clean all
+    pid_one_command: /usr/lib/systemd/systemd
+    intermediate_instructions:
+      - RUN yum -y install tar
+
+- name: ubuntu-12.04
+  driver:
+    image: ubuntu-upstart:12.04
+    pid_one_command: /sbin/init
+    intermediate_instructions:
+      - RUN /usr/bin/apt-get update
+      - RUN /usr/bin/apt-get install apt-transport-https net-tools -y
+
+- name: ubuntu-14.04
+  driver:
+    image: ubuntu-upstart:14.04
+    pid_one_command: /sbin/init
+    intermediate_instructions:
+      - RUN /usr/bin/apt-get update
+      - RUN /usr/bin/apt-get install apt-transport-https net-tools -y
+
+- name: ubuntu-15.10
+  driver:
+    image: ubuntu:15.10
+    pid_one_command: /bin/systemd
+    intermediate_instructions:
+      - RUN /usr/bin/apt-get update
+      - RUN /usr/bin/apt-get install apt-transport-https net-tools -y
+
+suites:
+  - name: installation_binary-222
+    run_list:
+      - recipe[etcd_test::installation_binary]
+    attributes:
+      etcd:
+        version: '2.2.2'
+
+  - name: service-execute
+    run_list:
+      - recipe[etcd_test::service_execute]
+
+  - name: service-execute-multi
+    run_list:
+      - recipe[etcd_test::service_execute_multi]
+
+  - name: service-systemd
+    includes: [
+    'debian-8',
+    'centos-7',
+    'fedora-21',
+    'ubuntu-15.10'
+    ]
+    run_list:
+      - recipe[etcd_test::service_systemd]
+
+  - name: service-systemd-multi
+    includes: [
+    'debian-8',
+    'centos-7',
+    'fedora-21',
+    'ubuntu-15.10'
+    ]
+    run_list:
+      - recipe[etcd_test::service_systemd_multi]
+
+  - name: service-upstart
+    includes: [
+    'ubuntu-14.04'
+    ]
+    run_list:
+      - recipe[etcd_test::service_upstart]
+
+  - name: service-upstart-multi
+    includes: [
+    'ubuntu-14.04'
+    ]
+    run_list:
+      - recipe[etcd_test::service_upstart_multi]
+
+  - name: service-sysvinit
+    includes: [
+    'debian-7',
+    'centos-5',
+    'centos-6',
+    'ubuntu-12.04'
+    ]
+    run_list:
+      - recipe[etcd_test::service_sysvinit]
+
+  - name: service-sysvinit-multi
+    includes: [
+    'debian-7',
+    'centos-5',
+    'centos-6',
+    'ubuntu-12.04'
+    ]
+    run_list:
+      - recipe[etcd_test::service_sysvinit_multi]
+
+  - name: keys
+    includes: [
+      'centos-7'
+    ]
+    run_list:
+      - recipe[etcd_test::keys]
+
+  - name: auto
+    run_list:
+      - recipe[etcd_test::auto]
