@@ -66,6 +66,10 @@ module EtcdCookbook
 
       def etcdctl_opts
         opts = []
+	# The client cert must be the same file as the server cert
+	opts << "--ca-file=#{trusted_ca_file}" if client_cert_auth == true
+	opts << "--cert-file=#{etcdctl_client_cert_file}" if client_cert_auth == true
+	opts << "--key-file=#{etcdctl_client_key_file}" if client_cert_auth == true
         opts << "-C #{advertise_client_urls}" if advertise_client_urls
       end
 
