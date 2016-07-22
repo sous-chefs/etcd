@@ -332,13 +332,21 @@ end
 
 ## License and Author
 
-```
-                |
-```
+**Original Author** | [Jesse Nelson](https://github.com/spheromak)
 
-------------------- | ----------------------------------------------- **Original Author** | [Jesse Nelson](https://github.com/spheromak) **Contributor** | [Soulou](https://github.com/Soulou) **Contributor** | [Aaron O'Mullan](https://github.com/AaronO) **Contributor** | [Anthony Scalisi](https://github.com/scalp42) **Contributor** | [Robert Coleman](https://github.com/rjocoleman) **Contributor** | [James Gregory](https://github.com/jagregory) **Contributor** | [Sean OMeara](https://github.com/someara) **Copyright** | Copyright (c) 2013, Jesse Nelson
+**Contributor** | [Soulou](https://github.com/Soulou)
 
-## License
+**Contributor** | [Aaron O'Mullan](https://github.com/AaronO)
+
+**Contributor** | [Anthony Scalisi](https://github.com/scalp42)
+
+**Contributor** | [Robert Coleman](https://github.com/rjocoleman)
+
+**Contributor** | [James Gregory](https://github.com/jagregory)
+
+**Contributor** | [Sean OMeara](https://github.com/someara)
+
+**Copyright** | Copyright (c) 2013, Jesse Nelson
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
