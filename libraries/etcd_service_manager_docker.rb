@@ -4,7 +4,7 @@ module EtcdCookbook
 
     property :repo, String, default: 'quay.io/coreos/etcd'
     property :tag, default: lazy { "v#{version}" }
-    property :version, default: '2.2.2', desired_state: false
+    property :version, default: '2.3.7', desired_state: false
     property :container_name, String, default: lazy { etcd_name }, desired_state: false
     property :port, default: ['2379/tcp4:2379', '4001/tcp4:4001']
     property :network_mode, String, default: 'host'

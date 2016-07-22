@@ -6,11 +6,11 @@ provisioner:
 
 platforms:
   - name: centos-5.11
-  - name: centos-6.7
+  - name: centos-6.8
   - name: centos-7.2
-  - name: debian-7.10
+  - name: debian-7.11
     run_list: apt::default
-  - name: debian-8.4
+  - name: debian-8.5
     run_list: apt::default
   - name: fedora-23
     run_list: yum::dnf_yum_compat
@@ -22,12 +22,9 @@ platforms:
     run_list: apt::default
 
 suites:
-  - name: installation_binary-222
+  - name: installation_binary
     run_list:
       - recipe[etcd_test::installation_binary]
-    attributes:
-      etcd:
-        version: '2.2.2'
 
   - name: service-execute
     run_list:
@@ -39,8 +36,8 @@ suites:
 
   - name: service-systemd
     includes: [
-    'debian-8',
-    'centos-7',
+    'debian-8.5',
+    'centos-7.2',
     'fedora-23',
     'ubuntu-16.04'
     ]
@@ -49,8 +46,8 @@ suites:
 
   - name: service-systemd-multi
     includes: [
-    'debian-8',
-    'centos-7',
+    'debian-8.5',
+    'centos-7.2',
     'fedora-23',
     'ubuntu-16.04'
     ]
@@ -73,9 +70,9 @@ suites:
 
   - name: service-sysvinit
     includes: [
-    'debian-7',
-    'centos-5',
-    'centos-6',
+    'debian-7.11',
+    'centos-5.11',
+    'centos-6.8',
     'ubuntu-12.04'
     ]
     run_list:
@@ -83,9 +80,9 @@ suites:
 
   - name: service-sysvinit-multi
     includes: [
-    'debian-7',
-    'centos-5',
-    'centos-6',
+    'debian-7.11',
+    'centos-5.11',
+    'centos-6.8',
     'ubuntu-12.04'
     ]
     run_list:
