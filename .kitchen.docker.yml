@@ -77,12 +77,9 @@ platforms:
       - RUN /usr/bin/apt-get install apt-transport-https net-tools -y
 
 suites:
-  - name: installation_binary-222
+  - name: installation_binary
     run_list:
       - recipe[etcd_test::installation_binary]
-    attributes:
-      etcd:
-        version: '2.2.2'
 
   - name: service-execute
     run_list:
