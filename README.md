@@ -15,7 +15,6 @@ distributed key/value store as distributed by CoreOS, Inc.
 Requirements
 ------------
 - Chef 12.0.0 or higher. Chef 11 is NOT SUPPORTED, please do not open issues about it.
-- Ruby 2.1 or higher (preferably, the Chef full-stack installer)
 - Network accessible web server hosting the etcd binary.
 
 Platform Support
@@ -35,13 +34,13 @@ most likely work on other platforms as well
 |--------------+-------+
 | centos-7     | X     |
 |--------------+-------+
-| fedora-21    | X     |
+| fedora       | X     |
 |--------------+-------+
 | ubuntu-12.04 | X     |
 |--------------+-------+
 | ubuntu-14.04 | X     |
 |--------------+-------+
-| ubuntu-15.10 | X     |
+| ubuntu-16.04 | X     |
 |--------------+-------+
 ```
 

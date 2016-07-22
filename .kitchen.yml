@@ -12,8 +12,6 @@ platforms:
     run_list: apt::default
   - name: debian-8.4
     run_list: apt::default
-  - name: fedora-22
-    run_list: yum::dnf_yum_compat
   - name: fedora-23
     run_list: yum::dnf_yum_compat
   - name: ubuntu-12.04
@@ -43,8 +41,8 @@ suites:
     includes: [
     'debian-8',
     'centos-7',
-    'fedora-21',
-    'ubuntu-15.10'
+    'fedora-23',
+    'ubuntu-16.04'
     ]
     run_list:
       - recipe[etcd_test::service_systemd]
@@ -53,8 +51,8 @@ suites:
     includes: [
     'debian-8',
     'centos-7',
-    'fedora-21',
-    'ubuntu-15.10'
+    'fedora-23',
+    'ubuntu-16.04'
     ]
     run_list:
       - recipe[etcd_test::service_systemd_multi]
