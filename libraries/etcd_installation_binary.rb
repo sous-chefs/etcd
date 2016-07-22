@@ -18,6 +18,8 @@ module EtcdCookbook
     #########
 
     action :create do
+      package 'tar'
+
       remote_file 'etcd tarball' do
         path "#{file_cache_path}/etcd-v#{new_resource.version}-linux-amd64.tar.gz"
         source new_resource.source

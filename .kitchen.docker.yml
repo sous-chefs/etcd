@@ -35,7 +35,7 @@ platforms:
     platform: rhel
     pid_one_command: /sbin/init
     intermediate_instructions:
-      - RUN yum -y install tar which initscripts
+      - RUN yum -y install which initscripts
 
 - name: centos-7
   driver:
@@ -96,8 +96,8 @@ suites:
     includes: [
     'debian-8',
     'centos-7',
-    'fedora-21',
-    'ubuntu-15.10'
+    'fedora-latest',
+    'ubuntu-16.04'
     ]
     run_list:
       - recipe[etcd_test::service_systemd]
@@ -106,8 +106,8 @@ suites:
     includes: [
     'debian-8',
     'centos-7',
-    'fedora-21',
-    'ubuntu-15.10'
+    'fedora-latest',
+    'ubuntu-16.04'
     ]
     run_list:
       - recipe[etcd_test::service_systemd_multi]
