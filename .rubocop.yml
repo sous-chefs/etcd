@@ -2,7 +2,6 @@ AllCops:
   Exclude:
     - files/default/vendor/**/*
     - vendor/**/*
-    - Guardfile
 
 Lint/AmbiguousOperator:
   Exclude:
