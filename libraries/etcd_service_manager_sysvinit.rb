@@ -7,7 +7,6 @@ module EtcdCookbook
       node['platform_version'].to_f <= 7.0
     end
 
-    provides :etcd_service_manager, platform: 'suse'
     provides :etcd_service_manager, platform: 'debian'
 
     action :start do

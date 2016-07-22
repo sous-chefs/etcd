@@ -16,6 +16,10 @@ module EtcdCookbook
       node['platform_version'].to_f >= 15.04
     end
 
+    provides :etcd_service_manager, platform_family: 'suse' do |node|
+      node['platform_version'].to_i >= 13
+    end
+
     property :service_timeout, Integer, default: 20
 
     action :start do
