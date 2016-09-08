@@ -125,7 +125,6 @@ suites:
 
   - name: service-sysvinit
     includes: [
-    'debian-7',
     'centos-5',
     'centos-6',
     'ubuntu-12.04'
@@ -135,7 +134,6 @@ suites:
 
   - name: service-sysvinit-multi
     includes: [
-    'debian-7',
     'centos-5',
     'centos-6',
     'ubuntu-12.04'
