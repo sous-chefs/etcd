@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 4.1.0 (2016-10-10)
+
+- suse is systemd not sysv
+- Require Chef 12.1+ and the latest compat_resource
+- Define custom matchers helpers for Chefspec
+
 ## 4.0.0
 
 - Install etcd 2.3.7 by default
