@@ -1,7 +1,7 @@
 driver:
   name: dokken
-  chef_version: latest
   privileged: true # because Docker and SystemD/Upstart
+  chef_version: current
 
 transport:
   name: dokken
@@ -20,14 +20,6 @@ platforms:
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
       - RUN /usr/bin/apt-get install lsb-release -y
-
-- name: centos-5
-  driver:
-    image: centos:5
-    platform: rhel
-    pid_one_command: /sbin/init
-    intermediate_instructions:
-      - RUN yum install -y which initscripts
 
 - name: centos-6
   driver:
@@ -51,13 +43,6 @@ platforms:
     pid_one_command: /usr/lib/systemd/systemd
     intermediate_instructions:
       - RUN dnf -y install yum which systemd-sysv initscripts
-
-- name: ubuntu-12.04
-  driver:
-    image: ubuntu-upstart:12.04
-    pid_one_command: /sbin/init
-    intermediate_instructions:
-      - RUN /usr/bin/apt-get update
       - RUN /usr/bin/apt-get install apt-transport-https net-tools -y
 
 - name: ubuntu-14.04

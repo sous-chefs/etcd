@@ -5,7 +5,7 @@ dist: trusty
 addons:
   apt:
     sources:
-      - chef-current-trusty
+      - chef-stable-trusty
     packages:
       - chefdk
 
@@ -21,7 +21,6 @@ services: docker
 env:
   matrix:
   - INSTANCE=keys-centos-7
-  - INSTANCE=service-execute-multi-centos-5
   - INSTANCE=service-execute-multi-centos-6
   - INSTANCE=service-execute-multi-centos-7
   - INSTANCE=service-execute-multi-fedora-latest
@@ -33,9 +32,7 @@ env:
   - INSTANCE=service-systemd-multi-debian-8
   - INSTANCE=service-systemd-multi-ubuntu-1604
 #  - INSTANCE=service-upstart-multi-ubuntu-1404
-  - INSTANCE=service-sysvinit-multi-centos-5
   - INSTANCE=service-sysvinit-multi-centos-6
-  - INSTANCE=service-sysvinit-multi-ubuntu-1204
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
