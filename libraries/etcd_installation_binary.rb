@@ -1,5 +1,5 @@
 module EtcdCookbook
-  class EtcdInstallationBinary < ChefCompat::Resource
+  class EtcdInstallationBinary < Chef::Resource
     resource_name :etcd_installation_binary
     provides :etcd_installation
 
