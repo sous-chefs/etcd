@@ -6,7 +6,6 @@ description 'Installs and configures etcd'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '4.1.0'
 
-depends 'compat_resource', '>= 12.16.3'
 depends 'docker'
 
 supports 'amazon'

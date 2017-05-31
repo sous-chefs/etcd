@@ -1,5 +1,5 @@
 module EtcdCookbook
-  class EtcdKey < ChefCompat::Resource
+  class EtcdKey < Chef::Resource
     require 'etcd'
 
     resource_name :etcd_key
