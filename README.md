@@ -248,6 +248,7 @@ The `etcd_service` resource property list corresponds to the options found in
 - `max_snapshots`
 - `max_wals`
 - `cors`
+- `quota_backend_bytes`
 
 ##### Clustering Flags
 
