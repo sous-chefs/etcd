@@ -20,7 +20,7 @@ module EtcdCookbook
         action :create
       end
 
-      bash "start etcd #{name}" do
+      bash "start etcd #{new_resource.name}" do
         code <<-EOF
         su -c "#{etcd_cmd} >> #{logfile}" #{new_resource.run_user} 2>&1 &
         PID=$!
@@ -37,7 +37,7 @@ module EtcdCookbook
       end
 
       # loop until etcd is available
-      bash "etcd-wait-ready #{name}" do
+      bash "etcd-wait-ready #{new_resource.name}" do
         code <<-EOF
             timeout=0
             while [ $timeout -lt 20 ];  do
@@ -56,7 +56,7 @@ module EtcdCookbook
     end
 
     action :stop do
-      execute "stop etcd #{name}" do
+      execute "stop etcd #{new_resource.name}" do
         command "kill `cat #{pid_file}`"
         only_if "#{etcdctl_cmd} cluster-health"
       end
