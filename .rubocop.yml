@@ -1,8 +1,15 @@
 AllCops:
   Exclude:
     - files/default/vendor/**/*
-    - vendor/**/*
 
 Lint/AmbiguousOperator:
   Exclude:
     - 'libraries/_autoload.rb'
+
+Lint/AmbiguousRegexpLiteral:
+  Exclude:
+    - '**/test/**/*'
+
+Style/AccessorMethodName:
+  Exclude:
+    - 'libraries/matchers.rb'
