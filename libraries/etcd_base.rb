@@ -1,5 +1,5 @@
 module EtcdCookbook
-  class EtcdBase < ChefCompat::Resource
+  class EtcdBase < Chef::Resource
     require 'helpers_base'
 
     ################
