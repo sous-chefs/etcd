@@ -7,22 +7,22 @@ module EtcdCookbook
     action :start do
       user 'etcd' do
         action :create
-        only_if { run_user == 'etcd' }
+        only_if { new_resource.run_user == 'etcd' }
       end
 
       file logfile do
-        owner run_user
+        owner new_resource.run_user
         action :create
       end
 
       directory data_dir do
-        owner run_user
+        owner new_resource.run_user
         action :create
       end
 
       bash "start etcd #{name}" do
         code <<-EOF
-        su -c "#{etcd_cmd} >> #{logfile}" #{run_user} 2>&1 &
+        su -c "#{etcd_cmd} >> #{logfile}" #{new_resource.run_user} 2>&1 &
         PID=$!
         sleep 0.5
         kill -0 $PID
@@ -42,7 +42,7 @@ module EtcdCookbook
             timeout=0
             while [ $timeout -lt 20 ];  do
               ((timeout++))
-              su -c "#{etcdctl_cmd} cluster-health" #{run_user}
+              su -c "#{etcdctl_cmd} cluster-health" #{new_resource.run_user}
                 if [ $? -eq 0 ]; then
                   break
                 fi
