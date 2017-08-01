@@ -27,6 +27,7 @@ module EtcdCookbook
     property :max_snapshots, String, desired_state: false
     property :max_wals, String, desired_state: false
     property :cors, String, desired_state: false
+    property :quota_backend_bytes, String, desired_state: false
 
     # Clustering Flags
     property :initial, String, desired_state: false

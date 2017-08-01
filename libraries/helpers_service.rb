@@ -46,6 +46,7 @@ module EtcdCookbook
         opts << "-proxy-refresh-interval=#{proxy_refresh_interval}" unless proxy_refresh_interval.nil?
         opts << "-proxy-write-timeout=#{proxy_write_timeout}" unless proxy_write_timeout.nil?
         opts << "-proxy=#{proxy}" unless proxy.nil?
+        opts << "--quota-backend-bytes=#{quota_backend_bytes}" unless quota_backend_bytes.nil?
         opts << "-snapshot-count=#{snapshot_count}" unless snapshot_count.nil?
         opts << "-trusted-ca-file=#{trusted_ca_file}" unless trusted_ca_file.nil?
         opts << "-wal-dir=#{wal_dir}" unless wal_dir.nil?
