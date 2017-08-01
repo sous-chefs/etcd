@@ -30,5 +30,9 @@ module EtcdCookbook
       action_stop
       action_start
     end
+
+    action_class do
+      include EtcdHelpers::Service
+    end
   end
 end

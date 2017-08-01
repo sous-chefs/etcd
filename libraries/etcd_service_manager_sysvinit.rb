@@ -12,11 +12,11 @@ module EtcdCookbook
     action :start do
       user 'etcd' do
         action :create
-        only_if { run_user == 'etcd' }
+        only_if { new_resource.run_user == 'etcd' }
       end
 
       file logfile do
-        owner run_user
+        owner new_resource.run_user
         action :create
       end
 
@@ -41,6 +41,8 @@ module EtcdCookbook
     end
 
     action_class do
+      include EtcdHelpers::Service
+
       def create_init
         template "/etc/init.d/#{etcd_name}" do
           source 'sysvinit/etcd.erb'

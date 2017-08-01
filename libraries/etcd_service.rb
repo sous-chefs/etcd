@@ -32,7 +32,7 @@ module EtcdCookbook
 
     action_class do
       def installation(&block)
-        case install_method
+        case new_resource.install_method
         when 'auto'
           install = etcd_installation(name, &block)
         when 'binary'

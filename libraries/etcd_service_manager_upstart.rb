@@ -7,16 +7,16 @@ module EtcdCookbook
     action :start do
       user 'etcd' do
         action :create
-        only_if { run_user == 'etcd' }
+        only_if { new_resource.run_user == 'etcd' }
       end
 
       file logfile do
-        owner run_user
+        owner new_resource.run_user
         action :create
       end
 
       directory new_resource.data_dir do
-        owner run_user
+        owner new_resource.run_user
         action :create
       end
 
@@ -58,6 +58,10 @@ module EtcdCookbook
     action :restart do
       action_stop
       action_start
+    end
+
+    action_class do
+      include EtcdHelpers::Service
     end
   end
 end

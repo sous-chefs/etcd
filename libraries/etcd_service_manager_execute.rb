@@ -29,9 +29,9 @@ module EtcdCookbook
         RET=$?
         exit $RET
         EOF
-        environment 'HTTP_PROXY' => http_proxy,
-                    'HTTPS_PROXY' => https_proxy,
-                    'NO_PROXY' => no_proxy
+        environment 'HTTP_PROXY' => new_resource.http_proxy,
+                    'HTTPS_PROXY' => new_resource.https_proxy,
+                    'NO_PROXY' => new_resource.no_proxy
         not_if "ps -ef | grep -v grep | grep #{Shellwords.escape(etcd_cmd)}"
         action :run
       end
@@ -65,6 +65,10 @@ module EtcdCookbook
     action :restart do
       action_stop
       action_start
+    end
+
+    action_class do
+      include EtcdHelpers::Service
     end
   end
 end
