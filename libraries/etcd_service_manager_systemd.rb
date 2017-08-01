@@ -4,7 +4,7 @@ module EtcdCookbook
 
     provides :etcd_service_manager, platform: 'fedora'
 
-    provides :etcd_service_manager, platform: %w(redhat centos scientific) do |node| # ~FC005
+    provides :etcd_service_manager, platform: %w(redhat centos scientific oracle) do |node| # ~FC005
       node['platform_version'].to_f >= 7.0
     end
 
