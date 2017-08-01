@@ -3,13 +3,19 @@ driver:
 
 provisioner:
   name: chef_zero
+  deprecations_as_errors: true
 
 platforms:
+  - name: amazon-linux
+    driver_config:
+      box: mvbcoding/awslinux
   - name: centos-6.9
   - name: centos-7.3
   - name: debian-7.11
     run_list: apt::default
   - name: debian-8.8
+    run_list: apt::default
+  - name: debian-9.0
     run_list: apt::default
   - name: fedora-25
   - name: ubuntu-14.04
@@ -42,8 +48,8 @@ suites:
 
   - name: service-systemd-multi
     includes: [
-    'debian-8.7',
-    'centos-7.2',
+    'debian-8.8',
+    'centos-7.3',
     'fedora-25',
     'ubuntu-16.04'
     ]
