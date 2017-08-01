@@ -55,7 +55,7 @@ module EtcdCookbook
         mode '0755'
         variables(
           etcdctl_cmd: etcdctl_cmd,
-          service_timeout: service_timeout
+          service_timeout: new_resource.service_timeout
         )
         cookbook 'etcd'
         action :create
