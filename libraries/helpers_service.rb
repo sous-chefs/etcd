@@ -16,7 +16,7 @@ module EtcdCookbook
         opts << "-cert-file=#{cert_file}" unless cert_file.nil?
         opts << '-client-cert-auth=true' if client_cert_auth == true
         opts << "-cors=#{cors}" unless cors.nil?
-        opts << "-data-dir=#{data_dir}" unless data_dir.nil?
+        opts << "-data-dir=#{new_resource.data_dir}" unless new_resource.data_dir.nil?
         opts << '-debug=true' if debug == true
         opts << "-discovery-fallback=#{discovery_fallback}" unless discovery_fallback.nil?
         opts << "-discovery-proxy=#{discovery_proxy}" unless discovery_proxy.nil?
