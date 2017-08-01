@@ -30,7 +30,7 @@ module EtcdCookbook
       end
     end
 
-    action_class.class_eval do
+    action_class do
       def installation(&block)
         case install_method
         when 'auto'

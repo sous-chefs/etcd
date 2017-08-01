@@ -40,7 +40,7 @@ module EtcdCookbook
       action_start
     end
 
-    action_class.class_eval do
+    action_class do
       def create_init
         template "/etc/init.d/#{etcd_name}" do
           source 'sysvinit/etcd.erb'
