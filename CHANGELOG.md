@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 4.1.0 (2017-08-20)
+- Fixing some deprecation warnings
+
 ## 4.1.0 (2016-10-10)
 
 - suse is systemd not sysv
