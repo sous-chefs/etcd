@@ -75,7 +75,7 @@ module EtcdCookbook
         cookbook 'etcd'
         notifies :run, 'execute[systemctl daemon-reload]', :immediately
         notifies :restart, new_resource unless ::File.exist? "/etc/#{etcd_name}-firstconverge"
-        notifies :restart, new_resource if auto_restart
+        notifies :restart, new_resource if new_resource.auto_restart
         action :create
       end
 

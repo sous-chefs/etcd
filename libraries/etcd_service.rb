@@ -34,9 +34,9 @@ module EtcdCookbook
       def installation(&block)
         case new_resource.install_method
         when 'auto'
-          install = etcd_installation(name, &block)
+          install = etcd_installation(new_resource.name, &block)
         when 'binary'
-          install = etcd_installation_binary(name, &block)
+          install = etcd_installation_binary(new_resource.name, &block)
         when 'none'
           Chef::Log.info('Skipping Etcd installation. Assuming it was handled previously.')
           return
@@ -46,17 +46,17 @@ module EtcdCookbook
       end
 
       def svc_manager(&block)
-        case service_manager
+        case new_resource.service_manager
         when 'auto'
-          svc = etcd_service_manager(name, &block)
+          svc = etcd_service_manager(new_resource.name, &block)
         when 'execute'
-          svc = etcd_service_manager_execute(name, &block)
+          svc = etcd_service_manager_execute(new_resource.name, &block)
         when 'sysvinit'
-          svc = etcd_service_manager_sysvinit(name, &block)
+          svc = etcd_service_manager_sysvinit(new_resource.name, &block)
         when 'upstart'
-          svc = etcd_service_manager_upstart(name, &block)
+          svc = etcd_service_manager_upstart(new_resource.name, &block)
         when 'systemd'
-          svc = etcd_service_manager_systemd(name, &block)
+          svc = etcd_service_manager_systemd(new_resource.name, &block)
         end
         copy_properties_to(svc)
         svc
