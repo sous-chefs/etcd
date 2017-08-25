@@ -63,8 +63,6 @@ module EtcdCookbook
 
     def default_checksum
       case version
-      when '2.2.2' then '90aff7364caa43932fd46974825af20e0ecb70fe7e01981e2d3a496106f147e7'
-      when '2.3.7' then 'ab102d271026a4060c9f85ecad11f454d82b1df7b8e676cc3da69f67eb078729'
       when '3.2.6' then '8186aa554c3eddfa16880fecc27f70bf24b57560d9187679a09331af651ea59c'
       end
     end
