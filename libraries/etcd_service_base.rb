@@ -40,6 +40,9 @@ module EtcdCookbook
     property :discovery_srv, String, desired_state: false
     property :discovery_fallback, String, desired_state: false
     property :discovery_proxy, String, desired_state: false
+    property :strict_reconfig_check, Boolean, default: false, desired_state: false
+    property :auto_compaction_retention, Integer, default: 0, desired_state: false
+    property :enable_v2, Boolean, default: true, desired_state: false
 
     # Proxy Flags
     property :proxy, String, desired_state: false
@@ -54,21 +57,28 @@ module EtcdCookbook
     property :key_file, String, desired_state: false
     property :client_cert_auth, Boolean, default: false, desired_state: false
     property :trusted_ca_file, String, desired_state: false
+    property :auto_tls, Boolean, default: false, desired_state: false
     property :peer_cert_file, String, desired_state: false
     property :peer_key_file, String, desired_state: false
     property :peer_client_cert_auth, Boolean, default: false, desired_state: false
     property :peer_trusted_ca_file, String, desired_state: false
+    property :peer_auto_tls, Boolean, default: false, desired_state: false
     property :etcdctl_client_cert_file, String, desired_state: false
     property :etcdctl_client_key_file, String, desired_state: false
 
     # Logging Flags
     property :debug, Boolean, default: false, desired_state: false
+    property :log_package_levels, String, desired_state: false
 
     # Unsafe Flags
     property :force_new_cluster, Boolean, default: false, desired_state: false
 
-    # Experimental Flags
-    property :experimental_v3demo, Boolean, default: false, desired_state: false
+    # Profiling Flags
+    property :enable_pprof, Boolean, default: false, desired_state: false
+    property :metrics, String, default: 'basic', desired_state: false
+
+    # Auth Flags
+    property :auth_token, String, default: 'simple', desired_state: false
 
     # Misc
     property :run_user, String, default: 'etcd', desired_state: false
