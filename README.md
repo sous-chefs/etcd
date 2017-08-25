@@ -41,7 +41,6 @@ The following platforms have been tested with Test Kitchen. It will most likely 
 
 ## Cookbook Dependencies
 
-- [compat_resource](https://supermarket.chef.io/cookbooks/compat_resource)
 - [docker](https://supermarket.chef.io/cookbooks/docker)
 
 ## Usage
