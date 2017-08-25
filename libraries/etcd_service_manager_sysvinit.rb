@@ -7,6 +7,8 @@ module EtcdCookbook
       node['platform_version'].to_f <= 7.0
     end
 
+    provides :etcd_service_manager, platform: 'amazon'
+
     provides :etcd_service_manager, platform: 'debian'
 
     action :start do
@@ -65,7 +67,7 @@ module EtcdCookbook
 
       def create_service
         service etcd_name do
-          provider Chef::Provider::Service::Init::Redhat if platform_family?('rhel')
+          provider Chef::Provider::Service::Init::Redhat if platform_family?('rhel', 'amazon')
           provider Chef::Provider::Service::Init::Debian if platform_family?('debian')
           supports restart: true, status: true
           action [:enable, :start]
