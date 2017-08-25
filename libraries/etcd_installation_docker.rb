@@ -8,7 +8,7 @@ module EtcdCookbook
 
     property :repo, String, default: 'quay.io/coreos/etcd', desired_state: false
     property :tag, default: lazy { "v#{version}" }, desired_state: false
-    property :version, default: '2.3.7'
+    property :version, default: '3.2.6'
 
     default_action :create
 

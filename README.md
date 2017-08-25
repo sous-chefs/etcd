@@ -19,7 +19,7 @@ The following platforms have been tested with Test Kitchen. It will most likely 
 
 ```
 |--------------+-------+
-|              | 2.3.7 |
+|              | 3.2.6 |
 |--------------+-------+
 | debian-8     | X     |
 |--------------+-------+
@@ -130,7 +130,7 @@ The `etcd_installation_binary` resource copies the precompiled Go binary onto th
 
 ```ruby
 etcd_installation_binary 'default' do
-  version '2.3.7'
+  version '3.2.6'
   source 'https://my.computers.biz/dist/etcd'
   checksum '90aff7364caa43932fd46974825af20e0ecb70fe7e01981e2d3a496106f147e7'
   action :create
@@ -213,7 +213,7 @@ end
 
 - repo - defaults to 'quay.io/coreos/etcd'
 - tag - default calculated from version
-- version - defaults to '2.3.7',
+- version - defaults to '3.2.6',
 - container_name - defaults to resource name
 - port - defaults to ['2379/tcp4:2379', '4001/tcp4:4001']
 
