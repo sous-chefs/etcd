@@ -8,7 +8,7 @@ module EtcdCookbook
     property :value, String
     property :ttl, String, desired_state: false
     property :host, String, default: '127.0.0.1', desired_state: false
-    property :port, Integer, default: 2379, desired_state: false
+    property :port, Integer, default: 2380, desired_state: false
 
     def etcd
       @etcd ||= ::Etcd.client(host: host, port: port)

@@ -50,8 +50,8 @@ The following platforms have been tested with Test Kitchen. It will most likely 
 
 ```ruby
 etcd_service 'etcd0' do
-  advertise_client_urls 'http://127.0.0.1:2379,http://127.0.0.1:4001'
-  listen_client_urls 'http://0.0.0.0:2379,http://0.0.0.0:4001'
+  advertise_client_urls 'http://127.0.0.1:2380,http://127.0.0.1:4001'
+  listen_client_urls 'http://0.0.0.0:2380,http://0.0.0.0:4001'
   initial_advertise_peer_urls 'http://127.0.0.1:2380'
   listen_peer_urls 'http://0.0.0.0:2380'
   initial_cluster_token 'etcd-cluster-1'
@@ -214,7 +214,7 @@ end
 - tag - default calculated from version
 - version - defaults to '3.2.6',
 - container_name - defaults to resource name
-- port - defaults to ['2379/tcp4:2379', '4001/tcp4:4001']
+- port - defaults to ['2379/tcp4:2380', '4001/tcp4:4001']
 
 ### etcd_service
 

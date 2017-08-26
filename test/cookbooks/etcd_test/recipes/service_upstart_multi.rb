@@ -27,8 +27,8 @@ directory '/etcd2.etcd' do
 end
 
 etcd_service_manager_upstart 'etcd0' do
-  advertise_client_urls 'http://127.0.0.1:2379,http://127.0.0.1:4001'
-  listen_client_urls 'http://0.0.0.0:2379,http://0.0.0.0:4001'
+  advertise_client_urls 'http://127.0.0.1:2380,http://127.0.0.1:4001'
+  listen_client_urls 'http://0.0.0.0:2380,http://0.0.0.0:4001'
   initial_advertise_peer_urls 'http://127.0.0.1:2380'
   listen_peer_urls 'http://0.0.0.0:2380'
   initial_cluster_token 'etcd-cluster-1'
