@@ -10,7 +10,7 @@ This cookbook is concerned with the [Etcd](https://coreos.com/etcd/) distributed
 
 ## Requirements
 
-- Chef 12.7+
+- Chef 12.11+
 - Network accessible web server hosting the etcd binary.
 
 ## Platform Support

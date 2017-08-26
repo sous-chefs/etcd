@@ -61,32 +61,46 @@ module EtcdCookbook
         action :create
       end
 
-      # this is the main systemd unit file
-      template "/lib/systemd/system/#{etcd_name}.service" do
-        source 'systemd/etcd.service.erb'
-        owner 'root'
-        group 'root'
-        mode '0644'
-        variables(
-          config: new_resource,
-          etcd_name: etcd_name,
-          etcd_cmd: etcd_cmd
-        )
-        cookbook 'etcd'
-        notifies :run, 'execute[systemctl daemon-reload]', :immediately
+      # cleanup the old systemd unit file
+      file "/lib/systemd/system/#{etcd_name}.service" do
+        action :delete
+      end
+
+      systemd_contents = {
+        Unit: {
+          Description: 'Etcd Application Container Engine',
+          Documentation: 'https://coreos.com/etcd',
+          After: 'network.target',
+        },
+        Service: {
+          Type: 'notify',
+          ExecStart: etcd_cmd,
+          ExecStartPost: "/usr/libexec/#{etcd_name}-wait-ready",
+          Restart: 'always',
+          MountFlags: 'slave',
+          LimitNOFILE: '1048576',
+          LimitNPROC: '1048576',
+          LimitCORE: 'infinity',
+        },
+        Install: {
+          WantedBy: 'multi-user.target',
+        },
+      }
+
+      systemd_contents[:Service][:User] = new_resource.run_user if new_resource.run_user
+      systemd_contents[:Service][:Environment] = "HTTP_PROXY=#{new_resource.http_proxy}" if new_resource.http_proxy
+      systemd_contents[:Service][:Environment] = "HTTPS_PROXY=#{new_resource.https_proxy}" if new_resource.https_proxy
+      systemd_contents[:Service][:Environment] = "NO_PROXY=#{new_resource.no_proxy}" if new_resource.no_proxy
+
+      systemd_unit "#{etcd_name}.service" do
+        content(systemd_contents)
+        action :create
         notifies :restart, new_resource unless ::File.exist? "/etc/#{etcd_name}-firstconverge"
         notifies :restart, new_resource if new_resource.auto_restart
-        action :create
       end
 
       file "/etc/#{etcd_name}-firstconverge" do
         action :create
-      end
-
-      # Avoid 'Unit file changed on disk' warning
-      execute 'systemctl daemon-reload' do
-        command '/bin/systemctl daemon-reload'
-        action :nothing
       end
 
       # service management resource
