@@ -20,6 +20,8 @@ module EtcdCookbook
         action :create
       end
 
+      Chef::Log.debug("The etcd command is #{etcd_cmd}")
+
       bash "start etcd #{new_resource.name}" do
         code <<-EOF
         su -c "#{etcd_cmd} >> #{logfile}" #{new_resource.run_user} 2>&1 &
