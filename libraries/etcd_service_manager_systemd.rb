@@ -108,7 +108,6 @@ module EtcdCookbook
         provider Chef::Provider::Service::Systemd
         supports status: true
         action [:enable, :start]
-        only_if { ::File.exist?("/lib/systemd/system/#{etcd_name}.service") }
       end
     end
 
