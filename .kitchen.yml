@@ -5,6 +5,9 @@ provisioner:
   name: chef_zero
   deprecations_as_errors: true
 
+verifier:
+  name: inspec
+
 platforms:
   - name: amazonlinux
     driver_config:
