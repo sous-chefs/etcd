@@ -16,7 +16,7 @@ etcd_installation_docker 'default'
 
 etcd_service_manager_docker 'etcd0' do
   advertise_client_urls 'http://127.0.0.1:2380,http://0.0.0.0:4001'
-  listen_client_urls 'http://0.0.0.0:2380,http://0.0.0.0:4001'
+  listen_client_urls 'http://0.0.0.0:2380'
   initial_advertise_peer_urls 'http://127.0.0.1:2380'
   listen_peer_urls 'http://0.0.0.0:2380'
   initial_cluster_token 'etcd-cluster-1'
@@ -28,7 +28,7 @@ end
 
 etcd_service_manager_docker 'etcd1' do
   advertise_client_urls 'http://127.0.0.1:3379,http://0.0.0.0:5001'
-  listen_client_urls 'http://0.0.0.0:3379,http://0.0.0.0:5001'
+  listen_client_urls 'http://0.0.0.0:3379'
   initial_advertise_peer_urls 'http://127.0.0.1:3380'
   listen_peer_urls 'http://0.0.0.0:3380'
   initial_cluster_token 'etcd-cluster-1'
@@ -40,7 +40,7 @@ end
 
 etcd_service_manager_docker 'etcd2' do
   advertise_client_urls 'http://127.0.0.1:4379,http://0.0.0.0:6001'
-  listen_client_urls 'http://0.0.0.0:4379,http://0.0.0.0:6001'
+  listen_client_urls 'http://0.0.0.0:4379'
   initial_advertise_peer_urls 'http://127.0.0.1:4380'
   listen_peer_urls 'http://0.0.0.0:4380'
   initial_cluster_token 'etcd-cluster-1'

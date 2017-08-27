@@ -50,8 +50,8 @@ The following platforms have been tested with Test Kitchen. It will most likely 
 
 ```ruby
 etcd_service 'etcd0' do
-  advertise_client_urls 'http://127.0.0.1:2380,http://127.0.0.1:4001'
-  listen_client_urls 'http://0.0.0.0:2380,http://0.0.0.0:4001'
+  advertise_client_urls 'http://127.0.0.1:2379'
+  listen_client_urls 'http://0.0.0.0:2379'
   initial_advertise_peer_urls 'http://127.0.0.1:2380'
   listen_peer_urls 'http://0.0.0.0:2380'
   initial_cluster_token 'etcd-cluster-1'
@@ -61,8 +61,8 @@ etcd_service 'etcd0' do
 end
 
 etcd_service 'etcd1' do
-  advertise_client_urls 'http://127.0.0.1:3379,http://127.0.0.1:5001'
-  listen_client_urls 'http://0.0.0.0:3379,http://0.0.0.0:5001'
+  advertise_client_urls 'http://127.0.0.1:3379'
+  listen_client_urls 'http://0.0.0.0:3379'
   initial_advertise_peer_urls 'http://127.0.0.1:3380'
   listen_peer_urls 'http://0.0.0.0:3380'
   initial_cluster_token 'etcd-cluster-1'
@@ -72,8 +72,8 @@ etcd_service 'etcd1' do
 end
 
 etcd_service 'etcd2' do
-  advertise_client_urls 'http://127.0.0.1:4379,http://127.0.0.1:6001'
-  listen_client_urls 'http://0.0.0.0:4379,http://0.0.0.0:6001'
+  advertise_client_urls 'http://127.0.0.1:4379'
+  listen_client_urls 'http://0.0.0.0:4379'
   initial_advertise_peer_urls 'http://127.0.0.1:4380'
   listen_peer_urls 'http://0.0.0.0:4380'
   initial_cluster_token 'etcd-cluster-1'
@@ -291,10 +291,6 @@ The `etcd_service` resource property list corresponds to the options found in
 ##### Unsafe Flags
 
 - `force_new_cluster`
-
-##### Experimental Flags
-
-- `experimental_v3demo`
 
 ##### Misc
 
