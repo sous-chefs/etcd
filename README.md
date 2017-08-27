@@ -214,7 +214,7 @@ end
 - tag - default calculated from version
 - version - defaults to '3.2.6',
 - container_name - defaults to resource name
-- port - defaults to ['2380:2380', '2379:2379']
+- port - defaults to ['2379/tcp4:2379', '2380/tcp4:2380']
 
 ### etcd_service
 
