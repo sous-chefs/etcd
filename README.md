@@ -101,7 +101,6 @@ test/cookbooks/etcd_test/
 - `etcd_key`: manages keys in etcd
 - `etcd_installation_binary`: copies a pre-compiled etcd binary onto disk
 - `etcd_installation_docker`: pulls a docker image to the DOCKER_HOST
-- `etcd_service_manager_execute`: manage etcd daemon with Chef
 - `etcd_service_manager_sysvinit`: manage etcd daemon with a sysvinit script
 - `etcd_service_manager_upstart`: manage etcd daemon with upstart script
 - `etcd_service_manager_systemd`: manage etcd daemon with systemd unit files
@@ -154,16 +153,6 @@ The `etcd_service_manager` resource auto-selects one of the below resources with
 
 ```ruby
 etcd_service_manager 'default' do
-  action :start
-end
-```
-
-### etcd_service_manager_execute
-
-#### Example
-
-```ruby
-etcd_service_manager_execute 'default' do
   action :start
 end
 ```

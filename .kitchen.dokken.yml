@@ -66,14 +66,6 @@ suites:
     run_list:
       - recipe[etcd_test::installation_binary]
 
-  - name: service-execute
-    run_list:
-      - recipe[etcd_test::service_execute]
-
-  - name: service-execute-multi
-    run_list:
-      - recipe[etcd_test::service_execute_multi]
-
   - name: service-systemd
     includes: [
     'debian-8',
