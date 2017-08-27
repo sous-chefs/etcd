@@ -40,7 +40,7 @@ module EtcdCookbook
 
     action :set do
       converge_if_changed do
-        opts = { value: value }
+        opts = { value: new_resource.value }
         opts[:ttl] = ttl if ttl
         converge_by "will set value of key #{key}" do
           with_retries { etcd.set(key, opts) }

@@ -23,7 +23,7 @@ module EtcdCookbook
       end
 
       directory new_resource.data_dir do
-        owner run_user
+        owner new_resource.run_user
         action :create
       end
 
