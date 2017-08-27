@@ -6,7 +6,7 @@ module EtcdCookbook
     property :tag, default: lazy { "v#{version}" }
     property :version, default: '2.3.7', desired_state: false
     property :container_name, String, default: lazy { etcd_name }, desired_state: false
-    property :port, default: ['2379/tcp4:2380']
+    property :port, default: ['2379/tcp4:2379', '2380/tcp4:2380']
     property :network_mode, String, default: 'host'
 
     action :start do
