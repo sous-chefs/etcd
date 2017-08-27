@@ -77,7 +77,7 @@ module EtcdCookbook
           ExecStart: etcd_cmd,
           ExecStartPost: "/usr/libexec/#{etcd_name}-wait-ready",
           Restart: 'always',
-          MountFlags: 'slave',
+          RestartSec: '10s',
           LimitNOFILE: '1048576',
           LimitNPROC: '1048576',
           LimitCORE: 'infinity',
