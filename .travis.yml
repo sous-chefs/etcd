@@ -23,9 +23,11 @@ env:
   - INSTANCE=service-systemd-centos-7
   - INSTANCE=service-systemd-fedora-latest
   - INSTANCE=service-systemd-debian-8
+  - INSTANCE=service-systemd-debian-9
   - INSTANCE=service-systemd-ubuntu-1604
   - INSTANCE=service-upstart-ubuntu-1404
   - INSTANCE=service-sysvinit-centos-6
+  - INSTANCE=service-sysvinit-amazonlinux
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )

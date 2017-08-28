@@ -21,17 +21,17 @@ The following platforms have been tested with Test Kitchen. It will most likely 
 |--------------+-------+
 |              | 3.2.6 |
 |--------------+-------+
-| debian-8     | X     |
-|--------------+-------+
-| centos-5     | X     |
+| amazonlinux  | X     |
 |--------------+-------+
 | centos-6     | X     |
 |--------------+-------+
 | centos-7     | X     |
 |--------------+-------+
-| fedora       | X     |
+| debian-8     | X     |
 |--------------+-------+
-| ubuntu-12.04 | X     |
+| debian-9     | X     |
+|--------------+-------+
+| fedora       | X     |
 |--------------+-------+
 | ubuntu-14.04 | X     |
 |--------------+-------+
@@ -45,7 +45,7 @@ The following platforms have been tested with Test Kitchen. It will most likely 
 
 ## Usage
 
-- Add `depends 'etcd', '~> 3.0'` to your cookbook's metadata.rb
+- Add `depends 'etcd'` to your cookbook's metadata.rb
 - Use the resources shipped in cookbook in a recipe, the same way you'd use core Chef resources (file, template, directory, package, etc).
 
 ```ruby
