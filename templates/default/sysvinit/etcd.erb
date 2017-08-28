@@ -32,11 +32,7 @@ pidfile="<%= @config.pidfile %>"
 <% else -%>
 pidfile="/var/run/<%= @etcd_name %>.pid"
 <% end -%>
-<% if @config.logfile -%>
-logfile="<%= @config.logfile %>"
-<% else -%>
-logfile="/var/log/<%= @etcd_name %>"
-<% end -%>
+logfile="<%= @logfile %>"
 
 ####
 # Helper functions

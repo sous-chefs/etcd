@@ -58,7 +58,8 @@ module EtcdCookbook
             etcd_cmd: etcd_cmd,
             etcdctl_cmd: etcdctl_cmd,
             etcd_daemon_opts: etcd_daemon_opts,
-            etcd_name: etcd_name
+            etcd_name: etcd_name,
+            logfile: logfile
           )
           action :create
           notifies :restart, new_resource

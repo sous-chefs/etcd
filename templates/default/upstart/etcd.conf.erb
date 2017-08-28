@@ -11,4 +11,4 @@ respawn limit 2 10
 setuid <%= @config.run_user %>
 setgid <%= @config.run_user %>
 
-exec <%= @etcd_cmd %> >> <%= @config.logfile %> 2>&1
+exec <%= @etcd_cmd %> >> <%= @logfile %> 2>&1

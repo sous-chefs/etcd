@@ -28,7 +28,8 @@ module EtcdCookbook
         variables(
           config: new_resource,
           etcd_name: etcd_name,
-          etcd_cmd: etcd_cmd
+          etcd_cmd: etcd_cmd,
+          logfile: logfile
         )
         cookbook 'etcd'
         notifies :restart, new_resource unless ::File.exist? "/etc/#{etcd_name}-firstconverge"
