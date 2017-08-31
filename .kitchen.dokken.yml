@@ -18,6 +18,7 @@ platforms:
   driver:
     image: dokken/amazonlinux
     pid_one_command: /sbin/init
+
 - name: debian-8
   driver:
     image: dokken/debian-8
@@ -66,70 +67,62 @@ suites:
     run_list:
       - recipe[etcd_test::installation_binary]
 
-  - name: service-execute
-    run_list:
-      - recipe[etcd_test::service_execute]
-
-  - name: service-execute-multi
-    run_list:
-      - recipe[etcd_test::service_execute_multi]
-
   - name: service-systemd
     includes: [
-    'debian-8',
-    'centos-7',
-    'fedora-latest',
-    'ubuntu-16.04'
-    ]
+      'debian-8',
+      'debian-9',
+      'centos-7',
+      'fedora-latest',
+      'ubuntu-16.04'
+      ]
     run_list:
       - recipe[etcd_test::service_systemd]
 
   - name: service-systemd-multi
     includes: [
-    'debian-8',
-    'centos-7',
-    'fedora-latest',
-    'ubuntu-16.04'
-    ]
+      'debian-8',
+      'debian-9',
+      'centos-7',
+      'fedora-latest',
+      'ubuntu-16.04'
+      ]
     run_list:
       - recipe[etcd_test::service_systemd_multi]
 
   - name: service-upstart
     includes: [
-    'ubuntu-14.04'
-    ]
+      'ubuntu-14.04'
+      ]
     run_list:
       - recipe[etcd_test::service_upstart]
 
   - name: service-upstart-multi
     includes: [
-    'ubuntu-14.04'
-    ]
+      'ubuntu-14.04'
+      ]
     run_list:
       - recipe[etcd_test::service_upstart_multi]
 
   - name: service-sysvinit
     includes: [
-    'centos-5',
-    'centos-6',
-    'ubuntu-12.04'
-    ]
+      'centos-6',
+      'amazonlinux'
+      ]
     run_list:
       - recipe[etcd_test::service_sysvinit]
 
   - name: service-sysvinit-multi
     includes: [
-    'centos-5',
-    'centos-6',
-    'ubuntu-12.04'
-    ]
+      'centos-6',
+      'amazonlinux'
+      ]
     run_list:
       - recipe[etcd_test::service_sysvinit_multi]
 
   - name: keys
     includes: [
       'centos-7'
-    ]
+      ]
     run_list:
       - recipe[etcd_test::keys]
 

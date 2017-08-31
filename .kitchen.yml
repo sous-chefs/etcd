@@ -5,19 +5,22 @@ provisioner:
   name: chef_zero
   deprecations_as_errors: true
 
+verifier:
+  name: inspec
+
 platforms:
-  - name: amazon-linux
+  - name: amazonlinux
     driver_config:
       box: mvbcoding/awslinux
-  - name: centos-6.9
-  - name: centos-7.3
-  - name: debian-7.11
+  - name: centos-6
+  - name: centos-7
+  - name: debian-7
     run_list: apt::default
-  - name: debian-8.8
+  - name: debian-8
     run_list: apt::default
-  - name: debian-9.0
+  - name: debian-9
     run_list: apt::default
-  - name: fedora-25
+  - name: fedora-26
   - name: ubuntu-14.04
     run_list: apt::default
   - name: ubuntu-16.04
@@ -28,72 +31,60 @@ suites:
     run_list:
       - recipe[etcd_test::installation_binary]
 
-  - name: service-execute
-    run_list:
-      - recipe[etcd_test::service_execute]
-
-  - name: service-execute-multi
-    run_list:
-      - recipe[etcd_test::service_execute_multi]
-
   - name: service-systemd
     includes: [
-    'debian-8.7',
-    'centos-7.2',
-    'fedora-25',
-    'ubuntu-16.04'
-    ]
+      'debian-8',
+      'centos-7',
+      'fedora-26',
+      'ubuntu-16.04'
+      ]
     run_list:
       - recipe[etcd_test::service_systemd]
 
   - name: service-systemd-multi
     includes: [
-    'debian-8.8',
-    'centos-7.3',
-    'fedora-25',
-    'ubuntu-16.04'
-    ]
+      'debian-8',
+      'centos-7',
+      'fedora-26',
+      'ubuntu-16.04'
+      ]
     run_list:
       - recipe[etcd_test::service_systemd_multi]
 
   - name: service-upstart
     includes: [
-    'ubuntu-14.04'
-    ]
+      'ubuntu-14.04'
+      ]
     run_list:
       - recipe[etcd_test::service_upstart]
 
   - name: service-upstart-multi
     includes: [
-    'ubuntu-14.04'
-    ]
+      'ubuntu-14.04'
+      ]
     run_list:
       - recipe[etcd_test::service_upstart_multi]
 
   - name: service-sysvinit
     includes: [
-    'debian-7.11',
-    'centos-5.11',
-    'centos-6.9',
-    'ubuntu-12.04'
-    ]
+      'debian-7',
+      'centos-6'
+      ]
     run_list:
       - recipe[etcd_test::service_sysvinit]
 
   - name: service-sysvinit-multi
     includes: [
-    'debian-7.11',
-    'centos-5.11',
-    'centos-6.9',
-    'ubuntu-12.04'
-    ]
+      'debian-7',
+      'centos-6'
+      ]
     run_list:
       - recipe[etcd_test::service_sysvinit_multi]
 
   - name: keys
     includes: [
       'centos-7'
-    ]
+      ]
     run_list:
       - recipe[etcd_test::keys]
 

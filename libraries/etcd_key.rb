@@ -40,25 +40,25 @@ module EtcdCookbook
 
     action :set do
       converge_if_changed do
-        opts = { value: value }
-        opts[:ttl] = ttl if ttl
-        converge_by "will set value of key #{key}" do
-          with_retries { etcd.set(key, opts) }
+        opts = { value: new_resource.value }
+        opts[:ttl] = new_resource.ttl if new_resource.ttl
+        converge_by "will set value of key #{new_resource.key}" do
+          with_retries { etcd.set(new_resource.key, opts) }
         end
       end
     end
 
     action :delete do
       if key_exist? # ~FC023
-        converge_by "delete key #{key}" do
-          with_retries { etcd.delete(key) }
+        converge_by "delete key #{new_resource.key}" do
+          with_retries { etcd.delete(new_resource.key) }
         end
       end
     end
 
     action :watch do
-      converge_by "watching for updates of #{key}" do
-        with_retries { etcd.watch(key) }
+      converge_by "watching for updates of #{new_resource.key}" do
+        with_retries { etcd.watch(new_resource.key) }
       end
     end
   end

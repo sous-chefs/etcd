@@ -17,13 +17,16 @@ module EtcdCookbook
         opts << '-client-cert-auth=true' if new_resource.client_cert_auth == true
         opts << "-cors=#{new_resource.cors}" unless new_resource.cors.nil?
         opts << "-data-dir=#{new_resource.data_dir}" unless new_resource.data_dir.nil?
-        opts << '-debug=true' if new_resource.debug == true
+        opts << "-debug=#{new_resource.debug}"
+        opts << "-log_package_levels=#{new_resource.log_package_levels}" unless new_resource.log_package_levels.nil?
         opts << "-discovery-fallback=#{new_resource.discovery_fallback}" unless new_resource.discovery_fallback.nil?
         opts << "-discovery-proxy=#{new_resource.discovery_proxy}" unless new_resource.discovery_proxy.nil?
+        opts << '-strict-reconfig-check=true' if new_resource.strict_reconfig_check == true
+        opts << "-auto-compaction-retention=#{new_resource.auto_compaction_retention}"
+        opts << "-enable-v2=#{new_resource.enable_v2}"
         opts << "-discovery-srv=#{new_resource.discovery_srv}" unless new_resource.discovery_srv.nil?
         opts << "-discovery=#{new_resource.discovery}" unless new_resource.discovery.nil?
         opts << "-election-timeout=#{new_resource.election_timeout}" unless new_resource.election_timeout.nil?
-        opts << '-experimental-v3demo=true' if new_resource.experimental_v3demo == true
         opts << "-force-new-cluster=#{new_resource.force_new_cluster}" unless new_resource.force_new_cluster.nil?
         opts << "-heartbeat-interval=#{new_resource.heartbeat_interval}" unless new_resource.heartbeat_interval.nil?
         opts << "-initial-advertise-peer-urls=#{new_resource.initial_advertise_peer_urls}" unless new_resource.initial_advertise_peer_urls.nil?
@@ -40,6 +43,8 @@ module EtcdCookbook
         opts << '-peer-client-cert-auth=true' if new_resource.peer_client_cert_auth == true
         opts << "-peer-key-file=#{new_resource.peer_key_file}" unless new_resource.peer_key_file.nil?
         opts << "-peer-trusted-ca-file=#{new_resource.peer_trusted_ca_file}" unless new_resource.peer_trusted_ca_file.nil?
+        opts << "-auto-tls=#{new_resource.auto_tls}"
+        opts << "-peer-auto-tls=#{new_resource.peer_auto_tls}"
         opts << "-proxy-dial-timeout=#{new_resource.proxy_dial_timeout}" unless new_resource.proxy_dial_timeout.nil?
         opts << "-proxy-failure-wait=#{new_resource.proxy_failure_wait}" unless new_resource.proxy_failure_wait.nil?
         opts << "-proxy-read-timeout=#{new_resource.proxy_read_timeout}" unless new_resource.proxy_read_timeout.nil?
@@ -50,6 +55,9 @@ module EtcdCookbook
         opts << "-snapshot-count=#{new_resource.snapshot_count}" unless new_resource.snapshot_count.nil?
         opts << "-trusted-ca-file=#{new_resource.trusted_ca_file}" unless new_resource.trusted_ca_file.nil?
         opts << "-wal-dir=#{new_resource.wal_dir}" unless new_resource.wal_dir.nil?
+        opts << "-enable-pprof=#{new_resource.enable_pprof}"
+        opts << "-metrics=#{new_resource.metrics}"
+        opts << "-auth-token=#{new_resource.auth_token}"
         opts
       end
 

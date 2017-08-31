@@ -7,6 +7,8 @@ module EtcdCookbook
       node['platform_version'].to_f <= 7.0
     end
 
+    provides :etcd_service_manager, platform: 'amazon'
+
     provides :etcd_service_manager, platform: 'debian'
 
     action :start do
@@ -21,7 +23,7 @@ module EtcdCookbook
       end
 
       directory new_resource.data_dir do
-        owner run_user
+        owner new_resource.run_user
         action :create
       end
 
@@ -56,7 +58,8 @@ module EtcdCookbook
             etcd_cmd: etcd_cmd,
             etcdctl_cmd: etcdctl_cmd,
             etcd_daemon_opts: etcd_daemon_opts,
-            etcd_name: etcd_name
+            etcd_name: etcd_name,
+            logfile: logfile
           )
           action :create
           notifies :restart, new_resource
@@ -65,7 +68,7 @@ module EtcdCookbook
 
       def create_service
         service etcd_name do
-          provider Chef::Provider::Service::Init::Redhat if platform_family?('rhel')
+          provider Chef::Provider::Service::Init::Redhat if platform_family?('rhel', 'amazon')
           provider Chef::Provider::Service::Init::Debian if platform_family?('debian')
           supports restart: true, status: true
           action [:enable, :start]

@@ -8,7 +8,6 @@ if defined?(ChefSpec)
   ChefSpec.define_matcher(:etcd_service)
   ChefSpec.define_matcher(:etcd_service_manager)
   ChefSpec.define_matcher(:etcd_service_manager_docker)
-  ChefSpec.define_matcher(:etcd_service_manager_execute)
   ChefSpec.define_matcher(:etcd_service_manager_systemd)
   ChefSpec.define_matcher(:etcd_service_manager_sysvinit)
   ChefSpec.define_matcher(:etcd_service_manager_upstart)
@@ -91,18 +90,6 @@ if defined?(ChefSpec)
 
   def restart_etcd_service_manager_docker(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(:etcd_service_manager_docker, :restart, resource_name)
-  end
-
-  def start_etcd_service_manager_execute(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(:etcd_service_manager_execute, :start, resource_name)
-  end
-
-  def stop_etcd_service_manager_execute(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(:etcd_service_manager_execute, :stop, resource_name)
-  end
-
-  def restart_etcd_service_manager_execute(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(:etcd_service_manager_execute, :restart, resource_name)
   end
 
   def start_etcd_service_manager_systemd(resource_name)
