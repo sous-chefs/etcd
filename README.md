@@ -122,7 +122,7 @@ end
 
 ### etcd_installation_binary
 
-The `etcd_installation_binary` resource copies the precompiled Go binary onto the disk. It exists to help run older Etcd versions. It should not be used in production, especially with devicemapper.
+The `etcd_installation_binary` resource copies the precompiled Go binary onto the disk.
 
 #### Example
 
@@ -220,7 +220,7 @@ The service management strategy for the host platform is dynamically chosen base
 
 The `etcd_service` resource property list corresponds to the options found in
 
-[Etcd Configuration Flags documentation](https://coreos.com/etcd/docs/2.3.7/configuration.html)
+[Etcd Configuration Flags documentation](https://coreos.com/etcd/docs/3.2.6/op-guide/configuration.html)
 
 ##### Member flags
 
@@ -250,6 +250,9 @@ The `etcd_service` resource property list corresponds to the options found in
 - `discovery_srv`
 - `discovery_fallback`
 - `discovery_proxy`
+- `strict_reconfig_check`
+- `auto_compaction_retention`
+- `enable_v2`
 
 ##### Proxy Flags
 
@@ -266,16 +269,28 @@ The `etcd_service` resource property list corresponds to the options found in
 - `key_file`
 - `client_cert_auth`
 - `trusted_ca_file`
+- `auto_tls`
 - `peer_cert_file`
 - `peer_key_file`
 - `peer_client_cert_auth`
 - `peer_trusted_ca_file`
+- `peer_auto_tls`
 - `etcdctl_client_cert_file`
 - `etcdctl_client_key_file`
 
 ##### Logging Flags
 
 - `debug`
+- `log_package_levels`
+
+##### Profiling Flags
+
+- `enable_pprof`
+- `metrics`
+
+##### Auth Flags
+
+- `auth_token`
 
 ##### Unsafe Flags
 
@@ -315,28 +330,36 @@ etcd_key "/test" do
 end
 ```
 
-## License and Author
+## Maintainers
 
-**Original Author** | [Jesse Nelson](https://github.com/spheromak)
+This cookbook is maintained by Chef's Community Cookbook Engineering team. Our goal is to improve cookbook quality and to aid the community in contributing to cookbooks. To learn more about our team, process, and design goals see our [team documentation](https://github.com/chef-cookbooks/community_cookbook_documentation/blob/master/COOKBOOK_TEAM.MD). To learn more about contributing to cookbooks like this see our [contributing documentation](https://github.com/chef-cookbooks/community_cookbook_documentation/blob/master/CONTRIBUTING.MD), or if you have general questions about this cookbook come chat with us in #cookbok-engineering on the [Chef Community Slack](http://community-slack.chef.io/)
 
-**Contributor** | [Soulou](https://github.com/Soulou)
+### Additional Contributors
 
-**Contributor** | [Aaron O'Mullan](https://github.com/AaronO)
+- [Jesse Nelson](https://github.com/spheromak)
+- [Soulou](https://github.com/Soulou)
+- [Aaron O'Mullan](https://github.com/AaronO)
+- [Anthony Scalisi](https://github.com/scalp42)
+- [Robert Coleman](https://github.com/rjocoleman)
+- [James Gregory](https://github.com/jagregory)
+- [Sean OMeara](https://github.com/someara)
 
-**Contributor** | [Anthony Scalisi](https://github.com/scalp42)
+## License
 
-**Contributor** | [Robert Coleman](https://github.com/rjocoleman)
+**Copyright** | 2013, Jesse Nelson
 
-**Contributor** | [James Gregory](https://github.com/jagregory)
-
-**Contributor** | [Sean OMeara](https://github.com/someara)
-
-**Copyright** | Copyright (c) 2013, Jesse Nelson
-
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+**Copyright** | 2015-2017, Chef Software, Inc.
 
 ```
-http://www.apache.org/licenses/LICENSE-2.0
-```
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
