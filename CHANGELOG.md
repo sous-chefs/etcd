@@ -2,6 +2,24 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 5.0.0 (2017-09-05)
+
+### Breaking Changes
+
+- This cookbook has been refactored to work with etcd 3.X and now defaults to installing 3.2.6\. 2.x will not work as many new configuration properties have been added to etcd. If you need support for etcd 2.x you should pin the 4.X release of this cookbook.
+- This cookbook now longer requires compat_resource and also utilizes the systemd_unit resource in Chef. Due to this the cookbook now requires Chef 12.11 or later.
+- The execute provider for the etcd_service has been removed as Chef should not be used as an init system. There is now fully functional sys-v, upstart, and systemd support, which are preferred alternatives.
+
+### Other Changes
+
+- Listening ports in examples, tests, and resources have been updated for the new ports used by etcd
+- Integration testing has been updated to InSpec
+- The default path to the data dir is now an absolute path to resolve some previous issues
+- All Chef 14 deprecation warnings have been resolved
+- Remove the only_if on the service start that could potentially prevent the service from starting
+- Sync up the unit file with the upstream format recommended by the project
+- Fix faulty logfile logic in the upstart / sys-v scripts that prevented these resources from ever working
+
 ## 4.1.0 (2017-08-20)
 
 - Fixing some deprecation warnings
