@@ -1,7 +1,11 @@
 module EtcdCookbook
   class EtcdServiceManagerUpstart < EtcdServiceBase
     resource_name :etcd_service_manager_upstart
-    provides :etcd_service_manager, platform: 'ubuntu'
+
+    provides :etcd_service_manager, platform_family: 'debian' do |_node|
+      Chef::Platform::ServiceHelpers.service_resource_providers.include?(:upstart) &&
+        !Chef::Platform::ServiceHelpers.service_resource_providers.include?(:systemd)
+    end
 
     # Start the service
     action :start do

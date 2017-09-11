@@ -2,22 +2,8 @@ module EtcdCookbook
   class EtcdServiceManagerSystemd < EtcdServiceBase
     resource_name :etcd_service_manager_systemd
 
-    provides :etcd_service_manager, platform: 'fedora'
-
-    provides :etcd_service_manager, platform: %w(redhat centos scientific oracle) do |node| # ~FC005
-      node['platform_version'].to_f >= 7.0
-    end
-
-    provides :etcd_service_manager, platform: 'debian' do |node|
-      node['platform_version'].to_f >= 8.0
-    end
-
-    provides :etcd_service_manager, platform: 'ubuntu' do |node|
-      node['platform_version'].to_f >= 15.04
-    end
-
-    provides :etcd_service_manager, platform_family: 'suse' do |node|
-      node['platform_version'].to_i >= 13
+    provides :etcd_service_manager, os: 'linux' do |_node|
+      Chef::Platform::ServiceHelpers.service_resource_providers.include?(:systemd)
     end
 
     property :service_timeout, Integer, default: 20
