@@ -8,14 +8,9 @@ version '5.0.0'
 
 depends 'docker'
 
-supports 'amazon'
-supports 'centos'
-supports 'debian'
-supports 'fedora'
-supports 'oracle'
-supports 'redhat'
-supports 'scientific'
-supports 'ubuntu'
+%w(ubuntu debian redhat centos suse opensuse opensuseleap scientific oracle amazon).each do |os|
+  supports os
+end
 
 source_url 'https://github.com/chef-cookbooks/etcd'
 issues_url 'https://github.com/chef-cookbooks/etcd/issues'

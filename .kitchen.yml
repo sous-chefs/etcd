@@ -21,6 +21,7 @@ platforms:
   - name: debian-9
     run_list: apt::default
   - name: fedora-26
+  - name: opensuse-leap-42
   - name: ubuntu-14.04
     run_list: apt::default
   - name: ubuntu-16.04
@@ -36,7 +37,8 @@ suites:
       'debian-8',
       'centos-7',
       'fedora-26',
-      'ubuntu-16.04'
+      'ubuntu-16.04',
+      opensuse-leap-42
       ]
     run_list:
       - recipe[etcd_test::service_systemd]
@@ -46,7 +48,8 @@ suites:
       'debian-8',
       'centos-7',
       'fedora-26',
-      'ubuntu-16.04'
+      'ubuntu-16.04',
+      opensuse-leap-42
       ]
     run_list:
       - recipe[etcd_test::service_systemd_multi]
