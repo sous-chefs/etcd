@@ -10,7 +10,7 @@ module EtcdCookbook
     property :network_mode, String, default: 'host'
 
     action :start do
-      docker_container container_name do
+      docker_container new_resource.container_name do
         repo new_resource.repo
         tag new_resource.tag
         command etcd_daemon_opts.join(' ').strip
