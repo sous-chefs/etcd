@@ -13,7 +13,7 @@ module EtcdCookbook
       docker_container new_resource.container_name do
         repo new_resource.repo
         tag new_resource.tag
-        command etcd_daemon_opts.join(' ').strip
+        command "etcd #{etcd_daemon_opts.join(' ').strip}"
         port new_resource.port
         network_mode new_resource.network_mode
         action :run
