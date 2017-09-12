@@ -61,7 +61,7 @@ platforms:
     pid_one_command: /bin/systemd
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
-      
+
 - name: opensuse-leap
   driver:
     image: dokken/opensuse-leap
@@ -78,7 +78,8 @@ suites:
       'debian-9',
       'centos-7',
       'fedora-latest',
-      'ubuntu-16.04'
+      'ubuntu-16.04',
+      'opensuse-leap'
       ]
     run_list:
       - recipe[etcd_test::service_systemd]
@@ -89,7 +90,8 @@ suites:
       'debian-9',
       'centos-7',
       'fedora-latest',
-      'ubuntu-16.04'
+      'ubuntu-16.04',
+      'opensuse-leap'
       ]
     run_list:
       - recipe[etcd_test::service_systemd_multi]
