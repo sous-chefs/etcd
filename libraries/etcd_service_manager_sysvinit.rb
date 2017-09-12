@@ -1,15 +1,7 @@
 module EtcdCookbook
   class EtcdServiceManagerSysvinit < EtcdServiceBase
     resource_name :etcd_service_manager_sysvinit
-    provides :etcd_service_manager, platform: 'amazon'
-
-    provides :etcd_service_manager, platform: %w(redhat centos scientific oracle) do |node| # ~FC005
-      node['platform_version'].to_f <= 7.0
-    end
-
-    provides :etcd_service_manager, platform: 'amazon'
-
-    provides :etcd_service_manager, platform: 'debian'
+    provides :etcd_service_manager, os: 'linux'
 
     action :start do
       user 'etcd' do

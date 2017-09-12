@@ -18,25 +18,27 @@ This cookbook is concerned with the [Etcd](https://coreos.com/etcd/) distributed
 The following platforms have been tested with Test Kitchen. It will most likely work on other platforms as well
 
 ```
-|--------------+-------+
-|              | 3.2.6 |
-|--------------+-------+
-| amazonlinux  | X     |
-|--------------+-------+
-| centos-6     | X     |
-|--------------+-------+
-| centos-7     | X     |
-|--------------+-------+
-| debian-8     | X     |
-|--------------+-------+
-| debian-9     | X     |
-|--------------+-------+
-| fedora       | X     |
-|--------------+-------+
-| ubuntu-14.04 | X     |
-|--------------+-------+
-| ubuntu-16.04 | X     |
-|--------------+-------+
+|---------------+-------+
+|               | 3.2.6 |
+|---------------+-------+
+| amazonlinux   |   X   |
+|---------------+-------+
+| centos-6      |   X   |
+|---------------+-------+
+| centos-7      |   X   |
+|---------------+-------+
+| debian-8      |   X   |
+|---------------+-------+
+| debian-9      |   X   |
+|---------------+-------+
+| fedora        |   X   |
+|---------------+-------+
+| ubuntu-14.04  |   X   |
+|---------------+-------+
+| ubuntu-16.04  |   X   |
+|---------------+-------+
+| opensuse-leap |   X   |
+|---------------+-------+
 ```
 
 ## Cookbook Dependencies
