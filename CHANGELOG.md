@@ -2,6 +2,15 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 5.2.0 (2017-09-11)
+
+- Several changes have been made to the cookbook to better allow for building up new etcd clusters. Since etcd will loop waiting for quorum forever processes never hand control back to the init system when the first node is being built. To workaround this I have removed the healthcheck script that was previously bundled and added the ability to continue on after failures. To not fail when the service fails to start add ignore_failure true to the service_manager resource declaration (see the example in the readme) and Chef will continue allowing the cluster to complete its build out.
+- Changed how the server_manager resources are declared to better support additional platforms that also use sys-v, upstart, or systemd. This gets us opensuse support, which is now part of the test matrix.
+- Add docker testing to the test kitchen and remove the duplicate installation tests
+- Fix new_resource error in the in etcd_service_manager_docker
+- Resolve a deprecation warning in etcd_service_manager_docker
+- Fix the etcd command to include the binary name in etcd_service_manage_docker
+
 ## 5.1.0 (2017-09-11)
 
 - Be less specific in the service resources so we can support any platform that is systemd, upstart or sys-v 
