@@ -148,7 +148,7 @@ The `etcd_installation_docker` resource uses the `docker_image` resource to pull
 
 - `repo` - The image name to pull. Defaults to 'quay.io/coreos/etcd'
 - `tag` - The image tag to pull.
-- `version` - String used to calculate tag string when tag is ommited. Defaults to '2.3.7'
+- `version` - String used to calculate tag string when tag is omitted. Defaults to '2.3.7'
 
 ### etcd_service_manager
 
