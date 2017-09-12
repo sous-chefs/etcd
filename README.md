@@ -60,6 +60,7 @@ etcd_service 'etcd0' do
   initial_cluster 'etcd0=http://127.0.0.1:2380,etcd1=http://127.0.0.1:3380,etcd2=http://127.0.0.1:4380'
   initial_cluster_state 'new'
   action :start
+  ignore_failure true # required for the first cluster build
 end
 
 etcd_service 'etcd1' do
@@ -71,6 +72,7 @@ etcd_service 'etcd1' do
   initial_cluster 'etcd0=http://127.0.0.1:2380,etcd1=http://127.0.0.1:3380,etcd2=http://127.0.0.1:4380'
   initial_cluster_state 'new'
   action :start
+  ignore_failure true
 end
 
 etcd_service 'etcd2' do
@@ -82,6 +84,7 @@ etcd_service 'etcd2' do
   initial_cluster 'etcd0=http://127.0.0.1:2380,etcd1=http://127.0.0.1:3380,etcd2=http://127.0.0.1:4380'
   initial_cluster_state 'new'
   action :start
+  ignore_failure true
 end
 ```
 
@@ -145,11 +148,15 @@ The `etcd_installation_docker` resource uses the `docker_image` resource to pull
 
 - `repo` - The image name to pull. Defaults to 'quay.io/coreos/etcd'
 - `tag` - The image tag to pull.
-- `version` - String used to calculate tag string when tag is ommited. Defaults to '2.3.7'
+- `version` - String used to calculate tag string when tag is omitted. Defaults to '2.3.7'
 
 ### etcd_service_manager
 
 The `etcd_service_manager` resource auto-selects one of the below resources with the provider resolution system. The `etcd_service` family all share a common set of properties, which are listed under the `etcd_service` composite resource.
+
+#### Warning
+
+etcd startup behavior is a bit quirky. etcd loops indefinitely on startup until quorum can be established. Due to this the first nodes service start will fail unless all nodes come up at the same time. Due to this there is an ignore_failure property for the upstart / systemd service managers which allows you to continue on in the chef run if the service fails to start. Upstart / systemd will automatically keep restarting the service until all nodes are up and the cluster is healthy. For sys-v init you're on your own.
 
 #### Example
 
@@ -179,6 +186,10 @@ etcd_service_manager_upstart 'default' do
 end
 ```
 
+#### properties
+
+- ignore_failure - Ignore failures starting the etcd service. Before quorum is established nodes will loop indefinitely and never successfully start. This can help ensure all instances are up when init systems can handle restart on failure. Default: false
+
 ### etcd_service_manager_systemd
 
 #### Example
@@ -188,6 +199,11 @@ etcd_service_manager_systemd 'default' do
   action :start
 end
 ```
+
+#### properties
+
+- service_timeout - The time in seconds before the service start fails. Default: 20
+- ignore_failure - Ignore failures starting the etcd service. Before quorum is established nodes will loop indefinitely and never successfully start. This can help ensure all instances are up when init systems can handle restart on failure. Default: false
 
 ### etcd_service_manager_docker
 

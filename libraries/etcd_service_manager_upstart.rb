@@ -49,6 +49,7 @@ module EtcdCookbook
         provider Chef::Provider::Service::Upstart
         supports status: true
         action :start
+        ignore_failure true if new_resource.ignore_failure
       end
     end
 

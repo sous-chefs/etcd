@@ -36,6 +36,7 @@ etcd_service_manager_systemd 'etcd0' do
   initial_cluster_state 'new'
   run_user 'alice'
   action :start
+  ignore_failure true # all nodes need to be started
 end
 
 etcd_service_manager_systemd 'etcd1' do
@@ -48,6 +49,7 @@ etcd_service_manager_systemd 'etcd1' do
   initial_cluster_state 'new'
   run_user 'bob'
   action :start
+  ignore_failure true # all nodes need to be started
 end
 
 etcd_service_manager_systemd 'etcd2' do
@@ -60,4 +62,5 @@ etcd_service_manager_systemd 'etcd2' do
   initial_cluster_state 'new'
   run_user 'eve'
   action :start
+  ignore_failure true # all nodes need to be started
 end

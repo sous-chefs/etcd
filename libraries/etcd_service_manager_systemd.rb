@@ -32,21 +32,6 @@ module EtcdCookbook
         action :create
       end
 
-      # this script is called by the main systemd unit file, and
-      # spins around until the service is actually up and running.
-      template "/usr/libexec/#{etcd_name}-wait-ready" do
-        source 'systemd/etcd-wait-ready.erb'
-        owner 'root'
-        group 'root'
-        mode '0755'
-        variables(
-          etcdctl_cmd: etcdctl_cmd,
-          service_timeout: new_resource.service_timeout
-        )
-        cookbook 'etcd'
-        action :create
-      end
-
       # cleanup the old systemd unit file
       file "/lib/systemd/system/#{etcd_name}.service" do
         action :delete
@@ -61,7 +46,6 @@ module EtcdCookbook
         Service: {
           Type: 'notify',
           ExecStart: etcd_cmd,
-          ExecStartPost: "/usr/libexec/#{etcd_name}-wait-ready",
           Restart: 'always',
           RestartSec: '10s',
           LimitNOFILE: '1048576',
@@ -93,6 +77,7 @@ module EtcdCookbook
       service etcd_name do
         provider Chef::Provider::Service::Systemd
         supports status: true
+        ignore_failure true if new_resource.ignore_failure
         action [:enable, :start]
       end
     end
