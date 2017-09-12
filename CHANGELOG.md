@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 5.1.0 (2017-09-11)
+
+- Be less specific in the service resources so we can support any platform that is systemd, upstart or sys-v 
+- Add that we support opensuse leap to the metadata / readme
+
 ## 5.0.0 (2017-09-05)
 
 ### Breaking Changes
