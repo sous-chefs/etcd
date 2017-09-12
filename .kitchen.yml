@@ -28,13 +28,10 @@ platforms:
     run_list: apt::default
 
 suites:
-  - name: installation_binary
-    run_list:
-      - recipe[etcd_test::installation_binary]
-
   - name: service-systemd
     includes: [
       'debian-8',
+      'debian-9',
       'centos-7',
       'fedora-26',
       'ubuntu-16.04',
@@ -46,6 +43,7 @@ suites:
   - name: service-systemd-multi
     includes: [
       'debian-8',
+      'debian-9',
       'centos-7',
       'fedora-26',
       'ubuntu-16.04',

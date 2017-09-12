@@ -1,5 +1,3 @@
-# binary installation for simplicity
-
 etcd_installation_binary 'default' do
   action :create
 end

@@ -1,7 +1,6 @@
-# HACK: for kitchen-verify
+# binary installation for kitchen verify
 etcd_installation_binary 'default'
 
-#
 docker_service 'default'
 
 etcd_installation_docker 'default'
