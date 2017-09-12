@@ -68,6 +68,12 @@ platforms:
     pid_one_command: /bin/systemd
 
 suites:
+  - name: service-docker
+    run_list:
+      - recipe[etcd_test::service_docker]
+  - name: service-docker-multi
+    run_list:
+      - recipe[etcd_test::service_docker_multi]
   - name: service-systemd
     includes: [
       'debian-8',
