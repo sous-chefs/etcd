@@ -77,6 +77,7 @@ module EtcdCookbook
       service etcd_name do
         provider Chef::Provider::Service::Systemd
         supports status: true
+        ignore_failure true if new_resource.ignore_failure
         action [:enable, :start]
       end
     end

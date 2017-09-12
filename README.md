@@ -60,6 +60,7 @@ etcd_service 'etcd0' do
   initial_cluster 'etcd0=http://127.0.0.1:2380,etcd1=http://127.0.0.1:3380,etcd2=http://127.0.0.1:4380'
   initial_cluster_state 'new'
   action :start
+  ignore_failure true # required for the first cluster build
 end
 
 etcd_service 'etcd1' do
@@ -71,6 +72,7 @@ etcd_service 'etcd1' do
   initial_cluster 'etcd0=http://127.0.0.1:2380,etcd1=http://127.0.0.1:3380,etcd2=http://127.0.0.1:4380'
   initial_cluster_state 'new'
   action :start
+  ignore_failure true
 end
 
 etcd_service 'etcd2' do
@@ -82,6 +84,7 @@ etcd_service 'etcd2' do
   initial_cluster 'etcd0=http://127.0.0.1:2380,etcd1=http://127.0.0.1:3380,etcd2=http://127.0.0.1:4380'
   initial_cluster_state 'new'
   action :start
+  ignore_failure true
 end
 ```
 
