@@ -63,6 +63,7 @@ module EtcdCookbook
           provider Chef::Provider::Service::Init::Redhat if platform_family?('rhel', 'amazon')
           provider Chef::Provider::Service::Init::Debian if platform_family?('debian')
           supports restart: true, status: true
+          ignore_failure true if new_resource.ignore_failure
           action [:enable, :start]
         end
       end

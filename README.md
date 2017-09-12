@@ -154,6 +154,10 @@ The `etcd_installation_docker` resource uses the `docker_image` resource to pull
 
 The `etcd_service_manager` resource auto-selects one of the below resources with the provider resolution system. The `etcd_service` family all share a common set of properties, which are listed under the `etcd_service` composite resource.
 
+#### Warning
+
+etcd startup behavior is a bit quirky. etcd loops indefinitely on startup until quorum can be established. Due to this the first nodes service start will fail unless all nodes come up at the same time. Due to this there is an ignore_failure property for the upstart / systemd service managers which allows you to continue on in the chef run if the service fails to start. Upstart / systemd will automatically keep restarting the service until all nodes are up and the cluster is healthy. For sys-v init you're on your own.
+
 #### Example
 
 ```ruby
@@ -182,6 +186,10 @@ etcd_service_manager_upstart 'default' do
 end
 ```
 
+#### properties
+
+- ignore_failure - Ignore failures starting the etcd service. Before quorum is established nodes will loop indefinitely and never successfully start. This can help ensure all instances are up when init systems can handle restart on failure. Default: false
+
 ### etcd_service_manager_systemd
 
 #### Example
@@ -191,6 +199,11 @@ etcd_service_manager_systemd 'default' do
   action :start
 end
 ```
+
+#### properties
+
+- service_timeout - The time in seconds before the service start fails. Default: 20
+- ignore_failure - Ignore failures starting the etcd service. Before quorum is established nodes will loop indefinitely and never successfully start. This can help ensure all instances are up when init systems can handle restart on failure. Default: false
 
 ### etcd_service_manager_docker
 
