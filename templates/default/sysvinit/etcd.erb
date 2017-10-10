@@ -116,7 +116,6 @@ start_command() {
     if ! [ -f $pidfile ]; then
         prestart
         start_loop
-        start_wait_ready
         print_start_success
     else
         print_start_failure
@@ -136,18 +135,6 @@ EOF
     kill -0 $PID
     RET=$?
     exit $RET
-}
-
-start_wait_ready(){
-    timeout=0
-    while [ $timeout -lt 20 ];  do
-        ((timeout++))
-        if running; then
-            sleep .1
-        fi
-    done
-    [[ $timeout -eq 20 ]] && exit 1
-    exit 0
 }
 
 ####
