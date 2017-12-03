@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 5.2.1 (2017-12-02)
+
+- Remove the start/wait logic from sys-v
+- Fix checksum property on etcd_installation resource
+
 ## 5.2.0 (2017-09-11)
 
 - Several changes have been made to the cookbook to better allow for building up new etcd clusters. Since etcd will loop waiting for quorum forever processes never hand control back to the init system when the first node is being built. To workaround this I have removed the healthcheck script that was previously bundled and added the ability to continue on after failures. To not fail when the service fails to start add ignore_failure true to the service_manager resource declaration (see the example in the readme) and Chef will continue allowing the cluster to complete its build out.
