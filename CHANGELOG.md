@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 5.3.0 (2018-01-13)
+
+- Update the default etcd from 3.2.6 to 3.2.14
+- Cleanup the test suites
+
 ## 5.2.1 (2017-12-02)
 
 - Remove the start/wait logic from sys-v
