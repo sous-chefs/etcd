@@ -29,6 +29,9 @@ suites:
   - name: service-docker
     run_list:
       - recipe[etcd_test::service_docker]
+    excludes: [
+      'centos-6'
+      ]
   - name: service-docker-multi
     run_list:
       - recipe[etcd_test::service_docker_multi]
