@@ -18,27 +18,27 @@ This cookbook is concerned with the [Etcd](https://coreos.com/etcd/) distributed
 The following platforms have been tested with Test Kitchen. It will most likely work on other platforms as well
 
 ```
-|---------------+-------+
-|               | 3.2.6 |
-|---------------+-------+
-| amazonlinux   |   X   |
-|---------------+-------+
-| centos-6      |   X   |
-|---------------+-------+
-| centos-7      |   X   |
-|---------------+-------+
-| debian-8      |   X   |
-|---------------+-------+
-| debian-9      |   X   |
-|---------------+-------+
-| fedora        |   X   |
-|---------------+-------+
-| ubuntu-14.04  |   X   |
-|---------------+-------+
-| ubuntu-16.04  |   X   |
-|---------------+-------+
-| opensuse-leap |   X   |
-|---------------+-------+
+|---------------+--------+
+|               | 3.2.14 |
+|---------------+--------+
+| amazonlinux   |   X    |
+|---------------+--------+
+| centos-6      |   X    |
+|---------------+--------+
+| centos-7      |   X    |
+|---------------+--------+
+| debian-8      |   X    |
+|---------------+--------+
+| debian-9      |   X    |
+|---------------+--------+
+| fedora        |   X    |
+|---------------+--------+
+| ubuntu-14.04  |   X    |
+|---------------+--------+
+| ubuntu-16.04  |   X    |
+|---------------+--------+
+| opensuse-leap |   X    |
+|---------------+--------+
 ```
 
 ## Cookbook Dependencies
@@ -219,7 +219,7 @@ end
 
 - repo - defaults to 'quay.io/coreos/etcd'
 - tag - default calculated from version
-- version - defaults to '3.2.6',
+- version - defaults to '3.2.14',
 - container_name - defaults to resource name
 - port - defaults to ['2379/tcp4:2379', '2380/tcp4:2380']
 
@@ -238,7 +238,7 @@ The service management strategy for the host platform is dynamically chosen base
 
 The `etcd_service` resource property list corresponds to the options found in
 
-[Etcd Configuration Flags documentation](https://coreos.com/etcd/docs/3.2.6/op-guide/configuration.html)
+[Etcd Configuration Flags documentation](https://coreos.com/etcd/docs/3.2.14/op-guide/configuration.html)
 
 ##### Member flags
 
