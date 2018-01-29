@@ -51,6 +51,7 @@ module EtcdCookbook
           LimitNOFILE: '1048576',
           LimitNPROC: '1048576',
           LimitCORE: 'infinity',
+          TimeoutStartSec: '120'
         },
         Install: {
           WantedBy: 'multi-user.target',
