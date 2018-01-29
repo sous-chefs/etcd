@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 5.3.1 (2018-01-28)
+
+- Give etcd 120 seconds to start under systemd instead of the 60s default
+
 ## 5.3.0 (2018-01-13)
 
 - Update the default etcd from 3.2.6 to 3.2.14
