@@ -49,7 +49,7 @@ module EtcdCookbook
     end
 
     action :delete do
-      if key_exist? # ~FC023
+      if key_exist?
         converge_by "delete key #{new_resource.key}" do
           with_retries { etcd.delete(new_resource.key) }
         end
