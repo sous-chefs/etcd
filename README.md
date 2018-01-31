@@ -222,6 +222,7 @@ end
 - version - defaults to '3.2.15',
 - container_name - defaults to resource name
 - port - defaults to ['2379/tcp4:2379', '2380/tcp4:2380']
+- host_data_path - Path to store data locally on the host, which will be mounted into the container
 
 ### etcd_service
 
