@@ -115,7 +115,7 @@ test/cookbooks/etcd_test/
 
 ### etcd_installation
 
-The `etcd_installation` resource auto-selects one of the below resources with the provider resolution system. Currently only the binary installation is available. Packages will be supported in the future versions.
+The `etcd_installation` resource auto-selects one of the below resources with the provider resolution system. Defaults to binary installation.
 
 #### Example
 
