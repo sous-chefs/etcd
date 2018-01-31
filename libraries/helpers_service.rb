@@ -77,9 +77,9 @@ module EtcdCookbook
         opts = []
         # The client cert must be the same file as the server cert
         if new_resource.client_cert_auth == true
-          opts << "--ca-file=#{trusted_ca_file}"
-          opts << "--cert-file=#{etcdctl_client_cert_file}"
-          opts << "--key-file=#{etcdctl_client_key_file}"
+          opts << "--ca-file=#{new_resource.trusted_ca_file}"
+          opts << "--cert-file=#{new_resource.cert_file}"
+          opts << "--key-file=#{new_resource.key_file}"
         end
         opts << "-C #{new_resource.advertise_client_urls}" if new_resource.advertise_client_urls
       end
