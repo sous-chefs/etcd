@@ -1,9 +1,8 @@
 module EtcdCookbook
   require 'etcd_service_base'
   class EtcdService < EtcdServiceBase
-    # register with the resource resolution system
     resource_name :etcd_service
-    # default_action :create
+    default_action :create
 
     # installation type and service_manager
     property :install_method, %w(binary auto docker), default: 'auto', desired_state: false
