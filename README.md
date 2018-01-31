@@ -225,7 +225,7 @@ end
 
 ### etcd_service
 
-The `etcd_service`: resource is a composite resource that uses `etcd_installation` and `etcd_service_manager` resources.
+The `etcd_service`: resource is a composite resource that uses `etcd_installation` and `etcd_service_manager` resources to install and manage the etcd service.
 
 - The `:create` action uses an `etcd_installation`
 - The `:delete` action uses an`etcd_installation`
@@ -240,7 +240,7 @@ The `etcd_service` resource property list corresponds to the options found in
 
 [Etcd Configuration Flags documentation](https://coreos.com/etcd/docs/3.2.15/op-guide/configuration.html)
 
-##### Member flags
+##### Member properties
 
 - `source`
 - `node_name`
@@ -256,7 +256,7 @@ The `etcd_service` resource property list corresponds to the options found in
 - `cors`
 - `quota_backend_bytes`
 
-##### Clustering Flags
+##### Clustering properties
 
 - `initial`
 - `initial_advertise_peer_urls`
@@ -272,7 +272,7 @@ The `etcd_service` resource property list corresponds to the options found in
 - `auto_compaction_retention`
 - `enable_v2`
 
-##### Proxy Flags
+##### Proxy properties
 
 - `proxy`
 - `proxy_failure_wait`
@@ -281,7 +281,7 @@ The `etcd_service` resource property list corresponds to the options found in
 - `proxy_write_timeout`
 - `proxy_read_timeout`
 
-##### Security Flags
+##### Security properties
 
 - `cert_file`
 - `key_file`
@@ -296,25 +296,25 @@ The `etcd_service` resource property list corresponds to the options found in
 - `etcdctl_client_cert_file`
 - `etcdctl_client_key_file`
 
-##### Logging Flags
+##### Logging properties
 
 - `debug`
 - `log_package_levels`
 
-##### Profiling Flags
+##### Profiling properties
 
 - `enable_pprof`
 - `metrics`
 
-##### Auth Flags
+##### Auth Flpropertiesags
 
 - `auth_token`
 
-##### Unsafe Flags
+##### Unsafe properties
 
 - `force_new_cluster`
 
-##### Misc
+##### Misc properties
 
 - `http_proxy`
 - `https_proxy`
