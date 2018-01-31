@@ -9,7 +9,7 @@ module EtcdCookbook
 
     property :checksum, String, default: lazy { default_checksum }, desired_state: false
     property :source, String, default: lazy { default_source }, desired_state: false
-    property :version, String, default: '3.2.14', desired_state: false
+    property :version, String, default: '3.2.15', desired_state: false
 
     default_action :create
 
@@ -64,6 +64,7 @@ module EtcdCookbook
 
     def default_checksum
       case version
+      when '3.2.15' then 'dff8ae43c49d8c21f9fc1fe5507cc2e86455994ac706b7d92684f389669462a9'
       when '3.2.14' then 'f77398f558ff19b65a0bf978b47868e03683f27090c56c054415666b1d78bf42'
       when '3.2.6' then '8186aa554c3eddfa16880fecc27f70bf24b57560d9187679a09331af651ea59c'
       end

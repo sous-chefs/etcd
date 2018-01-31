@@ -19,7 +19,7 @@ The following platforms have been tested with Test Kitchen. It will most likely 
 
 ```
 |---------------+--------+
-|               | 3.2.14 |
+|               | 3.2.15 |
 |---------------+--------+
 | amazonlinux   |   X    |
 |---------------+--------+
@@ -219,7 +219,7 @@ end
 
 - repo - defaults to 'quay.io/coreos/etcd'
 - tag - default calculated from version
-- version - defaults to '3.2.14',
+- version - defaults to '3.2.15',
 - container_name - defaults to resource name
 - port - defaults to ['2379/tcp4:2379', '2380/tcp4:2380']
 
@@ -238,7 +238,7 @@ The service management strategy for the host platform is dynamically chosen base
 
 The `etcd_service` resource property list corresponds to the options found in
 
-[Etcd Configuration Flags documentation](https://coreos.com/etcd/docs/3.2.14/op-guide/configuration.html)
+[Etcd Configuration Flags documentation](https://coreos.com/etcd/docs/3.2.15/op-guide/configuration.html)
 
 ##### Member flags
 
