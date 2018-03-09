@@ -35,7 +35,7 @@ action :restart do
 end
 
 action_class do
-  include EtcdHelpers::Service
+  include EtcdCookbook::EtcdHelpers::Service
 
   def create_init
     template "/etc/init.d/#{etcd_name}" do

@@ -92,5 +92,5 @@ action :restart do
 end
 
 action_class do
-  include EtcdHelpers::Service
+  include EtcdCookbook::EtcdHelpers::Service
 end
