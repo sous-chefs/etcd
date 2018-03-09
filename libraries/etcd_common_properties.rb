@@ -11,7 +11,6 @@ module EtcdCookbook
     # lazy the properly declarations
     def self.included(base)
       base.class_eval do
-
         #####################
         # resource properties
         #####################
