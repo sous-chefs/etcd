@@ -9,7 +9,7 @@ module EtcdCookbook
     include EtcdHelpers::Service
 
     # lazy the properly declarations
-    def included(base)
+    def self.included(base)
       base.class_eval do
 
         #####################
