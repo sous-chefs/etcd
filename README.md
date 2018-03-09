@@ -202,7 +202,7 @@ end
 
 #### properties
 
-- service_timeout - The time in seconds before the service start fails. Default: 20
+- service_timeout - The time in seconds before the service start fails. Default: 120
 - ignore_failure - Ignore failures starting the etcd service. Before quorum is established nodes will loop indefinitely and never successfully start. This can help ensure all instances are up when init systems can handle restart on failure. Default: false
 
 ### etcd_service_manager_docker

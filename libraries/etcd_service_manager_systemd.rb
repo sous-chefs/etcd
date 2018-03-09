@@ -6,7 +6,7 @@ module EtcdCookbook
       Chef::Platform::ServiceHelpers.service_resource_providers.include?(:systemd)
     end
 
-    property :service_timeout, Integer, default: 20
+    property :service_timeout, Integer, default: 120
 
     action :start do
       user 'etcd' do
@@ -51,7 +51,7 @@ module EtcdCookbook
           LimitNOFILE: '1048576',
           LimitNPROC: '1048576',
           LimitCORE: 'infinity',
-          TimeoutStartSec: '120',
+          TimeoutStartSec: new_resource.service_timeout.to_s,
         },
         Install: {
           WantedBy: 'multi-user.target',
