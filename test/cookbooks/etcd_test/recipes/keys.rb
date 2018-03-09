@@ -1,5 +1,5 @@
 etcd_service 'default' do
-  action [:start]
+  action [:create, :start]
 end
 
 etcd_key '/test' do

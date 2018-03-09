@@ -67,7 +67,6 @@ module EtcdCookbook
     action :create do
       installation do
         action :create
-        # notifies :restart, new_resource
       end
     end
 
