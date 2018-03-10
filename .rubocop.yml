@@ -9,7 +9,3 @@ Lint/AmbiguousOperator:
 Lint/AmbiguousRegexpLiteral:
   Exclude:
     - '**/test/**/*'
-
-Style/AccessorMethodName:
-  Exclude:
-    - 'libraries/matchers.rb'
