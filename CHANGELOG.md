@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 5.5.0 (2018-03-09)
+
+- Convert from HWRPs to standard custom resources which resolves several incompatibilities that occured with the upcoming Chef 14 release
+
 ## 5.4.0 (2018-03-09)
 
 - Default to 3.2.15
