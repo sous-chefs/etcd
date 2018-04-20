@@ -14,6 +14,8 @@ module EtcdCookbook
         #####################
         # resource properties
         #####################
+        # set default service name like etcd.service
+        property :default_service_name, kind_of: [TrueClass, FalseClass], default: false
 
         # https://coreos.com/etcd/docs/latest/configuration.html
         # Member flags

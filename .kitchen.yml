@@ -26,6 +26,13 @@ platforms:
     run_list: apt::default
 
 suites:
+  - name: default-service-name
+    includes: [
+      'ubuntu-16.04'
+    ]
+    run_list:
+      - recipe[etcd_test::default_service_name]
+
   - name: service-docker
     run_list:
       - recipe[etcd_test::service_docker]
