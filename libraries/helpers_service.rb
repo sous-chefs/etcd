@@ -62,7 +62,11 @@ module EtcdCookbook
       end
 
       def etcd_name
-        "etcd-#{new_resource.node_name}"
+        if new_resource.default_service_name
+          'etcd'
+        else
+          "etcd-#{new_resource.node_name}"
+        end
       end
 
       def etcdctl_bin

@@ -88,6 +88,18 @@ etcd_service 'etcd2' do
 end
 ```
 
+By default reosource creates `etcd-NODE_NAME` unit file name. Sometimes it's not comfortable.
+
+If you don't run multi etcd service in node, you can change this action to default service name.
+
+```
+etcd_service 'etcd' do
+  action :start
+  default_service_name true
+...
+end
+```
+
 ## Test Cookbooks as Examples
 
 The cookbooks ran under test-kitchen make excellent usage examples.
