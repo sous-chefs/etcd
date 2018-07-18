@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
-## 5.5.1 (2018-04-20)
+## 5.5.1 (2018-07-18)
 
 - Add default_service_name param for etcd_service resource. Now you can change service name from
   etcd_NODE_NAME(set false by default) to etcd(set true)
