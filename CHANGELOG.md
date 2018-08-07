@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 5.6.0 (2018-08-07)
+
+- Added etcd checksum to support version 3.2.17.
+
 ## 5.5.1 (2018-07-18)
 
 - Add default_service_name param for etcd_service resource. Now you can change service name from
