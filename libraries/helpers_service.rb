@@ -58,6 +58,7 @@ module EtcdCookbook
         opts << "-enable-pprof=#{new_resource.enable_pprof}"
         opts << "-metrics=#{new_resource.metrics}"
         opts << "-auth-token=#{new_resource.auth_token}"
+        opts << "-peer-cert-allowed-cn=#{new_resource.peer_cert_allowed_cn}" unless new_resource.peer_cert_allowed_cn.nil?
         opts
       end
 
