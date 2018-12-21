@@ -68,6 +68,7 @@ module EtcdCookbook
         property :peer_auto_tls, [true, false], default: false, desired_state: false
         property :etcdctl_client_cert_file, String, desired_state: false
         property :etcdctl_client_key_file, String, desired_state: false
+        property :peer_cert_allowed_cn, String, desired_state: false
 
         # Logging Flags
         property :debug, [true, false], default: false, desired_state: false
