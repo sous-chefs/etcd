@@ -305,6 +305,7 @@ The `etcd_service` resource property list corresponds to the options found in
 - `peer_key_file`
 - `peer_client_cert_auth`
 - `peer_trusted_ca_file`
+- `peer_cert_allowed_cn`
 - `peer_auto_tls`
 - `etcdctl_client_cert_file`
 - `etcdctl_client_key_file`
