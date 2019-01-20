@@ -26,7 +26,6 @@ env:
   - INSTANCE=service-systemd-debian-9
   - INSTANCE=service-systemd-ubuntu-1604
   - INSTANCE=service-systemd-opensuse-leap
-  - INSTANCE=service-upstart-ubuntu-1404
   - INSTANCE=service-sysvinit-centos-6
   - INSTANCE=service-sysvinit-amazonlinux
 
