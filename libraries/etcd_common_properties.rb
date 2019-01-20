@@ -61,7 +61,7 @@ module EtcdCookbook
         property :client_cert_auth, [true, false], default: false, desired_state: false
         property :trusted_ca_file, String, desired_state: false
         property :auto_tls, [true, false], default: false, desired_state: false
-	property :peer_cert_allowed_cn, String, desired_state: false
+        property :peer_cert_allowed_cn, String, desired_state: false
         property :peer_cert_file, String, desired_state: false
         property :peer_key_file, String, desired_state: false
         property :peer_client_cert_auth, [true, false], default: false, desired_state: false

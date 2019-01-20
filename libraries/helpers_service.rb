@@ -39,7 +39,7 @@ module EtcdCookbook
         opts << "-listen-peer-urls=#{new_resource.listen_peer_urls}" unless new_resource.listen_peer_urls.nil?
         opts << "-max-snapshots=#{new_resource.max_snapshots}" unless new_resource.max_snapshots.nil?
         opts << "-max-wals=#{new_resource.max_wals}" unless new_resource.max_wals.nil?
-	opts << "-peer-cert-allowed-cn=#{new_resource.peer_cert_allowed_cn}" unless new_resource.peer_cert_allowed_cn?
+        opts << "-peer-cert-allowed-cn=#{new_resource.peer_cert_allowed_cn}" unless new_resource.peer_cert_allowed_cn?
         opts << "-peer-cert-file=#{new_resource.peer_cert_file}" unless new_resource.peer_cert_file.nil?
         opts << '-peer-client-cert-auth=true' if new_resource.peer_client_cert_auth == true
         opts << "-peer-key-file=#{new_resource.peer_key_file}" unless new_resource.peer_key_file.nil?
