@@ -22,9 +22,7 @@ def copy_properties_to(to, *properties)
   properties.each do |p|
     # If the property is set on from, and exists on to, set the
     # property on to
-    if to.class.properties.include?(p) && property_is_set?(p)
-      to.send(p, send(p))
-    end
+    to.send(p, send(p)) if to.class.properties.include?(p) && property_is_set?(p)
   end
 end
 
