@@ -43,7 +43,7 @@ action_class do
     when 'systemd'
       svc = etcd_service_manager_systemd(new_resource.name, &block)
     end
-    svc.copy_properties_from(svc)
+    svc.copy_properties_from new_resource
     svc
   end
 end
