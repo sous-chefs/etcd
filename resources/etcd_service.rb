@@ -17,15 +17,6 @@ property :version, String, desired_state: false
 # Helper Methods
 ################
 
-def copy_properties_to(to, *properties)
-  properties = self.class.properties.keys if properties.empty?
-  properties.each do |p|
-    # If the property is set on from, and exists on to, set the
-    # property on to
-    to.send(p, send(p)) if to.class.properties.include?(p) && property_is_set?(p)
-  end
-end
-
 action_class do
   def installation(&block)
     case new_resource.install_method
@@ -37,7 +28,7 @@ action_class do
       Chef::Log.info('Skipping Etcd installation. Assuming it was handled previously.')
       return
     end
-    copy_properties_to(install)
+    install.copy_properties_from new_resource
     install
   end
 
@@ -52,7 +43,7 @@ action_class do
     when 'systemd'
       svc = etcd_service_manager_systemd(new_resource.name, &block)
     end
-    copy_properties_to(svc)
+    svc.copy_properties_from(svc)
     svc
   end
 end
