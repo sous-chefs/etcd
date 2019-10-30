@@ -15,12 +15,12 @@ platforms:
       box: mvbcoding/awslinux
   - name: centos-6
   - name: centos-7
-  - name: debian-8
+  - name: debian-10
     run_list: apt::default
-  - name: debian-9
+  - name: debian-10
     run_list: apt::default
-  - name: fedora-28
-  - name: opensuse-leap-42
+  - name: fedora-latest
+  - name: opensuse-leap-15
   - name: ubuntu-16.04
     run_list: apt::default
   - name: ubuntu-18.04
@@ -48,9 +48,9 @@ suites:
       'debian-8',
       'debian-9',
       'centos-7',
-      'fedora-28',
+      'fedora-latest',
       'ubuntu-16.04',
-      opensuse-leap-42
+      opensuse-leap-15
       ]
     run_list:
       - recipe[etcd_test::service_systemd]
@@ -60,9 +60,9 @@ suites:
       'debian-8',
       'debian-9',
       'centos-7',
-      'fedora-28',
+      'fedora-latest',
       'ubuntu-16.04',
-      opensuse-leap-42
+      opensuse-leap-15
       ]
     run_list:
       - recipe[etcd_test::service_systemd_multi]
