@@ -20,6 +20,11 @@ platforms:
     image: dokken/amazonlinux
     pid_one_command: /sbin/init
 
+- name: amazonlinux-2
+  driver:
+    image: dokken/amazonlinux-2
+    pid_one_command: /usr/lib/systemd/systemd
+
 - name: debian-9
   driver:
     image: dokken/debian-9
@@ -44,17 +49,15 @@ platforms:
     image: dokken/centos-7
     pid_one_command: /usr/lib/systemd/systemd
 
+- name: centos-8
+  driver:
+    image: dokken/centos-8
+    pid_one_command: /usr/lib/systemd/systemd
+
 - name: fedora-latest
   driver:
     image: dokken/fedora-latest
     pid_one_command: /usr/lib/systemd/systemd
-
-- name: ubuntu-14.04
-  driver:
-    image: dokken/ubuntu-14.04
-    pid_one_command: /sbin/init
-    intermediate_instructions:
-      - RUN /usr/bin/apt-get update
 
 - name: ubuntu-16.04
   driver:
@@ -70,9 +73,9 @@ platforms:
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
 
-- name: opensuse-leap
+- name: opensuse-leap-15
   driver:
-    image: dokken/opensuse-leap
+    image: dokken/opensuse-leap-15
     pid_one_command: /bin/systemd
 
 suites:
@@ -84,41 +87,32 @@ suites:
       - recipe[etcd_test::service_docker_multi]
   - name: service-systemd
     includes: [
-      'debian-8',
       'debian-9',
+      'debian-10',
       'centos-7',
+      'centos-8',
       'fedora-latest',
       'ubuntu-16.04',
-      'opensuse-leap'
+      'ubuntu-18.04',
+      'opensuse-leap-15'
       ]
     run_list:
       - recipe[etcd_test::service_systemd]
 
   - name: service-systemd-multi
     includes: [
-      'debian-8',
       'debian-9',
+      'debian-10',
       'centos-7',
+      'centos-8',
       'fedora-latest',
       'ubuntu-16.04',
-      'opensuse-leap'
+      'ubuntu-18.04',
+      'opensuse-leap-15'
       ]
     run_list:
       - recipe[etcd_test::service_systemd_multi]
 
-  - name: service-upstart
-    includes: [
-      'ubuntu-14.04'
-      ]
-    run_list:
-      - recipe[etcd_test::service_upstart]
-
-  - name: service-upstart-multi
-    includes: [
-      'ubuntu-14.04'
-      ]
-    run_list:
-      - recipe[etcd_test::service_upstart_multi]
 
   - name: service-sysvinit
     includes: [
