@@ -43,9 +43,9 @@ module EtcdCookbook
         property :discovery_srv, String, desired_state: false
         property :discovery_fallback, String, desired_state: false
         property :discovery_proxy, String, desired_state: false
-        property :strict_reconfig_check, [TrueClass, FalseClass], default: false, desired_state: false
+        property :strict_reconfig_check, [true, false], default: false, desired_state: false
         property :auto_compaction_retention, Integer, default: 0, desired_state: false
-        property :enable_v2, [TrueClass, FalseClass], default: true, desired_state: false
+        property :enable_v2, [true, false], default: true, desired_state: false
 
         # Proxy Flags
         property :proxy, String, desired_state: false
@@ -58,27 +58,27 @@ module EtcdCookbook
         # Security Flags
         property :cert_file, String, desired_state: false
         property :key_file, String, desired_state: false
-        property :client_cert_auth, [TrueClass, FalseClass], default: false, desired_state: false
+        property :client_cert_auth, [true, false], default: false, desired_state: false
         property :trusted_ca_file, String, desired_state: false
-        property :auto_tls, [TrueClass, FalseClass], default: false, desired_state: false
+        property :auto_tls, [true, false], default: false, desired_state: false
         property :peer_cert_allowed_cn, String, desired_state: false
         property :peer_cert_file, String, desired_state: false
         property :peer_key_file, String, desired_state: false
-        property :peer_client_cert_auth, [TrueClass, FalseClass], default: false, desired_state: false
+        property :peer_client_cert_auth, [true, false], default: false, desired_state: false
         property :peer_trusted_ca_file, String, desired_state: false
-        property :peer_auto_tls, [TrueClass, FalseClass], default: false, desired_state: false
+        property :peer_auto_tls, [true, false], default: false, desired_state: false
         property :etcdctl_client_cert_file, String, desired_state: false
         property :etcdctl_client_key_file, String, desired_state: false
 
         # Logging Flags
-        property :debug, [TrueClass, FalseClass], default: false, desired_state: false
+        property :debug, [true, false], default: false, desired_state: false
         property :log_package_levels, String, desired_state: false
 
         # Unsafe Flags
-        property :force_new_cluster, [TrueClass, FalseClass], default: false, desired_state: false
+        property :force_new_cluster, [true, false], default: false, desired_state: false
 
         # Profiling Flags
-        property :enable_pprof, [TrueClass, FalseClass], default: false, desired_state: false
+        property :enable_pprof, [true, false], default: false, desired_state: false
         property :metrics, String, default: 'basic', desired_state: false
 
         # Auth Flags
@@ -89,7 +89,7 @@ module EtcdCookbook
         property :http_proxy, [String, nil], desired_state: false
         property :https_proxy, [String, nil], desired_state: false
         property :no_proxy, [String, nil], desired_state: false
-        property :auto_restart, [TrueClass, FalseClass], default: false, desired_state: false
+        property :auto_restart, [true, false], default: false, desired_state: false
       end
     end
   end
