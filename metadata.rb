@@ -13,4 +13,4 @@ end
 
 source_url 'https://github.com/chef-cookbooks/etcd'
 issues_url 'https://github.com/chef-cookbooks/etcd/issues'
-chef_version '>= 12.11'
+chef_version '>= 12.15'
