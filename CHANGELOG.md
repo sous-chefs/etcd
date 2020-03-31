@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 5.7.0 (2020-03-31)
+
+- Added etcd checksum to support versions
+    - 3.3.19
+    - 3.4.6
+
 ## 5.6.0 (2018-08-07)
 
 - Added etcd checksum to support version 3.2.17.
