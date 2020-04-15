@@ -47,8 +47,8 @@ suites:
       - recipe[etcd_test::service_docker_multi]
   - name: service-systemd
     includes: [
-      'debian-8',
       'debian-9',
+      'debian-10',
       'centos-7',
       'fedora-latest',
       'ubuntu-16.04',
@@ -59,8 +59,8 @@ suites:
 
   - name: service-systemd-multi
     includes: [
-      'debian-8',
       'debian-9',
+      'debian-10',
       'centos-7',
       'fedora-latest',
       'ubuntu-16.04',
@@ -68,20 +68,6 @@ suites:
       ]
     run_list:
       - recipe[etcd_test::service_systemd_multi]
-
-  - name: service-upstart
-    includes: [
-      'ubuntu-14.04'
-      ]
-    run_list:
-      - recipe[etcd_test::service_upstart]
-
-  - name: service-upstart-multi
-    includes: [
-      'ubuntu-14.04'
-      ]
-    run_list:
-      - recipe[etcd_test::service_upstart_multi]
 
   - name: service-sysvinit
     includes: [
