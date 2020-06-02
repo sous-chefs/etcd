@@ -1,6 +1,6 @@
 include EtcdCookbook::EtcdCommonProperties
 
-resource_name :etcd_service_manager_docker
+provides :etcd_service_manager_docker
 
 property :repo, String, default: 'quay.io/coreos/etcd'
 property :tag, default: lazy { "v#{version}" }
