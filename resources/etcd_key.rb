@@ -1,6 +1,6 @@
 require 'etcd'
 
-resource_name :etcd_key
+provides :etcd_key
 
 property :key, String, name_property: true, desired_state: false
 property :value, String

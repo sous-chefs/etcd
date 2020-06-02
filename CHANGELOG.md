@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## Unreleased
+
+- resolved cookstyle error: resources/etcd_installation_docker.rb:1:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+- resolved cookstyle error: resources/etcd_key.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+- resolved cookstyle error: resources/etcd_service.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+- resolved cookstyle error: resources/etcd_service_manager_docker.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+
 ## 5.6.0 (2018-08-07)
 
 - Added etcd checksum to support version 3.2.17.
