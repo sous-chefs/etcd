@@ -3,7 +3,7 @@ maintainer 'Chef Software, Inc.'
 maintainer_email 'cookbooks@chef.io'
 license 'Apache-2.0'
 description 'Installs and configures etcd'
-version '5.6.0'
+version '5.6.1'
 
 depends 'docker'
 
