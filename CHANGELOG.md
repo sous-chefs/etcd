@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 5.6.2 (2020-06-03)
+
+- Make sure we have provides and resource_name for Chef 15 - [@tas50](https://github.com/tas50)
+
 ## 5.6.1 (2020-06-02)
 
 - Adding peer-cert-allowed-cn new option in allowed resources properties
