@@ -1,5 +1,6 @@
 include EtcdCookbook::EtcdCommonProperties
 
+resource_name :etcd_service
 provides :etcd_service
 default_action :create
 

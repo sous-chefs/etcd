@@ -1,3 +1,4 @@
+resource_name :etcd_installation_docker
 provides :etcd_installation_docker
 
 #####################
