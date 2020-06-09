@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## Unreleased
+
+- resolved cookstyle error: resources/etcd_installation_binary.rb:1:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+- resolved cookstyle error: resources/etcd_service_manager_systemd.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+- resolved cookstyle error: resources/etcd_service_manager_sysvinit.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+- resolved cookstyle error: resources/etcd_service_manager_upstart.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+
 ## 5.6.2 (2020-06-03)
 
 - Make sure we have provides and resource_name for Chef 15 - [@tas50](https://github.com/tas50)

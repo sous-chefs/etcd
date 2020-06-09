@@ -1,6 +1,7 @@
 include EtcdCookbook::EtcdCommonProperties
 
 resource_name :etcd_service_manager_sysvinit
+provides :etcd_service_manager_sysvinit
 provides :etcd_service_manager, os: 'linux'
 
 action :start do
