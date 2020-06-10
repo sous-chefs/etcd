@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+
+## UNRELEASED
+
+- Added etcd checksum to support versions
+    - 3.3.19
+    - 3.4.6
+    
 ## 5.6.2 (2020-06-03)
 
 - Make sure we have provides and resource_name for Chef 15 - [@tas50](https://github.com/tas50)
