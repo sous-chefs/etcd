@@ -1,6 +1,7 @@
 include EtcdCookbook::EtcdCommonProperties
 
 resource_name :etcd_service_manager_systemd
+provides :etcd_service_manager_systemd
 
 provides :etcd_service_manager, os: 'linux' do |_node|
   Chef::Platform::ServiceHelpers.service_resource_providers.include?(:systemd)
