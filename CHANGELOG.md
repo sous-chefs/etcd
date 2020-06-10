@@ -2,11 +2,28 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
-## 5.7.0 (2020-03-31)
+
+## UNRELEASED
 
 - Added etcd checksum to support versions
     - 3.3.19
     - 3.4.6
+    
+## 5.6.2 (2020-06-03)
+
+- Make sure we have provides and resource_name for Chef 15 - [@tas50](https://github.com/tas50)
+
+## 5.6.1 (2020-06-02)
+
+- Adding peer-cert-allowed-cn new option in allowed resources properties
+- use copy_properties_from API - [@lamont-granquist](https://github.com/lamont-granquist)
+- Expand testing to new platforms - [@tas50](https://github.com/tas50)
+- Require Chef 12.15+ - [@tas50](https://github.com/tas50)
+- Cookstyle fixes including Chef Infra Client 16 compatibility - [@xorimabot](https://github.com/xorimabot)
+  - resolved cookstyle error: resources/etcd_installation_docker.rb:1:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+  - resolved cookstyle error: resources/etcd_key.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+  - resolved cookstyle error: resources/etcd_service.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+  - resolved cookstyle error: resources/etcd_service_manager_docker.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
 
 ## 5.6.0 (2018-08-07)
 
