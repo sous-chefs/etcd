@@ -1,6 +1,6 @@
 driver:
   name: dokken
-  privileged: true # because Docker and SystemD/Upstart
+  privileged: true # because Docker and SystemD
   chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
   chef_license: accept-no-persist
 
@@ -112,23 +112,6 @@ suites:
       ]
     run_list:
       - recipe[etcd_test::service_systemd_multi]
-
-
-  - name: service-sysvinit
-    includes: [
-      'centos-6',
-      'amazonlinux'
-      ]
-    run_list:
-      - recipe[etcd_test::service_sysvinit]
-
-  - name: service-sysvinit-multi
-    includes: [
-      'centos-6',
-      'amazonlinux'
-      ]
-    run_list:
-      - recipe[etcd_test::service_sysvinit_multi]
 
   - name: keys
     includes: [

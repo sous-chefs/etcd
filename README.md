@@ -118,8 +118,6 @@ test/cookbooks/etcd_test/
 - `etcd_key`: manages keys in etcd
 - `etcd_installation_binary`: copies a pre-compiled etcd binary onto disk
 - `etcd_installation_docker`: pulls a docker image to the DOCKER_HOST
-- `etcd_service_manager_sysvinit`: manage etcd daemon with a sysvinit script
-- `etcd_service_manager_upstart`: manage etcd daemon with upstart script
 - `etcd_service_manager_systemd`: manage etcd daemon with systemd unit files
 - `etcd_service_manager_docker`: starts a docker process on the DOCKER_HOST
 
@@ -168,32 +166,12 @@ The `etcd_service_manager` resource auto-selects one of the below resources with
 
 #### Warning
 
-etcd startup behavior is a bit quirky. etcd loops indefinitely on startup until quorum can be established. Due to this the first nodes service start will fail unless all nodes come up at the same time. Due to this there is an ignore_failure property for the upstart / systemd service managers which allows you to continue on in the chef run if the service fails to start. Upstart / systemd will automatically keep restarting the service until all nodes are up and the cluster is healthy. For sys-v init you're on your own.
+etcd startup behavior is a bit quirky. etcd loops indefinitely on startup until quorum can be established. Due to this the first nodes service start will fail unless all nodes come up at the same time. Due to this there is an ignore_failure property for the systemd service managers which allows you to continue on in the chef run if the service fails to start. systemd will automatically keep restarting the service until all nodes are up and the cluster is healthy. For sys-v init you're on your own.
 
 #### Example
 
 ```ruby
 etcd_service_manager 'default' do
-  action :start
-end
-```
-
-### etcd_service_manager_sysvinit
-
-#### Example
-
-```ruby
-etcd_service_manager_sysvinit 'default' do
-  action :stop
-end
-```
-
-### etcd_service_manager_upstart
-
-#### Example
-
-```ruby
-etcd_service_manager_upstart 'default' do
   action :start
 end
 ```
