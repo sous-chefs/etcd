@@ -2,13 +2,11 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 5.6.3 (2020-06-10)
 
-## UNRELEASED
+- Add etcd checksums to support versions 3.3.19 and 3.4.6 - [@tasdikrahman](https://github.com/tasdikrahman)
+- Add missing provides for Chef Infra Client 15 compatibility - [@tas50](https://github.com/tas50)
 
-- Added etcd checksum to support versions
-    - 3.3.19
-    - 3.4.6
-    
 ## 5.6.2 (2020-06-03)
 
 - Make sure we have provides and resource_name for Chef 15 - [@tas50](https://github.com/tas50)
