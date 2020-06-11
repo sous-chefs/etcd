@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+## 6.0.0 (2020-06-10)
+
+- Support systemd only / Remove sysv init and Upstart - [@tas50](https://github.com/tas50)
+- Add Ubuntu 20.04 testing - [@tas50](https://github.com/tas50)
+
 ## 5.6.3 (2020-06-10)
 
 - Add etcd checksums to support versions 3.3.19 and 3.4.6 - [@tasdikrahman](https://github.com/tasdikrahman)
