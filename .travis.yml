@@ -26,8 +26,6 @@ env:
   - INSTANCE=service-systemd-ubuntu-1604
   - INSTANCE=service-systemd-ubuntu-1804
   - INSTANCE=service-systemd-opensuse-leap-15
-  - INSTANCE=service-sysvinit-centos-6
-  - INSTANCE=service-sysvinit-amazonlinux
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
@@ -35,11 +33,3 @@ before_script:
   - chef --version
 
 script: KITCHEN_LOCAL_YAML=kitchen.dokken.yml kitchen verify ${INSTANCE}
-
-matrix:
-  include:
-    - script:
-      - chef exec delivery local all
-      env:
-        - UNIT_AND_LINT=1
-        - CHEF_LICENSE=accept

@@ -7,7 +7,7 @@ default_action :create
 
 # installation type and service_manager
 property :install_method, %w(binary auto docker), default: 'auto', desired_state: false
-property :service_manager, %w(sysvinit upstart systemd auto docker), default: 'auto', desired_state: false
+property :service_manager, %w(systemd auto docker), default: 'auto', desired_state: false
 
 # etcd_installation_binary
 property :checksum, String, desired_state: false
@@ -38,10 +38,6 @@ action_class do
     case new_resource.service_manager
     when 'auto'
       svc = etcd_service_manager(new_resource.name, &block)
-    when 'sysvinit'
-      svc = etcd_service_manager_sysvinit(new_resource.name, &block)
-    when 'upstart'
-      svc = etcd_service_manager_upstart(new_resource.name, &block)
     when 'systemd'
       svc = etcd_service_manager_systemd(new_resource.name, &block)
     end

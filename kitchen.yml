@@ -69,20 +69,6 @@ suites:
     run_list:
       - recipe[etcd_test::service_systemd_multi]
 
-  - name: service-sysvinit
-    includes: [
-      'centos-6'
-      ]
-    run_list:
-      - recipe[etcd_test::service_sysvinit]
-
-  - name: service-sysvinit-multi
-    includes: [
-      'centos-6'
-      ]
-    run_list:
-      - recipe[etcd_test::service_sysvinit_multi]
-
   - name: keys
     includes: [
       'centos-7'

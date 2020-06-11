@@ -2,10 +2,7 @@ include EtcdCookbook::EtcdCommonProperties
 
 resource_name :etcd_service_manager_systemd
 provides :etcd_service_manager_systemd
-
-provides :etcd_service_manager, os: 'linux' do |_node|
-  Chef::Platform::ServiceHelpers.service_resource_providers.include?(:systemd)
-end
+provides :etcd_service_manager
 
 property :service_timeout, Integer, default: 120
 
@@ -77,7 +74,6 @@ action :start do
 
   # service management resource
   service etcd_name do
-    provider Chef::Provider::Service::Systemd
     supports status: true
     ignore_failure true if new_resource.ignore_failure
     action [:enable, :start]
