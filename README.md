@@ -10,7 +10,7 @@ This cookbook is concerned with the [Etcd](https://coreos.com/etcd/) distributed
 
 ## Requirements
 
-- Chef 12.11+
+- Chef Infra Client 12.15+
 - Network accessible web server hosting the etcd binary.
 
 ## Platform Support
@@ -21,9 +21,7 @@ The following platforms have been tested with Test Kitchen. It will most likely 
 |---------------+--------+
 |               | 3.2.15 |
 |---------------+--------+
-| amazonlinux   |   X    |
-|---------------+--------+
-| centos-6      |   X    |
+| amazonlinux 2 |   X    |
 |---------------+--------+
 | centos-7      |   X    |
 |---------------+--------+
@@ -36,6 +34,8 @@ The following platforms have been tested with Test Kitchen. It will most likely 
 | ubuntu-16.04  |   X    |
 |---------------+--------+
 | ubuntu-18.04  |   X    |
+|---------------+--------+
+| ubuntu-20.04  |   X    |
 |---------------+--------+
 | opensuse-leap |   X    |
 |---------------+--------+

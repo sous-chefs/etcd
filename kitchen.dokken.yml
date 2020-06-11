@@ -73,6 +73,13 @@ platforms:
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
 
+- name: ubuntu-20.04
+  driver:
+    image: dokken/ubuntu-20.04
+    pid_one_command: /bin/systemd
+    intermediate_instructions:
+      - RUN /usr/bin/apt-get update
+
 - name: opensuse-leap-15
   driver:
     image: dokken/opensuse-leap-15
@@ -86,30 +93,10 @@ suites:
     run_list:
       - recipe[etcd_test::service_docker_multi]
   - name: service-systemd
-    includes: [
-      'debian-9',
-      'debian-10',
-      'centos-7',
-      'centos-8',
-      'fedora-latest',
-      'ubuntu-16.04',
-      'ubuntu-18.04',
-      'opensuse-leap-15'
-      ]
     run_list:
       - recipe[etcd_test::service_systemd]
 
   - name: service-systemd-multi
-    includes: [
-      'debian-9',
-      'debian-10',
-      'centos-7',
-      'centos-8',
-      'fedora-latest',
-      'ubuntu-16.04',
-      'ubuntu-18.04',
-      'opensuse-leap-15'
-      ]
     run_list:
       - recipe[etcd_test::service_systemd_multi]
 

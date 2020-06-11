@@ -25,6 +25,7 @@ env:
   - INSTANCE=service-systemd-debian-10
   - INSTANCE=service-systemd-ubuntu-1604
   - INSTANCE=service-systemd-ubuntu-1804
+  - INSTANCE=service-systemd-ubuntu-2004
   - INSTANCE=service-systemd-opensuse-leap-15
 
 before_script:
