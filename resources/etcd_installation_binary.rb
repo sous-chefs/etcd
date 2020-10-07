@@ -1,3 +1,5 @@
+include EtcdCookbook::EtcdCommonProperties
+
 resource_name :etcd_installation_binary
 provides :etcd_installation_binary
 
