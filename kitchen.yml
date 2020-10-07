@@ -1,3 +1,4 @@
+---
 driver:
   name: vagrant
 
@@ -41,7 +42,7 @@ suites:
       - recipe[etcd_test::service_docker]
     excludes: [
       'centos-6'
-      ]
+    ]
   - name: service-docker-multi
     run_list:
       - recipe[etcd_test::service_docker_multi]
@@ -53,7 +54,7 @@ suites:
       'fedora-latest',
       'ubuntu-16.04',
       opensuse-leap-15
-      ]
+    ]
     run_list:
       - recipe[etcd_test::service_systemd]
 
@@ -65,14 +66,14 @@ suites:
       'fedora-latest',
       'ubuntu-16.04',
       opensuse-leap-15
-      ]
+    ]
     run_list:
       - recipe[etcd_test::service_systemd_multi]
 
   - name: keys
     includes: [
       'centos-7'
-      ]
+    ]
     run_list:
       - recipe[etcd_test::keys]
 
