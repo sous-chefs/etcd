@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sous Chefs Adoption
 - Update Changelog to Sous Chefs
 
+### Fixed
+
+- Cookstyle fixes
+
 ## 6.0.0 (2020-06-10)
 
 - Support systemd only / Remove sysv init and Upstart - [@tas50](https://github.com/tas50)
