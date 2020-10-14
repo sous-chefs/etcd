@@ -23,6 +23,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MDL fixes
 - Add missing include for `EtcdCookbook::EtcdCommonProperties` in `etcd_installation_binary`
 
+### Removed
+
+- Remove support for Amazon Linux 1
+
 ## 6.0.0 (2020-06-10)
 
 - Support systemd only / Remove sysv init and Upstart - [@tas50](https://github.com/tas50)
