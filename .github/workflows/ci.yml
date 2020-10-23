@@ -52,13 +52,12 @@ jobs:
           - 'opensuse-leap-15'
         suite:
           - 'service-docker'
-          - 'service-docker-multi'
           - 'service-systemd'
           - 'service-systemd-multi'
           - 'auto'
-        include:
-          - os: centos-7
-            suite: keys
+        exclude:
+          - os: opensuse-leap-15
+            suite: service-docker
       fail-fast: false
 
     steps:
