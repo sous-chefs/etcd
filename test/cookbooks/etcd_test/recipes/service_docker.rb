@@ -1,7 +1,9 @@
 # binary installation for kitchen verify
 etcd_installation_binary 'default'
 
-docker_service 'default'
+docker_service 'default' do
+  storage_driver 'vfs'
+end
 
 etcd_installation_docker 'default'
 
