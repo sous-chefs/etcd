@@ -4,7 +4,9 @@ etcd_installation_binary 'default' do
 end
 
 # docker_service for the containers to run in
-docker_service 'default'
+docker_service 'default' do
+  storage_driver 'vfs'
+end
 
 # Make sure we have the image
 etcd_installation_docker 'default'

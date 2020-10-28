@@ -4,10 +4,10 @@ resource_name :etcd_service_manager_docker
 provides :etcd_service_manager_docker
 
 property :repo, String, default: 'quay.io/coreos/etcd'
-property :tag, default: lazy { "v#{version}" }
-property :version, default: '3.2.15', desired_state: false
+property :tag, String, default: lazy { "v#{version}" }
+property :version, String, default: '3.2.15', desired_state: false
 property :container_name, String, default: lazy { |n| "etcd-#{n.node_name}" }, desired_state: false
-property :port, default: ['2379/tcp4:2379', '2380/tcp4:2380']
+property :port, Array, default: ['2379/tcp4:2379', '2380/tcp4:2380']
 property :network_mode, String, default: 'host'
 property :host_data_path, String, default: '/var/lib/etcd'
 

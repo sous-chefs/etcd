@@ -2,6 +2,32 @@
 
 This file is used to list changes made in each version of the etcd cookbook.
 
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## Unreleased
+
+### Changed
+
+- Sous Chefs Adoption
+- Update Changelog to Sous Chefs
+- Update to use Sous Chefs GH workflow
+- Update README to sous-chefs
+- Update metadata.rb to Sous Chefs
+- Update test-kitchen to Sous Chefs
+
+### Fixed
+
+- Cookstyle fixes
+- Yamllint fixes
+- MDL fixes
+- Add missing include for `EtcdCookbook::EtcdCommonProperties` in `etcd_installation_binary`
+
+### Removed
+
+- Remove support for Amazon Linux 1
+- Remove support for CentOS 6
+
 ## 6.0.0 (2020-06-10)
 
 - Support systemd only / Remove sysv init and Upstart - [@tas50](https://github.com/tas50)

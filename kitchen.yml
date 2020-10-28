@@ -1,78 +1,56 @@
+---
 driver:
   name: vagrant
 
 provisioner:
   name: chef_zero
+  product_name: chef
+  enforce_idempotency: true
+  multiple_converge: 2
   deprecations_as_errors: true
-  chef_license: accept-no-persist
 
 verifier:
   name: inspec
 
 platforms:
-  - name: amazonlinux
-    driver_config:
-      box: mvbcoding/awslinux
   - name: amazonlinux-2
-  - name: centos-6
   - name: centos-7
   - name: centos-8
   - name: debian-9
-    run_list: apt::default
   - name: debian-10
-    run_list: apt::default
   - name: fedora-latest
   - name: opensuse-leap-15
   - name: ubuntu-16.04
-    run_list: apt::default
   - name: ubuntu-18.04
-    run_list: apt::default
+  - name: ubuntu-20.04
 
 suites:
   - name: default-service-name
-    includes: [
-      'ubuntu-16.04'
-    ]
     run_list:
       - recipe[etcd_test::default_service_name]
 
   - name: service-docker
     run_list:
       - recipe[etcd_test::service_docker]
-    excludes: [
-      'centos-6'
-      ]
+    excludes:
+      - opensuse-leap-15
+
+  # TODO(ramereth): this suite is broken
   - name: service-docker-multi
     run_list:
       - recipe[etcd_test::service_docker_multi]
+    excludes:
+      - opensuse-leap-15
+
   - name: service-systemd
-    includes: [
-      'debian-9',
-      'debian-10',
-      'centos-7',
-      'fedora-latest',
-      'ubuntu-16.04',
-      opensuse-leap-15
-      ]
     run_list:
       - recipe[etcd_test::service_systemd]
 
   - name: service-systemd-multi
-    includes: [
-      'debian-9',
-      'debian-10',
-      'centos-7',
-      'fedora-latest',
-      'ubuntu-16.04',
-      opensuse-leap-15
-      ]
     run_list:
       - recipe[etcd_test::service_systemd_multi]
 
   - name: keys
-    includes: [
-      'centos-7'
-      ]
     run_list:
       - recipe[etcd_test::keys]
 

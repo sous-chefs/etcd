@@ -1,1 +1,3 @@
-etcd_service 'default'
+etcd_service 'default' do
+  action [:create, :start]
+end

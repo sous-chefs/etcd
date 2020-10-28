@@ -6,8 +6,8 @@ provides :etcd_installation_docker
 #####################
 
 property :repo, String, default: 'quay.io/coreos/etcd', desired_state: false
-property :tag, default: lazy { "v#{version}" }, desired_state: false
-property :version, default: '3.2.15'
+property :tag, String, default: lazy { "v#{version}" }, desired_state: false
+property :version, String, default: '3.2.15'
 
 default_action :create
 
