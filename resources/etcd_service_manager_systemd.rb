@@ -19,6 +19,7 @@ action :start do
 
   directory new_resource.data_dir do
     owner new_resource.run_user
+    mode '0700'
     action :create
   end
 
