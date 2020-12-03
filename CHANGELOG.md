@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Cookstyle 7.1.2 fixes
+- Update permissions to 0700 on data_dir
 
 ## 6.1.0 (2020-10-28)
 
