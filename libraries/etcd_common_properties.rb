@@ -80,6 +80,7 @@ module EtcdCookbook
         # Profiling Flags
         property :enable_pprof, [true, false], default: false, desired_state: false
         property :metrics, String, default: 'basic', desired_state: false
+        property :listen_metrics_urls, String, desired_state: false
 
         # Auth Flags
         property :auth_token, String, default: 'simple', desired_state: false
