@@ -58,6 +58,7 @@ module EtcdCookbook
         opts << "-wal-dir=#{new_resource.wal_dir}" unless new_resource.wal_dir.nil?
         opts << "-enable-pprof=#{new_resource.enable_pprof}"
         opts << "-metrics=#{new_resource.metrics}"
+        opts << "-listen-metrics-urls=#{new_resource.listen_metrics_urls}" unless new_resource.listen_metrics_urls.nil?
         opts << "-auth-token=#{new_resource.auth_token}"
         opts
       end

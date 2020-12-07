@@ -305,6 +305,7 @@ The `etcd_service` resource property list corresponds to the options found in
 
 - `enable_pprof`
 - `metrics`
+- `listen-metrics-urls`
 
 ##### Auth Flpropertiesags
 
