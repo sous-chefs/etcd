@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Chef 17 compatibility fixes
+  - Set `unified_mode true` on all resources
+  - Exclude `install_method` and `service_manager` methods when using `copy_properties_from`
+- Require Chef 15.3+
+- Remove backported `copy_properties_from` method library
+
 ## 6.3.0 - *2020-12-07*
 
 - Add configuration flag [listen-metrics-urls](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/configuration.md#--listen-metrics-urls)
