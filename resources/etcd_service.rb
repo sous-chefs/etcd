@@ -2,6 +2,7 @@ include EtcdCookbook::EtcdCommonProperties
 
 resource_name :etcd_service
 provides :etcd_service
+unified_mode true
 
 default_action :create
 

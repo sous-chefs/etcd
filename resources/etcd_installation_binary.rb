@@ -2,6 +2,7 @@ include EtcdCookbook::EtcdCommonProperties
 
 resource_name :etcd_installation_binary
 provides :etcd_installation_binary
+unified_mode true
 
 provides :etcd_installation
 

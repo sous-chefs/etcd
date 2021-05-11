@@ -2,6 +2,7 @@ include EtcdCookbook::EtcdCommonProperties
 
 resource_name :etcd_service_manager_systemd
 provides :etcd_service_manager_systemd
+unified_mode true
 provides :etcd_service_manager
 
 property :service_timeout, Integer, default: 120
