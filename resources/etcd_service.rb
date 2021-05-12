@@ -2,6 +2,7 @@ include EtcdCookbook::EtcdCommonProperties
 
 resource_name :etcd_service
 provides :etcd_service
+unified_mode true
 
 default_action :create
 
@@ -30,7 +31,7 @@ action_class do
       Chef::Log.info('Skipping Etcd installation. Assuming it was handled previously.')
       return
     end
-    install.copy_properties_from new_resource
+    install.copy_properties_from(new_resource, exclude: [:install_method])
     install
   end
 
@@ -41,7 +42,7 @@ action_class do
     when 'systemd'
       svc = etcd_service_manager_systemd(new_resource.name, &block)
     end
-    svc.copy_properties_from new_resource
+    svc.copy_properties_from(new_resource, exclude: [:service_manager, :install_method])
     svc
   end
 end
