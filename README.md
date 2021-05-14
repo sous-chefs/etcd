@@ -295,6 +295,7 @@ The `etcd_service` resource property list corresponds to the options found in
 - `peer_auto_tls`
 - `etcdctl_client_cert_file`
 - `etcdctl_client_key_file`
+- `experimental_peer_skip_client_san_verification`
 
 ##### Logging properties
 
