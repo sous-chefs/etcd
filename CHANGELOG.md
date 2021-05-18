@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Add configuration flag [-experimental-peer-skip-client-san-verification](https://etcd.io/docs/latest/op-guide/configuration/#--experimental-peer-skip-client-san-verification)
+
 ## 9.0.1 - *2022-02-10*
 
 - Standardise files with files in sous-chefs/repo-management
