@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Add configuration flag [-experimental-peer-skip-client-san-verification](https://etcd.io/docs/latest/op-guide/configuration/#--experimental-peer-skip-client-san-verification)
+
 ## 7.0.0 - *2021-05-12*
 
 - Chef 17 compatibility fixes
