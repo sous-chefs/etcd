@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Add CentOS Stream 8 to CI pipeline
+
 ## 7.0.2 - *2021-08-30*
 
 - Standardise files with files in sous-chefs/repo-management
