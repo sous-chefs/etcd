@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- Remove `-debug` line from etcd_cmd as it is deprecated as of etcd 3.5.0 (https://github.com/sous-chefs/etcd/issues/122)
-- Set unified mode to be false, otherwise resources are not correctly being passed through to systemd resource (https://github.com/sous-chefs/etcd/issues/120)
+- Remove `-debug` line from etcd_cmd as it is deprecated as of etcd 3.5.0 (#122)
+- Set unified mode to be false, otherwise resources are not correctly being passed through to systemd resource (#120)
 
 ## 7.0.3 - *2021-11-03*
 
