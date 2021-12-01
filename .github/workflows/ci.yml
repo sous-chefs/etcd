@@ -47,18 +47,17 @@ jobs:
           - 'centos-8'
           - 'centos-stream-8'
           - 'fedora-latest'
-          - 'ubuntu-1604'
           - 'ubuntu-1804'
           - 'ubuntu-2004'
-          - 'opensuse-leap-15'
+          # - 'opensuse-leap-15'
         suite:
           - 'service-docker'
           - 'service-systemd'
           - 'service-systemd-multi'
           - 'auto'
-        exclude:
-          - os: opensuse-leap-15
-            suite: service-docker
+        # exclude:
+        #   - os: opensuse-leap-15
+        #     suite: service-docker
       fail-fast: false
 
     steps:

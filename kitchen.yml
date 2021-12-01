@@ -20,7 +20,7 @@ platforms:
   - name: debian-9
   - name: debian-10
   - name: fedora-latest
-  - name: opensuse-leap-15
+  # - name: opensuse-leap-15
   - name: ubuntu-18.04
   - name: ubuntu-20.04
 
@@ -32,15 +32,15 @@ suites:
   - name: service-docker
     run_list:
       - recipe[etcd_test::service_docker]
-    excludes:
-      - opensuse-leap-15
+    # excludes:
+    #   - opensuse-leap-15
 
   # TODO(ramereth): this suite is broken
   - name: service-docker-multi
     run_list:
       - recipe[etcd_test::service_docker_multi]
-    excludes:
-      - opensuse-leap-15
+    # excludes:
+    #   - opensuse-leap-15
 
   - name: service-systemd
     run_list:

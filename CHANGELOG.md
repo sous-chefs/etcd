@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Remove Ubuntu 16.04 testing
+- Remove OpenSUSE Leap testing
 - Ignore deprecations as errors
 - Remove `-debug` line from etcd_cmd as it is deprecated as of etcd 3.5.0 (#122)
 - Set unified mode to be false, otherwise resources are not correctly being passed through to systemd resource (#120)
