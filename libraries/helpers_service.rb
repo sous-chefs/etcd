@@ -17,7 +17,6 @@ module EtcdCookbook
         opts << '-client-cert-auth=true' if new_resource.client_cert_auth == true
         opts << "-cors=#{new_resource.cors}" unless new_resource.cors.nil?
         opts << "-data-dir=#{new_resource.data_dir}" unless new_resource.data_dir.nil?
-        opts << "-debug=#{new_resource.debug}"
         opts << "-log_package_levels=#{new_resource.log_package_levels}" unless new_resource.log_package_levels.nil?
         opts << "-discovery-fallback=#{new_resource.discovery_fallback}" unless new_resource.discovery_fallback.nil?
         opts << "-discovery-proxy=#{new_resource.discovery_proxy}" unless new_resource.discovery_proxy.nil?
