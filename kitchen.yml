@@ -7,7 +7,7 @@ provisioner:
   product_name: chef
   enforce_idempotency: true
   multiple_converge: 2
-  deprecations_as_errors: true
+  deprecations_as_errors: false
 
 verifier:
   name: inspec
@@ -21,7 +21,6 @@ platforms:
   - name: debian-10
   - name: fedora-latest
   - name: opensuse-leap-15
-  - name: ubuntu-16.04
   - name: ubuntu-18.04
   - name: ubuntu-20.04
 
