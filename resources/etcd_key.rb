@@ -1,6 +1,5 @@
 require 'etcd'
 
-resource_name :etcd_key
 provides :etcd_key
 unified_mode true
 

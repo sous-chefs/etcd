@@ -6,7 +6,7 @@ description       'Installs and configures etcd'
 version           '8.0.0'
 source_url        'https://github.com/sous-chefs/etcd'
 issues_url        'https://github.com/sous-chefs/etcd/issues'
-chef_version      '>= 15.3'
+chef_version      '>= 16'
 
 depends 'docker'
 

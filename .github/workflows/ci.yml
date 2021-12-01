@@ -49,15 +49,11 @@ jobs:
           - 'fedora-latest'
           - 'ubuntu-1804'
           - 'ubuntu-2004'
-          # - 'opensuse-leap-15'
         suite:
           - 'service-docker'
           - 'service-systemd'
           - 'service-systemd-multi'
           - 'auto'
-        # exclude:
-        #   - os: opensuse-leap-15
-        #     suite: service-docker
       fail-fast: false
 
     steps:

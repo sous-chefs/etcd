@@ -1,16 +1,36 @@
-include EtcdCookbook::EtcdCommonProperties
-
-resource_name :etcd_service_manager_docker
 provides :etcd_service_manager_docker
 unified_mode true
+use 'partial/_common'
 
-property :repo, String, default: 'quay.io/coreos/etcd'
-property :tag, String, default: lazy { "v#{version}" }
-property :version, String, default: '3.2.15', desired_state: false
-property :container_name, String, default: lazy { |n| "etcd-#{n.node_name}" }, desired_state: false
-property :port, Array, default: ['2379/tcp4:2379', '2380/tcp4:2380']
-property :network_mode, String, default: 'host'
-property :host_data_path, String, default: '/var/lib/etcd'
+property :repo,
+          String,
+          default: 'quay.io/coreos/etcd'
+
+property :tag,
+          String,
+          default: lazy { "v#{version}" }
+
+property :version,
+          String,
+          default: '3.2.15',
+          desired_state: false
+
+property :container_name,
+          String,
+          default: lazy { |n| "etcd-#{n.node_name}" },
+          desired_state: false
+
+property :port,
+          Array,
+          default: ['2379/tcp4:2379', '2380/tcp4:2380']
+
+property :network_mode,
+          String,
+          default: 'host'
+
+property :host_data_path,
+          String,
+          default: '/var/lib/etcd'
 
 action :start do
   etcd_data_dir = ::File.absolute_path(new_resource.data_dir, '/')

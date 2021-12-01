@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Use partials instead of including a library.
+  - Require Chef 16 for resource partials
+- Remove unused libraries
+
 ## 8.0.0 - *2021-12-01*
 
 - Remove Ubuntu 16.04 testing
