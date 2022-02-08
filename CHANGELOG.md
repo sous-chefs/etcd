@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Remove delivery folder
+
 ## 9.0.0 - *2021-12-01*
 
 - Use partials instead of including a library.
