@@ -43,6 +43,7 @@ module EtcdCookbook
         opts << '-peer-client-cert-auth=true' if new_resource.peer_client_cert_auth == true
         opts << "-peer-key-file=#{new_resource.peer_key_file}" unless new_resource.peer_key_file.nil?
         opts << "-peer-trusted-ca-file=#{new_resource.peer_trusted_ca_file}" unless new_resource.peer_trusted_ca_file.nil?
+        opts << '-experimental-peer-skip-client-san-verification=true' if new_resource.experimental_peer_skip_client_san_verification == true
         opts << "-auto-tls=#{new_resource.auto_tls}"
         opts << "-peer-auto-tls=#{new_resource.peer_auto_tls}"
         opts << "-proxy-dial-timeout=#{new_resource.proxy_dial_timeout}" unless new_resource.proxy_dial_timeout.nil?

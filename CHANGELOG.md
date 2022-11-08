@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Add configuration flag [-experimental-peer-skip-client-san-verification](https://etcd.io/docs/latest/op-guide/configuration/#--experimental-peer-skip-client-san-verification)
+
 ## 9.0.1 - *2022-02-10*
 
 - Standardise files with files in sous-chefs/repo-management
@@ -15,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 9.0.0 - *2021-12-01*
 
 - Use partials instead of including a library.
-  - Require Chef 16 for resource partials
+   - Require Chef 16 for resource partials
 - Remove unused libraries
 
 ## 8.0.0 - *2021-12-01*
@@ -41,8 +43,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 7.0.0 - *2021-05-12*
 
 - Chef 17 compatibility fixes
-  - Set `unified_mode true` on all resources
-  - Exclude `install_method` and `service_manager` methods when using `copy_properties_from`
+   - Set `unified_mode true` on all resources
+   - Exclude `install_method` and `service_manager` methods when using `copy_properties_from`
 - Require Chef 15.3+
 - Remove backported `copy_properties_from` method library
 
@@ -99,10 +101,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Expand testing to new platforms - [@tas50](https://github.com/tas50)
 - Require Chef 12.15+ - [@tas50](https://github.com/tas50)
 - Cookstyle fixes including Chef Infra Client 16 compatibility - [@xorimabot](https://github.com/xorimabot)
-  - resolved cookstyle error: resources/etcd_installation_docker.rb:1:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
-  - resolved cookstyle error: resources/etcd_key.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
-  - resolved cookstyle error: resources/etcd_service.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
-  - resolved cookstyle error: resources/etcd_service_manager_docker.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+   - resolved cookstyle error: resources/etcd_installation_docker.rb:1:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+   - resolved cookstyle error: resources/etcd_key.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+   - resolved cookstyle error: resources/etcd_service.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
+   - resolved cookstyle error: resources/etcd_service_manager_docker.rb:3:1 warning: `ChefDeprecations/ResourceUsesOnlyResourceName`
 
 ## 5.6.0 (2018-08-07)
 
