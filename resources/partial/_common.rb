@@ -194,6 +194,11 @@ property :etcdctl_client_key_file,
           String,
           desired_state: false
 
+property :experimental_peer_skip_client_san_verification,
+          [true, false],
+          default: false,
+          desired_state: false
+
 # Logging Flags
 property :debug, [true, false],
           default: false,
