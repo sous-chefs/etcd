@@ -3,8 +3,9 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_zero
-  product_name: chef
+  name: chef_infra
+  product_name: <%= ENV['CHEF_PRODUCT_NAME'] || 'chef' %>
+  product_version: 17
   enforce_idempotency: true
   multiple_converge: 2
   deprecations_as_errors: true

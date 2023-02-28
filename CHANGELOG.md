@@ -7,25 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Add `experimental_peer_skip_client_san_verification` option to partial resources
+- Splt out GH actions so docker suites run in vagrant and amazonlinux runs on 20.04 runners
+- Set Chef version to 17 due to docker blocking on 18 due to [sous-chefs/docker#1229](https://github.com/sous-chefs/docker/pull/1229)
+
 ## 9.1.6 - *2023-02-23*
 
-Standardise files with files in sous-chefs/repo-management
+- Standardise files with files in sous-chefs/repo-management
 
 ## 9.1.5 - *2023-02-16*
 
-Standardise files with files in sous-chefs/repo-management
+- Standardise files with files in sous-chefs/repo-management
 
 ## 9.1.4 - *2023-02-15*
 
+- Update Actions (#135)
+
 ## 9.1.3 - *2023-02-14*
 
-Standardise files with files in sous-chefs/repo-management
+- Standardise files with files in sous-chefs/repo-management
 
 ## 9.1.2 - *2023-02-14*
 
+- Remove CircleCI (#133)
+- Remove Gemfile
+
 ## 9.1.1 - *2022-12-10*
 
-Standardise files with files in sous-chefs/repo-management
+- Standardise files with files in sous-chefs/repo-management
 
 ## 9.1.0 - *2022-11-08*
 
