@@ -25,7 +25,7 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 The following platforms have been tested with Test Kitchen. It will most likely work on other platforms as well
 
-```
+```text
 |---------------+--------+
 |               | 3.2.15 |
 |---------------+--------+
@@ -100,7 +100,7 @@ By default reosource creates `etcd-NODE_NAME` unit file name. Sometimes it's not
 
 If you don't run multi etcd service in node, you can change this action to default service name.
 
-```
+```ruby
 etcd_service 'etcd' do
   action :start
   default_service_name true
