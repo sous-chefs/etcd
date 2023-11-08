@@ -18,7 +18,7 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 ## Requirements
 
-- Chef Infra Client 12.15+
+- Chef Infra Client 16+
 - Network accessible web server hosting the etcd binary.
 
 ## Platform Support

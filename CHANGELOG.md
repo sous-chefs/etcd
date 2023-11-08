@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix markdown links
 
+## 9.1.24 - *2023-11-08*
+
 ## 9.1.23 - *2023-10-31*
 
 ## 9.1.22 - *2023-10-31*
