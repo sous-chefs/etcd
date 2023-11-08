@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Fix markdown links
+
 ## 9.1.23 - *2023-10-31*
 
 ## 9.1.22 - *2023-10-31*
@@ -125,7 +127,7 @@ Standardise files with files in sous-chefs/repo-management
 
 ## 6.3.0 - *2020-12-07*
 
-- Add configuration flag [listen-metrics-urls](https://github.com/etcd-io/etcd/blob/master/Documentation/op-guide/configuration.md#--listen-metrics-urls)
+- Add configuration flag listen-metrics-urls
 
 ## 6.2.0 - *2020-12-03*
 
