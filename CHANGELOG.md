@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Add `config_file` property for service resources to enable the passing of configuration options through a [configuration file](https://etcd.io/docs/v3.5/op-guide/configuration/#configuration-file) instead of command-line flags
+
 ## 9.1.34 - *2024-11-18*
 
 ## 9.1.33 - *2024-11-18*

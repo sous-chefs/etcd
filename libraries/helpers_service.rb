@@ -6,7 +6,77 @@ module EtcdCookbook
       end
 
       def etcd_cmd
-        [etcd_bin, etcd_daemon_opts].join(' ').strip
+        if new_resource.config_file.nil?
+          [etcd_bin, etcd_daemon_opts].join(' ').strip
+        else
+          create_config_file
+          [etcd_bin, '--config-file', new_resource.config_file].join(' ').strip
+        end
+      end
+
+      def create_config_file
+        directory ::File.dirname(new_resource.config_file) do
+          owner new_resource.run_user
+          group 'root'
+          mode '0755'
+          action :create
+        end
+
+        template new_resource.config_file do
+          source 'config/etcd.conf.yml.erb'
+          owner new_resource.run_user
+          cookbook 'etcd'
+          group 'root'
+          mode '0750'
+          variables instance_name: new_resource.node_name,
+                    data_dir: new_resource.data_dir,
+                    wal_dir: new_resource.wal_dir,
+                    snapshot_count: new_resource.snapshot_count,
+                    heartbeat_interval: new_resource.heartbeat_interval,
+                    election_timeout: new_resource.election_timeout,
+                    listen_peer_urls: new_resource.listen_peer_urls,
+                    listen_client_urls: new_resource.listen_client_urls,
+                    max_snapshots: new_resource.max_snapshots,
+                    max_wals: new_resource.max_wals,
+                    cors: new_resource.cors,
+                    quota_backend_bytes: new_resource.quota_backend_bytes,
+                    initial_advertise_peer_urls: new_resource.initial_advertise_peer_urls,
+                    initial_cluster: new_resource.initial_cluster,
+                    initial_cluster_state: new_resource.initial_cluster_state,
+                    initial_cluster_token: new_resource.initial_cluster_token,
+                    advertise_client_urls: new_resource.advertise_client_urls,
+                    discovery: new_resource.discovery,
+                    discovery_fallback: new_resource.discovery_fallback,
+                    discovery_proxy: new_resource.discovery_proxy,
+                    discovery_srv: new_resource.discovery_srv,
+                    strict_reconfig_check: new_resource.strict_reconfig_check,
+                    auto_compaction_retention: new_resource.auto_compaction_retention,
+                    enable_v2: new_resource.enable_v2,
+                    cert_file: new_resource.cert_file,
+                    key_file: new_resource.key_file,
+                    client_cert_auth: new_resource.client_cert_auth,
+                    trusted_ca_file: new_resource.trusted_ca_file,
+                    auto_tls: new_resource.auto_tls,
+                    peer_cert_file: new_resource.peer_cert_file,
+                    peer_key_file: new_resource.peer_key_file,
+                    peer_client_cert_auth: new_resource.peer_client_cert_auth,
+                    peer_trusted_ca_file: new_resource.peer_trusted_ca_file,
+                    peer_auto_tls: new_resource.peer_auto_tls,
+                    peer_cert_allowed_cn: new_resource.peer_cert_allowed_cn,
+                    auth_token: new_resource.auth_token,
+                    debug: new_resource.debug,
+                    force_new_cluster: new_resource.force_new_cluster,
+                    enable_pprof: new_resource.enable_pprof,
+                    proxy: new_resource.proxy,
+                    proxy_failure_wait: new_resource.proxy_failure_wait,
+                    proxy_refresh_interval: new_resource.proxy_refresh_interval,
+                    proxy_dial_timeout: new_resource.proxy_dial_timeout,
+                    proxy_write_timeout: new_resource.proxy_write_timeout,
+                    proxy_read_timeout: new_resource.proxy_read_timeout,
+                    metrics: new_resource.metrics,
+                    listen_metrics_urls: new_resource.listen_metrics_urls,
+                    experimental_peer_skip_client_san_verification: new_resource.experimental_peer_skip_client_san_verification
+        end
       end
 
       def etcd_daemon_opts

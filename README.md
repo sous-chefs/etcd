@@ -322,6 +322,7 @@ The `etcd_service` resource property list corresponds to the options found in
 - `https_proxy`
 - `no_proxy`
 - `auto_restart`
+- `config_file`
 
 ### etcd_key
 
