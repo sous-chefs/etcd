@@ -51,7 +51,7 @@ The following platforms have been tested with Test Kitchen. It will most likely 
 
 ## Cookbook Dependencies
 
-- [docker](https://supermarket.chef.io/cookbooks/docker)
+- [docker](https://github.com/sous-chefs/docker)
 
 ## Usage
 
