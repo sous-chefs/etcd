@@ -66,14 +66,21 @@ jobs:
     strategy:
       matrix:
         os:
+          - "almalinux-8"
+          - "almalinux-9"
           - "amazonlinux-2"
-          - "debian-9"
-          - "debian-10"
-          - "centos-7"
-          - "centos-stream-8"
-          - "fedora-latest"
-          - "ubuntu-1804"
+          - "centos-stream-9"
+          - "centos-stream-10"
+          - "debian-11"
+          - "debian-12"
+          - "opensuse-leap-15"
+          - "oraclelinux-8"
+          - "oraclelinux-9"
+          - "rockylinux-8"
+          - "rockylinux-9"
           - "ubuntu-2004"
+          - "ubuntu-2204"
+          - "ubuntu-2404"
         suite:
           - "service-docker"
       fail-fast: false
@@ -83,7 +90,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Chef
         uses: actionshub/chef-install@3.0.0
-      - name: Dokken
+      - name: Setup VirtualBox & Vagrant
+        uses: ./.github/actions/virtualbox-setup
+      - name: Test Kitchen
         uses: actionshub/test-kitchen@3.0.0
         env:
           CHEF_LICENSE: accept-no-persist
