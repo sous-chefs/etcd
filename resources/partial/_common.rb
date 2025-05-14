@@ -251,7 +251,12 @@ property :https_proxy,
 property :no_proxy,
           String,
           desired_state: false
+
 property :auto_restart,
           [true, false],
           default: false,
+          desired_state: false
+
+property :config_file,
+          String,
           desired_state: false

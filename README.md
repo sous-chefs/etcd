@@ -51,7 +51,7 @@ The following platforms have been tested with Test Kitchen. It will most likely 
 
 ## Cookbook Dependencies
 
-- [docker](https://supermarket.chef.io/cookbooks/docker)
+- [docker](https://github.com/sous-chefs/docker)
 
 ## Usage
 
@@ -322,6 +322,7 @@ The `etcd_service` resource property list corresponds to the options found in
 - `https_proxy`
 - `no_proxy`
 - `auto_restart`
+- `config_file`
 
 ### etcd_key
 
