@@ -5,7 +5,7 @@ This file is used to list changes made in each version of the etcd cookbook.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 9.2.0 - *2025-05-14*
 
 - Add `config_file` property for service resources to enable the passing of configuration options through a [configuration file](https://etcd.io/docs/v3.5/op-guide/configuration/#configuration-file) instead of command-line flags
 
