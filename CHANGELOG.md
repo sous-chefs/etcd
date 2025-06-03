@@ -5,6 +5,13 @@ This file is used to list changes made in each version of the etcd cookbook.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+Increased default etcd version to `3.5.21`
+Fix alma linux conflicting package errors when installing docker
+`auto_compaction_retention` is now a string since etcd 3.3
+Update expected test output based on new etcd version
+
 ## 9.2.0 - *2025-05-14*
 
 - Add `config_file` property for service resources to enable the passing of configuration options through a [configuration file](https://etcd.io/docs/v3.5/op-guide/configuration/#configuration-file) instead of command-line flags
