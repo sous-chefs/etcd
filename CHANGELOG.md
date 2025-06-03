@@ -12,6 +12,10 @@ Fix alma linux conflicting package errors when installing docker
 `auto_compaction_retention` is now a string since etcd 3.3
 Update expected test output based on new etcd version
 
+## 9.2.2 - *2025-06-03*
+
+Fix usage of `auto_compaction_retention` property in configuration file
+
 ## 9.2.0 - *2025-05-14*
 
 - Add `config_file` property for service resources to enable the passing of configuration options through a [configuration file](https://etcd.io/docs/v3.5/op-guide/configuration/#configuration-file) instead of command-line flags
