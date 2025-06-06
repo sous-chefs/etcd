@@ -103,8 +103,8 @@ property :strict_reconfig_check,
           desired_state: false
 
 property :auto_compaction_retention,
-          Integer,
-          default: 0,
+          String,
+          default: '0',
           desired_state: false
 
 property :enable_v2,

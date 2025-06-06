@@ -12,7 +12,7 @@ property :tag,
 
 property :version,
           String,
-          default: '3.2.15',
+          default: '3.5.21',
           desired_state: false
 
 property :container_name,
