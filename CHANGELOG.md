@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+Add `etcdutl` binary installation for versions >= `3.5.0`
+Fix keys test suite to use ETCD_API=2 and `etcd` `3.3.19`
+
 ## 10.0.0 - *2025-06-06*
 
 Increased default etcd version to `3.5.21`
