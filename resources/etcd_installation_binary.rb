@@ -28,6 +28,14 @@ action :create do
     action :nothing
     subscribes :run, 'remote_file[etcd tarball]'
   end
+
+  if etcdutl_supported?
+    execute 'extract etcdutl' do
+      command     extract_etcdutl_cmd
+      action      :nothing
+      subscribes  :run, 'remote_file[etcd tarball]'
+    end
+  end
 end
 
 action :delete do
@@ -37,6 +45,11 @@ action :delete do
 
   file etcdctl_bin do
     action :delete
+  end
+
+  file etcdutl_bin do
+    action  :delete
+    only_if { etcdutl_supported? }
   end
 end
 
@@ -60,20 +73,24 @@ def default_checksum
   end
 end
 
-def etcd_bin
-  "#{etcd_bin_prefix}/etcd"
+def etcdutl_supported?
+  Gem::Version.new(version) >= Gem::Version.new('3.5.0')
 end
 
 def etcd_bin_prefix
   '/usr/bin'
 end
 
-def etcdctl_bin
-  "#{etcdctl_bin_prefix}/etcdctl"
+def etcd_bin
+  "#{etcd_bin_prefix}/etcd"
 end
 
-def etcdctl_bin_prefix
-  etcd_bin_prefix
+def etcdctl_bin
+  "#{etcd_bin_prefix}/etcdctl"
+end
+
+def etcdutl_bin
+  "#{etcd_bin_prefix}/etcdutl"
 end
 
 def extract_etcd_cmd
@@ -81,5 +98,9 @@ def extract_etcd_cmd
 end
 
 def extract_etcdctl_cmd
-  "tar xvf #{file_cache_path}/etcd-v#{version}-linux-amd64.tar.gz -C #{etcdctl_bin_prefix} etcd-v#{version}-linux-amd64/etcdctl --strip-components=1"
+  "tar xvf #{file_cache_path}/etcd-v#{version}-linux-amd64.tar.gz -C #{etcd_bin_prefix} etcd-v#{version}-linux-amd64/etcdctl --strip-components=1"
+end
+
+def extract_etcdutl_cmd
+  "tar xvf #{file_cache_path}/etcd-v#{version}-linux-amd64.tar.gz -C #{etcd_bin_prefix} etcd-v#{version}-linux-amd64/etcdutl --strip-components=1"
 end

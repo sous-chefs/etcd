@@ -1,5 +1,10 @@
-etcd_service 'default' do
-  action [:create, :start]
+etcd_installation_binary 'default' do
+  action :create
+  version '3.3.19'
+end
+
+etcd_service_manager_systemd 'default' do
+  action :start
 end
 
 etcd_key '/test' do
