@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [11.0.2](https://github.com/sous-chefs/etcd/compare/11.0.1...v11.0.2) (2025-10-15)
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#188](https://github.com/sous-chefs/etcd/issues/188)) ([a8177fc](https://github.com/sous-chefs/etcd/commit/a8177fc9d3b06b5321d9db429addfeafdbb53d24))
+
 ## 11.0.0 - *2025-07-10*
 
 Add `etcdutl` binary installation for versions >= `3.5.0`
