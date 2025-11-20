@@ -26,10 +26,6 @@ property :source,
           String,
           desired_state: false
 
-property :version,
-          String,
-          desired_state: false
-
 action :create do
   installation do
     action :create
