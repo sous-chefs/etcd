@@ -10,11 +10,6 @@ property :tag,
           String,
           default: lazy { "v#{version}" }
 
-property :version,
-          String,
-          default: '3.5.21',
-          desired_state: false
-
 property :container_name,
           String,
           default: lazy { |n| "etcd-#{n.node_name}" },

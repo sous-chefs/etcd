@@ -4,6 +4,11 @@ property :default_service_name,
           [true, false],
           default: false
 
+property :version,
+          String,
+          default: '3.6.6',
+          desired_state: false
+
 # https://coreos.com/etcd/docs/latest/configuration.html
 # Member flags
 property :node_name,
@@ -95,6 +100,71 @@ property :discovery_fallback,
 
 property :discovery_proxy,
           String,
+          desired_state: false
+
+# Discovery v3 Flags (etcd 3.6+)
+property :discovery_token,
+          String,
+          default: '',
+          desired_state: false
+
+property :discovery_endpoints,
+          String,
+          default: '',
+          desired_state: false
+
+property :discovery_dial_timeout,
+          String,
+          default: '2s',
+          desired_state: false
+
+property :discovery_request_timeout,
+          String,
+          default: '5s',
+          desired_state: false
+
+property :discovery_keepalive_time,
+          String,
+          default: '2s',
+          desired_state: false
+
+property :discovery_keepalive_timeout,
+          String,
+          default: '6s',
+          desired_state: false
+
+property :discovery_insecure_transport,
+          String,
+          default: 'true',
+          desired_state: false
+property :discovery_insecure_skip_tls_verify,
+          String,
+          default: 'false',
+          desired_state: false
+
+property :discovery_cert,
+          String,
+          default: '',
+          desired_state: false
+
+property :discovery_key,
+          String,
+          default: '',
+          desired_state: false
+
+property :discovery_cacert,
+          String,
+          default: '',
+          desired_state: false
+
+property :discovery_user,
+          String,
+          default: '',
+          desired_state: false
+
+property :discovery_password,
+          String,
+          default: '',
           desired_state: false
 
 property :strict_reconfig_check,
@@ -199,12 +269,21 @@ property :experimental_peer_skip_client_san_verification,
           default: false,
           desired_state: false
 
+property :peer_skip_client_san_verification,
+          String,
+          default: 'false',
+          desired_state: false
+
 # Logging Flags
 property :debug, [true, false],
           default: false,
           desired_state: false
 
 property :log_package_levels,
+          String,
+          desired_state: false
+
+property :log_format,
           String,
           desired_state: false
 
@@ -232,6 +311,11 @@ property :listen_metrics_urls,
 property :auth_token,
           String,
           default: 'simple',
+          desired_state: false
+
+# Feature Gates (etcd 3.6+)
+property :feature_gates,
+          String,
           desired_state: false
 
 # Misc
