@@ -4,6 +4,11 @@ property :default_service_name,
           [true, false],
           default: false
 
+property :version,
+          String,
+          default: '3.6.6',
+          desired_state: false
+
 # https://coreos.com/etcd/docs/latest/configuration.html
 # Member flags
 property :node_name,
@@ -94,6 +99,61 @@ property :discovery_fallback,
           desired_state: false
 
 property :discovery_proxy,
+          String,
+          desired_state: false
+
+# Discovery v3 Flags (etcd 3.6+)
+property :discovery_token,
+          String,
+          desired_state: false
+
+property :discovery_endpoints,
+          String,
+          desired_state: false
+
+property :discovery_dial_timeout,
+          String,
+          desired_state: false
+
+property :discovery_request_timeout,
+          String,
+          desired_state: false
+
+property :discovery_keepalive_time,
+          String,
+          desired_state: false
+
+property :discovery_keepalive_timeout,
+          String,
+          desired_state: false
+
+property :discovery_insecure_transport,
+          [true, false],
+          default: true,
+          desired_state: false
+
+property :discovery_insecure_skip_tls_verify,
+          [true, false],
+          default: false,
+          desired_state: false
+
+property :discovery_cert,
+          String,
+          desired_state: false
+
+property :discovery_key,
+          String,
+          desired_state: false
+
+property :discovery_cacert,
+          String,
+          desired_state: false
+
+property :discovery_user,
+          String,
+          desired_state: false
+
+property :discovery_password,
           String,
           desired_state: false
 
@@ -199,6 +259,11 @@ property :experimental_peer_skip_client_san_verification,
           default: false,
           desired_state: false
 
+property :peer_skip_client_san_verification,
+          [true, false],
+          default: false,
+          desired_state: false
+
 # Logging Flags
 property :debug, [true, false],
           default: false,
@@ -206,6 +271,11 @@ property :debug, [true, false],
 
 property :log_package_levels,
           String,
+          desired_state: false
+
+property :log_format,
+          String,
+          default: 'json',
           desired_state: false
 
 # Unsafe Flags
@@ -232,6 +302,11 @@ property :listen_metrics_urls,
 property :auth_token,
           String,
           default: 'simple',
+          desired_state: false
+
+# Feature Gates (etcd 3.6+)
+property :feature_gates,
+          String,
           desired_state: false
 
 # Misc
