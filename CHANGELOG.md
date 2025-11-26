@@ -15,6 +15,25 @@ Standardise files with files in sous-chefs/repo-management
 
 * **ci:** Update workflows to use release pipeline ([#188](https://github.com/sous-chefs/etcd/issues/188)) ([a8177fc](https://github.com/sous-chefs/etcd/commit/a8177fc9d3b06b5321d9db429addfeafdbb53d24))
 
+## Unreleased
+
+### Added
+
+* Support for etcd 3.6.6
+* Discovery v3 properties for etcd 3.6+
+* `feature_gates` property for etcd 3.6+
+* `log_format` property for etcd 3.6+
+* `peer_skip_client_san_verification` property (replaces experimental flag in v3.6)
+
+### Changed
+
+* Default etcd version updated from 3.5.21 to 3.6.6
+
+### Deprecated
+
+* `experimental_peer_skip_client_san_verification` (use `peer_skip_client_san_verification` in v3.6+)
+* `enable_v2`, `discovery_fallback`, `discovery_proxy`, and proxy-related properties (removed in etcd v3.6)
+
 ## 11.0.0 - *2025-07-10*
 
 Add `etcdutl` binary installation for versions >= `3.5.0`

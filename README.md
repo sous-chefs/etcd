@@ -265,13 +265,29 @@ The `etcd_service` resource property list corresponds to the options found in
 - `advertise_client_urls`
 - `discovery`
 - `discovery_srv`
-- `discovery_fallback`
-- `discovery_proxy`
+- `discovery_fallback` (removed in v3.6)
+- `discovery_proxy` (removed in v3.6)
 - `strict_reconfig_check`
 - `auto_compaction_retention`
-- `enable_v2`
+- `enable_v2` (removed in v3.6)
 
-##### Proxy properties
+##### Discovery v3 properties (etcd 3.6+)
+
+- `discovery_token`
+- `discovery_endpoints`
+- `discovery_dial_timeout`
+- `discovery_request_timeout`
+- `discovery_keepalive_time`
+- `discovery_keepalive_timeout`
+- `discovery_insecure_transport`
+- `discovery_insecure_skip_tls_verify`
+- `discovery_cert`
+- `discovery_key`
+- `discovery_cacert`
+- `discovery_user`
+- `discovery_password`
+
+##### Proxy properties (removed in v3.6)
 
 - `proxy`
 - `proxy_failure_wait`
@@ -295,12 +311,14 @@ The `etcd_service` resource property list corresponds to the options found in
 - `peer_auto_tls`
 - `etcdctl_client_cert_file`
 - `etcdctl_client_key_file`
-- `experimental_peer_skip_client_san_verification`
+- `experimental_peer_skip_client_san_verification` (deprecated in v3.6, use `peer_skip_client_san_verification`)
+- `peer_skip_client_san_verification` (v3.6+, replaces `experimental_peer_skip_client_san_verification`)
 
 ##### Logging properties
 
 - `debug`
 - `log_package_levels`
+- `log_format` (v3.6+)
 
 ##### Profiling properties
 
@@ -308,9 +326,13 @@ The `etcd_service` resource property list corresponds to the options found in
 - `metrics`
 - `listen-metrics-urls`
 
-##### Auth Flpropertiesags
+##### Auth properties
 
 - `auth_token`
+
+##### Feature Gates (v3.6+)
+
+- `feature_gates`
 
 ##### Unsafe properties
 

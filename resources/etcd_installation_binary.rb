@@ -5,7 +5,6 @@ use 'partial/_common'
 
 property :checksum, String, default: lazy { default_checksum }, desired_state: false
 property :source, String, default: lazy { default_source }, desired_state: false
-property :version, String, default: '3.5.21', desired_state: false
 
 action :create do
   package 'tar'
@@ -63,6 +62,7 @@ end
 
 def default_checksum
   case version
+  when '3.6.6' then '887afaa4a99f22d802ccdfbe65730a5e79aa5c9ce2c8799c67e9d804c50ecedb'
   when '3.5.21' then 'adddda4b06718e68671ffabff2f8cee48488ba61ad82900e639d108f2148501c'
   when '3.4.6' then 'a591b59639aed73061281d34720725ed47092705f68c7b11e0b6965044d4f7f6'
   when '3.3.19' then '9c9220002fb176f4d73492f78cab37c9bd8b5132b3ac6f14515629603518476d'
