@@ -8,6 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [11.1.0](https://github.com/sous-chefs/etcd/compare/v11.0.2...v11.1.0) (2025-11-26)
+
+
+### Features
+
+* add etcd 3.6 support ([#191](https://github.com/sous-chefs/etcd/issues/191)) ([c23408f](https://github.com/sous-chefs/etcd/commit/c23408f50c19274194eb6aedaa31da7acca43c3e))
+
+
+### Bug Fixes
+
+* **ci:** Pull main lint-unit workflow ([867370f](https://github.com/sous-chefs/etcd/commit/867370f1ed530c0d19464a2c0aa44e0e1189bd81))
+* **ci:** tokens ([77ca7c8](https://github.com/sous-chefs/etcd/commit/77ca7c88400d7a41c60c00595d61bba39da839cc))
+
 ## [11.0.2](https://github.com/sous-chefs/etcd/compare/11.0.1...v11.0.2) (2025-10-15)
 
 
