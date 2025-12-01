@@ -103,6 +103,7 @@ property :discovery_proxy,
           desired_state: false
 
 # Discovery v3 Flags (etcd 3.6+)
+# Note: In YAML config, discovery v3 uses a nested 'discovery-config' structure
 property :discovery_token,
           String,
           desired_state: false
@@ -112,19 +113,19 @@ property :discovery_endpoints,
           desired_state: false
 
 property :discovery_dial_timeout,
-          String,
+          Integer,
           desired_state: false
 
 property :discovery_request_timeout,
-          String,
+          Integer,
           desired_state: false
 
 property :discovery_keepalive_time,
-          String,
+          Integer,
           desired_state: false
 
 property :discovery_keepalive_timeout,
-          String,
+          Integer,
           desired_state: false
 
 property :discovery_insecure_transport,

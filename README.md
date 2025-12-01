@@ -273,19 +273,23 @@ The `etcd_service` resource property list corresponds to the options found in
 
 ##### Discovery v3 properties (etcd 3.6+)
 
-- `discovery_token`
-- `discovery_endpoints`
-- `discovery_dial_timeout`
-- `discovery_request_timeout`
-- `discovery_keepalive_time`
-- `discovery_keepalive_timeout`
-- `discovery_insecure_transport`
-- `discovery_insecure_skip_tls_verify`
-- `discovery_cert`
-- `discovery_key`
-- `discovery_cacert`
-- `discovery_user`
-- `discovery_password`
+**Note:** In YAML configuration files, discovery v3 uses a nested `discovery-config` structure. When using command-line flags, use the flat `--discovery-*` flags.
+
+- `discovery_token` - Discovery v3 token for bootstrapping (String)
+- `discovery_endpoints` - Comma-separated list of discovery endpoints (String)
+- `discovery_dial_timeout` - Dial timeout in nanoseconds (Integer, default: 2000000000 = 2s)
+- `discovery_request_timeout` - Request timeout in nanoseconds (Integer, default: 5000000000 = 5s)
+- `discovery_keepalive_time` - Keepalive time in nanoseconds (Integer, default: 2000000000 = 2s)
+- `discovery_keepalive_timeout` - Keepalive timeout in nanoseconds (Integer, default: 6000000000 = 6s)
+- `discovery_insecure_transport` - Use insecure transport for discovery (Boolean, default: true)
+- `discovery_insecure_skip_tls_verify` - Skip TLS verification for discovery (Boolean, default: false)
+- `discovery_cert` - Client certificate for discovery (String)
+- `discovery_key` - Client key for discovery (String)
+- `discovery_cacert` - CA certificate for discovery (String)
+- `discovery_user` - Username for discovery authentication (String)
+- `discovery_password` - Password for discovery authentication (String)
+
+**Important:** Timeout values must be specified as integers in nanoseconds. To convert seconds to nanoseconds, multiply by 1,000,000,000 (1 billion). Leave timeout properties unset to use the default values.
 
 ##### Proxy properties (removed in v3.6)
 

@@ -68,44 +68,57 @@ discovery-proxy: <%= @discovery_proxy %>
 discovery-srv: <%= @discovery_srv %>
 
 <% if is_v36_or_higher %>
-# Discovery v3 token for bootstrapping the cluster.
-discovery-token: <%= @discovery_token %>
+# Discovery v3 configuration (nested structure for etcd 3.6+)
+discovery-config:
+  # Discovery v3 token for bootstrapping the cluster.
+  token: '<%= @discovery_token %>'
+<% if @discovery_endpoints %>
+  client:
+    # List of discovery service endpoints.
+    endpoints:
+<% @discovery_endpoints.split(',').each do |endpoint| %>
+      - <%= endpoint.strip %>
+<% end %>
 
-# Discovery v3 endpoints.
-discovery-endpoints: <%= @discovery_endpoints %>
+    # Timeout values in nanoseconds (1 second = 1000000000 nanoseconds)
 
-# Discovery v3 dial timeout.
-discovery-dial-timeout: <%= @discovery_dial_timeout %>
+    # Time (in nanoseconds) for dialing to discovery service to timeout.
+    dial-timeout: <%= @discovery_dial_timeout %>
 
-# Discovery v3 request timeout.
-discovery-request-timeout: <%= @discovery_request_timeout %>
+    # Time (in nanoseconds) for discovery service requests to timeout.
+    request-timeout: <%= @discovery_request_timeout %>
 
-# Discovery v3 keepalive time.
-discovery-keepalive-time: <%= @discovery_keepalive_time %>
+    # Time (in nanoseconds) after which discovery client pings server to see if transport is alive.
+    keepalive-time: <%= @discovery_keepalive_time %>
 
-# Discovery v3 keepalive timeout.
-discovery-keepalive-timeout: <%= @discovery_keepalive_timeout %>
+    # Time (in nanoseconds) after which discovery client closes the connection if no activity.
+    keepalive-timeout: <%= @discovery_keepalive_timeout %>
 
-# Discovery v3 insecure transport.
-discovery-insecure-transport: <%= @discovery_insecure_transport %>
+    # Discovery service TLS settings.
+    secure:
+      # Path to the discovery client TLS cert file.
+      cert: <%= @discovery_cert %>
 
-# Discovery v3 insecure skip TLS verify.
-discovery-insecure-skip-tls-verify: <%= @discovery_insecure_skip_tls_verify %>
+      # Path to the discovery client TLS key file.
+      key: <%= @discovery_key %>
 
-# Discovery v3 client certificate.
-discovery-cert: <%= @discovery_cert %>
+      # Path to the discovery client TLS trusted CA cert file.
+      cacert: <%= @discovery_cacert %>
 
-# Discovery v3 client key.
-discovery-key: <%= @discovery_key %>
+      # Discovery client using insecure transport (HTTP).
+      insecure-transport: <%= @discovery_insecure_transport %>
 
-# Discovery v3 CA certificate.
-discovery-cacert: <%= @discovery_cacert %>
+      # Discovery client skipping TLS verification.
+      insecure-skip-tls-verify: <%= @discovery_insecure_skip_tls_verify %>
 
-# Discovery v3 username.
-discovery-user: <%= @discovery_user %>
+    # Discovery service authentication.
+    auth:
+      # Username for discovery service authentication.
+      username: <%= @discovery_user %>
 
-# Discovery v3 password.
-discovery-password: <%= @discovery_password %>
+      # Password for discovery service authentication.
+      password: <%= @discovery_password %>
+<% end %>
 <% end %>
 
 <% if @initial_cluster %>
