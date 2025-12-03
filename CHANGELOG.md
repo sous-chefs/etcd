@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [11.1.1](https://github.com/sous-chefs/etcd/compare/v11.1.0...v11.1.1) (2025-12-02)
+
+
+### Bug Fixes
+
+* correct discovery v3 YAML structure for etcd 3.6+ ([#195](https://github.com/sous-chefs/etcd/issues/195)) ([55acd8a](https://github.com/sous-chefs/etcd/commit/55acd8a9c7d7a5463e1308832bb6f8b06f5c7f3d))
+
 ## [11.1.0](https://github.com/sous-chefs/etcd/compare/v11.0.2...v11.1.0) (2025-11-26)
 
 
