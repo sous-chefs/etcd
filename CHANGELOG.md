@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [11.2.0](https://github.com/sous-chefs/etcd/compare/v11.1.1...v11.2.0) (2025-12-11)
+
+
+### Features
+
+* add max-request-bytes option ([#197](https://github.com/sous-chefs/etcd/issues/197)) ([d78511d](https://github.com/sous-chefs/etcd/commit/d78511d1472feac1f36c4cda7da1f801b4db99a0))
+
 ## [11.1.1](https://github.com/sous-chefs/etcd/compare/v11.1.0...v11.1.1) (2025-12-02)
 
 
