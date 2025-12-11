@@ -61,6 +61,10 @@ property :quota_backend_bytes,
           String,
           desired_state: false
 
+property :max_request_bytes,
+          Integer,
+          desired_state: false
+
 # Clustering Flags
 property :initial,
           String,

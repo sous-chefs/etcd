@@ -46,6 +46,7 @@ module EtcdCookbook
                     max_wals: new_resource.max_wals,
                     cors: new_resource.cors,
                     quota_backend_bytes: new_resource.quota_backend_bytes,
+                    max_request_bytes: new_resource.max_request_bytes,
                     initial_advertise_peer_urls: new_resource.initial_advertise_peer_urls,
                     initial_cluster: new_resource.initial_cluster,
                     initial_cluster_state: new_resource.initial_cluster_state,
@@ -182,6 +183,7 @@ module EtcdCookbook
         end
 
         opts << "--quota-backend-bytes=#{new_resource.quota_backend_bytes}" unless new_resource.quota_backend_bytes.nil?
+        opts << "-max-request-bytes=#{new_resource.max_request_bytes}" unless new_resource.max_request_bytes.nil?
         opts << "-snapshot-count=#{new_resource.snapshot_count}" unless new_resource.snapshot_count.nil?
         opts << "-trusted-ca-file=#{new_resource.trusted_ca_file}" unless new_resource.trusted_ca_file.nil?
         opts << "-wal-dir=#{new_resource.wal_dir}" unless new_resource.wal_dir.nil?
