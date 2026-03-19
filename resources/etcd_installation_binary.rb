@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 provides :etcd_installation_binary
 provides :etcd_installation
 unified_mode true

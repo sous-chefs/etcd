@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Set default service name like etcd.service
 
 property :default_service_name,

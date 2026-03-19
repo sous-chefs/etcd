@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 provides :etcd_service_manager_systemd
 provides :etcd_service_manager
 unified_mode true

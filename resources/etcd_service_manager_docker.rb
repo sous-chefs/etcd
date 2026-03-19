@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 provides :etcd_service_manager_docker
 unified_mode true
 use 'partial/_common'
