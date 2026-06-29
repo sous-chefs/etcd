@@ -1,3 +1,5 @@
+apt_update
+
 etcd_installation_binary 'default' do
   action :create
 end

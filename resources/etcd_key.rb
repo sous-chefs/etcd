@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'etcd'
 
 provides :etcd_key

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EtcdCookbook
   module EtcdHelpers
     module Service

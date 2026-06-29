@@ -1,3 +1,5 @@
+apt_update
+
 # binary installation for kitchen verify
 etcd_installation_binary 'default'
 
