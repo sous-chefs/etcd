@@ -83,10 +83,10 @@ test/*
 */.hg/*
 */.svn/*
 
-# Berkshelf #
+# Policyfile #
 #############
-Berksfile
-Berksfile.lock
+Policyfile.rb
+Policyfile.lock.json
 cookbooks/*
 tmp
 

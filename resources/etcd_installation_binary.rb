@@ -1,55 +1,51 @@
+# frozen_string_literal: true
+
 provides :etcd_installation_binary
 provides :etcd_installation
 unified_mode true
-use 'partial/_common'
+use '_partial/_common'
 
 property :checksum, String, default: lazy { default_checksum }, desired_state: false
 property :source, String, default: lazy { default_source }, desired_state: false
 
+property :architecture, String, default: lazy { node['kernel']['machine'] == 'aarch64' ? 'arm64' : 'amd64' }, desired_state: false
+
 action :create do
   package 'tar'
 
-  remote_file 'etcd tarball' do
-    path "#{file_cache_path}/etcd-v#{new_resource.version}-linux-amd64.tar.gz"
+  remote_file tarball_path do
     source new_resource.source
     checksum new_resource.checksum
-    action :create
   end
 
-  execute 'extract etcd' do
-    command extract_etcd_cmd
-    action :nothing
-    subscribes :run, 'remote_file[etcd tarball]'
-  end
+  %w(etcd etcdctl etcdutl).each do |binary|
+    next if binary == 'etcdutl' && !etcdutl_supported?
 
-  execute 'extract etcdctl' do
-    command extract_etcdctl_cmd
-    action :nothing
-    subscribes :run, 'remote_file[etcd tarball]'
-  end
-
-  if etcdutl_supported?
-    execute 'extract etcdutl' do
-      command     extract_etcdutl_cmd
-      action      :nothing
-      subscribes  :run, 'remote_file[etcd tarball]'
+    execute "extract #{binary}" do
+      command ['tar', 'xzf', tarball_path, '-C', etcd_bin_prefix, "etcd-v#{new_resource.version}-linux-#{new_resource.architecture}/#{binary}", '--strip-components=1']
+      not_if do
+        path = "#{etcd_bin_prefix}/#{binary}"
+        flag = binary == 'etcd' ? '--version' : 'version'
+        ::File.exist?(path) && shell_out!(path, flag).stdout.match?(/(?:etcd Version:|etcdctl version:|etcdutl version:) #{Regexp.escape(new_resource.version)}(?:\s|$)/i)
+      end
     end
   end
 end
 
 action :delete do
-  file etcd_bin do
-    action :delete
+  %w(etcd etcdctl etcdutl).each do |binary|
+    file "#{etcd_bin_prefix}/#{binary}" do
+      action :delete
+    end
   end
 
-  file etcdctl_bin do
+  file tarball_path do
     action :delete
   end
+end
 
-  file etcdutl_bin do
-    action  :delete
-    only_if { etcdutl_supported? }
-  end
+def tarball_path
+  "#{file_cache_path}/etcd-v#{version}-linux-#{architecture}.tar.gz"
 end
 
 def file_cache_path
@@ -57,11 +53,16 @@ def file_cache_path
 end
 
 def default_source
-  "https://github.com/coreos/etcd/releases/download/v#{version}/etcd-v#{version}-linux-amd64.tar.gz"
+  "https://github.com/etcd-io/etcd/releases/download/v#{version}/etcd-v#{version}-linux-#{architecture}.tar.gz"
 end
 
 def default_checksum
+  if architecture == 'arm64'
+    return 'd7e25e08f694b6ed7792fc7b7a891fe2c3f3d3dccfe2f3bfdb1547b0eb75b6da' if version == '3.7.1'
+    raise ArgumentError, 'Supply checksum for this etcd version on arm64'
+  end
   case version
+  when '3.7.1' then 'e8cd3fa8064c98137c5dbd78b76f969417ace84efb83c481041d7a52ffdd8fb9'
   when '3.6.6' then '887afaa4a99f22d802ccdfbe65730a5e79aa5c9ce2c8799c67e9d804c50ecedb'
   when '3.5.21' then 'adddda4b06718e68671ffabff2f8cee48488ba61ad82900e639d108f2148501c'
   when '3.4.6' then 'a591b59639aed73061281d34720725ed47092705f68c7b11e0b6965044d4f7f6'
@@ -91,16 +92,4 @@ end
 
 def etcdutl_bin
   "#{etcd_bin_prefix}/etcdutl"
-end
-
-def extract_etcd_cmd
-  "tar xvf #{file_cache_path}/etcd-v#{version}-linux-amd64.tar.gz -C #{etcd_bin_prefix} etcd-v#{version}-linux-amd64/etcd --strip-components=1"
-end
-
-def extract_etcdctl_cmd
-  "tar xvf #{file_cache_path}/etcd-v#{version}-linux-amd64.tar.gz -C #{etcd_bin_prefix} etcd-v#{version}-linux-amd64/etcdctl --strip-components=1"
-end
-
-def extract_etcdutl_cmd
-  "tar xvf #{file_cache_path}/etcd-v#{version}-linux-amd64.tar.gz -C #{etcd_bin_prefix} etcd-v#{version}-linux-amd64/etcdutl --strip-components=1"
 end

@@ -1,9 +1,0 @@
-describe command('etcdctl member list') do
-  its(:exit_status) { should eq 0 }
-  its(:stdout) { should match(%r{started, default, http://localhost:2380, http://localhost:2379}) }
-end
-
-describe command('etcdutl version') do
-  its(:exit_status) { should eq 0 }
-  its(:stdout) { should match(/^etcdutl version: 3.6.6/) }
-end

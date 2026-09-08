@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 provides :etcd_installation_docker
 unified_mode true
-use 'partial/_common'
+use '_partial/_common'
 
 property :repo, String, default: 'quay.io/coreos/etcd', desired_state: false
 property :tag, String, default: lazy { "v#{version}" }, desired_state: false

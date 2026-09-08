@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 provides :etcd_service_manager_docker
 unified_mode true
-use 'partial/_common'
+use '_partial/_common'
 
 property :repo,
           String,
@@ -25,10 +27,15 @@ property :network_mode,
 
 property :host_data_path,
           String,
-          default: '/var/lib/etcd'
+          default: lazy { "/var/lib/etcd/#{node_name}" }
 
 action :start do
   etcd_data_dir = ::File.absolute_path(new_resource.data_dir, '/')
+
+  directory new_resource.host_data_path do
+    recursive true
+    mode '0700'
+  end
 
   docker_container new_resource.container_name do
     repo new_resource.repo
@@ -42,14 +49,26 @@ action :start do
 end
 
 action :stop do
-  docker_container container_name do
-    action [:stop, :delete]
+  docker_container new_resource.container_name do
+    action :stop
   end
 end
 
 action :restart do
-  action_stop
-  action_start
+  docker_container new_resource.container_name do
+    action :restart
+  end
+end
+
+action :delete do
+  docker_container new_resource.container_name do
+    action [:stop, :delete]
+  end
+
+  directory new_resource.host_data_path do
+    recursive true
+    action :delete
+  end
 end
 
 action_class do

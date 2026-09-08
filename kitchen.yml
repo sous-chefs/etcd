@@ -1,68 +1,161 @@
 ---
 driver:
-  name: vagrant
-
+  name: dokken
+  privileged: true
+  chef_image: cincproject/cinc
+  chef_version: '18'
+transport:
+  name: dokken
 provisioner:
-  name: chef_infra
-  product_name: <%= ENV['CHEF_PRODUCT_NAME'] || 'chef' %>
-  product_version: 17
+  name: dokken
+  product_name: cinc
+  chef_binary: /opt/cinc/bin/cinc-client
   enforce_idempotency: true
   multiple_converge: 2
   deprecations_as_errors: true
-
 verifier:
   name: inspec
 
 platforms:
   - name: almalinux-8
+    driver:
+      image: dokken/almalinux-8
+      pid_one_command: /usr/lib/systemd/systemd
   - name: almalinux-9
+    driver:
+      image: dokken/almalinux-9
+      pid_one_command: /usr/lib/systemd/systemd
   - name: almalinux-10
+    driver:
+      image: dokken/almalinux-10
+      pid_one_command: /usr/lib/systemd/systemd
   - name: amazonlinux-2023
+    driver:
+      image: dokken/amazonlinux-2023
+      pid_one_command: /usr/lib/systemd/systemd
   - name: centos-stream-9
+    driver:
+      image: dokken/centos-stream-9
+      pid_one_command: /usr/lib/systemd/systemd
   - name: centos-stream-10
+    driver:
+      image: dokken/centos-stream-10
+      pid_one_command: /usr/lib/systemd/systemd
   - name: debian-12
+    driver:
+      image: dokken/debian-12
+      pid_one_command: /usr/lib/systemd/systemd
   - name: debian-13
+    driver:
+      image: dokken/debian-13
+      pid_one_command: /usr/lib/systemd/systemd
   - name: fedora-latest
-  - name: opensuse-leap-15
+    driver:
+      image: dokken/fedora-latest
+      pid_one_command: /usr/lib/systemd/systemd
+  - name: opensuse-leap-16.0
+    driver:
+      image: dokken/opensuse-leap-16.0
+      pid_one_command: /usr/lib/systemd/systemd
   - name: oraclelinux-8
+    driver:
+      image: dokken/oraclelinux-8
+      pid_one_command: /usr/lib/systemd/systemd
   - name: oraclelinux-9
+    driver:
+      image: dokken/oraclelinux-9
+      pid_one_command: /usr/lib/systemd/systemd
   - name: rockylinux-8
+    driver:
+      image: dokken/rockylinux-8
+      pid_one_command: /usr/lib/systemd/systemd
   - name: rockylinux-9
+    driver:
+      image: dokken/rockylinux-9
+      pid_one_command: /usr/lib/systemd/systemd
   - name: rockylinux-10
-  - name: ubuntu-20.04
+    driver:
+      image: dokken/rockylinux-10
+      pid_one_command: /usr/lib/systemd/systemd
   - name: ubuntu-22.04
+    driver:
+      image: dokken/ubuntu-22.04
+      pid_one_command: /usr/lib/systemd/systemd
   - name: ubuntu-24.04
+    driver:
+      image: dokken/ubuntu-24.04
+      pid_one_command: /usr/lib/systemd/systemd
 
 suites:
+  - name: default
+    run_list:
+      - recipe[test::default]
+    provisioner:
+      named_run_list: default
+    verifier:
+      inspec_tests:
+        - test/integration/default
   - name: default-service-name
     run_list:
-      - recipe[etcd_test::default_service_name]
-
+      - recipe[test::default_service_name]
+    provisioner:
+      named_run_list: default_service_name
+    verifier:
+      inspec_tests:
+        - test/integration/default-service-name
   - name: service-docker
     run_list:
-      - recipe[etcd_test::service_docker]
-
-  # TODO(ramereth): this suite is broken
+      - recipe[test::service_docker]
+    provisioner:
+      named_run_list: service_docker
+    verifier:
+      inspec_tests:
+        - test/integration/service-docker
   - name: service-docker-multi
     run_list:
-      - recipe[etcd_test::service_docker_multi]
-
+      - recipe[test::service_docker_multi]
+    provisioner:
+      named_run_list: service_docker_multi
+    verifier:
+      inspec_tests:
+        - test/integration/service-docker-multi
   - name: service-systemd
     run_list:
-      - recipe[etcd_test::service_systemd]
-
+      - recipe[test::service_systemd]
+    provisioner:
+      named_run_list: service_systemd
+    verifier:
+      inspec_tests:
+        - test/integration/service-systemd
   - name: service-systemd-config-file
     run_list:
-      - recipe[etcd_test::service_systemd_config_file]
-
+      - recipe[test::service_systemd_config_file]
+    provisioner:
+      named_run_list: service_systemd_config_file
+    verifier:
+      inspec_tests:
+        - test/integration/service-systemd-config-file
   - name: service-systemd-multi
     run_list:
-      - recipe[etcd_test::service_systemd_multi]
-
+      - recipe[test::service_systemd_multi]
+    provisioner:
+      named_run_list: service_systemd_multi
+    verifier:
+      inspec_tests:
+        - test/integration/service-systemd-multi
   - name: keys
     run_list:
-      - recipe[etcd_test::keys]
-
+      - recipe[test::keys]
+    provisioner:
+      named_run_list: keys
+    verifier:
+      inspec_tests:
+        - test/integration/keys
   - name: auto
     run_list:
-      - recipe[etcd_test::auto]
+      - recipe[test::auto]
+    provisioner:
+      named_run_list: auto
+    verifier:
+      inspec_tests:
+        - test/integration/auto

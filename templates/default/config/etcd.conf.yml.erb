@@ -3,8 +3,11 @@
 <%
   # Determine if this is etcd 3.6 or higher
   is_v36_or_higher = false
+  # Determine if this is etcd 3.7 or higher
+  is_v37_or_higher = false
   if @version
     is_v36_or_higher = Gem::Version.new(@version) >= Gem::Version.new('3.6.0')
+    is_v37_or_higher = Gem::Version.new(@version) >= Gem::Version.new('3.7.0')
   end
 %>
 
@@ -56,8 +59,10 @@ initial-advertise-peer-urls: <%= @initial_advertise_peer_urls %>
 # The URLs needed to be a comma-separated list.
 advertise-client-urls: <%= @advertise_client_urls %>
 
-# Discovery URL used to bootstrap the cluster.
+<% unless is_v37_or_higher %>
+# Discovery URL used to bootstrap the cluster (removed in v3.7).
 discovery: <%= @discovery %>
+<% end %>
 
 <% unless is_v36_or_higher %>
 # Valid values include 'exit', 'proxy' (removed in v3.6)

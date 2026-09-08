@@ -1,13 +1,20 @@
+# frozen_string_literal: true
+
 module EtcdCookbook
   module EtcdHelpers
     module Service
       def etcd_bin
-        '/usr/bin/etcd'
+        new_resource.etcd_bin
       end
 
       def etcd_version_36_or_higher?
         return false unless new_resource.version
         Gem::Version.new(new_resource.version) >= Gem::Version.new('3.6.0')
+      end
+
+      def etcd_version_37_or_higher?
+        return false unless new_resource.version
+        Gem::Version.new(new_resource.version) >= Gem::Version.new('3.7.0')
       end
 
       def etcd_cmd
@@ -32,7 +39,8 @@ module EtcdCookbook
           owner new_resource.run_user
           cookbook 'etcd'
           group 'root'
-          mode '0750'
+          mode '0600'
+          sensitive true
           variables instance_name: new_resource.node_name,
                     version: new_resource.version,
                     data_dir: new_resource.data_dir,
@@ -104,6 +112,7 @@ module EtcdCookbook
       def etcd_daemon_opts
         opts = []
         is_v36_or_higher = etcd_version_36_or_higher?
+        is_v37_or_higher = etcd_version_37_or_higher?
 
         opts << "-name=#{new_resource.node_name}" unless new_resource.node_name.nil?
         opts << "-advertise-client-urls=#{new_resource.advertise_client_urls}" unless new_resource.advertise_client_urls.nil?
@@ -126,17 +135,18 @@ module EtcdCookbook
         opts << "-enable-v2=#{new_resource.enable_v2}" unless is_v36_or_higher
 
         opts << "-discovery-srv=#{new_resource.discovery_srv}" unless new_resource.discovery_srv.nil?
-        opts << "-discovery=#{new_resource.discovery}" unless new_resource.discovery.nil?
+        # Legacy v2 discovery flag (removed in v3.7)
+        opts << "-discovery=#{new_resource.discovery}" if !new_resource.discovery.nil? && !is_v37_or_higher
 
         # Discovery v3 flags (v3.6+)
         if is_v36_or_higher
           opts << "-discovery-token=#{new_resource.discovery_token}" unless new_resource.discovery_token.nil?
           opts << "-discovery-endpoints=#{new_resource.discovery_endpoints}" unless new_resource.discovery_endpoints.nil?
-          opts << "-discovery-dial-timeout=#{new_resource.discovery_dial_timeout}" unless new_resource.discovery_dial_timeout.nil?
-          opts << "-discovery-request-timeout=#{new_resource.discovery_request_timeout}" unless new_resource.discovery_request_timeout.nil?
-          opts << "-discovery-keepalive-time=#{new_resource.discovery_keepalive_time}" unless new_resource.discovery_keepalive_time.nil?
-          opts << "-discovery-keepalive-timeout=#{new_resource.discovery_keepalive_timeout}" unless new_resource.discovery_keepalive_timeout.nil?
-          opts << '-discovery-insecure-transport=true' if new_resource.discovery_insecure_transport == true
+          opts << "-discovery-dial-timeout=#{new_resource.discovery_dial_timeout}ns" unless new_resource.discovery_dial_timeout.nil?
+          opts << "-discovery-request-timeout=#{new_resource.discovery_request_timeout}ns" unless new_resource.discovery_request_timeout.nil?
+          opts << "-discovery-keepalive-time=#{new_resource.discovery_keepalive_time}ns" unless new_resource.discovery_keepalive_time.nil?
+          opts << "-discovery-keepalive-timeout=#{new_resource.discovery_keepalive_timeout}ns" unless new_resource.discovery_keepalive_timeout.nil?
+          opts << "-discovery-insecure-transport=#{new_resource.discovery_insecure_transport}" unless new_resource.discovery_insecure_transport.nil?
           opts << '-discovery-insecure-skip-tls-verify=true' if new_resource.discovery_insecure_skip_tls_verify == true
           opts << "-discovery-cert=#{new_resource.discovery_cert}" unless new_resource.discovery_cert.nil?
           opts << "-discovery-key=#{new_resource.discovery_key}" unless new_resource.discovery_key.nil?

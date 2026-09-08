@@ -1,6 +1,0 @@
----
-:directories:
-  - lib
-:excludes:
-  - spec
-  - .bundle

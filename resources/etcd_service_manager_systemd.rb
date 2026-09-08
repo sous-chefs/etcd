@@ -1,52 +1,50 @@
+# frozen_string_literal: true
+
 provides :etcd_service_manager_systemd
 provides :etcd_service_manager
 unified_mode true
-use 'partial/_common'
+use '_partial/_common'
 
-property :service_timeout,
-          Integer,
-          default: 120
+property :service_timeout, Integer, default: 120
 
 action :start do
   user 'etcd' do
-    action :create
+    system true
     only_if { new_resource.run_user == 'etcd' }
-  end
-
-  file logfile do
-    owner new_resource.run_user
-    action :create
   end
 
   directory new_resource.data_dir do
     owner new_resource.run_user
     mode '0700'
     recursive true
-    action :create
   end
 
-  # Needed for Debian / Ubuntu
-  directory '/usr/libexec' do
-    owner 'root'
-    group 'root'
-    mode '0755'
-    action :create
+  if new_resource.wal_dir
+    directory new_resource.wal_dir do
+      owner new_resource.run_user
+      mode '0700'
+      recursive true
+    end
   end
 
-  # cleanup the old systemd unit file
   file "/lib/systemd/system/#{etcd_name}.service" do
+    action :delete
+  end
+
+  file "/etc/#{etcd_name}-firstconverge" do
     action :delete
   end
 
   systemd_contents = {
     Unit: {
-      Description: 'Etcd Application Container Engine',
-      Documentation: 'https://coreos.com/etcd',
+      Description: 'etcd distributed key-value store',
+      Documentation: 'https://etcd.io',
       After: 'network.target',
     },
     Service: {
       Type: 'notify',
       ExecStart: etcd_cmd,
+      User: new_resource.run_user,
       Restart: 'always',
       RestartSec: '10s',
       LimitNOFILE: '1048576',
@@ -58,37 +56,50 @@ action :start do
       WantedBy: 'multi-user.target',
     },
   }
-
-  systemd_contents[:Service][:User] = new_resource.run_user if new_resource.run_user
-  systemd_contents[:Service][:Environment] = "HTTP_PROXY=#{new_resource.http_proxy}" if new_resource.http_proxy
-  systemd_contents[:Service][:Environment] = "HTTPS_PROXY=#{new_resource.https_proxy}" if new_resource.https_proxy
-  systemd_contents[:Service][:Environment] = "NO_PROXY=#{new_resource.no_proxy}" if new_resource.no_proxy
+  environment = []
+  environment << "HTTP_PROXY=#{new_resource.http_proxy}" if new_resource.http_proxy
+  environment << "HTTPS_PROXY=#{new_resource.https_proxy}" if new_resource.https_proxy
+  environment << "NO_PROXY=#{new_resource.no_proxy}" if new_resource.no_proxy
+  systemd_contents[:Service][:Environment] = environment unless environment.empty?
 
   systemd_unit "#{etcd_name}.service" do
-    content(systemd_contents)
-    action :create
-    notifies :restart, new_resource unless ::File.exist? "/etc/#{etcd_name}-firstconverge"
-    notifies :restart, new_resource if new_resource.auto_restart
-  end
-
-  file "/etc/#{etcd_name}-firstconverge" do
-    action :create
-  end
-
-  # service management resource
-  service etcd_name do
-    supports status: true
-    ignore_failure true if new_resource.ignore_failure
-    action [:enable, :start]
+    content systemd_contents
+    action [:create, :enable, :start]
+    ignore_failure new_resource.ignore_failure
+    notifies :restart, "systemd_unit[#{etcd_name}.service]", :delayed if new_resource.auto_restart
   end
 end
 
 action :stop do
+  systemd_unit "#{etcd_name}.service" do
+    action :stop
+  end
 end
 
 action :restart do
-  action_stop
-  action_start
+  systemd_unit "#{etcd_name}.service" do
+    action :restart
+  end
+end
+
+action :delete do
+  systemd_unit "#{etcd_name}.service" do
+    action [:stop, :disable, :delete]
+    only_if { ::File.exist?("/etc/systemd/system/#{etcd_name}.service") || ::File.exist?("/lib/systemd/system/#{etcd_name}.service") }
+  end
+
+  ["/lib/systemd/system/#{etcd_name}.service", "/etc/#{etcd_name}-firstconverge", logfile, new_resource.config_file].compact.each do |path|
+    file path do
+      action :delete
+    end
+  end
+
+  [new_resource.data_dir, new_resource.wal_dir].compact.uniq.each do |path|
+    directory path do
+      recursive true
+      action :delete
+    end
+  end
 end
 
 action_class do
