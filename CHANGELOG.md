@@ -8,6 +8,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [12.0.0](https://github.com/sous-chefs/etcd/compare/v11.2.0...v12.0.0) (2026-09-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* complete etcd custom resource migration ([#208](https://github.com/sous-chefs/etcd/issues/208))
+
+### Features
+
+* complete etcd custom resource migration ([#208](https://github.com/sous-chefs/etcd/issues/208)) ([23bea36](https://github.com/sous-chefs/etcd/commit/23bea367002176a536a64fc108c71fffbab35581))
+
+
+### Bug Fixes
+
+* **ci:** exclude vendor/bundle from cookstyle ([#209](https://github.com/sous-chefs/etcd/issues/209)) ([60718f8](https://github.com/sous-chefs/etcd/commit/60718f8b778b065044722c46fa44ae8b9293332f))
+
 ## [11.2.0](https://github.com/sous-chefs/etcd/compare/v11.1.1...v11.2.0) (2025-12-16)
 
 
