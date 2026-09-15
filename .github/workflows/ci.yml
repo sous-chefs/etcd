@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   lint-unit:
-    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@9.0.0
+    uses: sous-chefs/.github/.github/workflows/lint-unit.yml@9.0.1
     with:
       gems: chef-cli docker-api
     permissions:
@@ -32,7 +32,7 @@ jobs:
       instances: ${{ steps.kitchen.outputs.instances }}
     steps:
       - uses: actions/checkout@v7
-      - uses: sous-chefs/.github/.github/actions/install-workstation@9.0.0
+      - uses: sous-chefs/.github/.github/actions/install-workstation@9.0.1
       - id: kitchen
         name: Read the Kitchen matrix
         run: |
@@ -53,7 +53,7 @@ jobs:
         instance: ${{ fromJSON(needs.matrix.outputs.instances) }}
     steps:
       - uses: actions/checkout@v7
-      - uses: sous-chefs/.github/.github/actions/install-workstation@9.0.0
+      - uses: sous-chefs/.github/.github/actions/install-workstation@9.0.1
       - name: Test Kitchen
         env:
           CHEF_LICENSE: accept-no-persist
